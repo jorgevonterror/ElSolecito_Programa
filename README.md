@@ -123,8 +123,6 @@ y sobre todo experiencia. De antemano muchas gracias.
 
 **TABLA DE ESTIMACIÓN DE VALOR GANADO.**
 
-**TABLA DE ESTIMACIÓN DE VALOR GANADO.**
-
 | Día  | VP  | VGA  | TÉRMINO  | VG  |
 |---|---|---|---|---|
 | 1. Lunes 9  | 9.09  | 9.09  | 1  | 9.09   |
