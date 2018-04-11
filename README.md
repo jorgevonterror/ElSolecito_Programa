@@ -6,7 +6,7 @@
 
 
 Las estimaciones mostradas a continuación son como su nombre indica,
-aproximaxiones de tiempo; es decir, puede haber cambios y variantes que puedan que
+aproximaciones de tiempo; es decir, puede haber cambios y variantes que puedan que
 el proceso de desarrollo del sistema sea más rápido o más lento. Se le ruega que
 no sea tan exigente debido a nuestra falta de socialización entre miembros del equipo
 y sobre todo experiencia. De antemano muchas gracias.
