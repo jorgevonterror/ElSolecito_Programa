@@ -42,6 +42,7 @@ y sobre todo experiencia. De antemano muchas gracias.
 | 11. Lunes 23  |  2 | 19 |
 
 **ASIGNACIÓN DE HORARIOS PARA EL CÁLCULO DE TIEMPO DISPONIBLE.**
+
 **HORAS VERDADERAS...**
 
 | Nombre  | Horas disponibles por día (1)  |
