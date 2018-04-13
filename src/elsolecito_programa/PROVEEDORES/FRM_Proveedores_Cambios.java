@@ -41,7 +41,7 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
         TXTNombre = new javax.swing.JTextField();
         BTNGuardar = new javax.swing.JButton();
         BTNCerrar = new javax.swing.JButton();
-        BTNMenu = new javax.swing.JButton();
+        BTN_Menu_Proveedores = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,10 +52,15 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
         LBLNombre.setText("Nombre:");
 
         BTNGuardar.setText("Guardar");
+        BTNGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNGuardarActionPerformed(evt);
+            }
+        });
 
         BTNCerrar.setText("Cerrar");
 
-        BTNMenu.setText("Catalogo");
+        BTN_Menu_Proveedores.setText("Menu Proveedores");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,25 +69,26 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LBLId_Proveedor_Nuevo)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(LBLId_Proveedor_Actual, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(LBLNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TXTId_Proveedor_Nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TXTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TXTId_Proveedor_Actual, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(BTNGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                .addComponent(BTNCerrar)
-                .addGap(67, 67, 67)
-                .addComponent(BTNMenu)
-                .addGap(44, 44, 44))
+                        .addComponent(BTNGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                        .addComponent(BTNCerrar)
+                        .addGap(55, 55, 55)
+                        .addComponent(BTN_Menu_Proveedores)
+                        .addGap(44, 44, 44))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LBLId_Proveedor_Nuevo)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(LBLId_Proveedor_Actual, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(LBLNombre))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TXTId_Proveedor_Nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TXTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TXTId_Proveedor_Actual, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,12 +109,16 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNGuardar)
                     .addComponent(BTNCerrar)
-                    .addComponent(BTNMenu))
+                    .addComponent(BTN_Menu_Proveedores))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BTNGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTNGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,7 +159,7 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNCerrar;
     private javax.swing.JButton BTNGuardar;
-    private javax.swing.JButton BTNMenu;
+    private javax.swing.JButton BTN_Menu_Proveedores;
     private javax.swing.JLabel LBLId_Proveedor_Actual;
     private javax.swing.JLabel LBLId_Proveedor_Nuevo;
     private javax.swing.JLabel LBLNombre;
