@@ -16,6 +16,7 @@ public class FRM_Clientes extends javax.swing.JFrame {
      */
     public FRM_Clientes() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

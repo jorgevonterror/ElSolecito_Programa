@@ -16,6 +16,7 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
      */
     public FRM_Clientes_Alta() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

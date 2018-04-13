@@ -16,6 +16,7 @@ public class FRM_Clientes_Alta_Tabla extends javax.swing.JFrame {
      */
     public FRM_Clientes_Alta_Tabla() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
