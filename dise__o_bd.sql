@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-04-2018 a las 00:25:04
+-- Tiempo de generación: 13-04-2018 a las 15:02:02
 -- Versión del servidor: 5.7.14-log
 -- Versión de PHP: 5.6.25
 
@@ -43,6 +43,33 @@ CREATE TABLE `compras` (
   `Fecha` datetime NOT NULL,
   `TotalCompras` float NOT NULL,
   `id_provedor` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_compra`
+--
+
+CREATE TABLE `detalle_compra` (
+  `id_detalle` int(11) NOT NULL,
+  `producto` varchar(50) NOT NULL,
+  `Cantidad` float NOT NULL,
+  `Precio` float NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_venta`
+--
+
+CREATE TABLE `detalle_venta` (
+  `id_detalle_venta` int(11) NOT NULL,
+  `Cantida` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `Precio` float NOT NULL,
+  `id_venta` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -109,6 +136,18 @@ ALTER TABLE `clientes`
 --
 ALTER TABLE `compras`
   ADD PRIMARY KEY (`id_compras`);
+
+--
+-- Indices de la tabla `detalle_compra`
+--
+ALTER TABLE `detalle_compra`
+  ADD PRIMARY KEY (`id_detalle`);
+
+--
+-- Indices de la tabla `detalle_venta`
+--
+ALTER TABLE `detalle_venta`
+  ADD PRIMARY KEY (`id_detalle_venta`);
 
 --
 -- Indices de la tabla `productos`
