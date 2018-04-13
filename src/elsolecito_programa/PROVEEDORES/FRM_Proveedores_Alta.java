@@ -1,3 +1,5 @@
+package elsolecito_programa.PROVEEDORES;
+
 /* 1. Distribucion de inventario en el local El Solecito.
     2. Omar Almaraz Cordova.
     3. Creacion 11/04/18.

@@ -1,3 +1,5 @@
+package elsolecito_programa.PROVEEDORES;
+
 /* 1. Distribucion de inventario en el local El Solecito.
     2. Omar Almaraz Cordova.
     3. Creacion 11/04/18.
@@ -13,12 +15,12 @@
  *
  * @author 8.1
  */
-public class FRM_Proveedores_Baja extends javax.swing.JFrame {
+public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
 
     /**
-     * Creates new form Baja
+     * Creates new form Cambios
      */
-    public FRM_Proveedores_Baja() {
+    public FRM_Proveedores_Consultas() {
         initComponents();
     }
 
@@ -31,17 +33,15 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        LBLId_Proveedor = new javax.swing.JLabel();
-        TXTId_Proveedor = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableConsultas = new javax.swing.JTable();
-        BTNEliminar = new javax.swing.JButton();
+        LBLId_Proveedor = new javax.swing.JLabel();
+        BTNConsultar = new javax.swing.JButton();
+        TXTId_Proveedor = new javax.swing.JTextField();
         BTNCerrar = new javax.swing.JButton();
         BTNCatalogo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        LBLId_Proveedor.setText("Id_Proveedor:");
 
         TableConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -56,7 +56,9 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TableConsultas);
 
-        BTNEliminar.setText("Eliminar");
+        LBLId_Proveedor.setText("Id_Proveedor:");
+
+        BTNConsultar.setText("Consultar");
 
         BTNCerrar.setText("Cerrar");
 
@@ -75,7 +77,7 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
                         .addComponent(TXTId_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(98, 98, 98)
-                        .addComponent(BTNEliminar)))
+                        .addComponent(BTNConsultar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -83,7 +85,7 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
                         .addComponent(BTNCerrar)
                         .addGap(92, 92, 92)
                         .addComponent(BTNCatalogo)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,9 +99,9 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(79, 79, 79)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTNEliminar)
+                    .addComponent(BTNConsultar)
                     .addComponent(BTNCerrar)
                     .addComponent(BTNCatalogo))
                 .addGap(69, 69, 69))
@@ -125,13 +127,13 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FRM_Proveedores_Baja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRM_Proveedores_Consultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FRM_Proveedores_Baja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRM_Proveedores_Consultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FRM_Proveedores_Baja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRM_Proveedores_Consultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FRM_Proveedores_Baja.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRM_Proveedores_Consultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -139,7 +141,7 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FRM_Proveedores_Baja().setVisible(true);
+                new FRM_Proveedores_Consultas().setVisible(true);
             }
         });
     }
@@ -147,7 +149,7 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTNCatalogo;
     private javax.swing.JButton BTNCerrar;
-    private javax.swing.JButton BTNEliminar;
+    private javax.swing.JButton BTNConsultar;
     private javax.swing.JLabel LBLId_Proveedor;
     private javax.swing.JTextField TXTId_Proveedor;
     private javax.swing.JTable TableConsultas;
