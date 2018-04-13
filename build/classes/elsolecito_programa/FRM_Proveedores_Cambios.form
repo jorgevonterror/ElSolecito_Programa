@@ -26,29 +26,32 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="LBLId_Proveedor_Nuevo" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                      <Component id="LBLId_Proveedor_Actual" min="-2" pref="111" max="-2" attributes="0"/>
+                      <Component id="BTNGuardar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="92" max="32767" attributes="0"/>
+                      <Component id="BTNCerrar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <Component id="BTN_Menu_Proveedores" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="LBLNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="LBLId_Proveedor_Nuevo" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+                              <Component id="LBLId_Proveedor_Actual" min="-2" pref="111" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="LBLNombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="TXTId_Proveedor_Nuevo" min="-2" pref="116" max="-2" attributes="0"/>
+                          <Component id="TXTNombre" min="-2" pref="116" max="-2" attributes="0"/>
+                          <Component id="TXTId_Proveedor_Actual" min="-2" pref="116" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="TXTId_Proveedor_Nuevo" min="-2" pref="116" max="-2" attributes="0"/>
-                  <Component id="TXTNombre" min="-2" pref="116" max="-2" attributes="0"/>
-                  <Component id="TXTId_Proveedor_Actual" min="-2" pref="116" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-              <Component id="BTNGuardar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="102" max="32767" attributes="0"/>
-              <Component id="BTNCerrar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-              <Component id="BTNMenu" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -74,7 +77,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="BTNGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BTNCerrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BTNMenu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTN_Menu_Proveedores" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="49" max="32767" attributes="0"/>
           </Group>
@@ -107,15 +110,18 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTNGuardarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BTNCerrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cerrar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="BTNMenu">
+    <Component class="javax.swing.JButton" name="BTN_Menu_Proveedores">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Catalogo"/>
+        <Property name="text" type="java.lang.String" value="Menu Proveedores"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -37,7 +37,7 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
         TableConsultas = new javax.swing.JTable();
         BTNEliminar = new javax.swing.JButton();
         BTNCerrar = new javax.swing.JButton();
-        BTNCatalogo = new javax.swing.JButton();
+        BTN_Menu_Proveedores = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,7 +60,7 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
 
         BTNCerrar.setText("Cerrar");
 
-        BTNCatalogo.setText("Catalogo");
+        BTN_Menu_Proveedores.setText("Menu Proveedores");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,16 +74,16 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(TXTId_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
+                        .addGap(43, 43, 43)
                         .addComponent(BTNEliminar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BTNCerrar)
-                        .addGap(92, 92, 92)
-                        .addComponent(BTNCatalogo)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addGap(84, 84, 84)
+                        .addComponent(BTN_Menu_Proveedores))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,7 +101,7 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNEliminar)
                     .addComponent(BTNCerrar)
-                    .addComponent(BTNCatalogo))
+                    .addComponent(BTN_Menu_Proveedores))
                 .addGap(69, 69, 69))
         );
 
@@ -145,9 +145,9 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTNCatalogo;
     private javax.swing.JButton BTNCerrar;
     private javax.swing.JButton BTNEliminar;
+    private javax.swing.JButton BTN_Menu_Proveedores;
     private javax.swing.JLabel LBLId_Proveedor;
     private javax.swing.JTextField TXTId_Proveedor;
     private javax.swing.JTable TableConsultas;

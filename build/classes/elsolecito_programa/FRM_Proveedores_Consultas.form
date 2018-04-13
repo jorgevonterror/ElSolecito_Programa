@@ -24,25 +24,23 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                      <Component id="LBLId_Proveedor" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="LBLId_Proveedor" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTNConsultar" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="TXTId_Proveedor" min="-2" pref="92" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="270" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
-                      <Component id="BTNConsultar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
                       <Component id="BTNCerrar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                      <Component id="BTNCatalogo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="BTN_Menu_Proveedores" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="40" max="32767" attributes="0"/>
@@ -69,7 +67,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="BTNConsultar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BTNCerrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BTNCatalogo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTN_Menu_Proveedores" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
           </Group>
@@ -117,9 +115,9 @@
         <Property name="text" type="java.lang.String" value="Cerrar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="BTNCatalogo">
+    <Component class="javax.swing.JButton" name="BTN_Menu_Proveedores">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Catalogo"/>
+        <Property name="text" type="java.lang.String" value="Menu Proveedores"/>
       </Properties>
     </Component>
   </SubComponents>

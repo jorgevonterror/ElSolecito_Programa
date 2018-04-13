@@ -37,7 +37,7 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
         BTNConsultar = new javax.swing.JButton();
         TXTId_Proveedor = new javax.swing.JTextField();
         BTNCerrar = new javax.swing.JButton();
-        BTNCatalogo = new javax.swing.JButton();
+        BTN_Menu_Proveedores = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,29 +60,28 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
 
         BTNCerrar.setText("Cerrar");
 
-        BTNCatalogo.setText("Catalogo");
+        BTN_Menu_Proveedores.setText("Menu Proveedores");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(LBLId_Proveedor)
+                    .addComponent(BTNConsultar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(LBLId_Proveedor)
                         .addGap(18, 18, 18)
-                        .addComponent(TXTId_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(TXTId_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(BTNConsultar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
                         .addComponent(BTNCerrar)
-                        .addGap(92, 92, 92)
-                        .addComponent(BTNCatalogo)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BTN_Menu_Proveedores)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -101,7 +100,7 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNConsultar)
                     .addComponent(BTNCerrar)
-                    .addComponent(BTNCatalogo))
+                    .addComponent(BTN_Menu_Proveedores))
                 .addGap(69, 69, 69))
         );
 
@@ -145,9 +144,9 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTNCatalogo;
     private javax.swing.JButton BTNCerrar;
     private javax.swing.JButton BTNConsultar;
+    private javax.swing.JButton BTN_Menu_Proveedores;
     private javax.swing.JLabel LBLId_Proveedor;
     private javax.swing.JTextField TXTId_Proveedor;
     private javax.swing.JTable TableConsultas;
