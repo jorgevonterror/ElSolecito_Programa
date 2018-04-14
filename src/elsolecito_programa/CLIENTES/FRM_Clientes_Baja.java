@@ -125,12 +125,12 @@ public class FRM_Clientes_Baja extends javax.swing.JFrame {
         if(mBD.conectar()){
             ArrayList mListaClientes = mBD.consultarClientes();  
             String [] Datos;
-            modeloTabla.addColumn("folio");
+            modeloTabla.addColumn("Folio");
             modeloTabla.addColumn("Nombre");
             modeloTabla.addColumn("Monto");
  
             for (Object mListaCliente : mListaClientes) {
-                Datos = new String[3];
+                Datos = new String[4];
                 
                 CD = (ClientesDeudores)mListaCliente;
                 Datos[0] = CD.getFolio();
@@ -144,7 +144,7 @@ public class FRM_Clientes_Baja extends javax.swing.JFrame {
             this.Tabla_Deudores.setModel(modeloTabla);
             this.Tabla_Deudores.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.Tabla_Deudores.getColumnModel().getColumn(1).setPreferredWidth(100);
-            this.Tabla_Deudores.getColumnModel().getColumn(2).setPreferredWidth(150);
+            this.Tabla_Deudores.getColumnModel().getColumn(2).setPreferredWidth(400);
             
             if (this.Tabla_Deudores.getRowCount() > 0) {
                 this.Tabla_Deudores.setRowSelectionInterval(0, 0);

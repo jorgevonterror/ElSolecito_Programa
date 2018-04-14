@@ -50,8 +50,8 @@ public class BaseDeDatos {
         Statement consulta;
         try{
             consulta = conexion.createStatement();
-            consulta.execute("INSERT INTO BD_ElSolecito.clientes (id_clientes, Nombre, Monto)" + 
-                    "VALUES(null, '" + mClientesDeudores.getNombre() + "'," + "'" + mClientesDeudores.getMonto() + "');");
+            consulta.execute("INSERT INTO BD_ElSolecito.clientes (id_clientes, Nombre, Monto, folio)" + 
+                    "VALUES(null, '" + mClientesDeudores.getNombre() + "'," + "'" + mClientesDeudores.getMonto() + "'," +"'" +mClientesDeudores.getFolio() + "');");
             return true;
         }catch(Exception e){
              e.printStackTrace();
@@ -73,6 +73,7 @@ public class BaseDeDatos {
                 mClientes = new ClientesDeudores();
                 mClientes.setNombre(resultado.getString("Nombre"));
                 mClientes.setMonto(resultado.getInt("Monto"));
+                mClientes.setFolio(resultado.getString("folio"));
                 mListaClientes.add(mClientes);
             }
         } catch (Exception e) {

@@ -28,13 +28,14 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         //Para seleccionar fila y columna de la tabla y los ponga en los TXT.
-        Tabla_Deudores.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        Tabla_Deudores_Reg.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (Tabla_Deudores.getSelectedRow() != -1) {
-                    int fila = Tabla_Deudores.getSelectedRow();
-                    TXT_Nombre.setText(Tabla_Deudores.getValueAt(fila, 0).toString());
-                    TXT_Monto.setText(Tabla_Deudores.getValueAt(fila, 1).toString());
+                if (Tabla_Deudores_Reg.getSelectedRow() != -1) {
+                    int fila = Tabla_Deudores_Reg.getSelectedRow();
+                    TXT_Nombre.setText(Tabla_Deudores_Reg.getValueAt(fila, 0).toString());
+                    TXT_Monto.setText(Tabla_Deudores_Reg.getValueAt(fila, 1).toString());
+                    TXT_Folio.setText(Tabla_Deudores_Reg.getValueAt(fila, 2).toString());
                 }
             }
         });
@@ -61,7 +62,7 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tabla_Deudores = new javax.swing.JTable();
+        Tabla_Deudores_Reg = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         TXT_Folio = new javax.swing.JTextField();
 
@@ -97,8 +98,8 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
             }
         });
 
-        Tabla_Deudores.setModel(modeloTabla);
-        jScrollPane1.setViewportView(Tabla_Deudores);
+        Tabla_Deudores_Reg.setModel(modeloTabla);
+        jScrollPane1.setViewportView(Tabla_Deudores_Reg);
 
         jLabel5.setText("Folio:");
 
@@ -183,12 +184,13 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
         if(mBD.conectar()){
             ArrayList mListaClientes = mBD.consultarClientes();  
             String [] Datos;
+            
             modeloTabla.addColumn("Folio");
             modeloTabla.addColumn("Nombre");
             modeloTabla.addColumn("Monto");
  
             for (Object mListaCliente : mListaClientes) {
-                Datos = new String[4];
+                Datos = new String[3];
                 
                 CD = (ClientesDeudores)mListaCliente;
                 Datos[0] = CD.getFolio();
@@ -198,14 +200,15 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
                 modeloTabla.addRow(Datos);
             } 
             
-            this.Tabla_Deudores = new javax.swing.JTable();
-            this.Tabla_Deudores.setModel(modeloTabla);
-            this.Tabla_Deudores.getColumnModel().getColumn(0).setPreferredWidth(50);
-            this.Tabla_Deudores.getColumnModel().getColumn(1).setPreferredWidth(100);
-            this.Tabla_Deudores.getColumnModel().getColumn(2).setPreferredWidth(150);
+            this.Tabla_Deudores_Reg = new javax.swing.JTable();
+            this.Tabla_Deudores_Reg.setModel(modeloTabla);
             
-            if (this.Tabla_Deudores.getRowCount() > 0) {
-                this.Tabla_Deudores.setRowSelectionInterval(0, 0);
+            this.Tabla_Deudores_Reg.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.Tabla_Deudores_Reg.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.Tabla_Deudores_Reg.getColumnModel().getColumn(2).setPreferredWidth(400);
+            
+            if (this.Tabla_Deudores_Reg.getRowCount() > 0) {
+                this.Tabla_Deudores_Reg.setRowSelectionInterval(0, 0);
             }
            
         } else {
@@ -226,7 +229,7 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
         // Alta de clientes deudores...
         CD.setNombre(this.TXT_Nombre.getText());
         CD.setMonto(Integer.parseInt(this.TXT_Monto.getText()));
-        CD.setFolio(TXT_Folio.getText());
+        CD.setFolio(this.TXT_Folio.getText());
         
         if(mBD.conectar()) {
             if (mBD.GuardarClientes(CD)) {
@@ -280,7 +283,7 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
     private javax.swing.JTextField TXT_Folio;
     private javax.swing.JTextField TXT_Monto;
     private javax.swing.JTextField TXT_Nombre;
-    private javax.swing.JTable Tabla_Deudores;
+    private javax.swing.JTable Tabla_Deudores_Reg;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
