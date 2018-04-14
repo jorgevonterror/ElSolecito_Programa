@@ -7,6 +7,8 @@ package elsolecito_programa.CLIENTES;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,6 +24,16 @@ public class FRM_Clientes_Baja extends javax.swing.JFrame {
         setFilas();
         initComponents();
         this.setLocationRelativeTo(null);
+        //Para seleccionar fila y columna de la tabla y los ponga en los TXT.
+        Tabla_Deudores.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (Tabla_Deudores.getSelectedRow() != -1) {
+                    int fila = Tabla_Deudores.getSelectedRow();
+                    TXT_Folio.setText(Tabla_Deudores.getValueAt(fila, 0).toString());
+                }
+            }
+        });
     }
     
     BaseDeDatos mBD = new BaseDeDatos();

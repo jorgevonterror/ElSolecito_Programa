@@ -94,4 +94,17 @@ public class BaseDeDatos {
             return false;
         }
     }
+    
+    public boolean modificarClientes(ClientesDeudores aClientesDeudores, ClientesDeudores nClientesDeudores) {
+        Statement consulta;
+
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("update clientes set " + "nombre = '" + nClientesDeudores.getNombre()+ "'," + "monto = '" + nClientesDeudores.getMonto() + "'," + "folio = '" + nClientesDeudores.getFolio()+ "';");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

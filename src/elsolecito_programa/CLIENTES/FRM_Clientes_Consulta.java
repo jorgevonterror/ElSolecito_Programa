@@ -5,6 +5,10 @@
  */
 package elsolecito_programa.CLIENTES;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jorgegarcia
@@ -15,10 +19,50 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
      * Creates new form FRM_Clientes_Consulta
      */
     public FRM_Clientes_Consulta() {
+        setFilas();
         initComponents();
         this.setLocationRelativeTo(null);
     }
-
+    DefaultTableModel modeloTabla = new DefaultTableModel();
+    BaseDeDatos mBD = new BaseDeDatos();
+    ClientesDeudores CD = new ClientesDeudores();
+    
+    private void setFilas(){
+        if(mBD.conectar()){
+            ArrayList mListaClientes = mBD.consultarClientes();  
+            String [] Datos;
+            
+            modeloTabla.addColumn("Folio");
+            modeloTabla.addColumn("Nombre");
+            modeloTabla.addColumn("Monto");
+ 
+            for (Object mListaCliente : mListaClientes) {
+                Datos = new String[3];
+                
+                CD = (ClientesDeudores)mListaCliente;
+                Datos[0] = CD.getFolio();
+                Datos[1] = CD.getNombre();
+                Datos[2] = "" + CD.getMonto();
+            
+                modeloTabla.addRow(Datos);
+            } 
+            
+            this.Tabla_Deudores = new javax.swing.JTable();
+            this.Tabla_Deudores.setModel(modeloTabla);
+            
+            this.Tabla_Deudores.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.Tabla_Deudores.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.Tabla_Deudores.getColumnModel().getColumn(2).setPreferredWidth(400);
+            
+            if (this.Tabla_Deudores.getRowCount() > 0) {
+                this.Tabla_Deudores.setRowSelectionInterval(0, 0);
+            }
+           
+        } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+        mBD.desconectar();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,7 +75,7 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Tabla_Deudores = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -40,18 +84,8 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
 
         jLabel2.setText("LISTA DE CLIENTES DEUDORES");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Nombre", "Monto"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        Tabla_Deudores.setModel(modeloTabla);
+        jScrollPane1.setViewportView(Tabla_Deudores);
 
         jButton1.setText("Regresar");
 
@@ -128,10 +162,10 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Tabla_Deudores;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
