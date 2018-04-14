@@ -5,6 +5,8 @@
  */
 package elsolecito_programa;
 
+import elsolecito_programa.CLIENTES.FRM_Clientes;
+
 /**
  *
  * @author jorgegarcia
