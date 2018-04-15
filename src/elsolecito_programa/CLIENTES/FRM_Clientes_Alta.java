@@ -33,9 +33,9 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent e) {
                 if (Tabla_Deudores_Reg.getSelectedRow() != -1) {
                     int fila = Tabla_Deudores_Reg.getSelectedRow();
-                    TXT_Nombre.setText(Tabla_Deudores_Reg.getValueAt(fila, 0).toString());
-                    TXT_Monto.setText(Tabla_Deudores_Reg.getValueAt(fila, 1).toString());
-                    TXT_Folio.setText(Tabla_Deudores_Reg.getValueAt(fila, 2).toString());
+                    TXT_Nombre.setText(Tabla_Deudores_Reg.getValueAt(fila, 1).toString());
+                    TXT_Monto.setText(Tabla_Deudores_Reg.getValueAt(fila, 2).toString());
+                    TXT_Folio.setText(Tabla_Deudores_Reg.getValueAt(fila, 0).toString());
                 }
             }
         });
@@ -150,15 +150,13 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(TXT_Folio, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TXT_Monto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(TXT_Folio, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TXT_Monto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton3)
                             .addComponent(jButton1)))
