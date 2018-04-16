@@ -137,3 +137,18 @@ y sobre todo experiencia. De antemano muchas gracias.
 | 9. Jueves 19  | 9.09  | 99.99  | 9  | 99.99  |
 | 10. Viernes 20 | 0  |  99.99 | 9  | 99.99  |
 | 11. Lunes 23 | 9.09  | -  | -  | -  |
+
+
+| Tarea  | DÍA  | VGP  | VGA  | TÉRMINO  | VG  |
+|---|---|---|---|---|---|
+|1. Diseño del menú que incluya los formularios de clientes, proveedores y productos.   | 1. Lunes 9  | 9.09  | 9.09  |  Lunes 9  | 9.09  |
+|2. Diseño del formulario clientes con (alta, baja, cambios y consultas).   |2. Martes 10   | 9.09  | 18.18  | Viernes 13  | 18.18  |
+|3. Diseño del formulario proveedores con (alta, baja, cambios y consultas).   |3. Miércoles 11  | 18.18   |36.36   | Lunes 15  | -  |
+|4. Diseño del formulario productos con (alta, baja, cambios y consultas).   |4. Jueves    |  18.18 |   |   |   |
+|5. Diseño de la BD (Mejorar en caso de ser necesario).   |   |   |   |   |   |
+|6. Implementación de la BD.   |   |   |   |   |   |
+|7. Pruebas   |   |   |   |   |   |
+|8. Correción de estilo tipografía, tamaño letra, logo, etc.   |   |   |   |   |   |
+|   |   |   |   |   |   |
+|   |   |   |   |   |   |
+|   |   |   |   |   |   |
