@@ -50,12 +50,27 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
         jLabel3.setText("Nombre:");
 
         BtnGuardar.setText("Guardar");
+        BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGuardarActionPerformed(evt);
+            }
+        });
 
         TxrCerrar.setText("Cerrar");
+        TxrCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxrCerrarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Descripcion:");
 
         BtnMostrar.setText("Mostrar");
+        BtnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMostrarActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("EL SOLECITO");
 
@@ -131,6 +146,18 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void TxrCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxrCerrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxrCerrarActionPerformed
+
+    private void BtnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMostrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnMostrarActionPerformed
+
+    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
