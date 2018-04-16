@@ -126,11 +126,11 @@ TABLA DE ESTIMACIÓN DE VALOR GANADO
 
 | Tarea  | DÍA  | VGP  | VGA  | TÉRMINO  | VG  |
 |---|---|---|---|---|---|
-|1. Diseño del menú que incluya los formularios de clientes, proveedores y productos.   | 1. Lunes 9  | 9.09  | 9.09  |  Lunes 9  | 9.09  |
-|2. Diseño del formulario clientes con (alta, baja, cambios y consultas).   |2. Martes 10   | 9.09  | 18.18  | Viernes 13  | 18.18  |
-|3. Diseño del formulario proveedores con (alta, baja, cambios y consultas).   |3. Miércoles 11  | 18.18   |36.36   | Lunes 15  | -  |
-|4. Diseño del formulario productos con (alta, baja, cambios y consultas).   |4. Jueves    |  18.18 | 54.54  | Martes 17  | -  |
-|5. Diseño de la BD (Mejorar en caso de ser necesario).   |  5. Viernes 13 | 9.09  | 63.63  | Viernes 13  | -  |
+|1. Diseño del menú que incluya los formularios de clientes, proveedores y productos.   | Lunes 9  | 9.09  | 9.09  |  Lunes 9  | 9.09  |
+|2. Diseño del formulario clientes con (alta, baja, cambios y consultas).   | Martes 10   | 9.09  | 18.18  | Viernes 13  | 18.18  |
+|3. Diseño del formulario proveedores con (alta, baja, cambios y consultas).   |Miércoles 11  | 18.18   |36.36   | Lunes 15  | -  |
+|4. Diseño del formulario productos con (alta, baja, cambios y consultas).   |Jueves    |  18.18 | 54.54  | Martes 17  | -  |
+|5. Diseño de la BD (Mejorar en caso de ser necesario).   |  Viernes 13 | 9.09  | 63.63  | Viernes 13  | -  |
 |6. Implementación de la BD.   | 5. Viernes 13  | 9.09  | 72.72  | Viernes 13  | -  |
 |7. Pruebas   | Viernes 20  | 18.18  | 90.9  | Viernes 27  | -  |
 |8. Correción de estilo tipografía, tamaño letra, logo, etc.   | Viernes 27  | 9.09  | 99.99  |  Jueves 26 |  - |
