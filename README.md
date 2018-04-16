@@ -145,8 +145,7 @@ y sobre todo experiencia. De antemano muchas gracias.
 |2. Diseño del formulario clientes con (alta, baja, cambios y consultas).   |2. Martes 10   | 9.09  | 18.18  | Viernes 13  | 18.18  |
 |3. Diseño del formulario proveedores con (alta, baja, cambios y consultas).   |3. Miércoles 11  | 18.18   |36.36   | Lunes 15  | -  |
 |4. Diseño del formulario productos con (alta, baja, cambios y consultas).   |4. Jueves    |  18.18 |   | Martes 17  | -  |
-|5. Diseño de la BD (Mejorar en caso de ser necesario).   |  5. Viernes 13 |   |   | Viernes 13  | -  |
-|6. Implementación de la BD.   | 5. Viernes 13  |   |   | Viernes 13  | -  |
-|7. Pruebas   | Viernes 20  |   |   | Viernes 27  | -  |
-|8. Correción de estilo tipografía, tamaño letra, logo, etc.   | Viernes 27  |   |   |  Jueves 26 |   |
-
+|5. Diseño de la BD (Mejorar en caso de ser necesario).   |  5. Viernes 13 | 9.09  |   | Viernes 13  | -  |
+|6. Implementación de la BD.   | 5. Viernes 13  | 9.09  |   | Viernes 13  | -  |
+|7. Pruebas   | Viernes 20  | 18.18  |   | Viernes 27  | -  |
+|8. Correción de estilo tipografía, tamaño letra, logo, etc.   | Viernes 27  | 9.09  |   |  Jueves 26 |   |
