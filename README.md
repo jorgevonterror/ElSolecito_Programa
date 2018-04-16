@@ -122,7 +122,8 @@ y sobre todo experiencia. De antemano muchas gracias.
 | 3. Omar  | 1  |
 | 4. Armando  | 1  |
 
-**TABLA DE ESTIMACIÓN DE VALOR GANADO**
+TABLA DE ESTIMACIÓN DE VALOR GANADO
+
 | Tarea  | DÍA  | VGP  | VGA  | TÉRMINO  | VG  |
 |---|---|---|---|---|---|
 |1. Diseño del menú que incluya los formularios de clientes, proveedores y productos.   | 1. Lunes 9  | 9.09  | 9.09  |  Lunes 9  | 9.09  |
