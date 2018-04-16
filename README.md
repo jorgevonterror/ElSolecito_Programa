@@ -122,18 +122,15 @@ y sobre todo experiencia. De antemano muchas gracias.
 | 3. Omar  | 1  |
 | 4. Armando  | 1  |
 
-**TABLA DE ESTIMACIÓN DE VALOR GANADO.**
+TABLA DE ESTIMACIÓN DE VALOR GANADO
 
-| Día  | VP  | VGA  | TÉRMINO  | VG  |
-|---|---|---|---|---|
-| 1. Lunes 9  | 9.09  | 9.09  | 1  | 9.09   |
-| 2. Martes 10  | 9.09  | 18.18  | 2  | 18.18  |
-| 3. Miércoles 11  | 18.18  | 36.36  | 3  | 36.36  |
-| 4. Jueves 12  | 9.09  | 45.45  | 4  | 45.45  |
-| 5. Viernes 13  | 9.09  | 54.54  | 5  | 54.54  |
-| 6. Lunes 16  | 9.09  | 63.63  | 6  | 63.63  |
-| 7. Martes 17  | 9.09  | 72.72  | 7  | 72.72  |
-| 8. Miércoles 18  | 18.18  | 90.9  | 8  | 90.9  |
-| 9. Jueves 19  | 9.09  | 99.99  | 9  | 99.99  |
-| 10. Viernes 20 | 0  |  99.99 | 9  | 99.99  |
-| 11. Lunes 23 | 9.09  | -  | -  | -  |
+| Tarea  | DÍA  | VGP  | VGA  | TÉRMINO  | VG  |
+|---|---|---|---|---|---|
+|1. Diseño del menú que incluya los formularios de clientes, proveedores y productos.   | Lunes 9  | 9.09  | 9.09  |  Lunes 9  | 9.09  |
+|2. Diseño del formulario clientes con (alta, baja, cambios y consultas).   | Martes 10   | 9.09  | 18.18  | Viernes 13  | 18.18  |
+|3. Diseño del formulario proveedores con (alta, baja, cambios y consultas).   |Miércoles 11  | 18.18   |36.36   | Lunes 15  | -  |
+|4. Diseño del formulario productos con (alta, baja, cambios y consultas).   |Jueves    |  18.18 | 54.54  | Martes 17  | -  |
+|5. Diseño de la BD (Mejorar en caso de ser necesario).   |  Viernes 13 | 9.09  | 63.63  | Viernes 13  | -  |
+|6. Implementación de la BD.   | 5. Viernes 13  | 9.09  | 72.72  | Viernes 13  | -  |
+|7. Pruebas   | Viernes 20  | 18.18  | 90.9  | Viernes 27  | -  |
+|8. Correción de estilo tipografía, tamaño letra, logo, etc.   | Viernes 27  | 9.09  | 99.99  |  Sábado 28 |  - |
