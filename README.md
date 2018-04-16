@@ -133,4 +133,4 @@ TABLA DE ESTIMACIÓN DE VALOR GANADO
 |5. Diseño de la BD (Mejorar en caso de ser necesario).   |  Viernes 13 | 9.09  | 63.63  | Viernes 13  | -  |
 |6. Implementación de la BD.   | 5. Viernes 13  | 9.09  | 72.72  | Viernes 13  | -  |
 |7. Pruebas   | Viernes 20  | 18.18  | 90.9  | Viernes 27  | -  |
-|8. Correción de estilo tipografía, tamaño letra, logo, etc.   | Viernes 27  | 9.09  | 99.99  |  Jueves 26 |  - |
+|8. Correción de estilo tipografía, tamaño letra, logo, etc.   | Viernes 27  | 9.09  | 99.99  |  Sábado 28 |  - |
