@@ -100,7 +100,7 @@ public class BaseDeDatos {
 
         try {
             consulta = conexion.createStatement();
-            consulta.execute("update clientes set " + "nombre = '" + nClientesDeudores.getNombre()+ "'," + "monto = '" + nClientesDeudores.getMonto() + "'," + "folio = '" + nClientesDeudores.getFolio()+ "';");
+            consulta.execute("update clientes set " + "nombre = '" + nClientesDeudores.getNombre()+ "'," + "monto = '" + nClientesDeudores.getMonto() + "'" + "WHERE folio = '" + aClientesDeudores.getFolio()+ "';");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
