@@ -5,7 +5,12 @@
  */
 
 package elsolecito_programa.Recargas;
+import Atxy2k.CustomTextField.RestrictedTextField;
 import elsolecito_programa.FRM_Catalogo;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -18,8 +23,19 @@ public class Recargas extends javax.swing.JFrame {
      */
     public Recargas() {
         initComponents();
+        Snumero(TXTnumerotelefono);
+        Smonto(TXTmonto);
+        
+        RestrictedTextField RT = new RestrictedTextField(TXTnumerotelefono);
+        RT.setLimit(10);
+        RT.setOnlyNums(true);
+        getToolkit().beep();
+                //JOptionPane.showMessageDialog(null, "Solo 10 digitos...");
     }
-
+    BaseDatos mBD = new BaseDatos();
+    TiempoAire TA = new TiempoAire();
+    int digi=10;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,11 +50,13 @@ public class Recargas extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         TxrCerrar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        TXTnumerotelefono = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        CBXcompañia = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
         TxrCerrar1 = new javax.swing.JButton();
         TxrCerrar2 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        TXTnumerotelefono = new javax.swing.JTextField();
+        TXTmonto = new javax.swing.JTextField();
 
         jLabel7.setBackground(new java.awt.Color(102, 255, 0));
         jLabel7.setFont(new java.awt.Font("Snap ITC", 0, 18)); // NOI18N
@@ -68,9 +86,9 @@ public class Recargas extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(153, 0, 153));
         jLabel8.setText("Numero Telefonico:");
 
-        jComboBox1.setFont(new java.awt.Font("Script MT Bold", 1, 18)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Telcel", "Unefon", "Movistar", "otro..." }));
+        CBXcompañia.setFont(new java.awt.Font("Script MT Bold", 1, 18)); // NOI18N
+        CBXcompañia.setForeground(new java.awt.Color(0, 0, 255));
+        CBXcompañia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Telcel", "Unefon", "Movistar", "otro..." }));
 
         jLabel9.setBackground(new java.awt.Color(102, 255, 0));
         jLabel9.setFont(new java.awt.Font("Lucida Handwriting", 0, 12)); // NOI18N
@@ -96,6 +114,17 @@ public class Recargas extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setBackground(new java.awt.Color(102, 255, 0));
+        jLabel10.setFont(new java.awt.Font("Lucida Handwriting", 0, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(153, 0, 153));
+        jLabel10.setText("Monto:");
+
+        TXTnumerotelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXTnumerotelefonoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,27 +141,29 @@ public class Recargas extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TXTnumerotelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(21, 21, 21)
+                                .addComponent(TxrCerrar1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(TxrCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
-                                        .addComponent(TxrCerrar1))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(105, 105, 105)
-                                        .addComponent(TxrCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TxrCerrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(32, 32, 32)))))))
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TXTnumerotelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CBXcompañia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(TXTmonto, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(TxrCerrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,13 +175,15 @@ public class Recargas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(TXTnumerotelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TxrCerrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel9)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CBXcompañia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(TXTmonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(TxrCerrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TxrCerrar)
                     .addComponent(TxrCerrar1))
@@ -160,6 +193,30 @@ public class Recargas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void Snumero(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                char c=e.getKeyChar();
+                if(!Character.isDigit(c)){  
+                getToolkit().beep();                
+                e.consume();
+                JOptionPane.showMessageDialog(null, "Introduce solo digitos...");
+            }
+            }
+        });
+    }
+    public void Smonto(JTextField a){
+        a.addKeyListener(new KeyAdapter(){
+            public void keyTyped(KeyEvent e){
+                char c=e.getKeyChar();
+                if(Character.isLetter(c)){
+                getToolkit().beep();
+                JOptionPane.showMessageDialog(null, "Introduce un monto Correcto...");
+                e.consume();
+            }
+            }
+        });
+    }
     private void TxrCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxrCerrarActionPerformed
        setVisible(false);
     }//GEN-LAST:event_TxrCerrarActionPerformed
@@ -173,8 +230,27 @@ public class Recargas extends javax.swing.JFrame {
     }//GEN-LAST:event_TxrCerrar1ActionPerformed
 
     private void TxrCerrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxrCerrar2ActionPerformed
-        // TODO add your handling code here:
+        // Recargas...
+        TA.setCompañia(this.CBXcompañia.getItemAt(this.CBXcompañia.getSelectedIndex()).toString());
+        TA.setMonto(Integer.parseInt(this.TXTmonto.getText()));
+        TA.setnumeroT(this.TXTnumerotelefono.getText());
+        
+        if(mBD.conectar()) {
+            if (mBD.GuardarRecarga(TA)) {
+                JOptionPane.showMessageDialog(null, "Recarga con éxito...");
+                this.CBXcompañia.setSelectedItem("");
+                this.TXTmonto.setText("");
+                this.TXTnumerotelefono.setText("");
+            } else {
+                 JOptionPane.showMessageDialog(null, "Error al guardar...");
+            }
+        mBD.desconectar();
+        }
     }//GEN-LAST:event_TxrCerrar2ActionPerformed
+
+    private void TXTnumerotelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXTnumerotelefonoActionPerformed
+        
+    }//GEN-LAST:event_TXTnumerotelefonoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,11 +288,13 @@ public class Recargas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox CBXcompañia;
+    private javax.swing.JTextField TXTmonto;
     private javax.swing.JTextField TXTnumerotelefono;
     private javax.swing.JButton TxrCerrar;
     private javax.swing.JButton TxrCerrar1;
     private javax.swing.JButton TxrCerrar2;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
