@@ -16,14 +16,13 @@ import java.util.ArrayList;
  */
 public class BaseDatos {
     private Connection conexion;
-    ResultSet rs= null;
     Statement statement = null;
 
 public boolean conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
+                    "jdbc:mysql://localhost/elsolecito", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -47,12 +46,43 @@ public boolean conectar(){
         Statement consulta;
         try{
             consulta = conexion.createStatement();
-            consulta.execute("INSERT INTO BD_ElSolecito.clientes (id_clientes, Nombre, Monto, folio)" + 
-                    "VALUES(null, '" + mTiempoAire.getCompañia() + "'," + "'" + mTiempoAire.getnumeroT() + "'," +"'" +mTiempoAire.getMonto() + "');");
+            consulta.execute("insert into elsolecito.recargas "
+                    + "(Monto, NumeroTelefonico, Compania)" + 
+                    "values('" + mTiempoAire.getMonto() +
+                    "'," + "'" + mTiempoAire.getnumeroT() + "'," 
+                    +"'" +mTiempoAire.getCompañia() + "');");
             return true;
         }catch(Exception e){
              e.printStackTrace();
             return false;
         }
+    }
+    public ArrayList consultarRecargas() {
+        ArrayList mListaRecargas = new ArrayList();
+        TiempoAire mTiempo = null;
+        Statement consulta;
+        ResultSet resultado;
+        
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from recargas;");
+            
+            while (resultado.next()) {
+                mTiempo = new TiempoAire();
+                mTiempo.setMonto(resultado.getDouble("Monto"));
+                mTiempo.setnumeroT(resultado.getString("NumeroTelefonico"));
+                mTiempo.setCompañia(resultado.getString("Compania"));
+                //mTiempo.setCompañia(resultado.getItemAt(this.CBXcompañia.getSelectedIndex()).toString("Compañia"));
+                
+        
+                 
+                
+                
+                mListaRecargas.add(mTiempo);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaRecargas;
     }
 }

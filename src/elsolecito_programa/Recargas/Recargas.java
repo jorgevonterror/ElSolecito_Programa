@@ -34,7 +34,6 @@ public class Recargas extends javax.swing.JFrame {
     }
     BaseDatos mBD = new BaseDatos();
     TiempoAire TA = new TiempoAire();
-    int digi=10;
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,16 +52,18 @@ public class Recargas extends javax.swing.JFrame {
         CBXcompañia = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
         TxrCerrar1 = new javax.swing.JButton();
-        TxrCerrar2 = new javax.swing.JButton();
+        TXTrecargar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         TXTnumerotelefono = new javax.swing.JTextField();
         TXTmonto = new javax.swing.JTextField();
+        TxrCerrar2 = new javax.swing.JButton();
 
         jLabel7.setBackground(new java.awt.Color(102, 255, 0));
         jLabel7.setFont(new java.awt.Font("Snap ITC", 0, 18)); // NOI18N
         jLabel7.setText("Recargas!!");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(102, 255, 51));
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
         jLabel5.setFont(new java.awt.Font("Perpetua Titling MT", 0, 36)); // NOI18N
@@ -98,19 +99,19 @@ public class Recargas extends javax.swing.JFrame {
         TxrCerrar1.setBackground(new java.awt.Color(51, 255, 51));
         TxrCerrar1.setFont(new java.awt.Font("Harlow Solid Italic", 0, 14)); // NOI18N
         TxrCerrar1.setForeground(new java.awt.Color(0, 0, 204));
-        TxrCerrar1.setText("Regresar al Menu Anterior!!");
+        TxrCerrar1.setText("Regresar al Anterior!!");
         TxrCerrar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxrCerrar1ActionPerformed(evt);
             }
         });
 
-        TxrCerrar2.setBackground(new java.awt.Color(51, 255, 0));
-        TxrCerrar2.setForeground(new java.awt.Color(0, 0, 204));
-        TxrCerrar2.setText("¡¡Iniciar Recarga!!");
-        TxrCerrar2.addActionListener(new java.awt.event.ActionListener() {
+        TXTrecargar.setBackground(new java.awt.Color(51, 255, 0));
+        TXTrecargar.setForeground(new java.awt.Color(0, 0, 204));
+        TXTrecargar.setText("¡¡Iniciar Recarga!!");
+        TXTrecargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxrCerrar2ActionPerformed(evt);
+                TXTrecargarActionPerformed(evt);
             }
         });
 
@@ -125,6 +126,16 @@ public class Recargas extends javax.swing.JFrame {
             }
         });
 
+        TxrCerrar2.setBackground(new java.awt.Color(51, 255, 51));
+        TxrCerrar2.setFont(new java.awt.Font("Harlow Solid Italic", 0, 14)); // NOI18N
+        TxrCerrar2.setForeground(new java.awt.Color(0, 0, 204));
+        TxrCerrar2.setText("Ver Registro!!");
+        TxrCerrar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxrCerrar2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,21 +146,8 @@ public class Recargas extends javax.swing.JFrame {
                         .addGap(135, 135, 135)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(TxrCerrar1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(TxrCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TXTnumerotelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -158,12 +156,29 @@ public class Recargas extends javax.swing.JFrame {
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(TXTmonto, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 6, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(TXTnumerotelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(TxrCerrar1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(TxrCerrar2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(TxrCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(4, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(TxrCerrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TXTrecargar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(134, 134, 134))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,11 +197,12 @@ public class Recargas extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(TXTmonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(TxrCerrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TXTrecargar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxrCerrar)
-                    .addComponent(TxrCerrar1))
+                    .addComponent(TxrCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxrCerrar1)
+                    .addComponent(TxrCerrar2))
                 .addContainerGap())
         );
 
@@ -229,28 +245,35 @@ public class Recargas extends javax.swing.JFrame {
  
     }//GEN-LAST:event_TxrCerrar1ActionPerformed
 
-    private void TxrCerrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxrCerrar2ActionPerformed
+    private void TXTrecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXTrecargarActionPerformed
         // Recargas...
-        TA.setCompañia(this.CBXcompañia.getItemAt(this.CBXcompañia.getSelectedIndex()).toString());
         TA.setMonto(Integer.parseInt(this.TXTmonto.getText()));
         TA.setnumeroT(this.TXTnumerotelefono.getText());
+        TA.setCompañia(this.CBXcompañia.getItemAt(this.CBXcompañia.getSelectedIndex()).toString());
+        
         
         if(mBD.conectar()) {
             if (mBD.GuardarRecarga(TA)) {
                 JOptionPane.showMessageDialog(null, "Recarga con éxito...");
-                this.CBXcompañia.setSelectedItem("");
                 this.TXTmonto.setText("");
                 this.TXTnumerotelefono.setText("");
+                this.CBXcompañia.setSelectedItem("");                
+                
             } else {
                  JOptionPane.showMessageDialog(null, "Error al guardar...");
             }
         mBD.desconectar();
         }
-    }//GEN-LAST:event_TxrCerrar2ActionPerformed
+    }//GEN-LAST:event_TXTrecargarActionPerformed
 
     private void TXTnumerotelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXTnumerotelefonoActionPerformed
         
     }//GEN-LAST:event_TXTnumerotelefonoActionPerformed
+
+    private void TxrCerrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxrCerrar2ActionPerformed
+       FRMConsulta Consulta = new FRMConsulta();
+               Consulta.show();
+    }//GEN-LAST:event_TxrCerrar2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,6 +314,7 @@ public class Recargas extends javax.swing.JFrame {
     private javax.swing.JComboBox CBXcompañia;
     private javax.swing.JTextField TXTmonto;
     private javax.swing.JTextField TXTnumerotelefono;
+    private javax.swing.JButton TXTrecargar;
     private javax.swing.JButton TxrCerrar;
     private javax.swing.JButton TxrCerrar1;
     private javax.swing.JButton TxrCerrar2;

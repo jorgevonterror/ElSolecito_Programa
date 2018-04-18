@@ -1,17 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:8889
--- Tiempo de generación: 14-04-2018 a las 16:53:13
--- Versión del servidor: 5.6.38
--- Versión de PHP: 7.2.1
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 18-04-2018 a las 18:26:12
+-- Versión del servidor: 5.7.14-log
+-- Versión de PHP: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
--- Base de datos: `BD_ElSolecito`
+-- Base de datos: `elsolecito`
 --
 
 -- --------------------------------------------------------
@@ -108,8 +114,18 @@ CREATE TABLE `provedorees` (
 CREATE TABLE `recargas` (
   `id_recarga` int(11) NOT NULL,
   `Monto` float NOT NULL,
-  `NumeroTelefonico` varchar(50) NOT NULL
+  `NumeroTelefonico` varchar(50) NOT NULL,
+  `Compania` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `recargas`
+--
+
+INSERT INTO `recargas` (`id_recarga`, `Monto`, `NumeroTelefonico`, `Compania`) VALUES
+(5, 0, '4981204304', 'Movistar'),
+(2, 50, '4981123013', 'Unefon'),
+(6, 100, '498112303', 'Telcel');
 
 -- --------------------------------------------------------
 
@@ -184,45 +200,41 @@ ALTER TABLE `ventas`
 --
 ALTER TABLE `clientes`
   MODIFY `id_clientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
 --
 -- AUTO_INCREMENT de la tabla `compras`
 --
 ALTER TABLE `compras`
   MODIFY `id_compras` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `detalle_compra`
 --
 ALTER TABLE `detalle_compra`
   MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
   MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `provedorees`
 --
 ALTER TABLE `provedorees`
   MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `recargas`
 --
 ALTER TABLE `recargas`
-  MODIFY `id_recarga` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id_recarga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
   MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -12,12 +12,12 @@ package elsolecito_programa.Recargas;
  */
 public class TiempoAire {
     private String Compañia;
-    private double monto;
+    private double Monto;
     private String numeroT;
     
  public TiempoAire(){
         Compañia = "";
-        monto = 0;
+        Monto = 0;
         numeroT = "";
     }
 
@@ -30,11 +30,11 @@ public class TiempoAire {
     }
 
     public double getMonto() {
-        return monto;
+        return Monto;
     }
 
-    public void setMonto(double monto) {
-        this.monto = monto;
+    public void setMonto(double Monto) {
+        this.Monto = Monto;
     } 
 
     public String getnumeroT() {
