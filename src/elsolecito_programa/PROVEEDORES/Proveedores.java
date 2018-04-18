@@ -12,11 +12,21 @@ import javax.swing.JTextField;
 public class Proveedores {
     private String marca;
     private String nombre;
+    private String folio;
     
     public Proveedores()
     {
+        folio = "";
         marca = "";
         nombre = "";
+    }
+
+    public String getFolio() {
+        return folio;
+    }
+
+    public void setFolio(String folio) {
+        this.folio = folio;
     }
 
     public String getMarca() {

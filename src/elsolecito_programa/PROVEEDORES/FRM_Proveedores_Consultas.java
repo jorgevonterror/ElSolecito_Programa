@@ -1,9 +1,12 @@
 package elsolecito_programa.PROVEEDORES;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /* 1. Distribucion de inventario en el local El Solecito.
     2. Omar Almaraz Cordova.
-    3. Creacion 11/04/18.
-    4. Avance de la creacion de formularios para el catalogo de proveedores
+    3. Creacion 17/04/18.
+    4. Programacion de Formularios en catalogo Proveedores
 */
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,9 +24,50 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
      * Creates new form Cambios
      */
     public FRM_Proveedores_Consultas() {
+        setFilas();
         initComponents();
+        this.setLocationRelativeTo(null);
     }
-
+    DefaultTableModel modeloTabla = new DefaultTableModel();
+    BaseDeDAtos mBD = new BaseDeDAtos();
+    Proveedores Prov = new Proveedores();
+    
+    private void setFilas(){
+        if(mBD.conectar()){
+            ArrayList mListaProveedores = mBD.consultarProveedores();  
+            String [] Datos;
+            
+            modeloTabla.addColumn("Folio");
+            modeloTabla.addColumn("Nombre");
+            modeloTabla.addColumn("Monto");
+ 
+            for (Object mListaProveedor : mListaProveedores) {
+                Datos = new String[3];
+                
+                Prov = (Proveedores)mListaProveedor;
+                Datos[0] = Prov.getFolio();
+                Datos[1] = Prov.getMarca();
+                Datos[2] = Prov.getNombre();
+            
+                modeloTabla.addRow(Datos);
+            } 
+            
+            this.TableConsultas = new javax.swing.JTable();
+            this.TableConsultas.setModel(modeloTabla);
+            
+            this.TableConsultas.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TableConsultas.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.TableConsultas.getColumnModel().getColumn(2).setPreferredWidth(400);
+            
+            if (this.TableConsultas.getRowCount() > 0) {
+                this.TableConsultas.setRowSelectionInterval(0, 0);
+            }
+           
+        } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+        mBD.desconectar();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,79 +79,69 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         TableConsultas = new javax.swing.JTable();
-        LBLId_Proveedor = new javax.swing.JLabel();
-        BTNConsultar = new javax.swing.JButton();
-        TXTId_Proveedor = new javax.swing.JTextField();
-        BTNCerrar = new javax.swing.JButton();
         BTN_Menu_Proveedores = new javax.swing.JButton();
+        LBL_Consultas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         TableConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Id_Proveedor", "Marca", "Nombre"
+
             }
         ));
         jScrollPane1.setViewportView(TableConsultas);
 
-        LBLId_Proveedor.setText("Id_Proveedor:");
-
-        BTNConsultar.setText("Consultar");
-
-        BTNCerrar.setText("Cerrar");
-
         BTN_Menu_Proveedores.setText("Menu Proveedores");
+        BTN_Menu_Proveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_Menu_ProveedoresActionPerformed(evt);
+            }
+        });
+
+        LBL_Consultas.setFont(new java.awt.Font("Traditional Arabic", 1, 14)); // NOI18N
+        LBL_Consultas.setText("Consulta De Proveedores");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(LBLId_Proveedor)
-                    .addComponent(BTNConsultar))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(TXTId_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(202, 202, 202)
+                        .addComponent(BTN_Menu_Proveedores))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(BTNCerrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTN_Menu_Proveedores)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                        .addGap(199, 199, 199)
+                        .addComponent(LBL_Consultas, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LBLId_Proveedor)
-                            .addComponent(TXTId_Proveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTNConsultar)
-                    .addComponent(BTNCerrar)
-                    .addComponent(BTN_Menu_Proveedores))
-                .addGap(69, 69, 69))
+                .addComponent(LBL_Consultas, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(BTN_Menu_Proveedores)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BTN_Menu_ProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_Menu_ProveedoresActionPerformed
+        
+        this.dispose();
+    }//GEN-LAST:event_BTN_Menu_ProveedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,11 +180,8 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTNCerrar;
-    private javax.swing.JButton BTNConsultar;
     private javax.swing.JButton BTN_Menu_Proveedores;
-    private javax.swing.JLabel LBLId_Proveedor;
-    private javax.swing.JTextField TXTId_Proveedor;
+    private javax.swing.JLabel LBL_Consultas;
     private javax.swing.JTable TableConsultas;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

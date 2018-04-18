@@ -1,7 +1,7 @@
 /* 1. Distribucion de inventario en el local El Solecito.
     2. Omar Almaraz Cordova.
     3. Creacion 14/04/18.
-    4. Avance de la creacion de la clase base de datos para el catalogo de proveedores
+    4. correcion de la clase base de datos en proveedores.
 */
 package elsolecito_programa.PROVEEDORES;
 import elsolecito_programa.PROVEEDORES.Proveedores;
@@ -14,108 +14,94 @@ import java.util.ArrayList;
  * @author 8
  */
 public class BaseDeDAtos {
+ 
     private Connection conexion;
-    ResultSet res = null;
-    Statement stat = null;
+    ResultSet rs= null;
+    Statement statement = null;
     
-    public boolean conectar()
-    {
-        try{
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
-                conexion = DriverManager.getConnection(
-                "jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
-                if (conexion != null) {
+    public boolean conectar(){
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            conexion = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:8889/bd_elsolecito", "", "");
+            if (conexion != null) {
                 return true;
-                }
-                else
-                {
+            } else {
                 return false;
-                }
-        }catch(Exception e){
-                e.printStackTrace();
-                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
-    public void desconectar()
-    {
+    
+    public void desconectar() {
         try {
             this.conexion.close();
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
-    public boolean GuardarProveedores(Proveedores mProveedores)
-    {
+    
+    public boolean GuardarProveedores(Proveedores mProveedores){
         Statement consulta;
-        try
-        {
+        try{
             consulta = conexion.createStatement();
-            consulta.execute("INSERT INTO BD_ElSolecito.provedorees (id_proveedor, Marca, Nombre)" +
-                    "VALUES(null, '" + mProveedores.getMarca() + "'," + "'" + mProveedores.getNombre() + "');");
+            consulta.execute("INSERT INTO bd_elsolecito.provedorees (id_clientes, Folio, Marca, Nombre)" + 
+                    "VALUES(null, '" + mProveedores.getFolio() + "'," + "'" + mProveedores.getMarca() + "'," +"'" +mProveedores.getNombre() + "');");
             return true;
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
+        }catch(Exception e){
+             e.printStackTrace();
             return false;
         }
     }
-    public ArrayList ConsultarProveedores()
-    {
+    
+    public ArrayList consultarProveedores() {
         ArrayList mListaProveedores = new ArrayList();
         Proveedores mProveedores = null;
         Statement consulta;
         ResultSet resultado;
         
-        try 
-        {
+        try {
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from provedorees;");
             
-            while(resultado.next())
-            {
+            while (resultado.next()) {
                 mProveedores = new Proveedores();
+                mProveedores.setFolio(resultado.getString("Folio"));
                 mProveedores.setMarca(resultado.getString("Marca"));
                 mProveedores.setNombre(resultado.getString("Nombre"));
                 mListaProveedores.add(mProveedores);
-                
             }
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return mListaProveedores;
     }
-    public boolean EliminarProveedores(Proveedores mProveedores)
-    {
+    
+    public boolean eliminarProveedores(Proveedores mProveedores) {
         Statement consulta;
-        try
-        {
+
+        try {
             consulta = conexion.createStatement();
-            consulta.execute("delete from provedorees " + " where Marca = '" + mProveedores.getMarca() + "';");
+            consulta.execute("delete from provedorees " + " where folio = '" + mProveedores.getFolio() + "';");
             return true;
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    public boolean ModificarProveedores(Proveedores aProveedores, Proveedores nProveedores)
-    {
-        Statement consulta;
-        try 
-        {
-            consulta = conexion.createStatement();
-            consulta.execute("update proveedores set " + "marca = '" + nProveedores.getMarca() + "'," + "nombre ='" + nProveedores.getNombre() + "';" );
-            return true;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
     
+    public boolean modificarProveedores(Proveedores aProveedores, Proveedores nProveedores) {
+        Statement consulta;
+
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("update provedorees set " + "folio = '" + nProveedores.getFolio()+ "'," + "marca = '" + nProveedores.getMarca() + "'" + "WHERE folio = '" + aProveedores.getFolio()+ "';");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

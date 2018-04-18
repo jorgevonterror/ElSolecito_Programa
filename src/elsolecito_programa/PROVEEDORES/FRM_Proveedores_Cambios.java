@@ -1,9 +1,14 @@
 package elsolecito_programa.PROVEEDORES;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /* 1. Distribucion de inventario en el local El Solecito.
     2. Omar Almaraz Cordova.
-    3. Creacion 11/04/18.
-    4. Avance de la creacion de formularios para el catalogo de proveedores
+    3. Creacion 17/04/18.
+    4. Programacionde formularios para el catalogo de proveedores
 */
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,9 +26,64 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
      * Creates new form Cambios
      */
     public FRM_Proveedores_Cambios() {
+        setFilas();
         initComponents();
+        this.setLocationRelativeTo(null);
+        //Para seleccionar fila y columna de la tabla y los ponga en los TXT.
+        TableConsultas.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (TableConsultas.getSelectedRow() != -1) {
+                    int fila = TableConsultas.getSelectedRow();
+                    TXT_Folio.setText(TableConsultas.getValueAt(fila, 0).toString());
+                    TXT_Marca.setText(TableConsultas.getValueAt(fila, 1).toString());
+                    TXT_Nombre.setText(TableConsultas.getValueAt(fila, 2).toString());
+                   
+                    //TXT_ID.setText(Tabla_Deudores.getValueAt(fila, 3).toString());
+                }
+            }
+        });
     }
+    DefaultTableModel modeloTabla = new DefaultTableModel();
+    BaseDeDAtos mBD = new BaseDeDAtos();
+    Proveedores Prov = new Proveedores();
 
+     private void setFilas(){
+        if(mBD.conectar()){
+            ArrayList mListaProveedores = mBD.consultarProveedores();  
+            String [] Datos;
+            
+            modeloTabla.addColumn("Folio");
+            modeloTabla.addColumn("Marca");
+            modeloTabla.addColumn("Nombre");
+ 
+            for (Object mListaProveedor : mListaProveedores) {
+                Datos = new String[3];
+                
+                Prov = (Proveedores)mListaProveedor;
+                Datos[0] = Prov.getFolio();
+                Datos[1] = Prov.getMarca();
+                Datos[2] = Prov.getNombre();
+            
+                modeloTabla.addRow(Datos);
+            } 
+            
+            this.TableConsultas = new javax.swing.JTable();
+            this.TableConsultas.setModel(modeloTabla);
+            
+            this.TableConsultas.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TableConsultas.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.TableConsultas.getColumnModel().getColumn(2).setPreferredWidth(400);
+            
+            if (this.TableConsultas.getRowCount() > 0) {
+                this.TableConsultas.setRowSelectionInterval(0, 0);
+            }
+           
+        } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+        mBD.desconectar();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,92 +93,161 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        LBLId_Proveedor_Actual = new javax.swing.JLabel();
-        LBLId_Proveedor_Nuevo = new javax.swing.JLabel();
+        LBL_Folio = new javax.swing.JLabel();
+        LBL_Marca = new javax.swing.JLabel();
         LBLNombre = new javax.swing.JLabel();
-        TXTId_Proveedor_Actual = new javax.swing.JTextField();
-        TXTId_Proveedor_Nuevo = new javax.swing.JTextField();
-        TXTNombre = new javax.swing.JTextField();
-        BTNGuardar = new javax.swing.JButton();
-        BTNCerrar = new javax.swing.JButton();
+        TXT_Folio = new javax.swing.JTextField();
+        TXT_Marca = new javax.swing.JTextField();
+        TXT_Nombre = new javax.swing.JTextField();
+        BTNModificar = new javax.swing.JButton();
         BTN_Menu_Proveedores = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TableConsultas = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        LBLId_Proveedor_Actual.setText("Id_Poveedor_Actual:");
+        LBL_Folio.setText("Folio:");
 
-        LBLId_Proveedor_Nuevo.setText("Id_Proveedor_Nuevo:");
+        LBL_Marca.setText("Marca");
 
         LBLNombre.setText("Nombre:");
 
-        BTNGuardar.setText("Guardar");
-        BTNGuardar.addActionListener(new java.awt.event.ActionListener() {
+        TXT_Folio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNGuardarActionPerformed(evt);
+                TXT_FolioActionPerformed(evt);
             }
         });
 
-        BTNCerrar.setText("Cerrar");
+        BTNModificar.setText("Modificar");
+        BTNModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNModificarActionPerformed(evt);
+            }
+        });
 
         BTN_Menu_Proveedores.setText("Menu Proveedores");
+        BTN_Menu_Proveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_Menu_ProveedoresActionPerformed(evt);
+            }
+        });
+
+        TableConsultas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(TableConsultas);
+
+        jLabel1.setFont(new java.awt.Font("Traditional Arabic", 1, 12)); // NOI18N
+        jLabel1.setText("Modidicacion De Proveedores");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(19, 19, 19)
+                .addComponent(BTNModificar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(BTN_Menu_Proveedores)
+                .addGap(326, 326, 326))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BTNGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                        .addComponent(BTNCerrar)
-                        .addGap(55, 55, 55)
-                        .addComponent(BTN_Menu_Proveedores)
-                        .addGap(44, 44, 44))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LBLId_Proveedor_Nuevo)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(LBLId_Proveedor_Actual, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(LBLNombre))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(36, 36, 36)
+                                .addComponent(LBL_Marca)
+                                .addGap(16, 16, 16))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(LBL_Folio, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TXTId_Proveedor_Nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TXTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TXTId_Proveedor_Actual, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(TXT_Folio, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TXT_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(LBLNombre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TXT_Folio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LBL_Folio))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LBL_Marca)
+                            .addComponent(TXT_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LBLNombre)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LBLId_Proveedor_Actual)
-                    .addComponent(TXTId_Proveedor_Actual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LBLId_Proveedor_Nuevo)
-                    .addComponent(TXTId_Proveedor_Nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(TXTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LBLNombre))
-                .addGap(120, 120, 120)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BTNGuardar)
-                    .addComponent(BTNCerrar)
+                    .addComponent(BTNModificar)
                     .addComponent(BTN_Menu_Proveedores))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    
+    private void BTNModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNModificarActionPerformed
+        
+        Proveedores nProveedores = new Proveedores();
+        nProveedores.setFolio(this.TXT_Folio.getText());
+        nProveedores.setMarca(this.TXT_Marca.getText());
+        nProveedores.setNombre(this.TXT_Nombre.getText());
+        
+        if(mBD.conectar())
+        {
+            if(mBD.modificarProveedores(Prov, nProveedores))
+            {
+                JOptionPane.showMessageDialog(null, "Proveedor modificado con exito...");
+                this.TXT_Folio.setText("");
+                this.TXT_Marca.setText("");
+                this.TXT_Nombre.setText("");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Error al modificar...");
+            }
+            mBD.desconectar();
+        }
+    }//GEN-LAST:event_BTNModificarActionPerformed
 
-    private void BTNGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNGuardarActionPerformed
+    private void TXT_FolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_FolioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BTNGuardarActionPerformed
+    }//GEN-LAST:event_TXT_FolioActionPerformed
+
+    private void BTN_Menu_ProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_Menu_ProveedoresActionPerformed
+            this.dispose();        
+    }//GEN-LAST:event_BTN_Menu_ProveedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,14 +286,16 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTNCerrar;
-    private javax.swing.JButton BTNGuardar;
+    private javax.swing.JButton BTNModificar;
     private javax.swing.JButton BTN_Menu_Proveedores;
-    private javax.swing.JLabel LBLId_Proveedor_Actual;
-    private javax.swing.JLabel LBLId_Proveedor_Nuevo;
     private javax.swing.JLabel LBLNombre;
-    private javax.swing.JTextField TXTId_Proveedor_Actual;
-    private javax.swing.JTextField TXTId_Proveedor_Nuevo;
-    private javax.swing.JTextField TXTNombre;
+    private javax.swing.JLabel LBL_Folio;
+    private javax.swing.JLabel LBL_Marca;
+    private javax.swing.JTextField TXT_Folio;
+    private javax.swing.JTextField TXT_Marca;
+    private javax.swing.JTextField TXT_Nombre;
+    private javax.swing.JTable TableConsultas;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

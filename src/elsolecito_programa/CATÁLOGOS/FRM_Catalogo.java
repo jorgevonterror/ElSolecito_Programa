@@ -7,6 +7,7 @@ package elsolecito_programa;
 
 import elsolecito_programa.CLIENTES.FRM_Clientes;
 import elsolecito_programa.Recargas.Recargas;
+import elsolecito_programa.PROVEEDORES.FRM_Proveedores;
 
 /**
  *
@@ -109,6 +110,11 @@ public class FRM_Catalogo extends javax.swing.JFrame {
         });
 
         jButton2.setText("Proveedores");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Productos");
 
@@ -187,6 +193,13 @@ public class FRM_Catalogo extends javax.swing.JFrame {
         Rec = new Recargas();
         Rec.show();
     }//GEN-LAST:event_BTNrecargasActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        FRM_Proveedores mProveedores;
+        mProveedores = new FRM_Proveedores();
+        mProveedores.show();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
