@@ -133,17 +133,7 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
             }
         });
 
-        TableConsultas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
+        TableConsultas.setModel(modeloTabla);
         jScrollPane1.setViewportView(TableConsultas);
 
         jLabel1.setFont(new java.awt.Font("Traditional Arabic", 1, 12)); // NOI18N

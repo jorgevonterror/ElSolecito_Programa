@@ -95,17 +95,7 @@ public class FRM_Proveedores_Alta extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         jLabel1.setText("Registro De Proveedores");
 
-        TableConsultas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
+        TableConsultas.setModel(modeloTabla);
         jScrollPane1.setViewportView(TableConsultas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

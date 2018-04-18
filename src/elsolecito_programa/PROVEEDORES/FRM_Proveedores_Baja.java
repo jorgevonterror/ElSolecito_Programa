@@ -71,17 +71,7 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
             }
         });
 
-        TableConsultas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
+        TableConsultas.setModel(modeloTabla);
         jScrollPane1.setViewportView(TableConsultas);
 
         BTNEliminar.setText("Eliminar");

@@ -38,8 +38,8 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
             String [] Datos;
             
             modeloTabla.addColumn("Folio");
+            modeloTabla.addColumn("Marca");
             modeloTabla.addColumn("Nombre");
-            modeloTabla.addColumn("Monto");
  
             for (Object mListaProveedor : mListaProveedores) {
                 Datos = new String[3];
@@ -84,17 +84,7 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TableConsultas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
+        TableConsultas.setModel(modeloTabla);
         jScrollPane1.setViewportView(TableConsultas);
 
         BTN_Menu_Proveedores.setText("Menu Proveedores");

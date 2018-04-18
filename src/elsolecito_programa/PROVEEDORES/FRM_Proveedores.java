@@ -37,6 +37,7 @@ public class FRM_Proveedores extends javax.swing.JFrame {
         BTN_Baja = new javax.swing.JButton();
         BTN_Cambios = new javax.swing.JButton();
         BTN_Consulta = new javax.swing.JButton();
+        BTN_Menu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,24 +72,36 @@ public class FRM_Proveedores extends javax.swing.JFrame {
             }
         });
 
+        BTN_Menu.setText("Volver Al Menu");
+        BTN_Menu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_MenuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(BTN_Alta, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addComponent(BTN_Alta, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(BTN_Baja, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(BTN_Cambios, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(BTN_Consulta))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(BTN_Baja, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(BTN_Cambios, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(BTN_Consulta)))
+                        .addGap(183, 183, 183)
+                        .addComponent(BTN_Menu)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,7 +115,9 @@ public class FRM_Proveedores extends javax.swing.JFrame {
                     .addComponent(BTN_Baja)
                     .addComponent(BTN_Cambios)
                     .addComponent(BTN_Consulta))
-                .addGap(88, 88, 88))
+                .addGap(27, 27, 27)
+                .addComponent(BTN_Menu)
+                .addGap(38, 38, 38))
         );
 
         pack();
@@ -128,6 +143,10 @@ public class FRM_Proveedores extends javax.swing.JFrame {
         FRM_Proveedores_Cambios mCambios = new FRM_Proveedores_Cambios();
         mCambios.show();
     }//GEN-LAST:event_BTN_CambiosActionPerformed
+
+    private void BTN_MenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_MenuActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_BTN_MenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,6 +188,7 @@ public class FRM_Proveedores extends javax.swing.JFrame {
     private javax.swing.JButton BTN_Baja;
     private javax.swing.JButton BTN_Cambios;
     private javax.swing.JButton BTN_Consulta;
+    private javax.swing.JButton BTN_Menu;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
