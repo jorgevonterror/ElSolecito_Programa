@@ -5,6 +5,12 @@
  */
 package elsolecito_programa.PRODUCTO;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author MARIA NOELDA MARIANO
@@ -15,8 +21,23 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
      * Creates new form FrmBajaProductos
      */
     public FRM_Productos_Baja() {
+        setFilas();
         initComponents();
+    //Para seleccionar fila y columna de la tabla y los ponga en los TXT.
+        TBProductos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (TBProductos.getSelectedRow() != -1) {
+                    int fila = TBProductos.getSelectedRow();
+                    TxtCodigo.setText(TBProductos.getValueAt(fila, 0).toString());
+                }
+            }
+        });
     }
+    
+    BaseDeDatos mBD = new BaseDeDatos();
+    Producto mProducto = new Producto();
+    DefaultTableModel ModeloTabla = new DefaultTableModel();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,7 +50,7 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
 
         TxtCodigo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TableContenido = new javax.swing.JTable();
+        TBProductos = new javax.swing.JTable();
         BtnEliminar = new javax.swing.JButton();
         BtnMenu = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -37,24 +58,19 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TableContenido.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(TableContenido);
+        TBProductos.setModel(ModeloTabla);
+        jScrollPane1.setViewportView(TBProductos);
 
         BtnEliminar.setText("Eliminar");
+        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarActionPerformed(evt);
+            }
+        });
 
         BtnMenu.setText("Menu");
 
-        jLabel2.setText("Ingrese el ID del cliente a eliminar del sistema:");
+        jLabel2.setText("Ingrese el codigo del producto a eliminar del sistema:");
 
         jLabel3.setText("EL SOLECITO");
 
@@ -78,7 +94,7 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(232, 232, 232)
                         .addComponent(jLabel3)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,6 +120,61 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+        // TODO add your handling code here:
+        mProducto.setFolio(this.TxtCodigo.getText());
+        if(mBD.conectar()) {
+            if (mBD.EliminarProducto(mProducto)) {
+                 JOptionPane.showMessageDialog(null, "Producto eliminado con éxito...");
+                this.TxtCodigo.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al eliminar...");
+            }
+        mBD.desconectar();
+        }
+        
+    }//GEN-LAST:event_BtnEliminarActionPerformed
+
+    private void setFilas(){
+        if(mBD.conectar()){
+            ArrayList mListaProductos = mBD.ConsultarProductos();
+            String [] Datos;
+            
+            ModeloTabla.addColumn("Codigo");
+            ModeloTabla.addColumn("Nombre");
+            ModeloTabla.addColumn("Precio");
+            ModeloTabla.addColumn("Descripcion");
+ 
+            for (Object mListaProducto : mListaProductos) {
+                Datos = new String[3];
+                
+                mProducto = (Producto)mListaProducto;
+                Datos[0] = mProducto.getCodigo();
+                Datos[1] = mProducto.getNombre();
+                Datos[2] = "" + mProducto.getPrecio();
+                Datos[3] = mProducto.getDesc_Prod();
+                
+            
+                ModeloTabla.addRow(Datos);
+            } 
+            
+            this.TBProductos = new javax.swing.JTable();
+            this.TBProductos.setModel(ModeloTabla);
+            
+            this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
+            
+            if (this.TBProductos.getRowCount() > 0) {
+                this.TBProductos.setRowSelectionInterval(0, 0);
+            }
+           
+        } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+        mBD.desconectar();
+    }
     /**
      * @param args the command line arguments
      */
@@ -149,7 +220,7 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnMenu;
-    private javax.swing.JTable TableContenido;
+    private javax.swing.JTable TBProductos;
     private javax.swing.JTextField TxtCodigo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

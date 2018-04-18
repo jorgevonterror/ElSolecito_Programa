@@ -5,6 +5,13 @@
  */
 package elsolecito_programa.PRODUCTO;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author MARIA NOELDA MARIANO
@@ -15,9 +22,13 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
      * Creates new form FrmConsultaProducto
      */
     public FRM_Producto_Consulta() {
+        setFilas();
         initComponents();
     }
 
+    DefaultTableModel ModeloTabla = new DefaultTableModel();
+    BaseDeDatos mBD = new BaseDeDatos();
+    Producto mProducto = new Producto();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,7 +41,7 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
         TxtCodigo = new javax.swing.JTextField();
         BtnConsultar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TableContenido = new javax.swing.JTable();
+        TBProductos = new javax.swing.JTable();
         BtnMenu = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -39,18 +50,8 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
 
         BtnConsultar.setText("Buscar");
 
-        TableContenido.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(TableContenido);
+        TBProductos.setModel(ModeloTabla);
+        jScrollPane1.setViewportView(TBProductos);
 
         BtnMenu.setText("Menu");
 
@@ -111,6 +112,47 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void setFilas(){
+        if(mBD.conectar()){
+            ArrayList mListaProductos = mBD.ConsultarProductos();
+            String [] Datos;
+            
+            ModeloTabla.addColumn("Codigo");
+            ModeloTabla.addColumn("Nombre");
+            ModeloTabla.addColumn("Precio");
+            ModeloTabla.addColumn("Descripcion");
+ 
+            for (Object mListaProducto : mListaProductos) {
+                Datos = new String[3];
+                
+                mProducto = (Producto)mListaProducto;
+                Datos[0] = mProducto.getCodigo();
+                Datos[1] = mProducto.getNombre();
+                Datos[2] = "" + mProducto.getPrecio();
+                Datos[3] = mProducto.getDesc_Prod();
+                
+            
+                ModeloTabla.addRow(Datos);
+            } 
+            
+            this.TBProductos = new javax.swing.JTable();
+            this.TBProductos.setModel(ModeloTabla);
+            
+            this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
+            
+            if (this.TBProductos.getRowCount() > 0) {
+                this.TBProductos.setRowSelectionInterval(0, 0);
+            }
+           
+        } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+        mBD.desconectar();
+    }
     /**
      * @param args the command line arguments
      */
@@ -156,7 +198,7 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnConsultar;
     private javax.swing.JButton BtnMenu;
-    private javax.swing.JTable TableContenido;
+    private javax.swing.JTable TBProductos;
     private javax.swing.JTextField TxtCodigo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
