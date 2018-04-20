@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package elsolecito_programa;
+package elsolecito_programa.CATÁLOGOS;
 
 import elsolecito_programa.CLIENTES.FRM_Clientes;
 import elsolecito_programa.Recargas.Recargas;
 import elsolecito_programa.PROVEEDORES.FRM_Proveedores;
+import elsolecito_programa.Producto.FRM_Producto_Catalogo;
 
 /**
  *
@@ -117,6 +118,11 @@ public class FRM_Catalogo extends javax.swing.JFrame {
         });
 
         jButton3.setText("Productos");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         BTNrecargas.setText("Recargas");
         BTNrecargas.addActionListener(new java.awt.event.ActionListener() {
@@ -200,6 +206,12 @@ public class FRM_Catalogo extends javax.swing.JFrame {
         mProveedores.show();
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new FRM_Producto_Catalogo().show();
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

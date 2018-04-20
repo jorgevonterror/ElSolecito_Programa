@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package elsolecito_programa.PRODUCTO;
+package elsolecito_programa.Producto;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -31,11 +31,9 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent e) {
                 if (TBProductos.getSelectedRow() != -1) {
                     int fila = TBProductos.getSelectedRow();
-                    /*
                     TxtNuevoPrecio.setText(TBProductos.getValueAt(fila, 3).toString());
                     TxtNuevaDesc.setText(TBProductos.getValueAt(fila, 2).toString());
                     TxtNuevoNombre.setText(TBProductos.getValueAt(fila, 1).toString());
-                    */
                     TxtNuevoCodigo.setText(TBProductos.getValueAt(fila, 0).toString());
                 }
             }
@@ -62,11 +60,12 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
         TxtNuevaDesc = new javax.swing.JTextField();
         TxtNuevoNombre = new javax.swing.JTextField();
         TxtNuevoPrecio = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        BtnModificar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TBProductos = new javax.swing.JTable();
+        BtnMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,10 +77,10 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
 
         jLabel5.setText("Precio:");
 
-        jButton1.setText("Modificar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnModificar.setText("Modificar");
+        BtnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnModificarActionPerformed(evt);
             }
         });
 
@@ -92,14 +91,17 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
         TBProductos.setModel(ModeloTabla);
         jScrollPane1.setViewportView(TBProductos);
 
+        BtnMenu.setText("Volver al Menu");
+        BtnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMenuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,6 +131,12 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addGap(141, 141, 141))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnMenu)
+                .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,10 +165,12 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(TxtNuevoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnModificar)
+                    .addComponent(BtnMenu))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -177,7 +187,7 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
             ModeloTabla.addColumn("Descripcion");
  
             for (Object mListaProducto : mListaProductos) {
-                Datos = new String[3];
+                Datos = new String[4];
                 
                 aProducto = (Producto)mListaProducto;
                 Datos[0] = aProducto.getCodigo();
@@ -207,15 +217,17 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
         mBD.desconectar();
     }
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
         // TODO add your handling code here:
+        Producto aProducto = new Producto();
         Producto bProducto = new Producto();
+        aProducto.setCodigo(this.TxtNuevoCodigo.getText());
         bProducto.setNombre(this.TxtNuevoNombre.getText());
-        bProducto.setMonto(Float.parseFloat(this.TxtNuevoPrecio.getText()));
-        bProducto.getDesc_Prod(this.TxtNuevaDesc.getText());
+        bProducto.setPrecio(Float.parseFloat(this.TxtNuevoPrecio.getText()));
+        bProducto.setDesc_Prod(this.TxtNuevaDesc.getText());
 
         if(mBD.conectar()) {
-            if(mBD.modificarProductos(aProducto, bProducto)){
+            if(mBD.ModificarProductos(aProducto, bProducto)){
                 JOptionPane.showMessageDialog(null, "Producto modificado con éxito...");
                 this.TxtNuevoCodigo.setText("");
                 this.TxtNuevoNombre.setText("");
@@ -226,7 +238,13 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
             }
             mBD.desconectar();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnModificarActionPerformed
+
+    private void BtnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenuActionPerformed
+        // TODO add your handling code here:
+        new FRM_Producto_Catalogo().show();
+        this.setVisible(false);
+    }//GEN-LAST:event_BtnMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,12 +289,13 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnMenu;
+    private javax.swing.JButton BtnModificar;
     private javax.swing.JTable TBProductos;
     private javax.swing.JTextField TxtNuevaDesc;
     private javax.swing.JTextField TxtNuevoCodigo;
     private javax.swing.JTextField TxtNuevoNombre;
     private javax.swing.JTextField TxtNuevoPrecio;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package elsolecito_programa.PRODUCTO;
+package elsolecito_programa.Producto;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -124,7 +124,7 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
             ModeloTabla.addColumn("Descripcion");
  
             for (Object mListaProducto : mListaProductos) {
-                Datos = new String[3];
+                Datos = new String[4];
                 
                 mProducto = (Producto)mListaProducto;
                 Datos[0] = mProducto.getCodigo();

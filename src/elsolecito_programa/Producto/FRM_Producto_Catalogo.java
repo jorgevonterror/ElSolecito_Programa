@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package elsolecito_programa.PRODUCTO;
+package elsolecito_programa.Producto;
+
+import elsolecito_programa.CATÁLOGOS.FRM_Catalogo;
 
 /**
  *
@@ -39,14 +41,39 @@ public class FRM_Producto_Catalogo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         BtnAlta.setText("Alta");
+        BtnAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAltaActionPerformed(evt);
+            }
+        });
 
         BtnBaja.setText("Baja");
+        BtnBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBajaActionPerformed(evt);
+            }
+        });
 
         BtnCambios.setText("Cambios");
+        BtnCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCambiosActionPerformed(evt);
+            }
+        });
 
         BtnConsultas.setText("Consultas");
+        BtnConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnConsultasActionPerformed(evt);
+            }
+        });
 
         BtnMenu.setText("Menu");
+        BtnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMenuActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Seleccione la opción de su preferencia:");
 
@@ -105,6 +132,36 @@ public class FRM_Producto_Catalogo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAltaActionPerformed
+        // TODO add your handling code here:
+        new FRM_Producto_Alta().show();
+        this.setVisible(false);
+    }//GEN-LAST:event_BtnAltaActionPerformed
+
+    private void BtnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBajaActionPerformed
+        // TODO add your handling code here:
+        new FRM_Productos_Baja().show();
+        this.setVisible(false);
+    }//GEN-LAST:event_BtnBajaActionPerformed
+
+    private void BtnCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCambiosActionPerformed
+        // TODO add your handling code here:
+        new FRM_Productos_Modificar().show();
+        this.setVisible(false);
+    }//GEN-LAST:event_BtnCambiosActionPerformed
+
+    private void BtnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultasActionPerformed
+        // TODO add your handling code here:
+        new FRM_Producto_Consulta().show();
+        this.setVisible(false);
+    }//GEN-LAST:event_BtnConsultasActionPerformed
+
+    private void BtnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenuActionPerformed
+        // TODO add your handling code here:
+        new FRM_Catalogo().show();
+        this.setVisible(false);
+    }//GEN-LAST:event_BtnMenuActionPerformed
 
     /**
      * @param args the command line arguments

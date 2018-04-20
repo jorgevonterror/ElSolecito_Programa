@@ -86,26 +86,41 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Alta"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAltaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BtnBaja">
       <Properties>
         <Property name="text" type="java.lang.String" value="Baja"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBajaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BtnCambios">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cambios"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCambiosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BtnConsultas">
       <Properties>
         <Property name="text" type="java.lang.String" value="Consultas"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnConsultasActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BtnMenu">
       <Properties>
         <Property name="text" type="java.lang.String" value="Menu"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnMenuActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>

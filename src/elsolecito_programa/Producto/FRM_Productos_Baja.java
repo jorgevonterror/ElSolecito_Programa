@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package elsolecito_programa.PRODUCTO;
+package elsolecito_programa.Producto;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -69,6 +69,11 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
         });
 
         BtnMenu.setText("Menu");
+        BtnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMenuActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Ingrese el codigo del producto a eliminar del sistema:");
 
@@ -79,21 +84,18 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(BtnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BtnEliminar))
-                            .addComponent(BtnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(232, 232, 232)
-                        .addComponent(jLabel3)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BtnEliminar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -101,8 +103,9 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
                         .addComponent(jLabel3)
-                        .addGap(15, 15, 15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
@@ -122,7 +125,7 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
         // TODO add your handling code here:
-        mProducto.setFolio(this.TxtCodigo.getText());
+        mProducto.setCodigo(this.TxtCodigo.getText());
         if(mBD.conectar()) {
             if (mBD.EliminarProducto(mProducto)) {
                  JOptionPane.showMessageDialog(null, "Producto eliminado con éxito...");
@@ -135,6 +138,12 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
+    private void BtnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenuActionPerformed
+        // TODO add your handling code here:
+        new FRM_Producto_Catalogo().show();
+        this.setVisible(false);
+    }//GEN-LAST:event_BtnMenuActionPerformed
+
     private void setFilas(){
         if(mBD.conectar()){
             ArrayList mListaProductos = mBD.ConsultarProductos();
@@ -146,7 +155,7 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
             ModeloTabla.addColumn("Descripcion");
  
             for (Object mListaProducto : mListaProductos) {
-                Datos = new String[3];
+                Datos = new String[4];
                 
                 mProducto = (Producto)mListaProducto;
                 Datos[0] = mProducto.getCodigo();

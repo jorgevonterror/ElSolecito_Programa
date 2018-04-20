@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package elsolecito_programa.PRODUCTO;
+package elsolecito_programa.Producto;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -64,7 +64,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
         TxtDescProducto = new javax.swing.JTextField();
         TxtNombre = new javax.swing.JTextField();
         BtnGuardar = new javax.swing.JButton();
-        TxrCerrar = new javax.swing.JButton();
+        TxrMenu = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         TxtPrecio = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -100,10 +100,10 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
             }
         });
 
-        TxrCerrar.setText("Cerrar");
-        TxrCerrar.addActionListener(new java.awt.event.ActionListener() {
+        TxrMenu.setText("Volver al Menu");
+        TxrMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxrCerrarActionPerformed(evt);
+                TxrMenuActionPerformed(evt);
             }
         });
 
@@ -128,29 +128,34 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
-                        .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addComponent(jLabel5))
-                            .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(58, 58, 58)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(44, 44, 44)
+                                        .addComponent(jLabel5)))
+                                .addGap(109, 109, 109))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TxtPrecio)
+                                    .addComponent(TxtNombre)
+                                    .addComponent(TxtCodigo)))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TxtDescProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)))
                 .addGap(38, 38, 38))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(BtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TxrCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BtnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TxrMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
@@ -164,11 +169,15 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(TxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel3)
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(TxtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -180,12 +189,12 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(TxtDescProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnGuardar)
-                    .addComponent(TxrCerrar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TxrMenu)
+                    .addComponent(BtnGuardar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -202,7 +211,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
             ModeloTabla.addColumn("Descripcion");
  
             for (Object mListaProducto : mListaProductos) {
-                Datos = new String[3];
+                Datos = new String[4];
                 
                 mProducto = (Producto)mListaProducto;
                 Datos[0] = mProducto.getCodigo();
@@ -232,12 +241,33 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
         mBD.desconectar();
     }
     
-    private void TxrCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxrCerrarActionPerformed
+    private void TxrMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxrMenuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxrCerrarActionPerformed
+        new FRM_Producto_Catalogo().show();
+        this.setVisible(false);
+    }//GEN-LAST:event_TxrMenuActionPerformed
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
         // TODO add your handling code here:
+        // Alta de productos deudores...
+        mProducto.setCodigo(this.TxtCodigo.getText());
+        mProducto.setNombre(this.TxtNombre.getText());
+        mProducto.setDesc_Prod(this.TxtDescProducto.getText());
+        mProducto.setPrecio(Float.parseFloat(this.TxtNombre.getText()));
+        
+        if(mBD.conectar()) {
+            if (mBD.GuardarProducto(mProducto)) {
+                JOptionPane.showMessageDialog(null, "Producto guardado con éxito...");
+                this.TxtNombre.setText("");
+                this.TxtPrecio.setText("");
+                this.TxtCodigo.setText("");
+                this.TxtDescProducto.setText("");
+                
+            } else {
+                 JOptionPane.showMessageDialog(null, "Error al guardar...");
+            }
+        mBD.desconectar();
+        }
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
     /**
@@ -293,7 +323,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnGuardar;
     private javax.swing.JTable TBProductos;
-    private javax.swing.JButton TxrCerrar;
+    private javax.swing.JButton TxrMenu;
     private javax.swing.JTextField TxtCodigo;
     private javax.swing.JTextField TxtDescProducto;
     private javax.swing.JTextField TxtNombre;

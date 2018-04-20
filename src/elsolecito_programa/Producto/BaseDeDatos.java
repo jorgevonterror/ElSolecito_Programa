@@ -24,7 +24,7 @@ public class BaseDeDatos {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
+                    "jdbc:mysql://localhost/bd_elsolecito", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -50,8 +50,8 @@ public class BaseDeDatos {
         try
         {
             consulta = conexion.createStatement();
-            consulta.execute("INSERT INTO BD_ElSolecito.productos (id_producto, Desc_producto, Nombre, Precio)" +
-                    "VALUES(null, '" + mProducto.getCodigo() + "'," + "'" + mProducto.getDesc_Prod() + "'," + "'" + mProducto.getNombre() + "'," + "'" + mProducto.getPrecio() + "');");
+            consulta.execute("insert into productos (Codigo, Desc_producto, Nombre, Precio)" +
+                    "values('" + mProducto.getCodigo() + "'," + "'" + mProducto.getDesc_Prod() + "'," + "'" + mProducto.getNombre() + "'," + "'" + mProducto.getPrecio() + "');");
             return true;
         }
         catch(Exception e)
@@ -96,7 +96,7 @@ public class BaseDeDatos {
         try
         {
             consulta = conexion.createStatement();
-            consulta.execute("delete from productos " + " where id_producto = '" + mProducto.getCodigo() + "';");
+            consulta.execute("delete from productos " + " where Codigo = '" + mProducto.getCodigo() + "';");
             return true;
         }
         catch(Exception e)
@@ -111,7 +111,7 @@ public class BaseDeDatos {
         try 
         {
             consulta = conexion.createStatement();
-            consulta.execute("update productos set " + "'," + "id_producto ='" + bProducto.getCodigo() + "nombre ='" + bProducto.getNombre() + "Precio ='" + bProducto.getPrecio() + "Desc_prod ='" + bProducto.getDesc_Prod() + "'" + "WHERE id_producto = '" + aProducto.getCodigo() + "';" );
+            consulta.execute("update productos set " + "Nombre ='" + bProducto.getNombre() + "Precio ='" + bProducto.getPrecio() + "Desc_prod ='" + bProducto.getDesc_Prod() + "'" + "where Codigo = '" + aProducto.getCodigo() + "';" );
             return true;
         }
         catch(Exception e)
@@ -120,5 +120,4 @@ public class BaseDeDatos {
             return false;
         }
     }
-    
 }
