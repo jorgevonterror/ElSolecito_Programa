@@ -31,8 +31,9 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent e) {
                 if (TBProductos.getSelectedRow() != -1) {
                     int fila = TBProductos.getSelectedRow();
-                    TxtNuevoPrecio.setText(TBProductos.getValueAt(fila, 3).toString());
-                    TxtNuevaDesc.setText(TBProductos.getValueAt(fila, 2).toString());
+                    
+                    TxtNuevaDesc.setText(TBProductos.getValueAt(fila, 3).toString());
+                    TxtNuevoPrecio.setText(TBProductos.getValueAt(fila, 2).toString());
                     TxtNuevoNombre.setText(TBProductos.getValueAt(fila, 1).toString());
                     TxtNuevoCodigo.setText(TBProductos.getValueAt(fila, 0).toString());
                 }
@@ -42,7 +43,7 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
 
     DefaultTableModel ModeloTabla = new DefaultTableModel();
     BaseDeDatos mBD = new BaseDeDatos();
-    Producto aProducto = new Producto();
+    Producto mProducto = new Producto();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -189,11 +190,11 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
             for (Object mListaProducto : mListaProductos) {
                 Datos = new String[4];
                 
-                aProducto = (Producto)mListaProducto;
-                Datos[0] = aProducto.getCodigo();
-                Datos[1] = aProducto.getNombre();
-                Datos[2] = "" + aProducto.getPrecio();
-                Datos[3] = aProducto.getDesc_Prod();
+                mProducto = (Producto)mListaProducto;
+                Datos[0] = mProducto.getCodigo();
+                Datos[1] = mProducto.getNombre();
+                Datos[2] = "" + mProducto.getPrecio();
+                Datos[3] = mProducto.getDesc_Prod();
                 
             
                 ModeloTabla.addRow(Datos);
@@ -221,7 +222,9 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
         // TODO add your handling code here:
         Producto aProducto = new Producto();
         Producto bProducto = new Producto();
+        
         aProducto.setCodigo(this.TxtNuevoCodigo.getText());
+        
         bProducto.setNombre(this.TxtNuevoNombre.getText());
         bProducto.setPrecio(Float.parseFloat(this.TxtNuevoPrecio.getText()));
         bProducto.setDesc_Prod(this.TxtNuevaDesc.getText());

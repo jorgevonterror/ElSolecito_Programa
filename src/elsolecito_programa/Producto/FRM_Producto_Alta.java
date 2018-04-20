@@ -189,7 +189,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(TxtDescProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TxrMenu)
                     .addComponent(BtnGuardar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -253,7 +253,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
         mProducto.setCodigo(this.TxtCodigo.getText());
         mProducto.setNombre(this.TxtNombre.getText());
         mProducto.setDesc_Prod(this.TxtDescProducto.getText());
-        mProducto.setPrecio(Float.parseFloat(this.TxtNombre.getText()));
+        mProducto.setPrecio(Float.parseFloat(this.TxtPrecio.getText()));
         
         if(mBD.conectar()) {
             if (mBD.GuardarProducto(mProducto)) {

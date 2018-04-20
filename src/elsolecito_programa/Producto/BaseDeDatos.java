@@ -50,8 +50,11 @@ public class BaseDeDatos {
         try
         {
             consulta = conexion.createStatement();
-            consulta.execute("insert into productos (Codigo, Desc_producto, Nombre, Precio)" +
-                    "values('" + mProducto.getCodigo() + "'," + "'" + mProducto.getDesc_Prod() + "'," + "'" + mProducto.getNombre() + "'," + mProducto.getPrecio() + ");");
+            consulta.execute("insert into productos (Desc_producto, Codigo , Nombre, Precio)" +
+                    "values('" + mProducto.getDesc_Prod() + "'," 
+                    + "'" + mProducto.getCodigo() + "'," 
+                    + "'" + mProducto.getNombre() + "'," 
+                   + "'" + mProducto.getPrecio() + "');");
             return true;
         }
         catch(Exception e)
@@ -111,7 +114,11 @@ public class BaseDeDatos {
         try 
         {
             consulta = conexion.createStatement();
-            consulta.execute("update productos set " + "Nombre ='" + bProducto.getNombre() + "'" +  "Precio =" + bProducto.getPrecio() + "Desc_prod ='" + bProducto.getDesc_Prod() + "'" + "where Codigo = '" + aProducto.getCodigo() + "';" );
+            consulta.execute("update productos set " 
+                    + "Desc_producto ='" + bProducto.getDesc_Prod() + "'," 
+                    + "Nombre ='" + bProducto.getNombre() + "'," 
+                    + "Precio =" + bProducto.getPrecio() 
+                    + "where Codigo = '" + aProducto.getCodigo() + "';" );
             return true;
         }
         catch(Exception e)

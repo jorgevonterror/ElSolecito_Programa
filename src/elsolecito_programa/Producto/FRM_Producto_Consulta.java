@@ -54,6 +54,11 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
         jScrollPane1.setViewportView(TBProductos);
 
         BtnMenu.setText("Menu");
+        BtnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMenuActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Ingrese el codigo del Producto a buscar en el sistema:");
 
@@ -111,6 +116,12 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenuActionPerformed
+        // TODO add your handling code here:
+        new FRM_Producto_Catalogo().show();
+        this.setVisible(false);
+    }//GEN-LAST:event_BtnMenuActionPerformed
 
     
     private void setFilas(){
