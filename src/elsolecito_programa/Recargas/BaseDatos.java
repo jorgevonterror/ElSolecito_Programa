@@ -22,7 +22,7 @@ public boolean conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/elsolecito", "root", "");
+                    "jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
             if (conexion != null) {
                 return true;
             } else {
@@ -70,9 +70,9 @@ public boolean conectar(){
             while (resultado.next()) {
                 mTiempo = new TiempoAire();
                 mTiempo.setMonto(resultado.getDouble("Monto"));
+                mTiempo.setLada(resultado.getString("NumeroTelefonico"));
                 mTiempo.setnumeroT(resultado.getString("NumeroTelefonico"));
                 mTiempo.setCompañia(resultado.getString("Compania"));
-                //mTiempo.setCompañia(resultado.getItemAt(this.CBXcompañia.getSelectedIndex()).toString("Compañia"));
                 
         
                  

@@ -13,10 +13,11 @@ package elsolecito_programa.Recargas;
 public class TiempoAire {
     private String Compañia;
     private double Monto;
-    private String numeroT;
+    private String numeroT,Lada;
     
  public TiempoAire(){
         Compañia = "";
+        Lada = "";
         Monto = 0;
         numeroT = "";
     }
@@ -28,7 +29,13 @@ public class TiempoAire {
     public void setCompañia(String Compañia) {
         this.Compañia = Compañia;
     }
+     public String getLada() {
+        return Lada;
+    }
 
+    public void setLada(String Lada) {
+        this.Lada = Lada;
+    }
     public double getMonto() {
         return Monto;
     }
