@@ -5,7 +5,10 @@
     Descripción: Creación de los formularios del catálogo clientes, modificado
     hasta la baja SÓLO EN FORMULARIOS.
  */
-package elsolecito_programa;
+package elsolecito_programa.CATÁLOGOS;
+
+
+
 
 /**
  *
@@ -18,9 +21,9 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        //Inicialización de formulario de Clientes.
-        FRM_Catalogo Catalogo = new FRM_Catalogo();
-        Catalogo.show();
+        //Inicialización de formulario del catálogo.
+       FRM_Catalogo cat = new FRM_Catalogo();
+       cat.show();
     }
     
 }
