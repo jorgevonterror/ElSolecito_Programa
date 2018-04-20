@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package elsolecito_programa.CATÁLOGOS;
-
 import elsolecito_programa.CLIENTES.FRM_Clientes;
 import elsolecito_programa.Recargas.Recargas;
 import elsolecito_programa.PROVEEDORES.FRM_Proveedores;
