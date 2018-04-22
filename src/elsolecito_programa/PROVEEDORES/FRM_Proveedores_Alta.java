@@ -382,22 +382,7 @@ public class FRM_Proveedores_Alta extends javax.swing.JFrame {
     }//GEN-LAST:event_TXT_NombreActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Alta de clientes deudores...
-        CD.setNombre(this.TXT_Nombre.getText());
-        CD.setMonto(Integer.parseInt(this.TXT_Monto.getText()));
-        CD.setFolio(this.TXT_Folio.getText());
-
-        if(mBD.conectar()) {
-            if (mBD.GuardarClientes(CD)) {
-                JOptionPane.showMessageDialog(null, "Cliente deudor guardado con éxito...");
-                this.TXT_Nombre.setText("");
-                this.TXT_Monto.setText("");
-                this.TXT_Folio.setText("");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al guardar...");
-            }
-            mBD.desconectar();
-        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
