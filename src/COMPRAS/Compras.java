@@ -19,7 +19,16 @@ public class Compras {
     private int cantidadProductos;
     private Date Fecha;   //Verificar si es el tipo de dato correcto.
     private double TotalCompras;
+    private double precioUnitario;
 
+    public double getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
+    }
+    
     public int getId_compras() {
         return id_compras;
     }

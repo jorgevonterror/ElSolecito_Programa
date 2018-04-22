@@ -16,12 +16,12 @@ import javax.swing.JTextField;
  *
  * @author El Armandito
  */
-public class Recargas extends javax.swing.JFrame {
+public class FRM_Recargas extends javax.swing.JFrame {
 
     /**
      * Creates new form Recargas
      */
-    public Recargas() {
+    public FRM_Recargas() {
         initComponents();
         Snumero(TXTnumerotelefono);
         Smonto(TXTmonto);
@@ -285,7 +285,7 @@ public class Recargas extends javax.swing.JFrame {
     }//GEN-LAST:event_TxrCerrar1ActionPerformed
 
     private void TXTrecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXTrecargarActionPerformed
-        // Recargas...
+        // FRM_Recargas...
         
         TA.setMonto(Integer.parseInt(this.TXTmonto.getText()));
         TA.setnumeroT(this.TXTlada.getText() + this.TXTnumerotelefono.getText());
@@ -336,20 +336,21 @@ public class Recargas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Recargas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRM_Recargas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Recargas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRM_Recargas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Recargas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRM_Recargas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Recargas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRM_Recargas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Recargas().setVisible(true);
+                new FRM_Recargas().setVisible(true);
             }
         });
     }

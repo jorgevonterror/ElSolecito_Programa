@@ -97,7 +97,7 @@ public class BaseDeDatos {
     
     public boolean modificarCompras(Compras aCompras, Compras nCompras) {
         Statement consulta;
-        Folio, Descripcion, cantidadProductos, fecha, precioUnitario
+        //Folio, Descripcion, cantidadProductos, fecha, precioUnitario
         try {
             consulta = conexion.createStatement();
             consulta.execute("update compras set " + "descripcion= '" + nCompras.getDescripcion() + "'," + "monto = '" + nClientesDeudores.getMonto() + "'" + "WHERE folio = '" + aClientesDeudores.getFolio()+ "';");
