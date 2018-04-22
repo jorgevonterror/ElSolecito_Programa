@@ -6,6 +6,7 @@
 package elsolecito_programa.CLIENTES;
 
 import elsolecito_programa.CLIENTES.BaseDeDatos.*;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -233,6 +234,34 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private Connection conexion;
+    ResultSet rs= null;
+    Statement statement = null;
+    
+    
+    //Preguntar de la actualización en tabla.
+    void consulta(){
+        ArrayList mListaClientes = new ArrayList();
+        ClientesDeudores mClientes = null;
+        Statement consulta;
+        ResultSet resultado;
+        
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from clientes;");
+            
+            while (resultado.next()) {
+                mClientes = new ClientesDeudores();
+                mClientes.setNombre(resultado.getString("Nombre"));
+                mClientes.setMonto(resultado.getInt("Monto"));
+                mClientes.setFolio(resultado.getString("folio"));
+                mListaClientes.add(mClientes);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     private void setFilas(){
         if(mBD.conectar()){
             ArrayList mListaClientes = mBD.consultarClientes();  
@@ -251,6 +280,7 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
                 Datos[2] = "" + CD.getMonto();
             
                 modeloTabla.addRow(Datos);
+                //consulta();
             } 
             
             this.Tabla_Deudores_Reg = new javax.swing.JTable();
@@ -269,6 +299,7 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
             }
         mBD.desconectar();
     }
+    
     private void TXT_NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_NombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_NombreActionPerformed
