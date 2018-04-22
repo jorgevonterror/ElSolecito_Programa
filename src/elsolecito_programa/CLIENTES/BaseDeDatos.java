@@ -4,8 +4,10 @@ import elsolecito_programa.CLIENTES.ClientesDeudores;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -106,5 +108,25 @@ public class BaseDeDatos {
             e.printStackTrace();
             return false;
         }
+    }
+  
+    //PARA GENERAR LOS REPORTES:
+    
+    public String url = "jdbc:mysql://localhost:8889/BD_ElSolecito";
+    public String user = "root";
+    public String pass = "root";
+
+    public Connection conectare() {
+        Connection link = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            link = DriverManager.getConnection(this.url, this.user, this.pass);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showConfirmDialog(null, e);
+
+        }
+        return link;
     }
 }
