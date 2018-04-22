@@ -5,6 +5,9 @@
  */
 package elsolecito_programa.CLIENTES;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +26,49 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+    BaseDeDatos conectar = new BaseDeDatos();
+    Connection cn;
+    CallableStatement cts;
+    ResultSet r;
+    
+    
+    private void BuscarCliente(){
+        String nombre = TXT_Nombre.getText();
+        DefaultTableModel modeloTabla = new DefaultTableModel();
+        
+                    modeloTabla.addColumn("");
+                    modeloTabla.addColumn("");
+                    modeloTabla.addColumn("");
+        if (mBD.conectar()) {
+            try{
+                    modeloTabla.addColumn("Nombre");
+                    modeloTabla.addColumn("Monto");
+                    modeloTabla.addColumn("Folio");
+
+                    cts = cn.prepareCall("{call buscarClientes(?)}");
+                    //cts = cn.prepareCall("{call buscarClientes("+nombre+")}");
+                    cts.setString(1, TXT_Nombre.getText());
+                    r = cts.executeQuery();
+                    JOptionPane.showMessageDialog(null, "Si jala..");
+                    while (r.next()) {
+                        Object dato[] = new Object[3];
+                        for (int i = 0; i < 3; i++) {
+                            dato[i] = r.getString(i + 1);
+                        }
+                        modeloTabla.addRow(dato);
+                    }
+                    this.Tabla_Deudores.setModel(modeloTabla);
+                    
+                }catch(Exception e){
+        
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "No jala..");
+        }
+        
+    }
+    
     DefaultTableModel modeloTabla = new DefaultTableModel();
     BaseDeDatos mBD = new BaseDeDatos();
     ClientesDeudores CD = new ClientesDeudores();
@@ -80,6 +126,9 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla_Deudores = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        TXT_Nombre = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -124,10 +173,21 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
         Tabla_Deudores.setModel(modeloTabla);
         jScrollPane1.setViewportView(Tabla_Deudores);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Wzdelete.jpg"))); // NOI18N
         jButton1.setText("Regresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Ingrese el nombre:");
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (Search).jpg"))); // NOI18N
+        jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -136,17 +196,32 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 141, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(130, 130, 130))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TXT_Nombre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addGap(19, 19, 19)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1))
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -161,8 +236,7 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -172,6 +246,11 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        BuscarCliente();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,9 +288,12 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TXT_Nombre;
     private javax.swing.JTable Tabla_Deudores;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;

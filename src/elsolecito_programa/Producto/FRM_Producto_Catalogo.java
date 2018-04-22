@@ -85,6 +85,7 @@ public class FRM_Producto_Catalogo extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("Seleccione la opción de su preferencia:");
 
+        BtnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (User add).jpg"))); // NOI18N
         BtnAlta.setText("Alta");
         BtnAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +93,7 @@ public class FRM_Producto_Catalogo extends javax.swing.JFrame {
             }
         });
 
+        BtnBaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (User delete).jpg"))); // NOI18N
         BtnBaja.setText("Baja");
         BtnBaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +101,7 @@ public class FRM_Producto_Catalogo extends javax.swing.JFrame {
             }
         });
 
+        BtnCambios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (User edit).jpg"))); // NOI18N
         BtnCambios.setText("Cambios");
         BtnCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +109,7 @@ public class FRM_Producto_Catalogo extends javax.swing.JFrame {
             }
         });
 
+        BtnConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (Search).jpg"))); // NOI18N
         BtnConsultas.setText("Consultas");
         BtnConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +117,7 @@ public class FRM_Producto_Catalogo extends javax.swing.JFrame {
             }
         });
 
+        BtnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Wzdelete.jpg"))); // NOI18N
         BtnMenu.setText("Regresar al menú");
         BtnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,12 +142,11 @@ public class FRM_Producto_Catalogo extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(BtnCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(BtnConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(BtnMenu)))
                 .addContainerGap(14, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(BtnMenu)
-                .addGap(141, 141, 141))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

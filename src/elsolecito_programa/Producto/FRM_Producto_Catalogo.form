@@ -136,13 +136,12 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="BtnConsultas" min="-2" pref="99" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
+                          <Component id="BtnMenu" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace pref="14" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  <Component id="BtnMenu" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -175,6 +174,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="BtnAlta">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/16 (User add).jpg"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Alta"/>
           </Properties>
           <Events>
@@ -183,6 +185,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="BtnBaja">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/16 (User delete).jpg"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Baja"/>
           </Properties>
           <Events>
@@ -191,6 +196,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="BtnCambios">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/16 (User edit).jpg"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cambios"/>
           </Properties>
           <Events>
@@ -199,6 +207,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="BtnConsultas">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/16 (Search).jpg"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Consultas"/>
           </Properties>
           <Events>
@@ -207,6 +218,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="BtnMenu">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/Wzdelete.jpg"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Regresar al men&#xfa;"/>
           </Properties>
           <Events>

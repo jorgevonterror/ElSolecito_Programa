@@ -118,6 +118,7 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
 
         jLabel3.setText("Desc_Producto:");
 
+        BtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (User edit).jpg"))); // NOI18N
         BtnModificar.setText("Modificar");
         BtnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +126,7 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
             }
         });
 
+        BtnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Wzdelete.jpg"))); // NOI18N
         BtnMenu.setText("Regresar");
         BtnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

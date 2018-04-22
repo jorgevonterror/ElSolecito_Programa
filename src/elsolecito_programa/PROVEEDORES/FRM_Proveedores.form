@@ -23,10 +23,14 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <Component id="jPanel2" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -129,23 +133,22 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="BTN_Menu" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="BTN_Alta" min="-2" pref="76" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="BTN_Baja" min="-2" pref="73" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="BTN_Cambios" min="-2" pref="87" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                          <Component id="BTN_Alta" min="-2" pref="76" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="BTN_Baja" min="-2" pref="73" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="BTN_Cambios" min="-2" pref="87" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="BTN_Consulta" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
+                          <Component id="BTN_Menu" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="47" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -179,6 +182,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="BTN_Alta">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/16 (User add).jpg"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Alta"/>
           </Properties>
           <Events>
@@ -187,6 +193,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="BTN_Baja">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/16 (User delete).jpg"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Baja"/>
           </Properties>
           <Events>
@@ -195,6 +204,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="BTN_Cambios">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/16 (User edit).jpg"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cambios"/>
           </Properties>
           <Events>
@@ -203,6 +215,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="BTN_Consulta">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/16 (Search).jpg"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Consulta"/>
           </Properties>
           <Events>
@@ -211,6 +226,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="BTN_Menu">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/Wzdelete.jpg"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Regresar al men&#xfa;"/>
           </Properties>
           <Events>

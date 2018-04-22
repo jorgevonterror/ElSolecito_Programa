@@ -83,6 +83,7 @@ public class FRM_Clientes extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (User add).jpg"))); // NOI18N
         jButton1.setText("Alta");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +92,7 @@ public class FRM_Clientes extends javax.swing.JFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (User delete).jpg"))); // NOI18N
         jButton2.setText("Baja");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +101,7 @@ public class FRM_Clientes extends javax.swing.JFrame {
         });
 
         jButton3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (User edit).jpg"))); // NOI18N
         jButton3.setText("Cambios");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +110,7 @@ public class FRM_Clientes extends javax.swing.JFrame {
         });
 
         jButton4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (Search).jpg"))); // NOI18N
         jButton4.setText("Consultas");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,13 +133,13 @@ public class FRM_Clientes extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(jButton1)
-                        .addGap(18, 18, 18)
+                        .addGap(32, 32, 32)
                         .addComponent(jButton2)
-                        .addGap(18, 18, 18)
+                        .addGap(28, 28, 28)
                         .addComponent(jButton3)
-                        .addGap(12, 12, 12)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
