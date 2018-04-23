@@ -36,6 +36,11 @@ public class FRM_Recargas extends javax.swing.JFrame {
         RL.setLimit(3);
         RL.setOnlyNums(true);
         getToolkit().beep();
+        
+        RestrictedTextField RF = new RestrictedTextField(TXTmonto);
+        RF.setLimit(4);
+        RF.setOnlyNums(true);
+        getToolkit().beep();
                 //JOptionPane.showMessageDialog(null, "Solo 10 digitos...");
     }
     BaseDatos mBD = new BaseDatos();
@@ -254,7 +259,7 @@ public class FRM_Recargas extends javax.swing.JFrame {
                 char c=e.getKeyChar();
                 if(Character.isLetter(c)){
                 getToolkit().beep();
-                JOptionPane.showMessageDialog(null, "Introduce un monto Correcto...");
+                JOptionPane.showMessageDialog(null, "Introduce un monto Correcto de 4 digitos...");
                 e.consume();
             }
             }
