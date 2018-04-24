@@ -15,13 +15,14 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+/*
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
-
+*/
 /**
  *
  * @author MARIA NOELDA MARIANO
@@ -333,6 +334,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        /*
         String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito_Programa/src/elsolecito_programa/Producto/Reporte_Alta_Productos.jasper";
         JasperReport jr = null;
         
@@ -346,7 +348,8 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
             
         } catch (JRException ex) {
             Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

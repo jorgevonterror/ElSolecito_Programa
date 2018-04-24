@@ -25,8 +25,8 @@ public class BaseDeDatos {
     public boolean conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
+            //conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -52,7 +52,8 @@ public class BaseDeDatos {
         try
         {
             consulta = conexion.createStatement();
-            consulta.execute("insert into BD_ElSolecito.productos (Desc_producto, Codigo , Nombre, Precio)" +
+            //consulta.execute("insert into BD_ElSolecito.productos (Desc_producto, Codigo , Nombre, Precio)" +
+            consulta.execute("insert into productos (Desc_producto, Codigo , Nombre, Precio)" +
                     "values('" + mProducto.getDesc_Prod() + "'," 
                     + "'" + mProducto.getCodigo() + "'," 
                     + "'" + mProducto.getNombre() + "'," 
@@ -95,6 +96,38 @@ public class BaseDeDatos {
         }
         return mListaProductos;
     }
+    
+    public ArrayList ConsultarEspecifica(String Codigo)
+    {
+        ArrayList mListaProductos = new ArrayList();
+        Producto mProducto = null;
+        Statement consulta;
+        ResultSet resultado;
+        
+        try 
+        {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from productos where codigo = '" + Codigo + "';");
+            
+            while(resultado.next())
+            {
+                mProducto = new Producto();
+                mProducto.setCodigo(resultado.getString("Codigo"));
+                mProducto.setNombre(resultado.getString("Nombre"));
+                mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
+                
+                mListaProductos.add(mProducto);
+                
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return mListaProductos;
+    }
+    
     public boolean EliminarProducto(Producto mProducto)
     {
         Statement consulta;

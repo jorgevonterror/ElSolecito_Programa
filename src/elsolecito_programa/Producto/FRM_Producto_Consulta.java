@@ -22,7 +22,7 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
      * Creates new form FrmConsultaProducto
      */
     public FRM_Producto_Consulta() {
-        setFilas();
+        //setFilas();
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -96,6 +96,11 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
 
         BtnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (Search).jpg"))); // NOI18N
         BtnConsultar.setText("Buscar");
+        BtnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnConsultarActionPerformed(evt);
+            }
+        });
 
         BtnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Wzdelete.jpg"))); // NOI18N
         BtnMenu.setText("Regresar");
@@ -165,6 +170,50 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
         new FRM_Producto_Catalogo().show();
         this.setVisible(false);
     }//GEN-LAST:event_BtnMenuActionPerformed
+
+    private void BtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarActionPerformed
+        // TODO add your handling code here:
+        
+        String Codigo = TxtCodigo.getText();
+        if(mBD.conectar()){
+            ArrayList mListaProductos = mBD.ConsultarEspecifica(Codigo);
+            String [] Datos;
+            
+            ModeloTabla.addColumn("Codigo");
+            ModeloTabla.addColumn("Nombre");
+            ModeloTabla.addColumn("Precio");
+            ModeloTabla.addColumn("Descripcion");
+ 
+            for (Object mListaProducto : mListaProductos) {
+                Datos = new String[4];
+                
+                mProducto = (Producto)mListaProducto;
+                Datos[0] = mProducto.getCodigo();
+                Datos[1] = mProducto.getNombre();
+                Datos[2] = "" + mProducto.getPrecio();
+                Datos[3] = mProducto.getDesc_Prod();
+                
+            
+                ModeloTabla.addRow(Datos);
+            } 
+            
+            this.TBProductos = new javax.swing.JTable();
+            this.TBProductos.setModel(ModeloTabla);
+            
+            this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
+            
+            if (this.TBProductos.getRowCount() > 0) {
+                this.TBProductos.setRowSelectionInterval(0, 0);
+            }
+           
+        } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+        mBD.desconectar();
+    }//GEN-LAST:event_BtnConsultarActionPerformed
 
     
     private void setFilas(){
