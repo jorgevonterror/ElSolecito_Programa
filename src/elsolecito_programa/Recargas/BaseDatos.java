@@ -8,8 +8,10 @@ package elsolecito_programa.Recargas;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author El Armandito
@@ -46,7 +48,7 @@ public boolean conectar(){
         Statement consulta;
         try{
             consulta = conexion.createStatement();
-            consulta.execute("insert into elsolecito.recargas "
+            consulta.execute("insert into BD_ElSolecito.recargas "
                     + "(Monto, NumeroTelefonico, Compania)" + 
                     "values('" + mTiempoAire.getMonto() +
                     "'," + "'" + mTiempoAire.getnumeroT() + "'," 
@@ -73,16 +75,28 @@ public boolean conectar(){
                 mTiempo.setLada(resultado.getString("NumeroTelefonico"));
                 mTiempo.setnumeroT(resultado.getString("NumeroTelefonico"));
                 mTiempo.setCompañia(resultado.getString("Compania"));
-                
-        
-                 
-                
-                
                 mListaRecargas.add(mTiempo);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return mListaRecargas;
+    }
+    public String url = "jdbc:mysql://localhost:8889/BD_ElSolecito";
+    public String user = "root";
+    public String pass = "root";
+
+    public Connection conectare() {
+        Connection link = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            link = DriverManager.getConnection(this.url, this.user, this.pass);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showConfirmDialog(null, e);
+
+        }
+        return link;
     }
 }
