@@ -10,10 +10,19 @@ package elsolecito_programa.Producto;
  * @author MARIA NOELDA MARIANO
  */
 public class Producto {
+    private String id_proveedor;
     private String Codigo;
     private String Desc_Prod;
     private String Nombre;
     private float Precio;
+
+    public String getId_proveedor() {
+        return id_proveedor;
+    }
+
+    public void setId_proveedor(String id_proveedor) {
+        this.id_proveedor = id_proveedor;
+    }
 
     public Producto() {
         Codigo = "";

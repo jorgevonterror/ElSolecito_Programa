@@ -100,7 +100,7 @@ public class BaseDeDatos {
         //Folio, Descripcion, cantidadProductos, fecha, precioUnitario
         try {
             consulta = conexion.createStatement();
-            consulta.execute("update compras set " + "descripcion= '" + nCompras.getDescripcion() + "'," + "monto = '" + nClientesDeudores.getMonto() + "'" + "WHERE folio = '" + aClientesDeudores.getFolio()+ "';");
+            //consulta.execute("update compras set " + "descripcion= '" + nCompras.getDescripcion() + "'," + "monto = '" + nClientesDeudores.getMonto() + "'" + "WHERE folio = '" + aClientesDeudores.getFolio()+ "';");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
