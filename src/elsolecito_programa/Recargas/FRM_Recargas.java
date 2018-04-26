@@ -96,6 +96,38 @@ public class FRM_Recargas extends javax.swing.JFrame {
             }
         mBD.desconectar();
     }
+       private void setFilas_2(){
+        if(mBD.conectar()){
+            ArrayList mListaRecargas = mBD.consultarRecargas();  
+            String [] Datos;
+ 
+            for (Object mListaRecarga : mListaRecargas) {
+                Datos = new String[3];
+                
+                TA = (TiempoAire)mListaRecarga;
+                Datos[0] = "" + TA.getMonto();
+                Datos[1] = TA.getnumeroT();
+                Datos[2] = "" + TA.getCompañia();
+            
+                modeloTabla.addRow(Datos);
+            } 
+            
+            this.Tabla_Recargas = new javax.swing.JTable();
+            this.Tabla_Recargas.setModel(modeloTabla);
+            
+            this.Tabla_Recargas.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.Tabla_Recargas.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.Tabla_Recargas.getColumnModel().getColumn(2).setPreferredWidth(400);
+            
+            if (this.Tabla_Recargas.getRowCount() > 0) {
+                this.Tabla_Recargas.setRowSelectionInterval(0, 0);
+            }
+           
+        } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+        mBD.desconectar();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -343,6 +375,15 @@ public class FRM_Recargas extends javax.swing.JFrame {
  
     }//GEN-LAST:event_TxrCerrar1ActionPerformed
 
+    void borrar(){
+        DefaultTableModel LimpiadoTabla = (DefaultTableModel) Tabla_Recargas.getModel();
+        //Borramosla tabla...
+        int a = Tabla_Recargas.getRowCount()-1;
+        
+        for(int i = a; i>=0;i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        }
+    }
     private void TXTrecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXTrecargarActionPerformed
         // FRM_Recargas...
         
@@ -354,10 +395,12 @@ public class FRM_Recargas extends javax.swing.JFrame {
         if(mBD.conectar()) {
             if (mBD.GuardarRecarga(TA)) {
                 JOptionPane.showMessageDialog(null, "Recarga con éxito...");
+                borrar();
                 this.TXTmonto.setText("");
                 this.TXTnumerotelefono.setText("");
-                this.CBXcompañia.setSelectedItem("");                
-                
+                this.CBXcompañia.setSelectedItem("");
+                this.TXTlada.setText("");
+                setFilas_2();
             } else {
                  JOptionPane.showMessageDialog(null, "Error al guardar...");
             }
