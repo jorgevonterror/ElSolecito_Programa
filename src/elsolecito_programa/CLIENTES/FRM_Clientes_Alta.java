@@ -368,7 +368,7 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
         
         if(mBD.conectar()) {
             if (mBD.GuardarClientes(CD)) {
-                JOptionPane.showMessageDialog(null, "Cliente deudor guardado con éxito...");
+                //JOptionPane.showMessageDialog(null, "Cliente deudor guardado con éxito...");
                 borrar();
                 this.TXT_Nombre.setText("");
                 this.TXT_Monto.setText("");

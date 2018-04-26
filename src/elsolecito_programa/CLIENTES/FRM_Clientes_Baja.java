@@ -257,7 +257,7 @@ public class FRM_Clientes_Baja extends javax.swing.JFrame {
         CD.setFolio(this.TXT_Folio.getText());
         if(mBD.conectar()) {
             if (mBD.eliminarClientes(CD)) {
-                 JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito...");
+                 //JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito...");
                 this.TXT_Folio.setText("");
                  borrar();
                  setFilas_2();

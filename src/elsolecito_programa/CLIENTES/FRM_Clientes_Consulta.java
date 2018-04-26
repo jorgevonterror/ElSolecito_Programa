@@ -33,47 +33,19 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
     CallableStatement cts;
     ResultSet r;
     
-    
-    private void BuscarCliente(){
-        String nombre = TXT_Nombre.getText();
-        DefaultTableModel modeloTabla = new DefaultTableModel();
-        
-                    modeloTabla.addColumn("");
-                    modeloTabla.addColumn("");
-                    modeloTabla.addColumn("");
-        if (mBD.conectar()) {
-            try{
-                    modeloTabla.addColumn("Nombre");
-                    modeloTabla.addColumn("Monto");
-                    modeloTabla.addColumn("Folio");
-
-                    cts = cn.prepareCall("{call buscarClientes(?)}");
-                    //cts = cn.prepareCall("{call buscarClientes("+nombre+")}");
-                    cts.setString(1, TXT_Nombre.getText());
-                    r = cts.executeQuery();
-                    JOptionPane.showMessageDialog(null, "Si jala..");
-                    while (r.next()) {
-                        Object dato[] = new Object[3];
-                        for (int i = 0; i < 3; i++) {
-                            dato[i] = r.getString(i + 1);
-                        }
-                        modeloTabla.addRow(dato);
-                    }
-                    this.Tabla_Deudores.setModel(modeloTabla);
-                    
-                }catch(Exception e){
-        
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "No jala..");
-        }
-        
-    }
-    
     DefaultTableModel modeloTabla = new DefaultTableModel();
     BaseDeDatos mBD = new BaseDeDatos();
     ClientesDeudores CD = new ClientesDeudores();
     
+    void borrar(){
+        DefaultTableModel LimpiadoTabla = (DefaultTableModel) Tabla_Deudores.getModel();
+        //Borramosla tabla...
+        int a = Tabla_Deudores.getRowCount()-1;
+        
+        for(int i = a; i>=0;i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        }
+    }
     private void setFilas(){
         if(mBD.conectar()){
             ArrayList mListaClientes = mBD.consultarClientes();  
@@ -249,42 +221,40 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-//        String nombre = nombre_text.getText();
-//        
-//        if(mBD.conectar()){
-//            ArrayList mListaProductos = mBD.ConsultarEspecifica(nombre);
-//            String [] Datos;
-//           
-//            for (Object mListaProducto : mListaProductos) {
-//                Datos = new String[4];
-//                
-//                mProducto = (Producto)mListaProducto;
-//                Datos[0] = mProducto.getCodigo();
-//                Datos[1] = mProducto.getNombre();
-//                Datos[2] = "" + mProducto.getPrecio();
-//                Datos[3] = mProducto.getDesc_Prod();
-//                
-//            
-//                ModeloTabla.addRow(Datos);
-//            } 
-//            
-//            this.TBProductos = new javax.swing.JTable();
-//            this.TBProductos.setModel(ModeloTabla);
-//            
-//            this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
-//            this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
-//            this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
-//            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
-//            
-//            if (this.TBProductos.getRowCount() > 0) {
-//                this.TBProductos.setRowSelectionInterval(0, 0);
-//            }
-//           
-//        } else {
-//                JOptionPane.showMessageDialog(null, "Error al consultar...");
-//            }
-//        mBD.desconectar();
+        String nombre = nombre_text.getText();
+        
+        borrar();
+        if(mBD.conectar()){
+            ArrayList mListaClientes = mBD.ConsultarEspecifica(nombre);  
+            String [] Datos;
+
+ 
+            for (Object mListaCliente : mListaClientes) {
+                Datos = new String[3];
+                
+                CD = (ClientesDeudores)mListaCliente;
+                Datos[0] = CD.getFolio();
+                Datos[1] = CD.getNombre();
+                Datos[2] = "" + CD.getMonto();
+            
+                modeloTabla.addRow(Datos);
+            } 
+            
+            this.Tabla_Deudores = new javax.swing.JTable();
+            this.Tabla_Deudores.setModel(modeloTabla);
+            
+            this.Tabla_Deudores.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.Tabla_Deudores.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.Tabla_Deudores.getColumnModel().getColumn(2).setPreferredWidth(400);
+            
+            if (this.Tabla_Deudores.getRowCount() > 0) {
+                this.Tabla_Deudores.setRowSelectionInterval(0, 0);
+            }
+           
+        } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+        mBD.desconectar();
                                                
     }//GEN-LAST:event_jButton2ActionPerformed
 

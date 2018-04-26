@@ -333,7 +333,7 @@ public class FRM_Clientes_Modificar extends javax.swing.JFrame {
 
         if(mBD.conectar()) {
             if(mBD.modificarClientes(CD, nClientesDeudores)){
-                JOptionPane.showMessageDialog(null, "Cliente modificado con éxito...");
+                //JOptionPane.showMessageDialog(null, "Cliente modificado con éxito...");
                 this.TXT_Folio.setText("");
                 this.TXT_Nombre.setText("");
                 this.TXT_Monto.setText("");

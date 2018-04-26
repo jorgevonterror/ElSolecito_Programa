@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0c13101b-a5df-42e7-9257-1b03dd385e29">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<queryString language="SQL">
 		<![CDATA[select * from clientes;]]>
 	</queryString>
@@ -18,14 +21,14 @@
 					<textElement>
 						<font size="34" isBold="true"/>
 					</textElement>
-					<text><![CDATA[TITLE]]></text>
+					<text><![CDATA[EL SOLECITO]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="85bcda00-07f6-4b92-bba0-6283ec281d43" x="395" y="43" width="180" height="20" forecolor="#FFFFFF"/>
+					<reportElement uuid="85bcda00-07f6-4b92-bba0-6283ec281d43" x="390" y="63" width="180" height="20" forecolor="#FFFFFF"/>
 					<textElement textAlignment="Right">
 						<font size="14" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Add a description here]]></text>
+					<text><![CDATA[REGISTRO DE CLIENTES DEUDORES]]></text>
 				</staticText>
 			</frame>
 		</band>
