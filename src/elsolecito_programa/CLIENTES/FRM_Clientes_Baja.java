@@ -172,6 +172,15 @@ public class FRM_Clientes_Baja extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    void borrar(){
+        DefaultTableModel LimpiadoTabla = (DefaultTableModel) Tabla_Deudores.getModel();
+        //Borramosla tabla...
+        int a = Tabla_Deudores.getRowCount()-1;
+        
+        for(int i = a; i>=0;i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        }
+    }
     
     private void setFilas(){
         if(mBD.conectar()){
@@ -180,6 +189,37 @@ public class FRM_Clientes_Baja extends javax.swing.JFrame {
             modeloTabla.addColumn("Folio");
             modeloTabla.addColumn("Nombre");
             modeloTabla.addColumn("Monto");
+ 
+            for (Object mListaCliente : mListaClientes) {
+                Datos = new String[4];
+                
+                CD = (ClientesDeudores)mListaCliente;
+                Datos[0] = CD.getFolio();
+                Datos[1] = CD.getNombre();
+                Datos[2] = "" + CD.getMonto();
+            
+                modeloTabla.addRow(Datos);
+            } 
+            
+            this.Tabla_Deudores = new javax.swing.JTable();
+            this.Tabla_Deudores.setModel(modeloTabla);
+            this.Tabla_Deudores.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.Tabla_Deudores.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.Tabla_Deudores.getColumnModel().getColumn(2).setPreferredWidth(400);
+            
+            if (this.Tabla_Deudores.getRowCount() > 0) {
+                this.Tabla_Deudores.setRowSelectionInterval(0, 0);
+            }
+           
+        } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+        mBD.desconectar();
+    }
+    private void setFilas_2(){
+        if(mBD.conectar()){
+            ArrayList mListaClientes = mBD.consultarClientes();  
+            String [] Datos;
  
             for (Object mListaCliente : mListaClientes) {
                 Datos = new String[4];
@@ -219,6 +259,8 @@ public class FRM_Clientes_Baja extends javax.swing.JFrame {
             if (mBD.eliminarClientes(CD)) {
                  JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito...");
                 this.TXT_Folio.setText("");
+                 borrar();
+                 setFilas_2();
             } else {
                 JOptionPane.showMessageDialog(null, "Error al eliminar...");
             }

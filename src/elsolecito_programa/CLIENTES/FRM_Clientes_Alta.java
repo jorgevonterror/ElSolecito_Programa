@@ -246,6 +246,18 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
     Statement statement = null;
     
     
+    
+    //ESTE CUÑAAA
+    void borrar(){
+        DefaultTableModel LimpiadoTabla = (DefaultTableModel) Tabla_Deudores_Reg.getModel();
+        //Borramosla tabla...
+        int a = Tabla_Deudores_Reg.getRowCount()-1;
+        
+        for(int i = a; i>=0;i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        }
+    }
+    
     //Preguntar de la actualización en tabla.
     void consulta(){
         ArrayList mListaClientes = new ArrayList();
@@ -306,6 +318,38 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
             }
         mBD.desconectar();
     }
+     private void setFilas_2(){
+        if(mBD.conectar()){
+            ArrayList mListaClientes = mBD.consultarClientes();  
+            String [] Datos;
+ 
+            for (Object mListaCliente : mListaClientes) {
+                Datos = new String[3];
+                
+                CD = (ClientesDeudores)mListaCliente;
+                Datos[0] = CD.getFolio();
+                Datos[1] = CD.getNombre();
+                Datos[2] = "" + CD.getMonto();
+            
+                modeloTabla.addRow(Datos);
+            } 
+            
+            this.Tabla_Deudores_Reg = new javax.swing.JTable();
+            this.Tabla_Deudores_Reg.setModel(modeloTabla);
+            
+            this.Tabla_Deudores_Reg.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.Tabla_Deudores_Reg.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.Tabla_Deudores_Reg.getColumnModel().getColumn(2).setPreferredWidth(400);
+            
+            if (this.Tabla_Deudores_Reg.getRowCount() > 0) {
+                this.Tabla_Deudores_Reg.setRowSelectionInterval(0, 0);
+            }
+           
+        } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+        mBD.desconectar();
+    }
     
     private void TXT_NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_NombreActionPerformed
         // TODO add your handling code here:
@@ -317,7 +361,7 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Alta de clientes deudores...
+        // Alta de clientes deudores...       
         CD.setNombre(this.TXT_Nombre.getText());
         CD.setMonto(Integer.parseInt(this.TXT_Monto.getText()));
         CD.setFolio(this.TXT_Folio.getText());
@@ -325,9 +369,11 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
         if(mBD.conectar()) {
             if (mBD.GuardarClientes(CD)) {
                 JOptionPane.showMessageDialog(null, "Cliente deudor guardado con éxito...");
+                borrar();
                 this.TXT_Nombre.setText("");
                 this.TXT_Monto.setText("");
                 this.TXT_Folio.setText("");
+                setFilas_2();
             } else {
                  JOptionPane.showMessageDialog(null, "Error al guardar...");
             }

@@ -5,6 +5,7 @@
  */
 package elsolecito_programa.CLIENTES;
 
+import elsolecito_programa.Producto.Producto;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -127,7 +128,7 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
         Tabla_Deudores = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        TXT_Nombre = new javax.swing.JTextField();
+        nombre_text = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
 
         jFormattedTextField1.setText("jFormattedTextField1");
@@ -204,7 +205,7 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TXT_Nombre)
+                .addComponent(nombre_text)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
                 .addContainerGap())
@@ -215,7 +216,7 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombre_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,7 +250,42 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        BuscarCliente();
+//        String nombre = nombre_text.getText();
+//        
+//        if(mBD.conectar()){
+//            ArrayList mListaProductos = mBD.ConsultarEspecifica(nombre);
+//            String [] Datos;
+//           
+//            for (Object mListaProducto : mListaProductos) {
+//                Datos = new String[4];
+//                
+//                mProducto = (Producto)mListaProducto;
+//                Datos[0] = mProducto.getCodigo();
+//                Datos[1] = mProducto.getNombre();
+//                Datos[2] = "" + mProducto.getPrecio();
+//                Datos[3] = mProducto.getDesc_Prod();
+//                
+//            
+//                ModeloTabla.addRow(Datos);
+//            } 
+//            
+//            this.TBProductos = new javax.swing.JTable();
+//            this.TBProductos.setModel(ModeloTabla);
+//            
+//            this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
+//            this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
+//            this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
+//            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
+//            
+//            if (this.TBProductos.getRowCount() > 0) {
+//                this.TBProductos.setRowSelectionInterval(0, 0);
+//            }
+//           
+//        } else {
+//                JOptionPane.showMessageDialog(null, "Error al consultar...");
+//            }
+//        mBD.desconectar();
+                                               
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -288,7 +324,6 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TXT_Nombre;
     private javax.swing.JTable Tabla_Deudores;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -299,5 +334,6 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField nombre_text;
     // End of variables declaration//GEN-END:variables
 }

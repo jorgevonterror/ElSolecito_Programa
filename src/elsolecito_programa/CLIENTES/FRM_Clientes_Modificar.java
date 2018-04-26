@@ -78,6 +78,47 @@ public class FRM_Clientes_Modificar extends javax.swing.JFrame {
             }
         mBD.desconectar();
     }
+    void borrar(){
+        DefaultTableModel LimpiadoTabla = (DefaultTableModel) Tabla_Deudores.getModel();
+        //Borramosla tabla...
+        int a = Tabla_Deudores.getRowCount()-1;
+        
+        for(int i = a; i>=0;i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        }
+    }
+    private void setFilas_2(){
+        if(mBD.conectar()){
+            ArrayList mListaClientes = mBD.consultarClientes();  
+            String [] Datos;
+ 
+            for (Object mListaCliente : mListaClientes) {
+                Datos = new String[3];
+                
+                CD = (ClientesDeudores)mListaCliente;
+                Datos[0] = CD.getFolio();
+                Datos[1] = CD.getNombre();
+                Datos[2] = "" + CD.getMonto();
+            
+                modeloTabla.addRow(Datos);
+            } 
+            
+            this.Tabla_Deudores = new javax.swing.JTable();
+            this.Tabla_Deudores.setModel(modeloTabla);
+            
+            this.Tabla_Deudores.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.Tabla_Deudores.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.Tabla_Deudores.getColumnModel().getColumn(2).setPreferredWidth(400);
+            
+            if (this.Tabla_Deudores.getRowCount() > 0) {
+                this.Tabla_Deudores.setRowSelectionInterval(0, 0);
+            }
+           
+        } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+        mBD.desconectar();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -296,6 +337,8 @@ public class FRM_Clientes_Modificar extends javax.swing.JFrame {
                 this.TXT_Folio.setText("");
                 this.TXT_Nombre.setText("");
                 this.TXT_Monto.setText("");
+                borrar();
+                setFilas_2();
             } else {
                  JOptionPane.showMessageDialog(null, "Error al modificar...");
             }

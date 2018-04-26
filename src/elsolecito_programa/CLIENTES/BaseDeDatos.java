@@ -1,6 +1,7 @@
 package elsolecito_programa.CLIENTES;
 
 import elsolecito_programa.CLIENTES.ClientesDeudores;
+import elsolecito_programa.Producto.Producto;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -128,5 +129,34 @@ public class BaseDeDatos {
 
         }
         return link;
+    }
+    
+    public ArrayList ConsultarEspecifica(String nombre)
+    {
+        ArrayList mClientesDeudores = new ArrayList();
+        ClientesDeudores ClientesDeudores_c = null;
+        Statement consulta;
+        ResultSet resultado;
+        
+        try 
+        {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from clientes where nombre = '" + nombre + "';");
+            
+            while(resultado.next())
+            {
+                ClientesDeudores_c = new ClientesDeudores();
+                ClientesDeudores_c.setNombre(resultado.getString("Nombre"));
+                ClientesDeudores_c.setFolio(resultado.getString("Folio"));
+                ClientesDeudores_c.setMonto(Float.parseFloat(resultado.getString("Monto")));
+                
+                mClientesDeudores.add(ClientesDeudores_c); 
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return mClientesDeudores;
     }
 }

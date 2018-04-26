@@ -22,7 +22,7 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
      * Creates new form FrmConsultaProducto
      */
     public FRM_Producto_Consulta() {
-        //setFilas();
+        setFilas();
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -93,6 +93,12 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
         jScrollPane2.setViewportView(TBProductos);
 
         jLabel2.setText("Ingrese folio:");
+
+        TxtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtCodigoActionPerformed(evt);
+            }
+        });
 
         BtnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (Search).jpg"))); // NOI18N
         BtnConsultar.setText("Buscar");
@@ -171,19 +177,24 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_BtnMenuActionPerformed
 
+    void borrar(){
+        DefaultTableModel LimpiadoTabla = (DefaultTableModel) TBProductos.getModel();
+        //Borramosla tabla...
+        int a = TBProductos.getRowCount()-1;
+        
+        for(int i = a; i>=0;i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        }
+    }
     private void BtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarActionPerformed
         // TODO add your handling code here:
         
         String Codigo = TxtCodigo.getText();
+        borrar();
         if(mBD.conectar()){
             ArrayList mListaProductos = mBD.ConsultarEspecifica(Codigo);
             String [] Datos;
-            
-            ModeloTabla.addColumn("Codigo");
-            ModeloTabla.addColumn("Nombre");
-            ModeloTabla.addColumn("Precio");
-            ModeloTabla.addColumn("Descripcion");
- 
+           
             for (Object mListaProducto : mListaProductos) {
                 Datos = new String[4];
                 
@@ -214,6 +225,10 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
             }
         mBD.desconectar();
     }//GEN-LAST:event_BtnConsultarActionPerformed
+
+    private void TxtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtCodigoActionPerformed
 
     
     private void setFilas(){

@@ -115,7 +115,14 @@ public class FRM_Compras extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        Tabla_Compras.setModel(Tabla_Compras);
+        Tabla_Compras.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
         jScrollPane1.setViewportView(Tabla_Compras);
 
         jLabel1.setText("Folio:");
@@ -126,7 +133,14 @@ public class FRM_Compras extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel10.setText("REGISTRO DE PROVEEDORES.");
 
-        Tabla_Proveedores.setModel(Tabla_Proveedores);
+        Tabla_Proveedores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
         jScrollPane4.setViewportView(Tabla_Proveedores);
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
@@ -270,10 +284,11 @@ public class FRM_Compras extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(jLabel12)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -326,20 +341,20 @@ public class FRM_Compras extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    void borrar(){
+        DefaultTableModel LimpiadoTabla = (DefaultTableModel) Tabla_Compras.getModel();
+        //Borramosla tabla...
+        int a = Tabla_Compras.getRowCount()-1;
+        
+        for(int i = a; i>=0;i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //Se programa el botón para mostrar los datos en la tabla de compras.
         
-        DefaultTableModel LimpiadoTabla = (DefaultTableModel) Tabla_Compras.getModel();
-        //Borramosla tabla...
-        int a = Tabla_Compras.getRowCount()-1;
-        for(int i = a; i>=0;i--) {
-            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
-        }
         
-        if () {
-            
-        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
