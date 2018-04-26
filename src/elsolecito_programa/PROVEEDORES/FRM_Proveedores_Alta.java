@@ -405,7 +405,7 @@ public class FRM_Proveedores_Alta extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito_Programa/src/elsolecito_programa/PROVEEDORES/Reporte_Alta_Proveedores.jasper";
+        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito_Programa/src/elsolecito_programa/PROVEEDORES/Reporte_Proveedores.jasper";
         JasperReport jr = null;
         
         try {
