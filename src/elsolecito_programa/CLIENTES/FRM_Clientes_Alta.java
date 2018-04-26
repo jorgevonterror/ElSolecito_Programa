@@ -390,7 +390,7 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
         try {
             jr = (JasperReport) JRLoader.loadObjectFromFile(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
-            JasperViewer jv = new JasperViewer(jp);
+            JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
             jv.setTitle(path);
             this.dispose();
