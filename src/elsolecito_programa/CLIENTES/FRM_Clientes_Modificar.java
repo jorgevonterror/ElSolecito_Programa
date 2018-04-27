@@ -33,7 +33,6 @@ public class FRM_Clientes_Modificar extends javax.swing.JFrame {
                     TXT_Nombre.setText(Tabla_Deudores.getValueAt(fila, 1).toString());
                     TXT_Monto.setText(Tabla_Deudores.getValueAt(fila, 2).toString());
                     TXT_Folio.setText(Tabla_Deudores.getValueAt(fila, 0).toString());
-                    //TXT_ID.setText(Tabla_Deudores.getValueAt(fila, 3).toString());
                 }
             }
         });

@@ -4,6 +4,7 @@
     4. correcion de la clase base de datos en proveedores.
 */
 package elsolecito_programa.PROVEEDORES;
+import elsolecito_programa.CLIENTES.ClientesDeudores;
 import elsolecito_programa.PROVEEDORES.Proveedores;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,6 +21,8 @@ public class BaseDeDAtos {
     private Connection conexion;
     ResultSet rs= null;
     Statement statement = null;
+    
+   
     
     public boolean conectar(){
         try {
@@ -99,15 +102,15 @@ public class BaseDeDAtos {
 
         try {
             consulta = conexion.createStatement();
-            consulta.execute("update provedorees set " + "folio = '" + nProveedores.getFolio()+ "'," + "marca = '" + nProveedores.getMarca() + "'" + "WHERE folio = '" + aProveedores.getFolio()+ "';");
+            consulta.execute("update provedorees set " + "nombre = '" + nProveedores.getNombre()+ "'," + "marca = '" + nProveedores.getMarca() + "'" + "WHERE folio = '" + aProveedores.getFolio()+ "';");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-        //PARA GENERAR LOS REPORTES:
     
+    //PARA GENERAR LOS REPORTES:
     public String url = "jdbc:mysql://localhost:8889/BD_ElSolecito";
     public String user = "root";
     public String pass = "root";
@@ -124,5 +127,33 @@ public class BaseDeDAtos {
 
         }
         return link;
+    }
+    public ArrayList ConsultarEspecifica(String nombre)
+    {
+        ArrayList mProveedores =  new ArrayList();
+        Proveedores Proveedores_c = null;
+        Statement consulta;
+        ResultSet resultado;
+        
+        try 
+        {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from provedorees where nombre = '" + nombre + "';");
+            
+            while(resultado.next())
+            {
+                Proveedores_c = new Proveedores();
+                Proveedores_c.setNombre(resultado.getString("Nombre"));
+                Proveedores_c.setMarca(resultado.getString("Marca"));
+                Proveedores_c.setFolio(resultado.getString("Folio"));
+                
+                mProveedores.add(Proveedores_c);
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return mProveedores;
     }
 }

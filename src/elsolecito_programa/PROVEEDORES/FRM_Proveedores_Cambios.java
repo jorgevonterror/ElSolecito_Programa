@@ -38,16 +38,25 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
                     TXT_Folio.setText(TableConsultas.getValueAt(fila, 0).toString());
                     TXT_Marca.setText(TableConsultas.getValueAt(fila, 1).toString());
                     TXT_Nombre.setText(TableConsultas.getValueAt(fila, 2).toString());
-                   
-                    //TXT_ID.setText(Tabla_Deudores.getValueAt(fila, 3).toString());
                 }
             }
         });
     }
+    
     DefaultTableModel modeloTabla = new DefaultTableModel();
     BaseDeDAtos mBD = new BaseDeDAtos();
     Proveedores Prov = new Proveedores();
 
+    void borrar(){
+        DefaultTableModel LimpiadoTabla = (DefaultTableModel) TableConsultas.getModel();
+        //Borramosla tabla...
+        int a = TableConsultas.getRowCount()-1;
+        
+        for(int i = a; i>=0;i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        }
+    }
+    
      private void setFilas(){
         if(mBD.conectar()){
             ArrayList mListaProveedores = mBD.consultarProveedores();  
@@ -56,6 +65,38 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
             modeloTabla.addColumn("Folio");
             modeloTabla.addColumn("Marca");
             modeloTabla.addColumn("Nombre");
+ 
+            for (Object mListaProveedor : mListaProveedores) {
+                Datos = new String[3];
+                
+                Prov = (Proveedores)mListaProveedor;
+                Datos[0] = Prov.getFolio();
+                Datos[1] = Prov.getMarca();
+                Datos[2] = Prov.getNombre();
+            
+                modeloTabla.addRow(Datos);
+            } 
+            
+            this.TableConsultas = new javax.swing.JTable();
+            this.TableConsultas.setModel(modeloTabla);
+            
+            this.TableConsultas.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TableConsultas.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.TableConsultas.getColumnModel().getColumn(2).setPreferredWidth(400);
+            
+            if (this.TableConsultas.getRowCount() > 0) {
+                this.TableConsultas.setRowSelectionInterval(0, 0);
+            }
+           
+        } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+        mBD.desconectar();
+    }
+     private void setFilas_2(){
+        if(mBD.conectar()){
+            ArrayList mListaProveedores = mBD.consultarProveedores();    
+            String [] Datos;
  
             for (Object mListaProveedor : mListaProveedores) {
                 Datos = new String[3];
@@ -258,7 +299,6 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
     
     
     private void BTNModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNModificarActionPerformed
-        
         Proveedores nProveedores = new Proveedores();
         nProveedores.setFolio(this.TXT_Folio.getText());
         nProveedores.setMarca(this.TXT_Marca.getText());
@@ -268,10 +308,12 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
         {
             if(mBD.modificarProveedores(Prov, nProveedores))
             {
-                JOptionPane.showMessageDialog(null, "Proveedor modificado con exito...");
+                //JOptionPane.showMessageDialog(null, "Proveedor modificado con exito...");
+                borrar();
                 this.TXT_Folio.setText("");
                 this.TXT_Marca.setText("");
                 this.TXT_Nombre.setText("");
+                setFilas_2();
             }
             else
             {

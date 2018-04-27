@@ -220,6 +220,48 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
             }
         mBD.desconectar();
     }
+    
+    void borrar(){
+        DefaultTableModel LimpiadoTabla = (DefaultTableModel) TableConsultas.getModel();
+        //Borramosla tabla...
+        int a = TableConsultas.getRowCount()-1;
+        
+        for(int i = a; i>=0;i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        }
+    }
+    private void setFilas_2(){
+        if(mBD.conectar()){
+            ArrayList mListaProveedores = mBD.consultarProveedores();  
+            String [] Datos;
+
+            for (Object mListaProveedor : mListaProveedores) {
+                Datos = new String[4];
+                
+                Prov = (Proveedores)mListaProveedor;
+                Datos[0] = Prov.getFolio();
+                Datos[1] = Prov.getMarca();
+                Datos[2] = Prov.getNombre();
+            
+                modeloTabla.addRow(Datos);
+            } 
+            
+            this.TableConsultas = new javax.swing.JTable();
+            this.TableConsultas.setModel(modeloTabla);
+            this.TableConsultas.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TableConsultas.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.TableConsultas.getColumnModel().getColumn(2).setPreferredWidth(400);
+            
+            if (this.TableConsultas.getRowCount() > 0) {
+                this.TableConsultas.setRowSelectionInterval(0, 0);
+            }
+           
+        } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+        mBD.desconectar();
+    }
+    
     private void TXT_FolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_FolioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_FolioActionPerformed
@@ -234,8 +276,10 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
         {
             if(mBD.eliminarProveedores(Prov))
             {
-                JOptionPane.showMessageDialog(null, "Proveedor eliminado con exito...");
+                //JOptionPane.showMessageDialog(null, "Proveedor eliminado con exito...");
+                borrar();
                 this.TXT_Folio.setText("");
+                setFilas_2();
             }
             else 
             {
