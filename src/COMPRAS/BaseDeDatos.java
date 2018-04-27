@@ -5,6 +5,7 @@
  */
 package COMPRAS;
 
+import elsolecito_programa.Producto.Producto;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -107,4 +108,62 @@ public class BaseDeDatos {
             return false;
         }
     }
+    public ArrayList ConsultarProductos()
+    {
+        ArrayList mListaProductos = new ArrayList();
+        Producto mProducto = null;
+        Statement consulta;
+        ResultSet resultado;
+        
+        try 
+        {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from productos;");
+            
+            while(resultado.next())
+            {
+                mProducto = new Producto();
+                mProducto.setCodigo(resultado.getString("Codigo"));
+                mProducto.setNombre(resultado.getString("Nombre"));
+                mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
+                mListaProductos.add(mProducto);
+                
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return mListaProductos;
+    }
+    public Producto ConsultarEspecifica(String codigo)
+    {
+        Producto mProducto = null;
+        Statement consulta;
+        ResultSet resultado;
+        
+        try 
+        {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from productos where Codigo = '" + codigo + "';");
+            
+            while(resultado.next())
+            {
+                mProducto = new Producto();
+                mProducto.setCodigo(resultado.getString("Codigo"));
+                mProducto.setNombre(resultado.getString("Nombre"));
+                mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
+                
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return mProducto;
+    }
+    
+    
 }

@@ -11,10 +11,29 @@ package elsolecito_programa.Producto;
  */
 public class Producto {
     private String id_proveedor;
+    private int id_producto;
     private String Codigo;
     private String Desc_Prod;
     private String Nombre;
     private float Precio;
+    private int cantidadProducto;
+
+    public int getCantidadProducto() {
+        return cantidadProducto;
+    }
+
+    public void setCantidadProducto(int cantidadProducto) {
+        this.cantidadProducto = cantidadProducto;
+    }
+    
+
+    public int getId_producto() {
+        return id_producto;
+    }
+
+    public void setId_producto(int id_producto) {
+        this.id_producto = id_producto;
+    }
 
     public String getId_proveedor() {
         return id_proveedor;
