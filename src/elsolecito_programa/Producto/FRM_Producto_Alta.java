@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+/*
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -309,6 +310,52 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
         mBD.desconectar();
     }
     
+    private void setFilas_2(){
+        if(mBD.conectar()){
+            ArrayList mListaProductos = mBD.ConsultarProductos();
+            String [] Datos;
+
+            for (Object mListaProducto : mListaProductos) {
+                Datos = new String[4];
+                
+                mProducto = (Producto)mListaProducto;
+                Datos[0] = mProducto.getCodigo();
+                Datos[1] = mProducto.getNombre();
+                Datos[2] = "" + mProducto.getPrecio();
+                Datos[3] = mProducto.getDesc_Prod();
+                
+            
+                ModeloTabla.addRow(Datos);
+            } 
+            
+            this.TBProductos = new javax.swing.JTable();
+            this.TBProductos.setModel(ModeloTabla);
+            
+            this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
+            
+            if (this.TBProductos.getRowCount() > 0) {
+                this.TBProductos.setRowSelectionInterval(0, 0);
+            }
+           
+        } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+        mBD.desconectar();
+    }
+    
+    void borrar(){
+        DefaultTableModel LimpiadoTabla = (DefaultTableModel) TBProductos.getModel();
+        //Borramosla tabla...
+        int a = TBProductos.getRowCount()-1;
+        
+        for(int i = a; i>=0;i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        }
+    }
+    
     private void TxrMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxrMenuActionPerformed
         // TODO add your handling code here:
         new FRM_Producto_Catalogo().show();
@@ -325,7 +372,8 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
         
         if(mBD.conectar()) {
             if (mBD.GuardarProducto(mProducto)) {
-                JOptionPane.showMessageDialog(null, "Producto guardado con éxito...");
+                borrar();
+                setFilas_2();
                 this.TxtNombre.setText("");
                 this.TxtPrecio.setText("");
                 this.TxtCodigo.setText("");
@@ -340,7 +388,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+/*        
         String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito_Programa/src/elsolecito_programa/Producto/Reporte_Alta_Productos.jasper";
         JasperReport jr = null;
         
@@ -355,7 +403,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
         } catch (JRException ex) {
             Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+  */      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

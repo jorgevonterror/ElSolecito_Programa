@@ -271,6 +271,8 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
             }
         mBD.desconectar();
     }
+    
+    
     /**
      * @param args the command line arguments
      */

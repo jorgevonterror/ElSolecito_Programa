@@ -25,8 +25,8 @@ public class BaseDeDatos {
     public boolean conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
-            //conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "");
+            //conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -52,8 +52,8 @@ public class BaseDeDatos {
         try
         {
             consulta = conexion.createStatement();
-            consulta.execute("insert into BD_ElSolecito.productos (Desc_producto, Codigo , Nombre, Precio)" +
-            //consulta.execute("insert into productos (Desc_producto, Codigo , Nombre, Precio)" +
+            //consulta.execute("insert into BD_ElSolecito.productos (Desc_producto, Codigo , Nombre, Precio)" +
+            consulta.execute("insert into productos (Desc_producto, Codigo , Nombre, Precio)" +
                     "values('" + mProducto.getDesc_Prod() + "'," 
                     + "'" + mProducto.getCodigo() + "'," 
                     + "'" + mProducto.getNombre() + "'," 
