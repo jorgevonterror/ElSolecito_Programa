@@ -138,7 +138,7 @@ public class BaseDeDAtos {
         try 
         {
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from provedorees where nombre = '" + nombre + "';");
+            resultado = consulta.executeQuery("select * from provedorees where folio = '" + nombre + "';");
             
             while(resultado.next())
             {

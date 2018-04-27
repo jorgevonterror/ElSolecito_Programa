@@ -219,8 +219,10 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_Menu_ProveedoresActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nombre = TXT_Folio.getText();
         borrar();
+        String nombre = TXT_Folio.getText();
+        
+        
         if(mBD.conectar()){
             ArrayList mListaProveedores = mBD.ConsultarEspecifica(nombre);  
             String [] Datos;
