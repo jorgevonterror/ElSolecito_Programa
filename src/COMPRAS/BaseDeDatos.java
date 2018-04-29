@@ -5,6 +5,7 @@
  */
 package COMPRAS;
 
+import elsolecito_programa.PROVEEDORES.Proveedores;
 import elsolecito_programa.Producto.Producto;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,6 +21,7 @@ public class BaseDeDatos {
     private Connection conexion;
     ResultSet rs= null;
     Statement statement = null;
+    Proveedores proveedor = new Proveedores();
     
     public boolean conectar(){
         try {
@@ -165,5 +167,107 @@ public class BaseDeDatos {
         return mProducto;
     }
     
+    public Producto consultarProducto(int Codigo) {
+        Producto mProducto = null;
+        Statement consulta;
+        ResultSet resultado;
+        
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from productos where Codigo = '" + Codigo + "';");
+            if (resultado.next()) {
+                mProducto.setCodigo(resultado.getString("Codigo"));
+                mProducto.setNombre(resultado.getString("Nombre"));
+                mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+            
+        return mProducto;       
+    }
     
+    public boolean ModificarProductos(Producto aProducto, Producto bProducto)
+    {
+        Statement consulta;
+        try 
+        {
+            consulta = conexion.createStatement();
+            consulta.execute("update productos set " 
+                    + "Desc_producto ='" + bProducto.getDesc_Prod() + "'," 
+                    + "Nombre ='" + bProducto.getNombre() + "'," 
+                    + "Precio =" + bProducto.getPrecio() 
+                    + "where Codigo = '" + aProducto.getCodigo() + "';" );
+            return true;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public Compras ConsultaTodaCompra(int folio) {
+        Compras mCompra=null;
+        Statement consulta;
+        ResultSet resultado;
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from compras " +
+                        "where folio = " + folio + ";");
+            if (resultado.next()) {
+                mCompra = new Compras();
+                mCompra.setDescripcion(resultado.getString("Descripcion"));
+                mCompra.setFolio(resultado.getString("Folio"));
+                mCompra.setCantidadProductos(resultado.getInt("Cantidad"));
+                mCompra.setFecha(resultado.getDate("Fecha"));
+                mCompra.setPrecioUnitario(resultado.getFloat("Precio Unitario"));
+                mCompra.setCantidadProductos(resultado.getInt("Cantidad"));
+                mCompra.setId_compras(folio);
+                mCompra.setTotalCompras(Float.parseFloat(resultado.getString("PrecioTotalCompra")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mCompra;
+      }  
+    
+    public boolean AltaDetalleCompra(DetalleCompra mDetalleCompra) {
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("insert into detalle_compra " + 
+                        "(id_detalle, producto, cantidad, precio) " +
+                        "values (null,'" + mDetalleCompra.getProducto()+ "','" 
+                                        + mDetalleCompra.getCantidad()+ "','" 
+                                        + mDetalleCompra.getPrecio() + "');");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } 
+    }
+    
+    public ArrayList ConsultaTodoProveedor() {
+        ArrayList mLista = new ArrayList();
+        Proveedores mProveedor=null;
+        Statement consulta;
+        ResultSet resultado;
+        
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from provedorees;");
+            while (resultado.next()) {
+                mProveedor = new Proveedores();
+                mProveedor.setFolio(resultado.getString("Folio"));
+                mProveedor.setMarca(resultado.getString("Marca"));
+                mProveedor.setNombre(resultado.getString("Nombre"));
+                mLista.add(mProveedor);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mLista;
+      }
 }

@@ -46,7 +46,7 @@
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[folio]]></text>
+				<text><![CDATA[Folio]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="fafc5d1b-34b2-403b-85f0-8c892a67f5cf" mode="Opaque" x="185" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6"/>

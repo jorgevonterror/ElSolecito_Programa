@@ -36,6 +36,8 @@ public class FRM_Compras extends javax.swing.JFrame {
                 }
             }
         });
+        setFilas_Proveedores();
+        
     }
     //INSTANCIA DE TODOS LAS CLASES A USAR...
     BaseDeDatos mBD = new BaseDeDatos();
@@ -45,7 +47,14 @@ public class FRM_Compras extends javax.swing.JFrame {
     Producto mProducto = new Producto();
     DefaultTableModel modeloTabla = new DefaultTableModel();
     int ContColumn = 1;
-
+    int RegistroCompra = 0;
+    float TotalCompleto = 0;
+    float TotalTemporal = 0;
+    float ResultadoCompraTotal = 0;
+    float Nueva_Cantidad = 0;
+    int ContadorColumna = 1; 
+    int ContadorColumnaProveedor = 1;
+    DefaultTableModel TablaProveedores = new DefaultTableModel();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,9 +92,9 @@ public class FRM_Compras extends javax.swing.JFrame {
         LBL_Proveedor = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel15 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        TXT_N_Cantidad = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        LBL_TotalP = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         LBL_Nombre_Producto = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -199,7 +208,7 @@ public class FRM_Compras extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel16.setText("Total a pagar:");
 
-        jLabel17.setText("Aquí va el total.");
+        LBL_TotalP.setText("Aquí va el total.");
 
         jLabel18.setText("Nombre:");
 
@@ -228,7 +237,7 @@ public class FRM_Compras extends javax.swing.JFrame {
                                 .addComponent(jLabel18))
                             .addGap(31, 31, 31)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TXT_N_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(LBL_Nombre_Producto)))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,7 +250,7 @@ public class FRM_Compras extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel16)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel17)))
+                            .addComponent(LBL_TotalP)))
                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
@@ -296,14 +305,14 @@ public class FRM_Compras extends javax.swing.JFrame {
                         .addGap(11, 11, 11)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TXT_N_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel18)
                             .addComponent(LBL_Nombre_Producto))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
+                            .addComponent(LBL_TotalP)
                             .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -330,6 +339,11 @@ public class FRM_Compras extends javax.swing.JFrame {
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/guardar.png"))); // NOI18N
         jButton5.setText("Guardar compra");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/registry24.png"))); // NOI18N
         jButton3.setText("Finalizar compra");
@@ -409,6 +423,51 @@ public class FRM_Compras extends javax.swing.JFrame {
         for(int i = a; i>=0;i--) {
             LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
         }
+    }
+    void borrar_proveedores(){
+        DefaultTableModel LimpiadoTabla = (DefaultTableModel) Tabla_Proveedores.getModel();
+        //Borramosla tabla...
+        int a = Tabla_Proveedores.getRowCount()-1;
+        
+        for(int i = a; i>=0;i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        }
+    }
+    void setFilas_Proveedores(){
+        borrar_proveedores();
+
+        if (mBD.conectar()) {
+            ArrayList mArrayListProveedores = new ArrayList();
+            mArrayListProveedores = mBD.ConsultaTodoProveedor();
+            String[] Datos = null;
+            if (mArrayListProveedores != null) {
+                if (ContadorColumnaProveedor == 1) {
+                    TablaProveedores.addColumn("Folior");
+                    TablaProveedores.addColumn("Nombre");
+                    TablaProveedores.addColumn("Marca");
+                    ContadorColumnaProveedor = 2;
+                }
+                for (int i = 0; i < mArrayListProveedores.size(); i++) {
+                    mProveedor = (Proveedores) mArrayListProveedores.get(i);
+                    Datos = new String[3];
+                    Datos[0] = mProveedor.getFolio();
+                    Datos[1] = mProveedor.getNombre();
+                    Datos[2] = mProveedor.getMarca();
+                    TablaProveedores.addRow(Datos);
+                }
+    
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el proveedor...");
+            }
+            this.Tabla_Proveedores = new javax.swing.JTable();
+            this.Tabla_Proveedores.setModel(TablaProveedores);
+            this.Tabla_Proveedores.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.Tabla_Proveedores.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.Tabla_Proveedores.getColumnModel().getColumn(1).setPreferredWidth(200);
+            if (this.Tabla_Proveedores.getRowCount() > 0) {
+                this.Tabla_Proveedores.setRowSelectionInterval(0, 0);
+            }
+        } 
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -570,6 +629,55 @@ public class FRM_Compras extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Tabla_ComprasMouseClicked
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        //Le damos valores a los ID.
+        Producto nProducto = new Producto();
+        mProducto.setId_producto(Integer.parseInt(TXT_Nombre.getText()));
+       // mProveedor.setId_proveedor(Integer.parseInt(mProveedor.getFolio()));
+        
+        mBD.conectar();
+        Producto mProductoOld = mBD.consultarProducto(Integer.parseInt(this.TXT_Nombre.getText()));
+        mBD.desconectar();
+        
+        Nueva_Cantidad = Float.parseFloat(TXT_N_Cantidad.getText()) + mProductoOld.getCantidadProducto();
+        nProducto.setNombre(LBL_Nombre_Producto.getText());
+        nProducto.setPrecio(Float.parseFloat(LBL_Precio.getText()));
+        nProducto.setCantidadProducto(Integer.parseInt(TXT_N_Cantidad.getText()));
+        nProducto.setDesc_Prod(LBL_Desc.getText());
+        Nueva_Cantidad = 0;
+        
+        if (mBD.conectar()) {
+            if (mBD.ModificarProductos(nProducto, nProducto)) {
+                JOptionPane.showMessageDialog(null, "Productos agregados con éxito.");
+            }else{
+                JOptionPane.showMessageDialog(null, "Error al añadir.");
+            }
+            
+            Compras mCompraConsulta = mBD.ConsultaTodaCompra(mCompras.getId_compras());
+            //Solo para verificar...
+            
+            mDCompra.setCantidad(Integer.parseInt(TXT_N_Cantidad.getText()));
+            mDCompra.setPrecio(Float.parseFloat(LBL_Precio.getText()));
+            
+            mDCompra.setId_producto(mProducto.getId_producto());
+            mDCompra.setId_proveedor(mProveedor.getId_proveedor());
+            mDCompra.setId_detalle(RegistroCompra);
+            
+            TotalTemporal = Float.parseFloat(LBL_Precio.getText()) * Float.parseFloat(TXT_N_Cantidad.getText());
+            TotalCompleto = TotalTemporal + TotalCompleto;
+            LBL_TotalP.setText(String.valueOf(TotalCompleto));
+            
+            if (mBD.AltaDetalleCompra(mDCompra)) {
+                JOptionPane.showMessageDialog(null,"Detalle guardado.");
+            }else{
+                JOptionPane.showMessageDialog(null,"No se guardo el detalle guardado.");
+            }
+        }
+        TXT_N_Cantidad.setText("");
+        TXT_Nombre.setText("");
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -610,6 +718,8 @@ public class FRM_Compras extends javax.swing.JFrame {
     private javax.swing.JLabel LBL_Nombre_Producto;
     private javax.swing.JLabel LBL_Precio;
     private javax.swing.JLabel LBL_Proveedor;
+    private javax.swing.JLabel LBL_TotalP;
+    private javax.swing.JTextField TXT_N_Cantidad;
     private javax.swing.JTextField TXT_Nombre;
     private javax.swing.JTable Tabla_Compras;
     private javax.swing.JTable Tabla_Proveedores;
@@ -624,7 +734,6 @@ public class FRM_Compras extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
@@ -643,7 +752,6 @@ public class FRM_Compras extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }
