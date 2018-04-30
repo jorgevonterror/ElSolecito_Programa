@@ -270,4 +270,23 @@ public class BaseDeDatos {
         }
         return mLista;
       }
+    public Proveedores ConsultaProveedor(int codigo) {
+        Proveedores mProveedor = null;
+        Statement consulta;
+        ResultSet resultado;
+        
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from provedorees " +
+                        "where codigo = " + codigo + ";");
+            if (resultado.next()) {
+                mProveedor = new Proveedores();
+                mProveedor.setNombre(resultado.getString("Nombre"));             
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+            
+        return mProveedor;       
+    }
 }
