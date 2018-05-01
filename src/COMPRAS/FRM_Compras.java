@@ -6,16 +6,25 @@
 package COMPRAS;
 
 import elsolecito_programa.CLIENTES.ClientesDeudores;
+import elsolecito_programa.CLIENTES.FRM_Clientes_Alta;
 import elsolecito_programa.PROVEEDORES.Proveedores;
 import elsolecito_programa.Producto.Producto;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -108,6 +117,7 @@ public class FRM_Compras extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -345,12 +355,20 @@ public class FRM_Compras extends javax.swing.JFrame {
             }
         });
 
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/screen6.png"))); // NOI18N
+        jButton6.setText("Reporte");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
+                .addGap(50, 50, 50)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
@@ -358,7 +376,9 @@ public class FRM_Compras extends javax.swing.JFrame {
                 .addComponent(jButton5)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton6)
+                .addGap(18, 18, 18)
                 .addComponent(jButton4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -371,7 +391,8 @@ public class FRM_Compras extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5)
                     .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -379,11 +400,9 @@ public class FRM_Compras extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -516,8 +535,8 @@ public class FRM_Compras extends javax.swing.JFrame {
         System.out.println();
 
         mCompras.setFecha(FechaActual);
-        mCompras.setTotalCompras(ResultadoCompraTotal);
-        mCompras.setFolio(this.TXT_Nombre.getText());
+        mCompras.setTotalCompras(TotalCompleto);
+        mCompras.setFolio(TXT_Nombre.getText());
         
         if (mBD.conectar()) {
             if (mBD.AltaCompra(mCompras)) {
@@ -607,7 +626,8 @@ public class FRM_Compras extends javax.swing.JFrame {
                 //Datos[4] = mProducto.getDesc_Prod();
 
                 LBL_Nombre_Producto.setText(mProducto.getNombre());
-                LBL_Proveedor.setText("" + mProducto.getId_proveedor());
+                //LBL_Proveedor.setText(mBD.ConsultaProveedor_Prueba(TXT_Nombre.getText()));
+                //LBL_Proveedor.setText("" + mBD.ConsultaProveedor());
                 LBL_Precio.setText("" + mProducto.getPrecio());
                 LBL_Desc.setText(mProducto.getDesc_Prod());
 
@@ -633,54 +653,7 @@ public class FRM_Compras extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void Tabla_ComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_ComprasMouseClicked
-        // TODO add your handling code here:
-        //borrar();
-        if (mBD.conectar()) {
-            Producto mProducto = mBD.ConsultarEspecifica(TXT_Nombre.getText());
-            String[] Datos;
-
-            if (mProducto != null) {
-                if (ContColumn == 1) {
-                    modeloTabla.addColumn("Folio");
-                    modeloTabla.addColumn("Nombre");
-                    modeloTabla.addColumn("Precio");
-                    //modeloTabla.addColumn("Cantidad");
-                    modeloTabla.addColumn("Descripción");
-                    //modeloTabla.addColumn("id_proveedor");
-                    ContColumn = 2;
-                }
-                Datos = new String[4];
-
-                Datos[0] = "" + mProducto.getCodigo();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = "" + mProducto.getPrecio();
-                Datos[3] = mProducto.getDesc_Prod();
-                //Datos[4] = mProducto.getDesc_Prod();
-
-                LBL_Nombre_Producto.setText(mProducto.getNombre());
-                LBL_Proveedor.setText("" + mBD.ConsultaProveedor(mProducto.getCodigo()));
-                LBL_Precio.setText("" + mProducto.getPrecio());
-                LBL_Desc.setText(mProducto.getDesc_Prod());
-
-                modeloTabla.addRow(Datos);
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe ese Producto...");
-            }
-            this.Tabla_Compras = new javax.swing.JTable();
-            this.Tabla_Compras.setModel(modeloTabla);
-            this.Tabla_Compras.getColumnModel().getColumn(0).setPreferredWidth(50);
-            this.Tabla_Compras.getColumnModel().getColumn(1).setPreferredWidth(100);
-            this.Tabla_Compras.getColumnModel().getColumn(2).setPreferredWidth(400);
-            this.Tabla_Compras.getColumnModel().getColumn(3).setPreferredWidth(600);
-            //this.Tabla_Compras.getColumnModel().getColumn(4).setPreferredWidth(400);
-
-            if (this.Tabla_Compras.getRowCount() > 0) {
-                this.Tabla_Compras.setRowSelectionInterval(0, 0);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar");
-            }
-            mBD.desconectar();
-        }
+        //Aquí para cuando presiono un campo de la tabla
     }//GEN-LAST:event_Tabla_ComprasMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -710,10 +683,12 @@ public class FRM_Compras extends javax.swing.JFrame {
 
             Compras mCompraConsulta = mBD.ConsultaTodaCompra(this.TXT_Nombre.getText());
             //Solo para verificar...
-
+            //Aquí agregar todos los campos del detalle compra..
+            
             mDCompra.setCantidad(Integer.parseInt(TXT_N_Cantidad.getText()));
             mDCompra.setPrecio(Float.parseFloat(LBL_Precio.getText()));
-
+            mDCompra.setProducto(LBL_Nombre_Producto.getText());
+            
             mDCompra.setId_producto(Integer.parseInt(mProducto.getCodigo()));
             mDCompra.setId_proveedor(Integer.parseInt(mProveedor.getFolio()));
             
@@ -735,22 +710,53 @@ public class FRM_Compras extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        
         Compras mCompraAlterada = new Compras();
-            mCompras.setFolio(this.TXT_Nombre.getText());
-            mCompraAlterada.setTotalCompras(Float.parseFloat(LBL_TotalP.getText()));
-            if(mBD.conectar()) 
+        mCompras.setFolio(TXT_Nombre.getText());
+        mCompras.setId_compras(RegistroCompra);
+        
+        
+        mCompraAlterada.setFolio(TXT_Nombre.getText());
+        mCompraAlterada.setTotalCompras(Float.parseFloat(LBL_TotalP.getText()));
+        
+        if(mBD.conectar()) 
+        {
+            if (mBD.CambiosCompra(mCompras, mCompraAlterada))
             {
-                if (mBD.CambiosCompra(mCompras, mCompraAlterada))
-                {
-                    JOptionPane.showMessageDialog(null,"NUEVO PRECIO EN LA COMPRA");
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null,"ERROR EN NUEVO PRECIO");
-                }
+                JOptionPane.showMessageDialog(null,"NUEVO PRECIO EN LA COMPRA");
             }
-            mBD.desconectar();
+            else
+            {
+                JOptionPane.showMessageDialog(null,"ERROR EN NUEVO PRECIO");
+            }
+        }
+        mBD.desconectar();
+//        
+//        LBL_Desc.setText("");
+//        LBL_Nombre_Producto.setText("");
+//        LBL_Precio.setText("");
+//        LBL_Proveedor.setText("");
+//        LBL_TotalP.setText("");
+//        TXT_N_Cantidad.setText("");
+//        TXT_Nombre.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito_Programa/src/COMPRAS/Reporte_Compra.jasper";
+        JasperReport jr = null;
+        
+        try {
+            jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+            jv.setTitle(path);
+            this.dispose();
+        } catch (JRException ex) {
+            Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -802,6 +808,7 @@ public class FRM_Compras extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

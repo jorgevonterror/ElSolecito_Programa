@@ -10,8 +10,10 @@ import elsolecito_programa.Producto.Producto;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -51,9 +53,8 @@ public class BaseDeDatos {
         Statement consulta;
         try{
             consulta = conexion.createStatement();
-            consulta.execute("INSERT INTO BD_ElSolecito.compras (id_compras, folio, descripcion, cantidadProductos, Fecha, TotalCompras, id_provedor)" + 
-                    "VALUES(null, '" + mCompras.getId_compras() + "'," + "'" + mCompras.getFolio() + "'," + "'" + mCompras.getDescripcion() + "'," +"'" + mCompras.getCantidadProductos() + "'," 
-                            + "'"+ mCompras.getFecha()+ "'," + "'" + mCompras.getTotalCompras() + "',"+ "'" + mCompras.getId_provedor() + "');");
+            consulta.execute("INSERT INTO BD_ElSolecito.compras (id_compras, folio, Fecha, TotalCompras)" + 
+                    "VALUES(null, '" + mCompras.getFolio() + "','" + mCompras.getFecha()+ "'," + "'" + mCompras.getTotalCompras() + "');");
             return true;
         }catch(Exception e){
              e.printStackTrace();
@@ -74,10 +75,8 @@ public class BaseDeDatos {
             while (resultado.next()) {
                 mCompras = new Compras();
                 mCompras.setFolio(resultado.getString("Folio"));
-                mCompras.setDescripcion(resultado.getString("Descripcion"));
-                mCompras.setCantidadProductos(resultado.getInt("Cantidad Productos"));
+                mCompras.setTotalCompras(resultado.getDouble("TotalCompras"));
                 mCompras.setFecha(resultado.getString("Fecha"));
-                mCompras.setPrecioUnitario(resultado.getFloat("Precio Unitario"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -315,18 +314,57 @@ public class BaseDeDatos {
         }
         return RegistroUltimo;
       }
+    
     public boolean CambiosCompra(Compras mCompra, Compras nCompra) {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
             consulta.execute("update compras set " + 
-                        "TotalCompras = '" + nCompra.getTotalCompras() + "'" +
-                        " where folio = " + mCompra.getFolio() + ";");
+                        "TotalCompras = '" + nCompra.getTotalCompras() +"'," +
+                        "folio = '"+ nCompra.getFolio() + "'" +" WHERE id_compras = '" + mCompra.getId_compras() + "';");          
+            
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }     
+ 
+    }
+    public Proveedores ConsultaProveedor_Prueba(String folio) {
+        Proveedores mProveedor = null;
+        Statement consulta;
+        ResultSet resultado;
         
-    }       
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from provedorees.nombre " +
+                        "where codigo = " + folio + ";");
+            if (resultado.next()) {
+                mProveedor = new Proveedores();
+                mProveedor.setNombre(resultado.getString("Nombre"));             
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+            
+        return mProveedor;       
+    }
+    
+    public String url = "jdbc:mysql://localhost:8889/BD_ElSolecito";
+    public String user = "root";
+    public String pass = "root";
+
+    public Connection conectare() {
+        Connection link = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            link = DriverManager.getConnection(this.url, this.user, this.pass);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showConfirmDialog(null, e);
+
+        }
+        return link;
+    }
 }
