@@ -18,11 +18,12 @@ import javax.swing.JOptionPane;
  * @author MARIA NOELDA MARIANO
  */
 public class BaseDeDatos {
+
     private Connection conexion;
-    ResultSet rs= null;
+    ResultSet rs = null;
     Statement statement = null;
-    
-    public boolean conectar(){
+
+    public boolean conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
@@ -37,7 +38,7 @@ public class BaseDeDatos {
             return false;
         }
     }
-    
+
     public void desconectar() {
         try {
             this.conexion.close();
@@ -45,125 +46,105 @@ public class BaseDeDatos {
             System.err.println(e.getMessage());
         }
     }
-    
-    public boolean GuardarProducto(Producto mProducto)
-    {
+
+    public boolean GuardarProducto(Producto mProducto) {
         Statement consulta;
-        try
-        {
+        try {
             consulta = conexion.createStatement();
-            consulta.execute("insert into BD_ElSolecito.productos (Desc_producto, Codigo , Nombre, Precio)" +
-            //consulta.execute("insert into productos (Desc_producto, Codigo , Nombre, Precio)" +
-                    "values('" + mProducto.getDesc_Prod() + "'," 
-                    + "'" + mProducto.getCodigo() + "'," 
-                    + "'" + mProducto.getNombre() + "'," 
-                   + "'" + mProducto.getPrecio() + "');");
+            consulta.execute("insert into BD_ElSolecito.productos (Desc_producto, Codigo , Nombre, Precio)"
+                    + //consulta.execute("insert into productos (Desc_producto, Codigo , Nombre, Precio)" +
+                    "values('" + mProducto.getDesc_Prod() + "',"
+                    + "'" + mProducto.getCodigo() + "',"
+                    + "'" + mProducto.getNombre() + "',"
+                    + "'" + mProducto.getPrecio() + "');");
             return true;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-    public ArrayList ConsultarProductos()
-    {
+
+    public ArrayList ConsultarProductos() {
         ArrayList mListaProductos = new ArrayList();
         Producto mProducto = null;
         Statement consulta;
         ResultSet resultado;
-        
-        try 
-        {
+
+        try {
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from productos;");
-            
-            while(resultado.next())
-            {
+
+            while (resultado.next()) {
                 mProducto = new Producto();
                 mProducto.setCodigo(resultado.getString("Codigo"));
                 mProducto.setNombre(resultado.getString("Nombre"));
                 mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
-                
+
                 mListaProductos.add(mProducto);
-                
+
             }
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return mListaProductos;
     }
-    
-    public ArrayList ConsultarEspecifica(String Codigo)
-    {
+
+    public ArrayList ConsultarEspecifica(String Codigo) {
         ArrayList mListaProductos = new ArrayList();
         Producto mProducto = null;
         Statement consulta;
         ResultSet resultado;
-        
-        try 
-        {
+
+        try {
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from productos where codigo = '" + Codigo + "';");
-            
-            while(resultado.next())
-            {
+
+            while (resultado.next()) {
                 mProducto = new Producto();
                 mProducto.setCodigo(resultado.getString("Codigo"));
                 mProducto.setNombre(resultado.getString("Nombre"));
                 mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
-                
+
                 mListaProductos.add(mProducto);
-                
+
             }
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return mListaProductos;
     }
-    
-    public boolean EliminarProducto(Producto mProducto)
-    {
+
+    public boolean EliminarProducto(Producto mProducto) {
         Statement consulta;
-        try
-        {
+        try {
             consulta = conexion.createStatement();
             consulta.execute("delete from productos " + " where Codigo = '" + mProducto.getCodigo() + "';");
             return true;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-    public boolean ModificarProductos(Producto aProducto, Producto bProducto)
-    {
+
+    public boolean ModificarProductos(Producto aProducto, Producto bProducto) {
         Statement consulta;
-        try 
-        {
+        try {
             consulta = conexion.createStatement();
-            consulta.execute("update productos set " 
-                    + "Desc_producto ='" + bProducto.getDesc_Prod() + "'," 
-                    + "Nombre ='" + bProducto.getNombre() + "'," 
-                    + "Precio =" + bProducto.getPrecio() 
-                    + "where Codigo = '" + aProducto.getCodigo() + "';" );
+            consulta.execute("update productos set "
+                    + "Desc_producto ='" + bProducto.getDesc_Prod() + "',"
+                    + "Nombre ='" + bProducto.getNombre() + "',"
+                    + "Precio =" + bProducto.getPrecio()
+                    + "where Codigo = '" + aProducto.getCodigo() + "';");
             return true;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-          //PARA GENERAR LOS REPORTES:
-    
+    //PARA GENERAR LOS REPORTES:
+
     public String url = "jdbc:mysql://localhost:8889/BD_ElSolecito";
     public String user = "root";
     public String pass = "root";

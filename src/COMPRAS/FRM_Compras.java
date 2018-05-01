@@ -667,7 +667,7 @@ public class FRM_Compras extends javax.swing.JFrame {
         Producto mProductoOld = mBD.consultarProducto(Integer.parseInt(this.TXT_Nombre.getText()));
         mBD.desconectar();
 
-        //Nueva_Cantidad = Float.parseFloat(TXT_N_Cantidad.getText()) + mProductoOld.getCantidadProducto();
+        Nueva_Cantidad = Float.parseFloat(TXT_N_Cantidad.getText()) + mProductoOld.getCantidadProducto();
         nProducto.setNombre(LBL_Nombre_Producto.getText());
         nProducto.setPrecio(Float.parseFloat(LBL_Precio.getText()));
         nProducto.setCantidadProducto(Integer.parseInt(TXT_N_Cantidad.getText()));
@@ -717,6 +717,7 @@ public class FRM_Compras extends javax.swing.JFrame {
         
         
         mCompraAlterada.setFolio(TXT_Nombre.getText());
+        
         mCompraAlterada.setTotalCompras(Float.parseFloat(LBL_TotalP.getText()));
         
         if(mBD.conectar()) 

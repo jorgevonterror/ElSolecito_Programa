@@ -5,6 +5,13 @@
  */
 package Ventas;
 
+import elsolecito_programa.Producto.Producto;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Jorge García
@@ -16,6 +23,107 @@ public class FRM_Ventas extends javax.swing.JFrame {
      */
     public FRM_Ventas() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        setProductos();
+        setVentas();
+    }
+
+    BaseDeDatos mBD = new BaseDeDatos();
+    int ContadorColumna = 1;
+    DefaultTableModel modeloTabla = new DefaultTableModel();
+    Producto mProducto = new Producto();
+    float TotalCompleto = 0;
+    float TotalTemporal = 0;
+    int RegistroVenta = 0;
+    float ResultadoVentaTotal = 0;
+    int CantidadNueva = 0;
+    Venta mVenta = new Venta();
+    DetalleVenta mDetalleVenta = new DetalleVenta();
+    Calendar fecha = new GregorianCalendar();
+    int ContadorColumnaProveedor = 1;
+
+    void borrar() {
+        DefaultTableModel TablaLimpiar = (DefaultTableModel) Tabla_Ventas.getModel();
+        int a = Tabla_Ventas.getRowCount() - 1;
+        for (int i = a; i >= 0; i--) {
+            TablaLimpiar.removeRow(TablaLimpiar.getRowCount() - 1);
+        }
+    }
+
+    void setProductos() {
+        if (mBD.conectar()) {
+            ArrayList mArrayList = new ArrayList();
+            mArrayList = mBD.ConsultaTodoProducto();
+            String[] Datos = null;
+            if (mArrayList != null) {
+                if (ContadorColumna == 1) {
+                    //modeloTabla.addColumn("id_producto");
+                    modeloTabla.addColumn("Folio");
+                    modeloTabla.addColumn("Nombre");
+                    modeloTabla.addColumn("Precio");
+                    modeloTabla.addColumn("Descripcion");
+                    ContadorColumna = 2;
+                }
+                for (int i = 0; i < mArrayList.size(); i++) {
+                    mProducto = (Producto) mArrayList.get(i);
+                    Datos = new String[4];
+
+                    //Datos[0] = "" + mProducto.getId_producto();
+                    Datos[0] = mProducto.getCodigo();
+                    Datos[1] = mProducto.getNombre();
+                    Datos[2] = "" + mProducto.getPrecio();
+                    Datos[3] = mProducto.getDesc_Prod();
+
+                    //INICIALIZAMOS LOS LB EN NADA.
+                    //Me quede aquí.
+                    LB_Precio.setText("-");
+                    LB_TotalPago.setText("-");
+                    LB_Desc.setText("-");
+                    LB_Nombre.setText("-");
+                    LB_Proveedor.setText("-");
+
+                    modeloTabla.addRow(Datos);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el producto...");
+            }
+            this.Tabla_Ventas = new javax.swing.JTable();
+            this.Tabla_Ventas.setModel(modeloTabla);
+
+            this.Tabla_Ventas.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.Tabla_Ventas.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.Tabla_Ventas.getColumnModel().getColumn(2).setPreferredWidth(400);
+            this.Tabla_Ventas.getColumnModel().getColumn(3).setPreferredWidth(600);
+            //this.Tabla_Ventas.getColumnModel().getColumn(4).setPreferredWidth(400);
+
+            if (this.Tabla_Ventas.getRowCount() > 0) {
+                this.Tabla_Ventas.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al consultar.");
+        }
+        mBD.desconectar();
+    }
+
+    void setVentas() {
+        String FechaActual = "" + fecha.get(Calendar.YEAR) + "-" + fecha.get(Calendar.MONTH) + "-" + fecha.get(Calendar.DAY_OF_MONTH);
+        System.out.println();
+        
+        mVenta.setFecha_venta(FechaActual);
+        mVenta.setPrecioTotalVenta(TotalCompleto);
+        mVenta.setFolio(TXT_Folio.getText());
+        
+        if (mBD.conectar()) {
+            if (mBD.AltaVenta(mVenta)) {
+                RegistroVenta = (mBD.ConsultaIDVenta());
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al guardar Venta");
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Error al consultar");
+        }
+        mBD.desconectar();
     }
 
     /**
@@ -49,12 +157,12 @@ public class FRM_Ventas extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         LB_Proveedor = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        LB_Cantidad = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         LB_TotalPago = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Tabla_Ventas = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
+        TXT_Cantidad = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -143,28 +251,16 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
         jLabel6.setText("Cantidad:");
 
-        LB_Cantidad.setText("jLabel10");
-
         jLabel17.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel17.setText("Total a pagar:");
 
         LB_TotalPago.setText("jLabel10");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        Tabla_Ventas.setModel(modeloTabla);
+        jScrollPane1.setViewportView(Tabla_Ventas);
 
         jLabel10.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
-        jLabel10.setText("VENTAS REGISTRADAS.");
+        jLabel10.setText("PRODUCTOS REGISTRADOS.");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -183,7 +279,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(LB_Cantidad))
+                        .addComponent(TXT_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
@@ -244,7 +340,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(LB_Cantidad))
+                            .addComponent(TXT_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -363,35 +459,135 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         
+        setProductos();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+        borrar();
+        if (mBD.conectar()) {
+            Producto mProducto = mBD.ConsultaEspecificaProducto(this.TXT_Folio.getText());
+            String[] Datos;
+            if (mProducto != null) {
+                if (ContadorColumna == 1) {
+                    modeloTabla.addColumn("Folio");
+                    modeloTabla.addColumn("Nombre");
+                    modeloTabla.addColumn("Precio");
+                    modeloTabla.addColumn("Descripcion");
+                    ContadorColumna = 2;
+                }
+                Datos = new String[4];
+                Datos[0] = mProducto.getCodigo();
+                Datos[1] = mProducto.getNombre();
+                Datos[2] = "" + mProducto.getPrecio();
+                Datos[3] = mProducto.getDesc_Prod();
+
+                LB_Precio.setText("" + mProducto.getPrecio());
+                //LB_TotalPago.setText("-");
+                LB_Desc.setText(mProducto.getDesc_Prod());
+                LB_Nombre.setText(mProducto.getNombre());
+                LB_Proveedor.setText("-");
+
+                modeloTabla.addRow(Datos);
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el producto.");
+            }
+            this.Tabla_Ventas = new javax.swing.JTable();
+            this.Tabla_Ventas.setModel(modeloTabla);
+
+            this.Tabla_Ventas.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.Tabla_Ventas.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.Tabla_Ventas.getColumnModel().getColumn(2).setPreferredWidth(400);
+            this.Tabla_Ventas.getColumnModel().getColumn(3).setPreferredWidth(600);
+            //this.Tabla_Ventas.getColumnModel().getColumn(4).setPreferredWidth(400);
+
+            if (this.Tabla_Ventas.getRowCount() > 0) {
+                this.Tabla_Ventas.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al consultar.");
+        }
+        mBD.desconectar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        //Le damos valores a los ID.
-        
+        //Aquí para la venta...
+        Producto nProducto = new Producto();
+        mProducto.setCodigo(TXT_Folio.getText());
+
+        mBD.conectar();
+        Producto mProductoOld = mBD.ConsultaEspecificaProducto(TXT_Folio.getText());
+        mBD.desconectar();
+
+        //Restamos la cantidad.
+        CantidadNueva = mProductoOld.getCantidadProducto() - Integer.parseInt(TXT_Cantidad.getText());
+
+        nProducto.setNombre(LB_Nombre.getText());
+
+        nProducto.setCantidadProducto(CantidadNueva);
+
+        nProducto.setDesc_Prod(LB_Desc.getText());
+        nProducto.setPrecio(Float.parseFloat(LB_Precio.getText()));
+        nProducto.setId_proveedor(TXT_Folio.getText());
+        CantidadNueva = 0;
+
+        if (mBD.conectar()) {
+            if (mBD.ModificarProductos(mProducto, nProducto)) {
+                JOptionPane.showMessageDialog(null, "Productos añadidos...");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al añadir...");
+            }
+        }
+        Venta mVentaConsultada = mBD.ConsultaTodaVenta(TXT_Folio.getText());
+
+        mDetalleVenta.setCantidad(Float.parseFloat(TXT_Cantidad.getText()));
+        mDetalleVenta.setPrecio(Float.parseFloat(LB_Precio.getText()));
+        mDetalleVenta.setProducto_id_Producto(Integer.parseInt(mProducto.getCodigo()));
+        mDetalleVenta.setVenta_id_Venta(RegistroVenta);
+
+        TotalTemporal = Float.parseFloat(LB_Precio.getText()) * Float.parseFloat(TXT_Cantidad.getText());
+        TotalCompleto = TotalTemporal + TotalCompleto;
+        LB_TotalPago.setText(String.valueOf(TotalCompleto));
+
+        if (mBD.AltaDetalleVenta(mDetalleVenta)) {
+            JOptionPane.showMessageDialog(null, "Detalle venta guardado.");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error detalle venta.");
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-
+        Venta mVentaAl = new Venta();
         
+        mVenta.setId_venta(RegistroVenta);
+        mVenta.setFolio(TXT_Folio.getText());
+        mVenta.setPrecioTotalVenta(TotalCompleto);
+        
+        mVentaAl.setFolio(TXT_Folio.getText());
+        mVentaAl.setPrecioTotalVenta(Float.parseFloat(LB_TotalPago.getText()));
+  
+        
+        if (mBD.conectar()) {
+            if (mBD.CambiosVenta(mVenta, mVenta)) {
+                JOptionPane.showMessageDialog(null, "Nuevo precio en la venta...");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error en nuevo precio de venta...");
+            }
+        }
+        mBD.desconectar();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-       
-        
+
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -440,13 +636,14 @@ public class FRM_Ventas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LB_Cantidad;
     private javax.swing.JLabel LB_Desc;
     private javax.swing.JLabel LB_Nombre;
     private javax.swing.JLabel LB_Precio;
     private javax.swing.JLabel LB_Proveedor;
     private javax.swing.JLabel LB_TotalPago;
+    private javax.swing.JTextField TXT_Cantidad;
     private javax.swing.JTextField TXT_Folio;
+    private javax.swing.JTable Tabla_Ventas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -473,7 +670,6 @@ public class FRM_Ventas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }

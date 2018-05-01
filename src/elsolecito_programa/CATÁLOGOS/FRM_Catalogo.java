@@ -5,6 +5,7 @@
  */
 package elsolecito_programa.CATÁLOGOS;
 import COMPRAS.FRM_Compras;
+import Ventas.FRM_Ventas;
 import elsolecito_programa.CLIENTES.FRM_Clientes;
 import elsolecito_programa.PROVEEDORES.FRM_Proveedores;
 import elsolecito_programa.Producto.FRM_Producto_Catalogo;
@@ -207,6 +208,11 @@ public class FRM_Catalogo extends javax.swing.JFrame {
         });
 
         jButton5.setText("Ventas");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Reportes");
 
@@ -301,6 +307,12 @@ public class FRM_Catalogo extends javax.swing.JFrame {
         FRM_Compras com = new FRM_Compras();
         com.show();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        FRM_Ventas vn = new FRM_Ventas();
+        vn.show();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
