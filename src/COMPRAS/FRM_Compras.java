@@ -186,7 +186,7 @@ public class FRM_Compras extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(Tabla_Compras);
 
-        jLabel1.setText("Código:");
+        jLabel1.setText("Folio:");
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel6.setText("REGISTRO DE PRODUCTOS EN EL SISTEMA.");
