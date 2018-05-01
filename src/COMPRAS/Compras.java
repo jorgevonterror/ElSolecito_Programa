@@ -15,19 +15,11 @@ public class Compras {
     private int id_compras;
     private int id_provedor;
     private String folio;
-    private String descripcion;
-    private int cantidadProductos;
-    private Date Fecha;   //Verificar si es el tipo de dato correcto.
+
+    private String Fecha;   //Verificar si es el tipo de dato correcto.
     private double TotalCompras;
-    private double precioUnitario;
 
-    public double getPrecioUnitario() {
-        return precioUnitario;
-    }
 
-    public void setPrecioUnitario(double precioUnitario) {
-        this.precioUnitario = precioUnitario;
-    }
     
     public int getId_compras() {
         return id_compras;
@@ -53,27 +45,11 @@ public class Compras {
         this.folio = folio;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public int getCantidadProductos() {
-        return cantidadProductos;
-    }
-
-    public void setCantidadProductos(int cantidadProductos) {
-        this.cantidadProductos = cantidadProductos;
-    }
-
-    public Date getFecha() {
+    public String getFecha() {
         return Fecha;
     }
 
-    public void setFecha(Date Fecha) {
+    public void setFecha(String Fecha) {
         this.Fecha = Fecha;
     }
 

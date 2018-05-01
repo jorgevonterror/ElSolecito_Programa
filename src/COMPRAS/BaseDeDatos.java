@@ -76,7 +76,7 @@ public class BaseDeDatos {
                 mCompras.setFolio(resultado.getString("Folio"));
                 mCompras.setDescripcion(resultado.getString("Descripcion"));
                 mCompras.setCantidadProductos(resultado.getInt("Cantidad Productos"));
-                mCompras.setFecha(resultado.getDate("Fecha"));
+                mCompras.setFecha(resultado.getString("Fecha"));
                 mCompras.setPrecioUnitario(resultado.getFloat("Precio Unitario"));
             }
         } catch (Exception e) {
@@ -208,7 +208,7 @@ public class BaseDeDatos {
         }
     }
     
-    public Compras ConsultaTodaCompra(int folio) {
+    public Compras ConsultaTodaCompra(String folio) {
         Compras mCompra=null;
         Statement consulta;
         ResultSet resultado;
@@ -218,14 +218,9 @@ public class BaseDeDatos {
                         "where folio = " + folio + ";");
             if (resultado.next()) {
                 mCompra = new Compras();
-                mCompra.setDescripcion(resultado.getString("Descripcion"));
-                mCompra.setFolio(resultado.getString("Folio"));
-                mCompra.setCantidadProductos(resultado.getInt("Cantidad"));
-                mCompra.setFecha(resultado.getDate("Fecha"));
-                mCompra.setPrecioUnitario(resultado.getFloat("Precio Unitario"));
-                mCompra.setCantidadProductos(resultado.getInt("Cantidad"));
-                mCompra.setId_compras(folio);
-                mCompra.setTotalCompras(Float.parseFloat(resultado.getString("PrecioTotalCompra")));
+                mCompra.setFecha(resultado.getString("fecha"));
+                mCompra.setFecha(resultado.getString("folio"));
+                mCompra.setTotalCompras(Float.parseFloat(resultado.getString("TotalCompras")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -289,4 +284,49 @@ public class BaseDeDatos {
             
         return mProveedor;       
     }
+    public boolean AltaCompra(Compras mCompra) {
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("INSERT INTO compras "  +
+                        "VALUES(null, '" + mCompra.getFecha()+ "', '" 
+                    + mCompra.getTotalCompras() + "', '" + mCompra.getFolio() + "');");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public int ConsultaFolioCompra() {
+        ArrayList mLista = new ArrayList();
+        Compras mCompra=null;
+        Statement consulta;
+        ResultSet resultado;
+        int RegistroUltimo=0;
+        
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("SELECT MAX(id_compras) FROM compras;");
+            while (resultado.next()) {
+                RegistroUltimo = resultado.getInt("MAX(id_compras)");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return RegistroUltimo;
+      }
+    public boolean CambiosCompra(Compras mCompra, Compras nCompra) {
+        Statement consulta;
+        try {
+            consulta = conexion.createStatement();
+            consulta.execute("update compras set " + 
+                        "TotalCompras = '" + nCompra.getTotalCompras() + "'" +
+                        " where folio = " + mCompra.getFolio() + ";");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }     
+        
+    }       
 }
