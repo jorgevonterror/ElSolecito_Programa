@@ -7,7 +7,7 @@ package Ventas;
 
 /**
  *
- * @author 8
+ * @author Jorge García
  */
 public class FRM_Ventas extends javax.swing.JFrame {
 
@@ -363,223 +363,35 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        //Se programa el botón para mostrar los datos en la tabla de compras.
-        borrar();
+         
 
-        if (mBD.conectar()) {
-            ArrayList mArrayList = new ArrayList();
-            mArrayList = mBD.ConsultarProductos();
-            String[] Datos = null;
-            if (mArrayList != null) {
-                if (ContColumn == 1) {
-                    //modeloTabla.addColumn("id_producto");
-                    modeloTabla.addColumn("Folio");
-                    modeloTabla.addColumn("Nombre");
-                    modeloTabla.addColumn("Precio");
-                    //modeloTabla.addColumn("Cantidad");
-                    modeloTabla.addColumn("Descripción");
-
-                    ContColumn = 2;
-                }
-                for (int i = 0; i < mArrayList.size(); i++) {
-                    mProducto = (Producto) mArrayList.get(i);
-                    Datos = new String[4];
-                    Datos[0] = "" + mProducto.getCodigo();
-                    Datos[1] = mProducto.getNombre();
-                    Datos[2] = "" + mProducto.getPrecio();
-                    //Datos[3] = "" + mProducto.getCantidadProducto();
-                    Datos[3] = mProducto.getDesc_Prod();
-
-                    modeloTabla.addRow(Datos);
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "No existe ese Producto...");
-        }
-        this.Tabla_Compras = new javax.swing.JTable();
-        this.Tabla_Compras.setModel(modeloTabla);
-        this.Tabla_Compras.getColumnModel().getColumn(0).setPreferredWidth(50);
-        this.Tabla_Compras.getColumnModel().getColumn(1).setPreferredWidth(100);
-        this.Tabla_Compras.getColumnModel().getColumn(2).setPreferredWidth(400);
-        this.Tabla_Compras.getColumnModel().getColumn(3).setPreferredWidth(600);
-        //this.Tabla_Compras.getColumnModel().getColumn(4).setPreferredWidth(400);
-
-        if (this.Tabla_Compras.getRowCount() > 0) {
-            this.Tabla_Compras.setRowSelectionInterval(0, 0);
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al consultar");
-        }
-        mBD.desconectar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        borrar();
-        if (mBD.conectar()) {
-            Producto mProducto = mBD.ConsultarEspecifica(TXT_Nombre.getText());
-            String[] Datos;
-
-            if (mProducto != null) {
-                if (ContColumn == 1) {
-                    modeloTabla.addColumn("Folio");
-                    modeloTabla.addColumn("Nombre");
-                    modeloTabla.addColumn("Precio");
-                    //modeloTabla.addColumn("Cantidad");
-                    modeloTabla.addColumn("Descripción");
-                    //modeloTabla.addColumn("id_proveedor");
-                    ContColumn = 2;
-                }
-                Datos = new String[4];
-
-                Datos[0] = "" + mProducto.getCodigo();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = "" + mProducto.getPrecio();
-                Datos[3] = mProducto.getDesc_Prod();
-                //Datos[4] = mProducto.getDesc_Prod();
-
-                LBL_Nombre_Producto.setText(mProducto.getNombre());
-                //LBL_Proveedor.setText(mBD.ConsultaProveedor_Prueba(TXT_Nombre.getText()));
-                //LBL_Proveedor.setText("" + mBD.ConsultaProveedor());
-                LBL_Precio.setText("" + mProducto.getPrecio());
-                LBL_Desc.setText(mProducto.getDesc_Prod());
-
-                modeloTabla.addRow(Datos);
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe ese Producto...");
-            }
-            this.Tabla_Compras = new javax.swing.JTable();
-            this.Tabla_Compras.setModel(modeloTabla);
-            this.Tabla_Compras.getColumnModel().getColumn(0).setPreferredWidth(50);
-            this.Tabla_Compras.getColumnModel().getColumn(1).setPreferredWidth(100);
-            this.Tabla_Compras.getColumnModel().getColumn(2).setPreferredWidth(400);
-            this.Tabla_Compras.getColumnModel().getColumn(3).setPreferredWidth(600);
-            //this.Tabla_Compras.getColumnModel().getColumn(4).setPreferredWidth(400);
-
-            if (this.Tabla_Compras.getRowCount() > 0) {
-                this.Tabla_Compras.setRowSelectionInterval(0, 0);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar");
-            }
-            mBD.desconectar();
-        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         //Le damos valores a los ID.
-        Producto nProducto = new Producto();
-        mProducto.setId_producto(Integer.parseInt(TXT_Nombre.getText()));
-        mProveedor.setId_proveedor(Integer.parseInt(TXT_Nombre.getText()));
-
-        mBD.conectar();
-        Producto mProductoOld = mBD.consultarProducto(Integer.parseInt(this.TXT_Nombre.getText()));
-        mBD.desconectar();
-
-        //Nueva_Cantidad = Float.parseFloat(TXT_N_Cantidad.getText()) + mProductoOld.getCantidadProducto();
-        nProducto.setNombre(LBL_Nombre_Producto.getText());
-        nProducto.setPrecio(Float.parseFloat(LBL_Precio.getText()));
-        nProducto.setCantidadProducto(Integer.parseInt(TXT_N_Cantidad.getText()));
-        nProducto.setDesc_Prod(LBL_Desc.getText());
-        Nueva_Cantidad = 0;
-
-        if (mBD.conectar()) {
-            if (mBD.ModificarProductos(nProducto, nProducto)) {
-                JOptionPane.showMessageDialog(null, "Productos agregados con éxito.");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al añadir.");
-            }
-
-            Compras mCompraConsulta = mBD.ConsultaTodaCompra(this.TXT_Nombre.getText());
-            //Solo para verificar...
-            //Aquí agregar todos los campos del detalle compra..
-
-            mDCompra.setCantidad(Integer.parseInt(TXT_N_Cantidad.getText()));
-            mDCompra.setPrecio(Float.parseFloat(LBL_Precio.getText()));
-            mDCompra.setProducto(LBL_Nombre_Producto.getText());
-
-            mDCompra.setId_producto(Integer.parseInt(mProducto.getCodigo()));
-            mDCompra.setId_proveedor(Integer.parseInt(mProveedor.getFolio()));
-
-            mDCompra.setId_detalle(RegistroCompra);
-
-            TotalTemporal = Float.parseFloat(LBL_Precio.getText()) * Float.parseFloat(TXT_N_Cantidad.getText());
-            TotalCompleto = TotalTemporal + TotalCompleto;
-            LBL_TotalP.setText(String.valueOf(TotalCompleto));
-
-            if (mBD.AltaDetalleCompra(mDCompra)) {
-                JOptionPane.showMessageDialog(null, "Detalle guardado.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se guardo el detalle guardado.");
-            }
-        }
-        //TXT_N_Cantidad.setText("");
-        //TXT_Nombre.setText("");
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
 
-        Compras mCompraAlterada = new Compras();
-        mCompras.setFolio(TXT_Nombre.getText());
-        mCompras.setId_compras(RegistroCompra);
-
-        mCompraAlterada.setFolio(TXT_Nombre.getText());
-        mCompraAlterada.setTotalCompras(Float.parseFloat(LBL_TotalP.getText()));
-
-        if(mBD.conectar())
-        {
-            if (mBD.CambiosCompra(mCompras, mCompraAlterada))
-            {
-                JOptionPane.showMessageDialog(null,"NUEVO PRECIO EN LA COMPRA");
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null,"ERROR EN NUEVO PRECIO");
-            }
-        }
-        mBD.desconectar();
-        //
-        //        LBL_Desc.setText("");
-        //        LBL_Nombre_Producto.setText("");
-        //        LBL_Precio.setText("");
-        //        LBL_Proveedor.setText("");
-        //        LBL_TotalP.setText("");
-        //        TXT_N_Cantidad.setText("");
-        //        TXT_Nombre.setText("");
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito_Programa/src/COMPRAS/Reporte_Compra.jasper";
-        JasperReport jr = null;
-
-        try {
-            jr = (JasperReport) JRLoader.loadObjectFromFile(path);
-            JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
-            JasperViewer jv = new JasperViewer(jp, false);
-            jv.setVisible(true);
-            jv.setTitle(path);
-            this.dispose();
-        } catch (JRException ex) {
-            Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito_Programa/src/COMPRAS/Reporte_Compra.jasper";
-        JasperReport jr = null;
-
-        try {
-            jr = (JasperReport) JRLoader.loadObjectFromFile(path);
-            JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
-            JasperViewer jv = new JasperViewer(jp, false);
-            jv.setVisible(true);
-            jv.setTitle(path);
-            this.dispose();
-        } catch (JRException ex) {
-            Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
+        
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
