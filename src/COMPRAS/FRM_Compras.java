@@ -147,13 +147,14 @@ public class FRM_Compras extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(329, 329, 329)
-                .addComponent(jLabel8)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(329, 329, 329)
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(351, 351, 351)
+                        .addComponent(jLabel9)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9)
-                .addGap(343, 343, 343))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -687,7 +688,7 @@ public class FRM_Compras extends javax.swing.JFrame {
         //Le damos valores a los ID.
         Producto nProducto = new Producto();
         mProducto.setId_producto(Integer.parseInt(TXT_Nombre.getText()));
-        mProveedor.setId_proveedor(Integer.parseInt(mProveedor.getFolio()));
+        mProveedor.setId_proveedor(Integer.parseInt(TXT_Nombre.getText()));
 
         mBD.conectar();
         Producto mProductoOld = mBD.consultarProducto(Integer.parseInt(this.TXT_Nombre.getText()));
@@ -735,7 +736,7 @@ public class FRM_Compras extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         Compras mCompraAlterada = new Compras();
-            mCompras.setFolio("" +RegistroCompra);
+            mCompras.setFolio(this.TXT_Nombre.getText());
             mCompraAlterada.setTotalCompras(Float.parseFloat(LBL_TotalP.getText()));
             if(mBD.conectar()) 
             {
