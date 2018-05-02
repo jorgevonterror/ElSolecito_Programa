@@ -77,7 +77,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                     //INICIALIZAMOS LOS LB EN NADA.
                     //Me quede aquí.
                     LB_Precio.setText("-");
-                    LB_TotalPago.setText("-");
+                    LB_TotalPago.setText("00.00");
                     LB_Desc.setText("-");
                     LB_Nombre.setText("-");
                     LB_Proveedor.setText("-");
@@ -252,7 +252,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
         jLabel6.setText("Cantidad:");
 
         jLabel17.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jLabel17.setText("Total a pagar:");
+        jLabel17.setText("Total a pagar: $");
 
         LB_TotalPago.setText("jLabel10");
 
@@ -484,7 +484,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                 Datos[3] = mProducto.getDesc_Prod();
 
                 LB_Precio.setText("" + mProducto.getPrecio());
-                //LB_TotalPago.setText("-");
+                LB_TotalPago.setText("00.00");
                 LB_Desc.setText(mProducto.getDesc_Prod());
                 LB_Nombre.setText(mProducto.getNombre());
                 LB_Proveedor.setText("-");

@@ -209,7 +209,7 @@ public class FRM_Compras extends javax.swing.JFrame {
         jLabel15.setText("Cantidad:");
 
         jLabel16.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jLabel16.setText("Total a pagar:");
+        jLabel16.setText("Total a pagar: $");
 
         jLabel18.setText("Nombre:");
 
@@ -469,6 +469,12 @@ public class FRM_Compras extends javax.swing.JFrame {
                     Datos[2] = "" + mProducto.getPrecio();
                     //Datos[3] = "" + mProducto.getCantidadProducto();
                     Datos[3] = mProducto.getDesc_Prod();
+                    
+                    LBL_Nombre_Producto.setText("-");
+                    LBL_Precio.setText("-");
+                    LBL_Proveedor.setText("-");
+                    LBL_TotalP.setText("00.00");
+                    LBL_Desc.setText("-");
 
                     modeloTabla.addRow(Datos);
                 }
@@ -537,7 +543,7 @@ public class FRM_Compras extends javax.swing.JFrame {
         mCompras.setFecha(FechaActual);
         mCompras.setTotalCompras(TotalCompleto);
         mCompras.setFolio(TXT_Nombre.getText());
-        
+
         if (mBD.conectar()) {
             if (mBD.AltaCompra(mCompras)) {
                 RegistroCompra = (mBD.ConsultaFolioCompra());
@@ -577,6 +583,12 @@ public class FRM_Compras extends javax.swing.JFrame {
                     Datos[2] = "" + mProducto.getPrecio();
                     //Datos[3] = "" + mProducto.getCantidadProducto();
                     Datos[3] = mProducto.getDesc_Prod();
+
+                    LBL_Nombre_Producto.setText("-");
+                    LBL_Precio.setText("-");
+                    LBL_Proveedor.setText("-");
+                    LBL_TotalP.setText("00.00");
+                    LBL_Desc.setText("-");
 
                     modeloTabla.addRow(Datos);
                 }
@@ -667,7 +679,7 @@ public class FRM_Compras extends javax.swing.JFrame {
         Producto mProductoOld = mBD.consultarProducto(Integer.parseInt(this.TXT_Nombre.getText()));
         mBD.desconectar();
 
-        Nueva_Cantidad = Float.parseFloat(TXT_N_Cantidad.getText()) + mProductoOld.getCantidadProducto();
+        //Nueva_Cantidad = Float.parseFloat(TXT_N_Cantidad.getText()) + mProductoOld.getCantidadProducto();
         nProducto.setNombre(LBL_Nombre_Producto.getText());
         nProducto.setPrecio(Float.parseFloat(LBL_Precio.getText()));
         nProducto.setCantidadProducto(Integer.parseInt(TXT_N_Cantidad.getText()));
@@ -684,7 +696,7 @@ public class FRM_Compras extends javax.swing.JFrame {
             Compras mCompraConsulta = mBD.ConsultaTodaCompra(this.TXT_Nombre.getText());
             //Solo para verificar...
             //Aquí agregar todos los campos del detalle compra..
-            
+
             mDCompra.setCantidad(Integer.parseInt(TXT_N_Cantidad.getText()));
             mDCompra.setPrecio(Float.parseFloat(LBL_Precio.getText()));
             mDCompra.setProducto(LBL_Nombre_Producto.getText());
@@ -710,25 +722,20 @@ public class FRM_Compras extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+
         Compras mCompraAlterada = new Compras();
         mCompras.setFolio(TXT_Nombre.getText());
         mCompras.setId_compras(RegistroCompra);
-        
-        
+
         mCompraAlterada.setFolio(TXT_Nombre.getText());
-        
+
         mCompraAlterada.setTotalCompras(Float.parseFloat(LBL_TotalP.getText()));
-        
-        if(mBD.conectar()) 
-        {
-            if (mBD.CambiosCompra(mCompras, mCompraAlterada))
-            {
-                JOptionPane.showMessageDialog(null,"NUEVO PRECIO EN LA COMPRA");
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null,"ERROR EN NUEVO PRECIO");
+
+        if (mBD.conectar()) {
+            if (mBD.CambiosCompra(mCompras, mCompraAlterada)) {
+                JOptionPane.showMessageDialog(null, "NUEVO PRECIO EN LA COMPRA");
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR EN NUEVO PRECIO");
             }
         }
         mBD.desconectar();
@@ -746,7 +753,7 @@ public class FRM_Compras extends javax.swing.JFrame {
         // TODO add your handling code here:
         String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito_Programa/src/COMPRAS/Reporte_Compra.jasper";
         JasperReport jr = null;
-        
+
         try {
             jr = (JasperReport) JRLoader.loadObjectFromFile(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
