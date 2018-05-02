@@ -5,12 +5,21 @@
  */
 package Ventas;
 
+import elsolecito_programa.CLIENTES.FRM_Clientes_Alta;
 import elsolecito_programa.Producto.Producto;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -568,7 +577,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
         
         mVentaAl.setFolio(TXT_Folio.getText());
         mVentaAl.setPrecioTotalVenta(Float.parseFloat(LB_TotalPago.getText()));
-  
+        
         
         if (mBD.conectar()) {
             if (mBD.CambiosVenta(mVenta, mVenta)) {
@@ -586,7 +595,19 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito_Programa/src/Ventas/Reporte_Ventas.jasper";
+        JasperReport jr = null;
 
+        try {
+            jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+            jv.setTitle(path);
+            this.dispose();
+        } catch (JRException ex) {
+            Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_jButton7ActionPerformed
 
