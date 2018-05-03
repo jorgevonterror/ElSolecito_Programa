@@ -51,12 +51,14 @@ public class BaseDeDatos {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("insert into BD_ElSolecito.productos (Desc_producto, Codigo , Nombre, Precio)"
+            consulta.execute("insert into BD_ElSolecito.productos (id_producto, Desc_producto, Codigo , Nombre, Precio)"
                     + //consulta.execute("insert into productos (Desc_producto, Codigo , Nombre, Precio)" +
-                    "values('" + mProducto.getDesc_Prod() + "',"
+                    "values('" + mProducto.getId_producto()+ "',"
+                    + "'" + mProducto.getDesc_Prod() + "',"
                     + "'" + mProducto.getCodigo() + "',"
                     + "'" + mProducto.getNombre() + "',"
                     + "'" + mProducto.getPrecio() + "');");
+            consulta.execute("INSERT into BD_ElSolecito.existencia(id_existencia, id_producto, cantidad)" + "values (null,'" + mProducto.getId_producto() +"', 0);");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

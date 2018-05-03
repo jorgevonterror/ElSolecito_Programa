@@ -156,7 +156,7 @@ public class BaseDeDatos {
             consulta.execute("update ventas set " + 
                         "Total = '" + nVenta.getPrecioTotalVenta() +"'," +
                         "folio = '" + nVenta.getFolio() + "'," +" Fecha = '" + nVenta.getFecha_venta()+ "'"
-                                +" WHERE folio = '" + mProducto.getCodigo() + "';");  
+                                +" WHERE folio = '" + mVenta.getFolio() + "';");  
             return true;
         } catch (Exception e) {
             e.printStackTrace();

@@ -367,10 +367,16 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
         new FRM_Producto_Catalogo().show();
         this.setVisible(false);
     }//GEN-LAST:event_TxrMenuActionPerformed
-
+    int prod = 1;
+    
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
         // TODO add your handling code here:
         // Alta de productos deudores...
+        
+        //
+        //Verificar que el id sea el mismo del el producto.
+        mProducto.setId_producto(prod);
+        
         mProducto.setCodigo(this.TxtCodigo.getText());
         mProducto.setNombre(this.TxtNombre.getText());
         mProducto.setDesc_Prod(this.TxtDescProducto.getText());
