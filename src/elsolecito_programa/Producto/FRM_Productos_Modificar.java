@@ -23,15 +23,15 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
     public FRM_Productos_Modificar() {
         setFilas();
         initComponents();
-        
+
         this.setLocationRelativeTo(null);
-         //Para seleccionar fila y columna de la tabla y los ponga en los TXT.
+        //Para seleccionar fila y columna de la tabla y los ponga en los TXT.
         TBProductos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (TBProductos.getSelectedRow() != -1) {
                     int fila = TBProductos.getSelectedRow();
-                    
+
                     TxtNuevaDesc.setText(TBProductos.getValueAt(fila, 3).toString());
                     TxtNuevoPrecio.setText(TBProductos.getValueAt(fila, 2).toString());
                     TxtNuevoNombre.setText(TBProductos.getValueAt(fila, 1).toString());
@@ -44,6 +44,7 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
     DefaultTableModel ModeloTabla = new DefaultTableModel();
     BaseDeDatos mBD = new BaseDeDatos();
     Producto mProducto = new Producto();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,6 +70,8 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
         BtnMenu = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TBProductos = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        TXT_CantidadP = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,6 +140,8 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
         TBProductos.setModel(ModeloTabla);
         jScrollPane1.setViewportView(TBProductos);
 
+        jLabel1.setText("Cantidad de producto:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -144,14 +149,6 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TxtNuevaDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 9, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
@@ -166,13 +163,23 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(TxtNuevoCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                                     .addComponent(TxtNuevoNombre))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnMenu)
+                            .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(BtnMenu)))
-                        .addGap(30, 30, 30))))
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TxtNuevaDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(TXT_CantidadP, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,17 +199,21 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(TxtNuevoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGap(25, 25, 25)
                         .addComponent(BtnModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnMenu)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TxtNuevaDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(TXT_CantidadP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -223,116 +234,120 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void setFilas(){
-        if(mBD.conectar()){
+    private void setFilas() {
+        if (mBD.conectar()) {
             ArrayList mListaProductos = mBD.ConsultarProductos();
-            String [] Datos;
-            
+            String[] Datos;
+
             ModeloTabla.addColumn("Codigo");
             ModeloTabla.addColumn("Nombre");
             ModeloTabla.addColumn("Precio");
+            ModeloTabla.addColumn("Cantidad");
             ModeloTabla.addColumn("Descripcion");
- 
-            for (Object mListaProducto : mListaProductos) {
-                Datos = new String[4];
-                
-                mProducto = (Producto)mListaProducto;
-                Datos[0] = mProducto.getCodigo();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = "" + mProducto.getPrecio();
-                Datos[3] = mProducto.getDesc_Prod();
-                
-            
-                ModeloTabla.addRow(Datos);
-            } 
-            
-            this.TBProductos = new javax.swing.JTable();
-            this.TBProductos.setModel(ModeloTabla);
-            
-            this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
-            this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
-            this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
-            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
-            
-            if (this.TBProductos.getRowCount() > 0) {
-                this.TBProductos.setRowSelectionInterval(0, 0);
-            }
-           
-        } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
-        mBD.desconectar();
-    }
-    
-    private void setFilas_2(){
-        if(mBD.conectar()){
-            ArrayList mListaProductos = mBD.ConsultarProductos();
-            String [] Datos;
 
             for (Object mListaProducto : mListaProductos) {
-                Datos = new String[4];
-                
-                mProducto = (Producto)mListaProducto;
+                Datos = new String[5];
+
+                mProducto = (Producto) mListaProducto;
                 Datos[0] = mProducto.getCodigo();
                 Datos[1] = mProducto.getNombre();
                 Datos[2] = "" + mProducto.getPrecio();
-                Datos[3] = mProducto.getDesc_Prod();
-                
-            
+                Datos[3] = "" + mProducto.getCantidadProducto();
+                Datos[4] = mProducto.getDesc_Prod();
+
                 ModeloTabla.addRow(Datos);
-            } 
-            
+            }
+
             this.TBProductos = new javax.swing.JTable();
             this.TBProductos.setModel(ModeloTabla);
-            
+
             this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
             this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
-            
+            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(500);
+
             if (this.TBProductos.getRowCount() > 0) {
                 this.TBProductos.setRowSelectionInterval(0, 0);
             }
-           
+
         } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
         mBD.desconectar();
     }
-    
-    void borrar(){
+
+    private void setFilas_2() {
+        if (mBD.conectar()) {
+            ArrayList mListaProductos = mBD.ConsultarProductos();
+            String[] Datos;
+
+            for (Object mListaProducto : mListaProductos) {
+                Datos = new String[5];
+
+                mProducto = (Producto) mListaProducto;
+                Datos[0] = mProducto.getCodigo();
+                Datos[1] = mProducto.getNombre();
+                Datos[2] = "" + mProducto.getPrecio();
+                Datos[3] = "" + mProducto.getCantidadProducto();
+                Datos[4] = mProducto.getDesc_Prod();
+
+                ModeloTabla.addRow(Datos);
+            }
+
+            this.TBProductos = new javax.swing.JTable();
+            this.TBProductos.setModel(ModeloTabla);
+
+            this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
+            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(500);
+
+            if (this.TBProductos.getRowCount() > 0) {
+                this.TBProductos.setRowSelectionInterval(0, 0);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
+        mBD.desconectar();
+    }
+
+    void borrar() {
         DefaultTableModel LimpiadoTabla = (DefaultTableModel) TBProductos.getModel();
         //Borramosla tabla...
-        int a = TBProductos.getRowCount()-1;
-        
-        for(int i = a; i>=0;i--) {
-            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        int a = TBProductos.getRowCount() - 1;
+
+        for (int i = a; i >= 0; i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount() - 1);
         }
     }
-    
+
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
         // TODO add your handling code here:
         Producto aProducto = new Producto();
         Producto bProducto = new Producto();
-        
+
         aProducto.setCodigo(this.TxtNuevoCodigo.getText());
-        
+
         bProducto.setNombre(this.TxtNuevoNombre.getText());
         bProducto.setPrecio(Float.parseFloat(this.TxtNuevoPrecio.getText()));
         bProducto.setDesc_Prod(this.TxtNuevaDesc.getText());
-
-        if(mBD.conectar()) {
-            if(mBD.ModificarProductos(aProducto, bProducto)){
+        bProducto.setCantidadProducto(Integer.parseInt(this.TXT_CantidadP.getText()));
+        
+        if (mBD.conectar()) {
+            if (mBD.ModificarProductos(aProducto, bProducto)) {
                 //JOptionPane.showMessageDialog(null, "Producto modificado con éxito...");
-                borrar();    
+                borrar();
                 setFilas_2();
-                
+
                 this.TxtNuevoCodigo.setText("");
                 this.TxtNuevoNombre.setText("");
                 this.TxtNuevaDesc.setText("");
                 this.TxtNuevoPrecio.setText("");
             } else {
-                 JOptionPane.showMessageDialog(null, "Error al modificar...");
+                JOptionPane.showMessageDialog(null, "Error al modificar...");
             }
             mBD.desconectar();
         }
@@ -390,10 +405,12 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
     private javax.swing.JButton BtnMenu;
     private javax.swing.JButton BtnModificar;
     private javax.swing.JTable TBProductos;
+    private javax.swing.JTextField TXT_CantidadP;
     private javax.swing.JTextField TxtNuevaDesc;
     private javax.swing.JTextField TxtNuevoCodigo;
     private javax.swing.JTextField TxtNuevoNombre;
     private javax.swing.JTextField TxtNuevoPrecio;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

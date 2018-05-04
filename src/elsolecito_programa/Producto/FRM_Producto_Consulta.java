@@ -193,36 +193,37 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
         borrar();
         if(mBD.conectar()){
             ArrayList mListaProductos = mBD.ConsultarEspecifica(Codigo);
-            String [] Datos;
-           
+            String[] Datos;
+
             for (Object mListaProducto : mListaProductos) {
-                Datos = new String[4];
-                
-                mProducto = (Producto)mListaProducto;
+                Datos = new String[5];
+
+                mProducto = (Producto) mListaProducto;
                 Datos[0] = mProducto.getCodigo();
                 Datos[1] = mProducto.getNombre();
                 Datos[2] = "" + mProducto.getPrecio();
-                Datos[3] = mProducto.getDesc_Prod();
-                
-            
+                Datos[3] = "" + mProducto.getCantidadProducto();
+                Datos[4] = mProducto.getDesc_Prod();
+
                 ModeloTabla.addRow(Datos);
-            } 
-            
+            }
+
             this.TBProductos = new javax.swing.JTable();
             this.TBProductos.setModel(ModeloTabla);
-            
+
             this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
             this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
-            
+            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(500);
+
             if (this.TBProductos.getRowCount() > 0) {
                 this.TBProductos.setRowSelectionInterval(0, 0);
             }
-           
+
         } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
         mBD.desconectar();
     }//GEN-LAST:event_BtnConsultarActionPerformed
 
@@ -233,42 +234,44 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
     
     private void setFilas(){
         if(mBD.conectar()){
-            ArrayList mListaProductos = mBD.ConsultarProductos();
-            String [] Datos;
-            
+           ArrayList mListaProductos = mBD.ConsultarProductos();
+            String[] Datos;
+
             ModeloTabla.addColumn("Codigo");
             ModeloTabla.addColumn("Nombre");
             ModeloTabla.addColumn("Precio");
+            ModeloTabla.addColumn("Cantidad");
             ModeloTabla.addColumn("Descripcion");
- 
+
             for (Object mListaProducto : mListaProductos) {
-                Datos = new String[4];
-                
-                mProducto = (Producto)mListaProducto;
+                Datos = new String[5];
+
+                mProducto = (Producto) mListaProducto;
                 Datos[0] = mProducto.getCodigo();
                 Datos[1] = mProducto.getNombre();
                 Datos[2] = "" + mProducto.getPrecio();
-                Datos[3] = mProducto.getDesc_Prod();
-                
-            
+                Datos[3] = "" + mProducto.getCantidadProducto();
+                Datos[4] = mProducto.getDesc_Prod();
+
                 ModeloTabla.addRow(Datos);
-            } 
-            
+            }
+
             this.TBProductos = new javax.swing.JTable();
             this.TBProductos.setModel(ModeloTabla);
-            
+
             this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
             this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
-            
+            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(500);
+
             if (this.TBProductos.getRowCount() > 0) {
                 this.TBProductos.setRowSelectionInterval(0, 0);
             }
-           
+
         } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
         mBD.desconectar();
     }
     
