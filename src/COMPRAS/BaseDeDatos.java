@@ -131,6 +131,7 @@ public class BaseDeDatos {
                 mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
                 mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("Cantidad")));
                 mProducto.setId_proveedor(resultado.getString("id_proveedor"));
+                
                 mListaProductos.add(mProducto);
                 
             }
@@ -172,14 +173,14 @@ public class BaseDeDatos {
         return mProducto;
     }
     
-    public Producto consultarProducto(int Codigo) {
+    public Producto consultarProducto(int id) {
         Producto mProducto = null;
         Statement consulta;
         ResultSet resultado;
         
         try {
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from productos where id_producto = '" + Codigo + "';");
+            resultado = consulta.executeQuery("select * from productos where Codigo = '" + id + "';");
             if (resultado.next()) {
                 mProducto.setId_producto(resultado.getInt("id_producto"));
                 mProducto.setCodigo(resultado.getString("Codigo"));
@@ -209,7 +210,7 @@ public class BaseDeDatos {
                     + "Nombre ='" + bProducto.getNombre() + "'," 
                     + "Precio ='" + bProducto.getPrecio() + "',"
                     + "codigo ='" + bProducto.getCodigo() + "'"
-                    + "where id_producto = '" + aProducto.getId_producto() + "';" );
+                    + "where codigo = " + aProducto.getCodigo() + ";" );
             return true;
         }
         catch(Exception e)
@@ -300,9 +301,7 @@ public class BaseDeDatos {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("INSERT INTO compras "  +
-                        "VALUES(null, '" + mCompra.getFecha()+ "','" 
-                    + mCompra.getTotalCompras() + "');");
+            consulta.execute("INSERT INTO compras" + "(id_compras, Fecha, folio, TotalCompras)" + "values(null,'" + mCompra.getFecha() + "','" + mCompra.getFolio() + "','" + mCompra.getTotalCompras() + "');");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

@@ -27,7 +27,6 @@ public class BaseDeDatos {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
-            //conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -51,13 +50,14 @@ public class BaseDeDatos {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("insert into BD_ElSolecito.productos (id_producto, Desc_producto, Codigo , Nombre, Precio, cantidad)"
+            consulta.execute("insert into BD_ElSolecito.productos (id_producto, Desc_producto, Codigo , Nombre, Precio, cantidad, id_proveedor)"
                     +"values(null,'" + mProducto.getDesc_Prod() + "',"
                     + "'" + mProducto.getCodigo() + "',"
                     + "'" + mProducto.getNombre() + "',"
-                    + "'" + mProducto.getPrecio() + "'," 
-                    + "'" + mProducto.getCantidadProducto()+"');");
-            //consulta.execute("INSERT into BD_ElSolecito.existencia(id_existencia, id_producto, cantidad)" + "values (null,'" + mProducto.getId_producto() +"', 0);");
+                    + "'" + mProducto.getPrecio() + "',"
+                    + "'" + mProducto.getCantidadProducto() + "',"
+                    + "'" + mProducto.getId_proveedor()+ "');");
+           
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,6 +84,7 @@ public class BaseDeDatos {
                 mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
                 mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("Cantidad")));
+                mProducto.setId_proveedor("id_proveedor");
                 
                 mListaProductos.add(mProducto);
 
@@ -112,7 +113,7 @@ public class BaseDeDatos {
                 mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
                 mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("Cantidad")));
-                
+                mProducto.setId_proveedor(resultado.getString("id_proveedor"));
                 mListaProductos.add(mProducto);
 
             }

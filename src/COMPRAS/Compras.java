@@ -13,27 +13,16 @@ import java.sql.Date;
  */
 public class Compras {
     private int id_compras;
-    private int id_proveedor;
     private String folio;
     private String Fecha; 
     private double TotalCompras;
 
-
-    
     public int getId_compras() {
         return id_compras;
     }
 
     public void setId_compras(int id_compras) {
         this.id_compras = id_compras;
-    }
-
-    public int getId_provedor() {
-        return id_proveedor;
-    }
-
-    public void setId_provedor(int id_provedor) {
-        this.id_proveedor = id_proveedor;
     }
 
     public String getFolio() {
