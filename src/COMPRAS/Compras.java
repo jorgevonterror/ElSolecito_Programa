@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Compras;
+package COMPRAS;
 
 import java.sql.Date;
 
@@ -13,10 +13,9 @@ import java.sql.Date;
  */
 public class Compras {
     private int id_compras;
-    private int id_provedor;
+    private int id_proveedor;
     private String folio;
-
-    private String Fecha;   //Verificar si es el tipo de dato correcto.
+    private String Fecha; 
     private double TotalCompras;
 
 
@@ -30,11 +29,11 @@ public class Compras {
     }
 
     public int getId_provedor() {
-        return id_provedor;
+        return id_proveedor;
     }
 
     public void setId_provedor(int id_provedor) {
-        this.id_provedor = id_provedor;
+        this.id_proveedor = id_proveedor;
     }
 
     public String getFolio() {

@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Compras;
+package COMPRAS;
 
 import elsolecito_programa.CLIENTES.ClientesDeudores;
 import elsolecito_programa.CLIENTES.FRM_Clientes_Alta;
 import elsolecito_programa.PROVEEDORES.Proveedores;
 import elsolecito_programa.Producto.Producto;
+import java.awt.HeadlessException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -451,24 +452,25 @@ public class FRM_Compras extends javax.swing.JFrame {
             String[] Datos = null;
             if (mArrayList != null) {
                 if (ContColumn == 1) {
-                    //modeloTabla.addColumn("id_producto");
+                    modeloTabla.addColumn("id_producto");
                     modeloTabla.addColumn("Folio");
                     modeloTabla.addColumn("Nombre");
                     modeloTabla.addColumn("Precio");
-                    //modeloTabla.addColumn("Cantidad");
+                    modeloTabla.addColumn("Cantidad");
                     modeloTabla.addColumn("Descripción");
 
                     ContColumn = 2;
                 }
                 for (int i = 0; i < mArrayList.size(); i++) {
                     mProducto = (Producto) mArrayList.get(i);
-                    Datos = new String[4];
-                    Datos[0] = "" + mProducto.getCodigo();
-                    Datos[1] = mProducto.getNombre();
-                    Datos[2] = "" + mProducto.getPrecio();
-                    //Datos[3] = "" + mProducto.getCantidadProducto();
-                    Datos[3] = mProducto.getDesc_Prod();
-                    
+                    Datos = new String[6];
+                    Datos[0] = "" + mProducto.getId_producto();
+                    Datos[1] = "" + mProducto.getCodigo();
+                    Datos[2] = mProducto.getNombre();
+                    Datos[3] = "" + mProducto.getPrecio();
+                    Datos[4] = "" + mProducto.getCantidadProducto();
+                    Datos[5] = mProducto.getDesc_Prod();
+
                     LBL_Nombre_Producto.setText("-");
                     LBL_Precio.setText("-");
                     LBL_Proveedor.setText("-");
@@ -487,7 +489,9 @@ public class FRM_Compras extends javax.swing.JFrame {
         this.Tabla_Compras.getColumnModel().getColumn(1).setPreferredWidth(100);
         this.Tabla_Compras.getColumnModel().getColumn(2).setPreferredWidth(400);
         this.Tabla_Compras.getColumnModel().getColumn(3).setPreferredWidth(600);
-        //this.Tabla_Compras.getColumnModel().getColumn(4).setPreferredWidth(400);
+        this.Tabla_Compras.getColumnModel().getColumn(4).setPreferredWidth(400);
+        this.Tabla_Compras.getColumnModel().getColumn(5).setPreferredWidth(500);
+        this.Tabla_Compras.getColumnModel().getColumn(6).setPreferredWidth(600);
 
         if (this.Tabla_Compras.getRowCount() > 0) {
             this.Tabla_Compras.setRowSelectionInterval(0, 0);
@@ -506,6 +510,7 @@ public class FRM_Compras extends javax.swing.JFrame {
             String[] Datos = null;
             if (mArrayListProveedores != null) {
                 if (ContadorColumnaProveedor == 1) {
+                    TablaProveedores.addColumn("ID_Proveedor");
                     TablaProveedores.addColumn("Folio");
                     TablaProveedores.addColumn("Nombre");
                     TablaProveedores.addColumn("Marca");
@@ -513,13 +518,13 @@ public class FRM_Compras extends javax.swing.JFrame {
                 }
                 for (int i = 0; i < mArrayListProveedores.size(); i++) {
                     mProveedor = (Proveedores) mArrayListProveedores.get(i);
-                    Datos = new String[3];
-                    Datos[0] = mProveedor.getFolio();
-                    Datos[1] = mProveedor.getNombre();
-                    Datos[2] = mProveedor.getMarca();
+                    Datos = new String[4];
+                    Datos[0] = "" + mProveedor.getId_proveedor();
+                    Datos[1] = mProveedor.getFolio();
+                    Datos[2] = mProveedor.getNombre();
+                    Datos[3] = mProveedor.getMarca();
                     TablaProveedores.addRow(Datos);
                 }
-
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el proveedor...");
             }
@@ -528,6 +533,8 @@ public class FRM_Compras extends javax.swing.JFrame {
             this.Tabla_Proveedores.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.Tabla_Proveedores.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.Tabla_Proveedores.getColumnModel().getColumn(2).setPreferredWidth(200);
+            this.Tabla_Proveedores.getColumnModel().getColumn(3).setPreferredWidth(300);
+
             if (this.Tabla_Proveedores.getRowCount() > 0) {
                 this.Tabla_Proveedores.setRowSelectionInterval(0, 0);
             }
@@ -540,8 +547,8 @@ public class FRM_Compras extends javax.swing.JFrame {
         System.out.println();
 
         mCompras.setFecha(FechaActual);
-        mCompras.setTotalCompras(TotalCompleto);
-        mCompras.setFolio(TXT_Nombre.getText());
+        mCompras.setTotalCompras(ResultadoCompraTotal);
+        //mCompras.setFolio(TXT_Nombre.getText());
 
         if (mBD.conectar()) {
             if (mBD.AltaCompra(mCompras)) {
@@ -565,23 +572,26 @@ public class FRM_Compras extends javax.swing.JFrame {
             String[] Datos = null;
             if (mArrayList != null) {
                 if (ContColumn == 1) {
-                    //modeloTabla.addColumn("id_producto");
+                    modeloTabla.addColumn("ID_Producto");
                     modeloTabla.addColumn("Folio");
                     modeloTabla.addColumn("Nombre");
                     modeloTabla.addColumn("Precio");
-                    //modeloTabla.addColumn("Cantidad");
+                    modeloTabla.addColumn("Cantidad");
                     modeloTabla.addColumn("Descripción");
-
+                    modeloTabla.addColumn("ID_Proveedor");
                     ContColumn = 2;
                 }
                 for (int i = 0; i < mArrayList.size(); i++) {
                     mProducto = (Producto) mArrayList.get(i);
-                    Datos = new String[4];
-                    Datos[0] = "" + mProducto.getCodigo();
-                    Datos[1] = mProducto.getNombre();
-                    Datos[2] = "" + mProducto.getPrecio();
-                    //Datos[3] = "" + mProducto.getCantidadProducto();
-                    Datos[3] = mProducto.getDesc_Prod();
+                    Datos = new String[7];
+
+                    Datos[0] = "" + mProducto.getId_producto();
+                    Datos[1] = "" + mProducto.getCodigo();
+                    Datos[2] = mProducto.getNombre();
+                    Datos[3] = "" + mProducto.getPrecio();
+                    Datos[4] = "" + mProducto.getCantidadProducto();
+                    Datos[5] = mProducto.getDesc_Prod();
+                    Datos[6] = mProducto.getId_proveedor();
 
                     LBL_Nombre_Producto.setText("-");
                     LBL_Precio.setText("-");
@@ -601,7 +611,9 @@ public class FRM_Compras extends javax.swing.JFrame {
         this.Tabla_Compras.getColumnModel().getColumn(1).setPreferredWidth(100);
         this.Tabla_Compras.getColumnModel().getColumn(2).setPreferredWidth(400);
         this.Tabla_Compras.getColumnModel().getColumn(3).setPreferredWidth(600);
-        //this.Tabla_Compras.getColumnModel().getColumn(4).setPreferredWidth(400);
+        this.Tabla_Compras.getColumnModel().getColumn(4).setPreferredWidth(400);
+        this.Tabla_Compras.getColumnModel().getColumn(5).setPreferredWidth(500);
+        this.Tabla_Compras.getColumnModel().getColumn(6).setPreferredWidth(600);
 
         if (this.Tabla_Compras.getRowCount() > 0) {
             this.Tabla_Compras.setRowSelectionInterval(0, 0);
@@ -620,25 +632,27 @@ public class FRM_Compras extends javax.swing.JFrame {
 
             if (mProducto != null) {
                 if (ContColumn == 1) {
+                    modeloTabla.addColumn("ID");
                     modeloTabla.addColumn("Folio");
                     modeloTabla.addColumn("Nombre");
                     modeloTabla.addColumn("Precio");
-                    //modeloTabla.addColumn("Cantidad");
+                    modeloTabla.addColumn("Cantidad");
                     modeloTabla.addColumn("Descripción");
-                    //modeloTabla.addColumn("id_proveedor");
+                    modeloTabla.addColumn("id_proveedor");
                     ContColumn = 2;
                 }
-                Datos = new String[4];
+                Datos = new String[7];
 
-                Datos[0] = "" + mProducto.getCodigo();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = "" + mProducto.getPrecio();
-                Datos[3] = mProducto.getDesc_Prod();
-                //Datos[4] = mProducto.getDesc_Prod();
+                Datos[0] = "" + mProducto.getId_producto();
+                Datos[1] = "" + mProducto.getCodigo();
+                Datos[2] = mProducto.getNombre();
+                Datos[3] = "" + mProducto.getPrecio();
+                Datos[4] = "" + mProducto.getCantidadProducto();
+                Datos[5] = mProducto.getDesc_Prod();
+                Datos[6] = "" + mProducto.getId_proveedor();
 
                 LBL_Nombre_Producto.setText(mProducto.getNombre());
-                //LBL_Proveedor.setText(mBD.ConsultaProveedor_Prueba(TXT_Nombre.getText()));
-                //LBL_Proveedor.setText("" + mBD.ConsultaProveedor());
+                LBL_Proveedor.setText("" + mProducto.getId_proveedor());
                 LBL_Precio.setText("" + mProducto.getPrecio());
                 LBL_Desc.setText(mProducto.getDesc_Prod());
 
@@ -652,7 +666,9 @@ public class FRM_Compras extends javax.swing.JFrame {
             this.Tabla_Compras.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.Tabla_Compras.getColumnModel().getColumn(2).setPreferredWidth(400);
             this.Tabla_Compras.getColumnModel().getColumn(3).setPreferredWidth(600);
-            //this.Tabla_Compras.getColumnModel().getColumn(4).setPreferredWidth(400);
+            this.Tabla_Compras.getColumnModel().getColumn(4).setPreferredWidth(400);
+            this.Tabla_Compras.getColumnModel().getColumn(5).setPreferredWidth(500);
+            this.Tabla_Compras.getColumnModel().getColumn(6).setPreferredWidth(700);
 
             if (this.Tabla_Compras.getRowCount() > 0) {
                 this.Tabla_Compras.setRowSelectionInterval(0, 0);
@@ -670,18 +686,25 @@ public class FRM_Compras extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         //Le damos valores a los ID.
+        try {
+
+        } catch (Exception e) {
+
+        }
         Producto nProducto = new Producto();
+        //verificar si no hay problema con los iD y el folio.
         mProducto.setId_producto(Integer.parseInt(TXT_Nombre.getText()));
-        mProveedor.setId_proveedor(Integer.parseInt(TXT_Nombre.getText()));
+        mProveedor.setId_proveedor(Integer.parseInt(this.LBL_Proveedor.getText()));
 
         mBD.conectar();
         Producto mProductoOld = mBD.consultarProducto(Integer.parseInt(this.TXT_Nombre.getText()));
         mBD.desconectar();
 
-        //Nueva_Cantidad = Float.parseFloat(TXT_N_Cantidad.getText()) + mProductoOld.getCantidadProducto();
+        Nueva_Cantidad = Float.parseFloat(TXT_N_Cantidad.getText()) + mProductoOld.getCantidadProducto();
         nProducto.setNombre(LBL_Nombre_Producto.getText());
         nProducto.setPrecio(Float.parseFloat(LBL_Precio.getText()));
         nProducto.setCantidadProducto(Integer.parseInt(TXT_N_Cantidad.getText()));
+        nProducto.setId_proveedor(LBL_Proveedor.getText());
         nProducto.setDesc_Prod(LBL_Desc.getText());
         Nueva_Cantidad = 0;
 
@@ -699,10 +722,9 @@ public class FRM_Compras extends javax.swing.JFrame {
             mDCompra.setCantidad(Integer.parseInt(TXT_N_Cantidad.getText()));
             mDCompra.setPrecio(Float.parseFloat(LBL_Precio.getText()));
             mDCompra.setProducto(LBL_Nombre_Producto.getText());
-            
-            mDCompra.setId_producto(Integer.parseInt(mProducto.getCodigo()));
-            mDCompra.setId_proveedor(Integer.parseInt(mProveedor.getFolio()));
-            
+
+            mDCompra.setId_producto(mProducto.getId_producto());
+            mDCompra.setId_proveedor(mProveedor.getId_proveedor());
             mDCompra.setId_detalle(RegistroCompra);
 
             TotalTemporal = Float.parseFloat(LBL_Precio.getText()) * Float.parseFloat(TXT_N_Cantidad.getText());
@@ -721,23 +743,26 @@ public class FRM_Compras extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-
-        Compras mCompraAlterada = new Compras();
-        mCompras.setFolio(TXT_Nombre.getText());
-        mCompras.setId_compras(RegistroCompra);
-
-        mCompraAlterada.setFolio(TXT_Nombre.getText());
-
-        mCompraAlterada.setTotalCompras(Float.parseFloat(LBL_TotalP.getText()));
-
-        if (mBD.conectar()) {
-            if (mBD.CambiosCompra(mCompras, mCompraAlterada)) {
-                JOptionPane.showMessageDialog(null, "NUEVO PRECIO EN LA COMPRA");
-            } else {
-                JOptionPane.showMessageDialog(null, "ERROR EN NUEVO PRECIO");
+        if ((Integer.parseInt(LBL_TotalP.getText())) != 0) {
+            try {
+                Compras mCompraAlterada = new Compras();
+                mCompras.setId_compras(RegistroCompra);
+                mCompraAlterada.setTotalCompras(Float.parseFloat(LBL_TotalP.getText()));
+                if (mBD.conectar()) {
+                    if (mBD.CambiosCompra(mCompras, mCompraAlterada)) {
+                        JOptionPane.showMessageDialog(null, "NUEVO PRECIO EN LA COMPRA");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "ERROR EN NUEVO PRECIO");
+                    }
+                }
+                mBD.desconectar();
+            } catch (HeadlessException | NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "No se guardó la compra...");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se guardó la compra...");
         }
-        mBD.desconectar();
+
 //        
 //        LBL_Desc.setText("");
 //        LBL_Nombre_Producto.setText("");

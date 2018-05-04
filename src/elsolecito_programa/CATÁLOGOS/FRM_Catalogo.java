@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package elsolecito_programa.CATÁLOGOS;
-import Compras.FRM_Compras;
+import COMPRAS.FRM_Compras;
 import Ventas.FRM_Ventas;
 import elsolecito_programa.CLIENTES.FRM_Clientes;
 import elsolecito_programa.PROVEEDORES.FRM_Proveedores;

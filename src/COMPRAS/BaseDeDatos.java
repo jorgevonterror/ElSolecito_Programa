@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Compras;
+package COMPRAS;
 
 import elsolecito_programa.PROVEEDORES.Proveedores;
 import elsolecito_programa.Producto.Producto;
@@ -124,10 +124,13 @@ public class BaseDeDatos {
             while(resultado.next())
             {
                 mProducto = new Producto();
+                mProducto.setId_producto(resultado.getInt("id_producto"));
                 mProducto.setCodigo(resultado.getString("Codigo"));
                 mProducto.setNombre(resultado.getString("Nombre"));
                 mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
+                mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("Cantidad")));
+                mProducto.setId_proveedor(resultado.getString("id_proveedor"));
                 mListaProductos.add(mProducto);
                 
             }
@@ -152,10 +155,13 @@ public class BaseDeDatos {
             while(resultado.next())
             {
                 mProducto = new Producto();
+                mProducto.setId_producto(resultado.getInt("id_producto"));
                 mProducto.setCodigo(resultado.getString("Codigo"));
                 mProducto.setNombre(resultado.getString("Nombre"));
                 mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
+                mProducto.setId_proveedor(resultado.getString("id_proveedor"));
+                mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("Cantidad")));
                 
             }
         }
@@ -173,12 +179,15 @@ public class BaseDeDatos {
         
         try {
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from productos where Codigo = '" + Codigo + "';");
+            resultado = consulta.executeQuery("select * from productos where id_producto = '" + Codigo + "';");
             if (resultado.next()) {
+                mProducto.setId_producto(resultado.getInt("id_producto"));
                 mProducto.setCodigo(resultado.getString("Codigo"));
                 mProducto.setNombre(resultado.getString("Nombre"));
                 mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
+                mProducto.setId_proveedor(resultado.getString("id_proveedor"));
+                mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("Cantidad")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -194,10 +203,13 @@ public class BaseDeDatos {
         {
             consulta = conexion.createStatement();
             consulta.execute("update productos set " 
-                    + "Desc_producto ='" + bProducto.getDesc_Prod() + "'," 
+                    + "Desc_producto ='" + bProducto.getDesc_Prod() + "',"
+                    + "id_proveedor ='" + bProducto.getId_proveedor() + "',"
+                    + "cantidad ='" + bProducto.getCantidadProducto() + "',"
                     + "Nombre ='" + bProducto.getNombre() + "'," 
-                    + "Precio =" + bProducto.getPrecio() 
-                    + "where Codigo = '" + aProducto.getCodigo() + "';" );
+                    + "Precio ='" + bProducto.getPrecio() + "',"
+                    + "codigo ='" + bProducto.getCodigo() + "'"
+                    + "where id_producto = '" + aProducto.getId_producto() + "';" );
             return true;
         }
         catch(Exception e)
@@ -254,6 +266,7 @@ public class BaseDeDatos {
             resultado = consulta.executeQuery("select * from provedorees;");
             while (resultado.next()) {
                 mProveedor = new Proveedores();
+                mProveedor.setId_proveedor(resultado.getShort("id_proveedor"));
                 mProveedor.setFolio(resultado.getString("Folio"));
                 mProveedor.setMarca(resultado.getString("Marca"));
                 mProveedor.setNombre(resultado.getString("Nombre"));
@@ -288,8 +301,8 @@ public class BaseDeDatos {
         try {
             consulta = conexion.createStatement();
             consulta.execute("INSERT INTO compras "  +
-                        "VALUES(null, '" + mCompra.getFecha()+ "', '" 
-                    + mCompra.getTotalCompras() + "', '" + mCompra.getFolio() + "');");
+                        "VALUES(null, '" + mCompra.getFecha()+ "','" 
+                    + mCompra.getTotalCompras() + "');");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -320,8 +333,8 @@ public class BaseDeDatos {
         try {
             consulta = conexion.createStatement();
             consulta.execute("update compras set " + 
-                        "TotalCompras = '" + nCompra.getTotalCompras() +"'," +
-                        "folio = '"+ nCompra.getFolio() + "'" +" WHERE id_compras = '" + mCompra.getId_compras() + "';");          
+                        "TotalCompras = '" + nCompra.getTotalCompras() + "'" +
+                        "WHERE id_compras = '" + mCompra.getId_compras() + "';");          
             
             return true;
         } catch (Exception e) {
