@@ -51,14 +51,13 @@ public class BaseDeDatos {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("insert into BD_ElSolecito.productos (id_producto, Desc_producto, Codigo , Nombre, Precio)"
-                    + //consulta.execute("insert into productos (Desc_producto, Codigo , Nombre, Precio)" +
-                    "values('" + mProducto.getId_producto()+ "',"
-                    + "'" + mProducto.getDesc_Prod() + "',"
+            consulta.execute("insert into BD_ElSolecito.productos (id_producto, Desc_producto, Codigo , Nombre, Precio, cantidad)"
+                    +"values(null,'" + mProducto.getDesc_Prod() + "',"
                     + "'" + mProducto.getCodigo() + "',"
                     + "'" + mProducto.getNombre() + "',"
-                    + "'" + mProducto.getPrecio() + "');");
-            consulta.execute("INSERT into BD_ElSolecito.existencia(id_existencia, id_producto, cantidad)" + "values (null,'" + mProducto.getId_producto() +"', 0);");
+                    + "'" + mProducto.getPrecio() + "'," 
+                    + "'" + mProducto.getCantidadProducto()+"');");
+            //consulta.execute("INSERT into BD_ElSolecito.existencia(id_existencia, id_producto, cantidad)" + "values (null,'" + mProducto.getId_producto() +"', 0);");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,11 +77,14 @@ public class BaseDeDatos {
 
             while (resultado.next()) {
                 mProducto = new Producto();
+                
+                mProducto.setId_producto(resultado.getInt("id_producto"));
                 mProducto.setCodigo(resultado.getString("Codigo"));
                 mProducto.setNombre(resultado.getString("Nombre"));
                 mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
-
+                mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("Cantidad")));
+                
                 mListaProductos.add(mProducto);
 
             }
@@ -104,11 +106,13 @@ public class BaseDeDatos {
 
             while (resultado.next()) {
                 mProducto = new Producto();
+                mProducto.setId_producto(resultado.getInt("id_producto"));
                 mProducto.setCodigo(resultado.getString("Codigo"));
                 mProducto.setNombre(resultado.getString("Nombre"));
                 mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
-
+                mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("Cantidad")));
+                
                 mListaProductos.add(mProducto);
 
             }
@@ -137,7 +141,8 @@ public class BaseDeDatos {
             consulta.execute("update productos set "
                     + "Desc_producto ='" + bProducto.getDesc_Prod() + "',"
                     + "Nombre ='" + bProducto.getNombre() + "',"
-                    + "Precio =" + bProducto.getPrecio()
+                    + "Precio ='" + bProducto.getPrecio() + "',"
+                    + "cantidad ='" + bProducto.getCantidadProducto() + "'"
                     + "where Codigo = '" + aProducto.getCodigo() + "';");
             return true;
         } catch (Exception e) {
