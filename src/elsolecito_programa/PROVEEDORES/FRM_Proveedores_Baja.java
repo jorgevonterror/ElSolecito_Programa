@@ -113,6 +113,11 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
                 TXT_FolioActionPerformed(evt);
             }
         });
+        TXT_Folio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_FolioKeyTyped(evt);
+            }
+        });
 
         BTNEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (User delete).jpg"))); // NOI18N
         BTNEliminar.setText("Eliminar");
@@ -153,7 +158,7 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(TXT_Folio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -288,6 +293,11 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
             mBD.desconectar();
         }
     }//GEN-LAST:event_BTNEliminarActionPerformed
+
+    private void TXT_FolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_FolioKeyTyped
+       char error = evt.getKeyChar();
+       if (error < '0'|| error > '9')evt.consume(); 
+    }//GEN-LAST:event_TXT_FolioKeyTyped
 
     /**
      * @param args the command line arguments

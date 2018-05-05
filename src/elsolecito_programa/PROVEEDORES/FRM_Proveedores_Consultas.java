@@ -93,7 +93,7 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
         TableConsultas = new javax.swing.JTable();
         BTN_Menu_Proveedores = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        TXT_Folio = new javax.swing.JTextField();
+        TXT_Nombre = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -115,6 +115,12 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Ingrese el nombre:");
+
+        TXT_Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_NombreKeyTyped(evt);
+            }
+        });
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +146,7 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(TXT_Folio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addContainerGap())
@@ -151,7 +157,7 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(TXT_Folio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,7 +226,7 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         borrar();
-        String nombre = TXT_Folio.getText();
+        String nombre = TXT_Nombre.getText();
         
         
         if(mBD.conectar()){
@@ -254,6 +260,11 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
             }
         mBD.desconectar();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void TXT_NombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_NombreKeyTyped
+        char error = evt.getKeyChar();
+        if ((error < 'A'|| error > 'Z') &&(error < 'a'|| error > 'z'))evt.consume();
+    }//GEN-LAST:event_TXT_NombreKeyTyped
 
     /**
      * @param args the command line arguments
@@ -293,7 +304,7 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Menu_Proveedores;
-    private javax.swing.JTextField TXT_Folio;
+    private javax.swing.JTextField TXT_Nombre;
     private javax.swing.JTable TableConsultas;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

@@ -338,9 +338,13 @@
         <Component class="javax.swing.JTextField" name="TXT_Folio">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TXT_FolioActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TXT_FolioKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="TXTMarca">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TXTMarcaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="LBLNombre">
           <Properties>
@@ -348,6 +352,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="TXTNombre">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TXTNombreKeyTyped"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
