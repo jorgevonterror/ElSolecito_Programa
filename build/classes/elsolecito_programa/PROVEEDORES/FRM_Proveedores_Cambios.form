@@ -219,6 +219,7 @@
         <Component class="javax.swing.JTextField" name="TXT_Folio">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TXT_FolioActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TXT_FolioKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="LBL_Marca">
@@ -227,6 +228,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="TXT_Marca">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TXT_MarcaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="LBLNombre">
           <Properties>
@@ -234,6 +238,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="TXT_Nombre">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TXT_NombreKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BTNModificar">
           <Properties>

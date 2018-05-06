@@ -198,10 +198,27 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
                 TXT_FolioActionPerformed(evt);
             }
         });
+        TXT_Folio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_FolioKeyTyped(evt);
+            }
+        });
 
         LBL_Marca.setText("Marca:");
 
+        TXT_Marca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_MarcaKeyTyped(evt);
+            }
+        });
+
         LBLNombre.setText("Nombre:");
+
+        TXT_Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_NombreKeyTyped(evt);
+            }
+        });
 
         BTNModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (User edit).jpg"))); // NOI18N
         BTNModificar.setText("Modificar");
@@ -330,6 +347,21 @@ public class FRM_Proveedores_Cambios extends javax.swing.JFrame {
     private void BTN_Menu_ProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_Menu_ProveedoresActionPerformed
             this.dispose();        
     }//GEN-LAST:event_BTN_Menu_ProveedoresActionPerformed
+
+    private void TXT_FolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_FolioKeyTyped
+        char error = evt.getKeyChar();
+        if (error < '0'|| error > '9')evt.consume(); 
+    }//GEN-LAST:event_TXT_FolioKeyTyped
+
+    private void TXT_MarcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_MarcaKeyTyped
+        char error = evt.getKeyChar();
+        if (((error < 'A'|| error > 'Z') &&(error < 'a'|| error > 'z'))&&(error < '0'|| error > '9'))evt.consume();
+    }//GEN-LAST:event_TXT_MarcaKeyTyped
+
+    private void TXT_NombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_NombreKeyTyped
+        char error = evt.getKeyChar();
+        if ((error < 'A'|| error > 'Z') &&(error < 'a'|| error > 'z'))evt.consume();
+    }//GEN-LAST:event_TXT_NombreKeyTyped
 
     /**
      * @param args the command line arguments

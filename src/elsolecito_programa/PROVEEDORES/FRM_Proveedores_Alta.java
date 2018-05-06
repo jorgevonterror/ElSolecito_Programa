@@ -219,8 +219,25 @@ public class FRM_Proveedores_Alta extends javax.swing.JFrame {
                 TXT_FolioActionPerformed(evt);
             }
         });
+        TXT_Folio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_FolioKeyTyped(evt);
+            }
+        });
+
+        TXTMarca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXTMarcaKeyTyped(evt);
+            }
+        });
 
         LBLNombre.setText("Nombre:");
+
+        TXTNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXTNombreKeyTyped(evt);
+            }
+        });
 
         TableConsultas.setModel(modeloTabla);
         jScrollPane1.setViewportView(TableConsultas);
@@ -465,6 +482,23 @@ public class FRM_Proveedores_Alta extends javax.swing.JFrame {
             Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void TXT_FolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_FolioKeyTyped
+        char error = evt.getKeyChar();
+        if (error < '0'|| error > '9') evt.consume(); 
+            
+    }//GEN-LAST:event_TXT_FolioKeyTyped
+
+    private void TXTMarcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTMarcaKeyTyped
+       
+        char error = evt.getKeyChar();
+        if (((error < 'A'|| error > 'Z') &&(error < 'a'|| error > 'z'))&&(error < '0'|| error > '9'))evt.consume(); 
+    }//GEN-LAST:event_TXTMarcaKeyTyped
+
+    private void TXTNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTNombreKeyTyped
+        char error = evt.getKeyChar();
+        if ((error < 'A'|| error > 'Z') &&(error < 'a'|| error > 'z'))evt.consume(); 
+    }//GEN-LAST:event_TXTNombreKeyTyped
 
     /**
      * @param args the command line arguments
