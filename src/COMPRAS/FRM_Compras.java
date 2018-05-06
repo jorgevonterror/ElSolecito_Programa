@@ -692,7 +692,7 @@ public class FRM_Compras extends javax.swing.JFrame {
         try {
             Producto nProducto = new Producto();
             //verificar si no hay problema con los iD y el folio.
-            mProducto.setId_producto(Integer.parseInt(mProducto.getCodigo()));
+            mProducto.setId_producto(Integer.parseInt(this.TXT_Nombre.getText()));
             mProveedor.setId_proveedor(Integer.parseInt(LBL_Proveedor.getText()));
 
             mBD.conectar();
@@ -764,15 +764,6 @@ public class FRM_Compras extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se guardó la compra...");
         }
-
-//        
-//        LBL_Desc.setText("");
-//        LBL_Nombre_Producto.setText("");
-//        LBL_Precio.setText("");
-//        LBL_Proveedor.setText("");
-//        LBL_TotalP.setText("");
-//        TXT_N_Cantidad.setText("");
-//        TXT_Nombre.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
