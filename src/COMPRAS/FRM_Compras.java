@@ -693,7 +693,7 @@ public class FRM_Compras extends javax.swing.JFrame {
             Producto nProducto = new Producto();
             //verificar si no hay problema con los iD y el folio.
             mProducto.setId_producto(Integer.parseInt(this.TXT_Nombre.getText()));
-            mProveedor.setId_proveedor(Integer.parseInt(LBL_Proveedor.getText()));
+            mProveedor.setId_proveedor(Integer.parseInt(this.LBL_Proveedor.getText()));
 
             mBD.conectar();
             Producto mProductoOld = mBD.consultarProducto(TXT_Nombre.getText());
@@ -726,6 +726,7 @@ public class FRM_Compras extends javax.swing.JFrame {
                 mDCompra.setId_producto(mProducto.getId_producto());
                 mDCompra.setId_proveedor(mProveedor.getId_proveedor());
                 mDCompra.setId_detalle(RegistroCompra);
+                mDCompra.setId_compras(RegistroCompra);
 
                 TotalTemporal = Float.parseFloat(LBL_Precio.getText()) * Float.parseFloat(TXT_N_Cantidad.getText());
                 TotalCompleto = TotalTemporal + TotalCompleto;

@@ -223,6 +223,12 @@ public class FRM_Recargas extends javax.swing.JFrame {
 
         jLabel8.setText("Monto:");
 
+        TXTmonto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXTmontoActionPerformed(evt);
+            }
+        });
+
         TxrCerrar1.setBackground(new java.awt.Color(51, 255, 51));
         TxrCerrar1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TxrCerrar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Wzdelete.jpg"))); // NOI18N
@@ -435,6 +441,10 @@ public class FRM_Recargas extends javax.swing.JFrame {
             Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void TXTmontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXTmontoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TXTmontoActionPerformed
 
     /**
      * @param args the command line arguments

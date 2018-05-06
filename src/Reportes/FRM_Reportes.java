@@ -22,14 +22,25 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author jorgegarcia
  */
 public class FRM_Reportes extends javax.swing.JFrame {
-
+        Map Parametro;
+        String Companyia = "";
+        String Dia = "";
+        String Tipo = "";
+        String path = "";
+        String Mes = ""; 
+        JasperReport jr = null;
     /**
      * Creates new form FRM_Reportes
      */
     public FRM_Reportes() {
         initComponents();
+        LblTC.setVisible(false);
+        CBXcompañia.setVisible(false);
+        LbMes.setVisible(false);
+        TxtMes.setVisible(false);
+        
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,7 +56,12 @@ public class FRM_Reportes extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        CBXTipo = new javax.swing.JComboBox<>();
+        LblTC = new javax.swing.JLabel();
+        CBXcompañia = new javax.swing.JComboBox();
+        BtnGenerar = new javax.swing.JButton();
+        LbMes = new javax.swing.JLabel();
+        TxtMes = new javax.swing.JTextField();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -91,22 +107,56 @@ public class FRM_Reportes extends javax.swing.JFrame {
 
         jLabel1.setText("Seleccione el tipo de reporte:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        CBXTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recargas", "Ventas por mes", " " }));
+        CBXTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                CBXTipoActionPerformed(evt);
             }
         });
+
+        LblTC.setText("Compañía:");
+
+        CBXcompañia.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        CBXcompañia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Telcel", "Unefon", "Movistar", "otro..." }));
+        CBXcompañia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBXcompañiaActionPerformed(evt);
+            }
+        });
+
+        BtnGenerar.setText("Generar reporte");
+        BtnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGenerarActionPerformed(evt);
+            }
+        });
+
+        LbMes.setText("Mes");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(LblTC)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CBXcompañia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LbMes)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TxtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(CBXTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(170, 170, 170)
+                        .addComponent(BtnGenerar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -115,8 +165,16 @@ public class FRM_Reportes extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(215, Short.MAX_VALUE))
+                    .addComponent(CBXTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CBXcompañia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblTC)
+                    .addComponent(TxtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LbMes))
+                .addGap(35, 35, 35)
+                .addComponent(BtnGenerar)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,8 +184,8 @@ public class FRM_Reportes extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -142,9 +200,113 @@ public class FRM_Reportes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void CBXTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBXTipoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        Tipo = "";
+        Tipo = CBXTipo.getItemAt(this.CBXTipo.getSelectedIndex()).toString();
+        switch(Tipo){
+            case "Existencia":
+                break;
+
+            case "Recargas":
+                LblTC.setVisible(true);
+                CBXcompañia.setVisible(true);
+                LbMes.setVisible(false);
+                TxtMes.setVisible(false);
+                break;
+                    
+            case "Ventas por mes":
+                LblTC.setVisible(false);
+                CBXcompañia.setVisible(false);
+                LbMes.setVisible(true);
+                TxtMes.setVisible(true);
+                
+                
+                break;
+
+            case "Ventas de dia":
+                LbMes.setVisible(false);
+                TxtMes.setVisible(false);
+                LblTC.setVisible(false);
+                CBXcompañia.setVisible(false);
+                
+            break;
+        }
+    }//GEN-LAST:event_CBXTipoActionPerformed
+
+    private void BtnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGenerarActionPerformed
+        // TODO add your handling code here:   
+        BaseDeDatosVentas mBD = new BaseDeDatosVentas();
+        
+        switch(Tipo){
+            case "Existencia":
+                
+                break;
+
+            case "Recargas":
+            Companyia = CBXcompañia.getItemAt(this.CBXcompañia.getSelectedIndex()).toString();
+            Parametro = new HashMap();
+            path = "";
+            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_Recargas.jasper";
+            jr = null;
+            try {
+                Parametro.put("seleccion", Companyia);
+                jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                JasperPrint jp = JasperFillManager.fillReport(jr, Parametro, mBD.conectare());
+                JasperViewer jv = new JasperViewer(jp, false);
+                jv.setVisible(true);
+                jv.setTitle(path);
+                this.dispose();
+            } catch (JRException ex) {
+                Logger.getLogger(FRM_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+            }                
+                
+                break;
+                    
+            case "Ventas por mes": 
+            Mes = TxtMes.getText();        
+            Parametro = new HashMap();
+            path = "";
+            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_VentasPorMes.jasper";
+            jr = null;
+            try {
+                Parametro.put("seleccion", Mes);
+                jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                JasperPrint jp = JasperFillManager.fillReport(jr, Parametro, mBD.conectare());
+                JasperViewer jv = new JasperViewer(jp, false);
+                jv.setVisible(true);
+                jv.setTitle(path);
+                this.dispose();
+            } catch (JRException ex) {
+                Logger.getLogger(FRM_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+            }                
+            break;
+
+            case "Ventas de dia":
+                /*Dia = TxtDia.getText();        
+            Parametro = new HashMap();
+            path = "";
+            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_VentasPorMes.jasper";
+            jr = null;
+            try {
+                Parametro.put("seleccion", Dia);
+                jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                JasperPrint jp = JasperFillManager.fillReport(jr, Parametro, mBD.conectare());
+                JasperViewer jv = new JasperViewer(jp, false);
+                jv.setVisible(true);
+                jv.setTitle(path);
+                this.dispose();
+            } catch (JRException ex) {
+                Logger.getLogger(FRM_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+            }     
+                */
+            break;
+        }
+    }//GEN-LAST:event_BtnGenerarActionPerformed
+
+    private void CBXcompañiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBXcompañiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBXcompañiaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,10 +342,14 @@ public class FRM_Reportes extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnGenerar;
+    private javax.swing.JComboBox<String> CBXTipo;
+    private javax.swing.JComboBox CBXcompañia;
+    private javax.swing.JLabel LbMes;
+    private javax.swing.JLabel LblTC;
+    private javax.swing.JTextField TxtMes;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
