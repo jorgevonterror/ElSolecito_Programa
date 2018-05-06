@@ -50,7 +50,8 @@ public class FRM_Ventas extends javax.swing.JFrame {
     DetalleVenta mDetalleVenta = new DetalleVenta();
     Calendar fecha = new GregorianCalendar();
     int ContadorColumnaProveedor = 1;
-
+    String FechaActual = "" + fecha.get(Calendar.YEAR) + "-" + fecha.get(Calendar.MONTH) + "-" + fecha.get(Calendar.DAY_OF_MONTH);
+        
     void borrar() {
         DefaultTableModel TablaLimpiar = (DefaultTableModel) Tabla_Ventas.getModel();
         int a = Tabla_Ventas.getRowCount() - 1;
@@ -115,7 +116,6 @@ public class FRM_Ventas extends javax.swing.JFrame {
     }
 
     void setVentas() {
-        String FechaActual = "" + fecha.get(Calendar.YEAR) + "-" + fecha.get(Calendar.MONTH) + "-" + fecha.get(Calendar.DAY_OF_MONTH);
         System.out.println();
         
         mVenta.setFecha_venta(FechaActual);
@@ -573,15 +573,16 @@ public class FRM_Ventas extends javax.swing.JFrame {
         Venta mVentaAl = new Venta();
         
         mVenta.setId_venta(RegistroVenta);
-        mVenta.setFolio(TXT_Folio.getText());
-        mVenta.setPrecioTotalVenta(TotalCompleto);
+        //mVenta.setFolio(TXT_Folio.getText());
+//        mVenta.setPrecioTotalVenta(TotalCompleto);
+        mVenta.setFecha_venta(FechaActual);
         
         mVentaAl.setFolio(TXT_Folio.getText());
         mVentaAl.setPrecioTotalVenta(Float.parseFloat(LB_TotalPago.getText()));
-        
+        mVentaAl.setFecha_venta(FechaActual);
         
         if (mBD.conectar()) {
-            if (mBD.CambiosVenta(mVenta, mVenta)) {
+            if (mBD.CambiosVenta(mVenta, mVentaAl)) {
                 JOptionPane.showMessageDialog(null, "Nuevo precio en la venta...");
             } else {
                 JOptionPane.showMessageDialog(null, "Error en nuevo precio de venta...");
