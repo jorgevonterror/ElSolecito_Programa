@@ -65,7 +65,7 @@ public class FRM_Compras extends javax.swing.JFrame {
     float TotalCompleto = 0;
     float TotalTemporal = 0;
     float ResultadoCompraTotal = 0;
-    float Nueva_Cantidad = 0;
+    int Nueva_Cantidad = 0;
     int ContadorColumna = 1;
     int ContadorColumnaProveedor = 1;
     DefaultTableModel TablaProveedores = new DefaultTableModel();
@@ -250,7 +250,7 @@ public class FRM_Compras extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(LBL_Desc))
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -381,7 +381,7 @@ public class FRM_Compras extends javax.swing.JFrame {
                 .addComponent(jButton6)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,6 +501,7 @@ public class FRM_Compras extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al consultar");
         }
         mBD.desconectar();
+
     }
 
     void setFilas_Proveedores() {
@@ -550,6 +551,7 @@ public class FRM_Compras extends javax.swing.JFrame {
 
         mCompras.setFecha(FechaActual);
         mCompras.setTotalCompras(ResultadoCompraTotal);
+        mCompras.setFolio(this.TXT_Nombre.getText());
 
         if (mBD.conectar()) {
             if (mBD.AltaCompra(mCompras)) {
@@ -690,20 +692,20 @@ public class FRM_Compras extends javax.swing.JFrame {
         try {
             Producto nProducto = new Producto();
             //verificar si no hay problema con los iD y el folio.
-            mProducto.setId_producto(Integer.parseInt(TXT_Nombre.getText()));
-            mProveedor.setId_proveedor(Integer.parseInt(this.LBL_Proveedor.getText()));
+            mProducto.setId_producto(Integer.parseInt(mProducto.getCodigo()));
+            mProveedor.setId_proveedor(Integer.parseInt(LBL_Proveedor.getText()));
 
             mBD.conectar();
-            Producto mProductoOld = mBD.consultarProducto(Integer.parseInt(this.TXT_Nombre.getText()));
+            Producto mProductoOld = mBD.consultarProducto(TXT_Nombre.getText());
             mBD.desconectar();
 
-            Nueva_Cantidad = Float.parseFloat(this.TXT_N_Cantidad.getText()) + mProductoOld.getCantidadProducto();
-            nProducto.setNombre(this.LBL_Nombre_Producto.getText());
-            nProducto.setCodigo(this.TXT_Nombre.getText());
-            nProducto.setPrecio(Float.parseFloat(this.LBL_Precio.getText()));
-            nProducto.setCantidadProducto(Integer.parseInt(this.TXT_N_Cantidad.getText()));
-            nProducto.setId_proveedor(this.LBL_Proveedor.getText());
-            nProducto.setDesc_Prod(this.LBL_Desc.getText());
+            Nueva_Cantidad = Integer.parseInt(TXT_N_Cantidad.getText()) + mProductoOld.getCantidadProducto();
+            nProducto.setNombre(LBL_Nombre_Producto.getText());
+            nProducto.setCodigo(TXT_Nombre.getText());
+            nProducto.setPrecio(Float.parseFloat(LBL_Precio.getText()));
+            nProducto.setCantidadProducto(Nueva_Cantidad);
+            nProducto.setId_proveedor(LBL_Proveedor.getText());
+            nProducto.setDesc_Prod(LBL_Desc.getText());
             Nueva_Cantidad = 0;
 
             if (mBD.conectar()) {
@@ -745,23 +747,21 @@ public class FRM_Compras extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if ((Integer.parseInt(LBL_TotalP.getText())) != 0) {
-            try {
-                Compras mCompraAlterada = new Compras();
-                mCompras.setId_compras(RegistroCompra);
-                mCompraAlterada.setTotalCompras(Float.parseFloat(LBL_TotalP.getText()));
-                if (mBD.conectar()) {
-                    if (mBD.CambiosCompra(mCompras, mCompraAlterada)) {
-                        JOptionPane.showMessageDialog(null, "NUEVO PRECIO EN LA COMPRA");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "ERROR EN NUEVO PRECIO");
-                    }
+        try {
+            Compras mCompraAlterada = new Compras();
+            mCompras.setId_compras(RegistroCompra);
+            mCompras.setFolio(String.valueOf(mProducto.getId_producto()));
+            
+            mCompraAlterada.setTotalCompras(Float.parseFloat(LBL_TotalP.getText()));
+            if (mBD.conectar()) {
+                if (mBD.CambiosCompra(mCompras, mCompraAlterada)) {
+                    JOptionPane.showMessageDialog(null, "NUEVO PRECIO EN LA COMPRA");
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR EN NUEVO PRECIO");
                 }
-                mBD.desconectar();
-            } catch (HeadlessException | NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "No se guardó la compra...");
             }
-        } else {
+            mBD.desconectar();
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se guardó la compra...");
         }
 

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package elsolecito_programa.CATÁLOGOS;
+
 import COMPRAS.FRM_Compras;
 import Ventas.FRM_Ventas;
 import elsolecito_programa.CLIENTES.FRM_Clientes;
@@ -318,8 +319,9 @@ public class FRM_Catalogo extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        FRM_Compras com = new FRM_Compras();
-        com.show();
+        FRM_Compras mCompras;
+        mCompras = new FRM_Compras();
+        mCompras.show();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

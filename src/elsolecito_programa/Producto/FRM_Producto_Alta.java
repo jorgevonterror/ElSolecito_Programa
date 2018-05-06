@@ -323,7 +323,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
             ModeloTabla.addColumn("Precio");
             ModeloTabla.addColumn("Cantidad");
             ModeloTabla.addColumn("Descripcion");
-            //ModeloTabla.addColumn("id");
+            ModeloTabla.addColumn("id");
 
             for (Object mListaProducto : mListaProductos) {
                 Datos = new String[6];
@@ -347,7 +347,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
             this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
             this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
             this.TBProductos.getColumnModel().getColumn(4).setPreferredWidth(500);
-            //this.TBProductos.getColumnModel().getColumn(5).setPreferredWidth(600);
+            this.TBProductos.getColumnModel().getColumn(5).setPreferredWidth(600);
             
             if (this.TBProductos.getRowCount() > 0) {
                 this.TBProductos.setRowSelectionInterval(0, 0);

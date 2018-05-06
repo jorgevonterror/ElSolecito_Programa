@@ -383,7 +383,8 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // Para los reportes:
-        
+        //En la variable path se debe de colocar la ruta del archivo .jasper
+        //que genera el archivo .xml
         String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito_Programa/src/elsolecito_programa/CLIENTES/Reporte_Alta_CD.jasper";
         JasperReport jr = null;
         

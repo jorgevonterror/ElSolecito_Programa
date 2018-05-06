@@ -54,7 +54,9 @@ public class BaseDeDatos {
         try{
             consulta = conexion.createStatement();
             consulta.execute("INSERT INTO BD_ElSolecito.compras (id_compras, folio, Fecha, TotalCompras)" + 
-                    "VALUES(null, '" + mCompras.getFolio() + "','" + mCompras.getFecha()+ "'," + "'" + mCompras.getTotalCompras() + "');");
+                    "VALUES(null, '" + mCompras.getFolio() + "','" 
+                    + mCompras.getFecha() + "'," 
+                            + "'" + mCompras.getTotalCompras() + "');");
             return true;
         }catch(Exception e){
              e.printStackTrace();
@@ -142,6 +144,32 @@ public class BaseDeDatos {
         }
         return mListaProductos;
     }
+    
+    public Producto consultarProducto(String ID) {
+        Producto mProducto = null;
+        Statement consulta;
+        ResultSet resultado;
+        
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from productos " +
+                        "where codigo = '" + ID + "';");
+            if (resultado.next()) {
+                mProducto = new Producto();
+                mProducto.setId_producto(resultado.getInt("id_producto"));
+                mProducto.setCodigo(resultado.getString("Codigo"));
+                mProducto.setNombre(resultado.getString("Nombre"));
+                mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
+                mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
+                mProducto.setId_proveedor(resultado.getString("id_proveedor"));
+                mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("cantidad")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mProducto;       
+    }
+    
     public Producto ConsultarEspecifica(String codigo)
     {
         Producto mProducto = null;
@@ -162,7 +190,7 @@ public class BaseDeDatos {
                 mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
                 mProducto.setId_proveedor(resultado.getString("id_proveedor"));
-                mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("Cantidad")));
+                mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("cantidad")));
                 
             }
         }
@@ -170,51 +198,25 @@ public class BaseDeDatos {
         {
             e.printStackTrace();
         }
+            
         return mProducto;
     }
     
-    public Producto consultarProducto(int id) {
-        Producto mProducto = null;
-        Statement consulta;
-        ResultSet resultado;
-        
-        try {
-            consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select * from productos where Codigo = '" + id + "';");
-            if (resultado.next()) {
-                mProducto.setId_producto(resultado.getInt("id_producto"));
-                mProducto.setCodigo(resultado.getString("Codigo"));
-                mProducto.setNombre(resultado.getString("Nombre"));
-                mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
-                mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
-                mProducto.setId_proveedor(resultado.getString("id_proveedor"));
-                mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("Cantidad")));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-            
-        return mProducto;       
-    }
+  
     
     public boolean ModificarProductos(Producto aProducto, Producto bProducto)
     {
         Statement consulta;
-        try 
-        {
+        try {
             consulta = conexion.createStatement();
-            consulta.execute("update productos set " 
+            consulta.execute("update productos set "
                     + "Desc_producto ='" + bProducto.getDesc_Prod() + "',"
-                    + "id_proveedor ='" + bProducto.getId_proveedor() + "',"
-                    + "cantidad ='" + bProducto.getCantidadProducto() + "',"
-                    + "Nombre ='" + bProducto.getNombre() + "'," 
+                    + "Nombre ='" + bProducto.getNombre() + "',"
                     + "Precio ='" + bProducto.getPrecio() + "',"
-                    + "codigo ='" + bProducto.getCodigo() + "'"
-                    + "where codigo = " + aProducto.getCodigo() + ";" );
+                    + "cantidad ='" + bProducto.getCantidadProducto() + "'"
+                    + "where Codigo = '" + aProducto.getId_producto()+ "';");
             return true;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -245,10 +247,12 @@ public class BaseDeDatos {
         try {
             consulta = conexion.createStatement();
             consulta.execute("insert into detalle_compra " + 
-                        "(id_detalle, producto, cantidad, precio) " +
+                        "(id_detalle, producto, cantidad, precio, id_proveedor, id_producto) " +
                         "values (null,'" + mDetalleCompra.getProducto()+ "','" 
-                                        + mDetalleCompra.getCantidad()+ "','" 
-                                        + mDetalleCompra.getPrecio() + "');");
+                                        + mDetalleCompra.getCantidad()+ "','"
+                                        + mDetalleCompra.getPrecio() +  "','"
+                                        + mDetalleCompra.getId_proveedor() + "','" 
+                                        + mDetalleCompra.getId_producto() + "');");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -333,7 +337,7 @@ public class BaseDeDatos {
             consulta = conexion.createStatement();
             consulta.execute("update compras set " + 
                         "TotalCompras = '" + nCompra.getTotalCompras() + "'" +
-                        "WHERE id_compras = '" + mCompra.getId_compras() + "';");          
+                        "WHERE folio = '" + mCompra.getFolio() + "';");          
             
             return true;
         } catch (Exception e) {

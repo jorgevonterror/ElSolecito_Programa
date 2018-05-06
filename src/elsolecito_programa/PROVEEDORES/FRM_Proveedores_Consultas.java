@@ -114,7 +114,7 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Ingrese el nombre:");
+        jLabel1.setText("Ingrese el folio:");
 
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
