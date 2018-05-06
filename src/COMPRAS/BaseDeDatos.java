@@ -214,7 +214,7 @@ public class BaseDeDatos {
                     + "Nombre ='" + bProducto.getNombre() + "',"
                     + "Precio ='" + bProducto.getPrecio() + "',"
                     + "cantidad ='" + bProducto.getCantidadProducto() + "'"
-                    + "where Codigo = '" + aProducto.getId_producto()+ "';");
+                    + "where Codigo = '" + aProducto.getCodigo()+ "';");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
