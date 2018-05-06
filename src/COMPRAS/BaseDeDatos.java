@@ -53,8 +53,11 @@ public class BaseDeDatos {
         Statement consulta;
         try{
             consulta = conexion.createStatement();
-            consulta.execute("INSERT INTO BD_ElSolecito.compras (id_compras, folio, Fecha, TotalCompras)" + 
-                    "VALUES(null, '" + mCompras.getFolio() + "','" + mCompras.getFecha()+ "'," + "'" + mCompras.getTotalCompras() + "');");
+            //consulta.execute("INSERT INTO BD_ElSolecito.compras (id_compras, folio, Fecha, TotalCompras)" + 
+            consulta.execute("insert into compras (id_compras, folio, Fecha, TotalCompras)" + 
+                    "values(null, '" + mCompras.getFolio() + "','" 
+                    + mCompras.getFecha()+ "'," 
+                            + "'" + mCompras.getTotalCompras() + "');");
             return true;
         }catch(Exception e){
              e.printStackTrace();
@@ -301,7 +304,11 @@ public class BaseDeDatos {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("INSERT INTO compras" + "(id_compras, Fecha, folio, TotalCompras)" + "values(null,'" + mCompra.getFecha() + "','" + mCompra.getFolio() + "','" + mCompra.getTotalCompras() + "');");
+            consulta.execute("INSERT INTO compras" + "(id_compras, Fecha, folio, TotalCompras)" 
+                    + "values(null,'" 
+                    + mCompra.getFecha() + "','" 
+                    + mCompra.getFolio() + "','" 
+                    + mCompra.getTotalCompras() + "');");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

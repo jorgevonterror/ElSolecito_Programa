@@ -5,6 +5,7 @@
  */
 package elsolecito_programa.CATÁLOGOS;
 import COMPRAS.FRM_Compras;
+import Reportes.FRM_Reportes;
 import Ventas.FRM_Ventas;
 import elsolecito_programa.CLIENTES.FRM_Clientes;
 import elsolecito_programa.PROVEEDORES.FRM_Proveedores;
@@ -225,6 +226,11 @@ public class FRM_Catalogo extends javax.swing.JFrame {
         });
 
         jButton6.setText("Reportes");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -327,6 +333,12 @@ public class FRM_Catalogo extends javax.swing.JFrame {
         FRM_Ventas vn = new FRM_Ventas();
         vn.show();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        new FRM_Reportes().show();
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
