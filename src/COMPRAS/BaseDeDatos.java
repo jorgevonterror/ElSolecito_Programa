@@ -341,8 +341,9 @@ public class BaseDeDatos {
         try {
             consulta = conexion.createStatement();
             consulta.execute("update compras set " + 
-                        "TotalCompras = '" + nCompra.getTotalCompras() + "'" +
-                        "WHERE folio = '" + mCompra.getFolio() + "';");          
+                        "TotalCompras = '" + nCompra.getTotalCompras() + "'," +
+                        "folio = '" + nCompra.getFolio()+ "'" +
+                        "WHERE id_compras = '" + mCompra.getId_compras() + "';");          
             
             return true;
         } catch (Exception e) {

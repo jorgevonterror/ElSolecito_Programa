@@ -69,7 +69,9 @@ public class FRM_Compras extends javax.swing.JFrame {
     int ContadorColumna = 1;
     int ContadorColumnaProveedor = 1;
     DefaultTableModel TablaProveedores = new DefaultTableModel();
-
+    Calendar fecha = new GregorianCalendar();
+    String FechaActual = "" + fecha.get(Calendar.YEAR) + "-" + fecha.get(Calendar.MONTH) + "-" + fecha.get(Calendar.DAY_OF_MONTH);
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -545,10 +547,6 @@ public class FRM_Compras extends javax.swing.JFrame {
     }
 
     void setCompra() {
-        Calendar fecha = new GregorianCalendar();
-        String FechaActual = "" + fecha.get(Calendar.YEAR) + "-" + fecha.get(Calendar.MONTH) + "-" + fecha.get(Calendar.DAY_OF_MONTH);
-        System.out.println();
-
         mCompras.setFecha(FechaActual);
         mCompras.setTotalCompras(ResultadoCompraTotal);
         mCompras.setFolio(this.TXT_Nombre.getText());
@@ -751,9 +749,16 @@ public class FRM_Compras extends javax.swing.JFrame {
         try {
             Compras mCompraAlterada = new Compras();
             mCompras.setId_compras(RegistroCompra);
-            mCompras.setFolio(String.valueOf(mProducto.getId_producto()));
+            //mCompras.setFolio(TXT_Nombre.getText());
+            mCompras.setFecha(FechaActual);
+            mCompras.setTotalCompras(TotalCompleto);
             
+            
+            //mCompraAlterada.setId_compras(RegistroCompra);
+            mCompraAlterada.setFecha(FechaActual);
+            mCompraAlterada.setFolio(TXT_Nombre.getText());           
             mCompraAlterada.setTotalCompras(Float.parseFloat(LBL_TotalP.getText()));
+            
             if (mBD.conectar()) {
                 if (mBD.CambiosCompra(mCompras, mCompraAlterada)) {
                     JOptionPane.showMessageDialog(null, "NUEVO PRECIO EN LA COMPRA");
