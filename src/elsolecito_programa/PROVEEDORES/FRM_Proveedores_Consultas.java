@@ -114,7 +114,7 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Ingrese el folio:");
+        jLabel1.setText("Ingrese el nombre:");
 
         TXT_Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {

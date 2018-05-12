@@ -47,7 +47,7 @@ public class FRM_Compras extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent e) {
                 if (Tabla_Compras.getSelectedRow() != -1) {
                     int fila = Tabla_Compras.getSelectedRow();
-                    TXT_Nombre.setText(Tabla_Compras.getValueAt(fila, 0).toString());
+                    TXT_Nombre.setText(Tabla_Compras.getValueAt(fila, 1).toString());
                 }
             }
         });
@@ -189,6 +189,12 @@ public class FRM_Compras extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(Tabla_Compras);
 
+        TXT_Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_NombreKeyTyped(evt);
+            }
+        });
+
         jLabel1.setText("Folio:");
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
@@ -210,6 +216,12 @@ public class FRM_Compras extends javax.swing.JFrame {
         jLabel13.setText("Proveedor:");
 
         jLabel15.setText("Cantidad:");
+
+        TXT_N_Cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_N_CantidadKeyTyped(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel16.setText("Total a pagar: $");
@@ -778,7 +790,8 @@ public class FRM_Compras extends javax.swing.JFrame {
         JasperReport jr = null;
 
         try {
-            jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+            
+            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
@@ -788,6 +801,18 @@ public class FRM_Compras extends javax.swing.JFrame {
             Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void TXT_NombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_NombreKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0'|| error > '9') evt.consume(); 
+    }//GEN-LAST:event_TXT_NombreKeyTyped
+
+    private void TXT_N_CantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_N_CantidadKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0'|| error > '9') evt.consume(); 
+    }//GEN-LAST:event_TXT_N_CantidadKeyTyped
 
     /**
      * @param args the command line arguments
