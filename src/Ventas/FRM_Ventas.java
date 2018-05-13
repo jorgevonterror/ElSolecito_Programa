@@ -67,23 +67,27 @@ public class FRM_Ventas extends javax.swing.JFrame {
             String[] Datos = null;
             if (mArrayList != null) {
                 if (ContadorColumna == 1) {
-                    //modeloTabla.addColumn("id_producto");
+                    modeloTabla.addColumn("id_producto");
                     modeloTabla.addColumn("Folio");
                     modeloTabla.addColumn("Nombre");
                     modeloTabla.addColumn("Precio");
+                    modeloTabla.addColumn("Cantidad");
                     modeloTabla.addColumn("Descripcion");
+                    modeloTabla.addColumn("id_proveedor");
                     ContadorColumna = 2;
                 }
                 for (int i = 0; i < mArrayList.size(); i++) {
                     mProducto = (Producto) mArrayList.get(i);
-                    Datos = new String[4];
-
-                    //Datos[0] = "" + mProducto.getId_producto();
-                    Datos[0] = mProducto.getCodigo();
-                    Datos[1] = mProducto.getNombre();
-                    Datos[2] = "" + mProducto.getPrecio();
-                    Datos[3] = mProducto.getDesc_Prod();
-
+                    Datos = new String[7];
+                    
+                    Datos[0] = "" + mProducto.getId_producto();
+                    Datos[1] = "" + mProducto.getCodigo();
+                    Datos[2] = mProducto.getNombre();
+                    Datos[3] = "" + mProducto.getPrecio();
+                    Datos[4] = "" + mProducto.getCantidadProducto();
+                    Datos[5] = mProducto.getDesc_Prod();
+                    Datos[6] = "" + mProducto.getId_proveedor();
+                    
                     //INICIALIZAMOS LOS LB EN NADA.
                     //Me quede aquí.
                     LB_Precio.setText("-");
@@ -104,8 +108,9 @@ public class FRM_Ventas extends javax.swing.JFrame {
             this.Tabla_Ventas.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.Tabla_Ventas.getColumnModel().getColumn(2).setPreferredWidth(400);
             this.Tabla_Ventas.getColumnModel().getColumn(3).setPreferredWidth(600);
-            //this.Tabla_Ventas.getColumnModel().getColumn(4).setPreferredWidth(400);
-
+            this.Tabla_Ventas.getColumnModel().getColumn(4).setPreferredWidth(400);
+            this.Tabla_Ventas.getColumnModel().getColumn(5).setPreferredWidth(400);
+            
             if (this.Tabla_Ventas.getRowCount() > 0) {
                 this.Tabla_Ventas.setRowSelectionInterval(0, 0);
             }
@@ -487,23 +492,29 @@ public class FRM_Ventas extends javax.swing.JFrame {
             String[] Datos;
             if (mProducto != null) {
                 if (ContadorColumna == 1) {
+                    modeloTabla.addColumn("id_producto");
                     modeloTabla.addColumn("Folio");
                     modeloTabla.addColumn("Nombre");
                     modeloTabla.addColumn("Precio");
+                    modeloTabla.addColumn("Cantidad");
                     modeloTabla.addColumn("Descripcion");
+                    modeloTabla.addColumn("id_proveedor");
                     ContadorColumna = 2;
                 }
-                Datos = new String[4];
-                Datos[0] = mProducto.getCodigo();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = "" + mProducto.getPrecio();
-                Datos[3] = mProducto.getDesc_Prod();
+                Datos = new String[7];
+                Datos[0] = "" + mProducto.getId_producto();
+                Datos[1] = "" + mProducto.getCodigo();
+                Datos[2] = mProducto.getNombre();
+                Datos[3] = "" + mProducto.getPrecio();
+                Datos[4] = "" + mProducto.getCantidadProducto();
+                Datos[5] = mProducto.getDesc_Prod();
+                Datos[6] = "" + mProducto.getId_proveedor();
 
                 LB_Precio.setText("" + mProducto.getPrecio());
                 LB_TotalPago.setText("00.00");
                 LB_Desc.setText(mProducto.getDesc_Prod());
                 LB_Nombre.setText(mProducto.getNombre());
-                LB_Proveedor.setText("-");
+                LB_Proveedor.setText(mProducto.getId_proveedor());
 
                 modeloTabla.addRow(Datos);
             } else {
@@ -516,8 +527,9 @@ public class FRM_Ventas extends javax.swing.JFrame {
             this.Tabla_Ventas.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.Tabla_Ventas.getColumnModel().getColumn(2).setPreferredWidth(400);
             this.Tabla_Ventas.getColumnModel().getColumn(3).setPreferredWidth(600);
-            //this.Tabla_Ventas.getColumnModel().getColumn(4).setPreferredWidth(400);
-
+            this.Tabla_Ventas.getColumnModel().getColumn(4).setPreferredWidth(400);
+            this.Tabla_Ventas.getColumnModel().getColumn(5).setPreferredWidth(400);
+            
             if (this.Tabla_Ventas.getRowCount() > 0) {
                 this.Tabla_Ventas.setRowSelectionInterval(0, 0);
             }
