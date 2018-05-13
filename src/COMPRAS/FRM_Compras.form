@@ -327,6 +327,9 @@
           </SubComponents>
         </Container>
         <Component class="javax.swing.JTextField" name="TXT_Nombre">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Ingrese el folio del producto en base a la tabla productos."/>
+          </Properties>
           <Events>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TXT_NombreKeyTyped"/>
           </Events>
@@ -415,6 +418,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="TXT_N_Cantidad">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Ingrese la cantidad a comprar deseada."/>
+          </Properties>
           <Events>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TXT_N_CantidadKeyTyped"/>
           </Events>
@@ -489,6 +495,7 @@
               <Image iconType="3" name="/Imagenes/screen6.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Mostrar datos"/>
+            <Property name="toolTipText" type="java.lang.String" value="Mostrar todos los productos."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -500,20 +507,10 @@
               <Image iconType="3" name="/Imagenes/excel.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Seleccionar producto"/>
+            <Property name="toolTipText" type="java.lang.String" value="Selecciona productos en base al folio."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagenes/guardar.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Guardar compra"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
@@ -522,20 +519,22 @@
               <Image iconType="3" name="/Imagenes/registry24.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Finalizar compra"/>
+            <Property name="toolTipText" type="java.lang.String" value="Finaliza la compra."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="jButton5">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagenes/back57.png"/>
+              <Image iconType="3" name="/Imagenes/guardar.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Regresar"/>
+            <Property name="text" type="java.lang.String" value="Guardar compra"/>
+            <Property name="toolTipText" type="java.lang.String" value="Guarda la compra en la BD."/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton6">
@@ -544,9 +543,22 @@
               <Image iconType="3" name="/Imagenes/screen6.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Reporte"/>
+            <Property name="toolTipText" type="java.lang.String" value="Generar reporte de compras."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton4">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Imagenes/back57.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Regresar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Regresar al men&#xfa; anterior."/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

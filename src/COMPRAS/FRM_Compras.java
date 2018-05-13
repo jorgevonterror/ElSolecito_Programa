@@ -71,7 +71,7 @@ public class FRM_Compras extends javax.swing.JFrame {
     DefaultTableModel TablaProveedores = new DefaultTableModel();
     Calendar fecha = new GregorianCalendar();
     String FechaActual = "" + fecha.get(Calendar.YEAR) + "-" + fecha.get(Calendar.MONTH) + "-" + fecha.get(Calendar.DAY_OF_MONTH);
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,10 +117,10 @@ public class FRM_Compras extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -189,6 +189,7 @@ public class FRM_Compras extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(Tabla_Compras);
 
+        TXT_Nombre.setToolTipText("Ingrese el folio del producto en base a la tabla productos.");
         TXT_Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TXT_NombreKeyTyped(evt);
@@ -217,6 +218,7 @@ public class FRM_Compras extends javax.swing.JFrame {
 
         jLabel15.setText("Cantidad:");
 
+        TXT_N_Cantidad.setToolTipText("Ingrese la cantidad a comprar deseada.");
         TXT_N_Cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TXT_N_CantidadKeyTyped(evt);
@@ -334,6 +336,7 @@ public class FRM_Compras extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/screen6.png"))); // NOI18N
         jButton1.setText("Mostrar datos");
+        jButton1.setToolTipText("Mostrar todos los productos.");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -342,41 +345,46 @@ public class FRM_Compras extends javax.swing.JFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/excel.png"))); // NOI18N
         jButton2.setText("Seleccionar producto");
+        jButton2.setToolTipText("Selecciona productos en base al folio.");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/guardar.png"))); // NOI18N
-        jButton5.setText("Guardar compra");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/registry24.png"))); // NOI18N
         jButton3.setText("Finalizar compra");
+        jButton3.setToolTipText("Finaliza la compra.");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/back57.png"))); // NOI18N
-        jButton4.setText("Regresar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/guardar.png"))); // NOI18N
+        jButton5.setText("Guardar compra");
+        jButton5.setToolTipText("Guarda la compra en la BD.");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButton5ActionPerformed(evt);
             }
         });
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/screen6.png"))); // NOI18N
         jButton6.setText("Reporte");
+        jButton6.setToolTipText("Generar reporte de compras.");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/back57.png"))); // NOI18N
+        jButton4.setText("Regresar");
+        jButton4.setToolTipText("Regresar al menú anterior.");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -643,58 +651,64 @@ public class FRM_Compras extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        borrar();
-        if (mBD.conectar()) {
-            Producto mProducto = mBD.ConsultarEspecifica(TXT_Nombre.getText());
-            String[] Datos;
 
-            if (mProducto != null) {
-                if (ContColumn == 1) {
-                    modeloTabla.addColumn("ID");
-                    modeloTabla.addColumn("Folio");
-                    modeloTabla.addColumn("Nombre");
-                    modeloTabla.addColumn("Precio");
-                    modeloTabla.addColumn("Cantidad");
-                    modeloTabla.addColumn("Descripción");
-                    modeloTabla.addColumn("id_proveedor");
-                    ContColumn = 2;
+        if (this.TXT_Nombre.getText().equals("") || this.TXT_N_Cantidad.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else {
+            borrar();
+            if (mBD.conectar()) {
+                Producto mProducto = mBD.ConsultarEspecifica(TXT_Nombre.getText());
+                String[] Datos;
+
+                if (mProducto != null) {
+                    if (ContColumn == 1) {
+                        modeloTabla.addColumn("ID");
+                        modeloTabla.addColumn("Folio");
+                        modeloTabla.addColumn("Nombre");
+                        modeloTabla.addColumn("Precio");
+                        modeloTabla.addColumn("Cantidad");
+                        modeloTabla.addColumn("Descripción");
+                        modeloTabla.addColumn("id_proveedor");
+                        ContColumn = 2;
+                    }
+                    Datos = new String[7];
+
+                    Datos[0] = "" + mProducto.getId_producto();
+                    Datos[1] = "" + mProducto.getCodigo();
+                    Datos[2] = mProducto.getNombre();
+                    Datos[3] = "" + mProducto.getPrecio();
+                    Datos[4] = "" + mProducto.getCantidadProducto();
+                    Datos[5] = mProducto.getDesc_Prod();
+                    Datos[6] = "" + mProducto.getId_proveedor();
+
+                    LBL_Nombre_Producto.setText(mProducto.getNombre());
+                    LBL_Proveedor.setText("" + mProducto.getId_proveedor());
+                    LBL_Precio.setText("" + mProducto.getPrecio());
+                    LBL_Desc.setText(mProducto.getDesc_Prod());
+
+                    modeloTabla.addRow(Datos);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No existe ese Producto...");
                 }
-                Datos = new String[7];
+                this.Tabla_Compras = new javax.swing.JTable();
+                this.Tabla_Compras.setModel(modeloTabla);
+                this.Tabla_Compras.getColumnModel().getColumn(0).setPreferredWidth(50);
+                this.Tabla_Compras.getColumnModel().getColumn(1).setPreferredWidth(100);
+                this.Tabla_Compras.getColumnModel().getColumn(2).setPreferredWidth(400);
+                this.Tabla_Compras.getColumnModel().getColumn(3).setPreferredWidth(600);
+                this.Tabla_Compras.getColumnModel().getColumn(4).setPreferredWidth(400);
+                this.Tabla_Compras.getColumnModel().getColumn(5).setPreferredWidth(500);
+                this.Tabla_Compras.getColumnModel().getColumn(6).setPreferredWidth(700);
 
-                Datos[0] = "" + mProducto.getId_producto();
-                Datos[1] = "" + mProducto.getCodigo();
-                Datos[2] = mProducto.getNombre();
-                Datos[3] = "" + mProducto.getPrecio();
-                Datos[4] = "" + mProducto.getCantidadProducto();
-                Datos[5] = mProducto.getDesc_Prod();
-                Datos[6] = "" + mProducto.getId_proveedor();
-
-                LBL_Nombre_Producto.setText(mProducto.getNombre());
-                LBL_Proveedor.setText("" + mProducto.getId_proveedor());
-                LBL_Precio.setText("" + mProducto.getPrecio());
-                LBL_Desc.setText(mProducto.getDesc_Prod());
-
-                modeloTabla.addRow(Datos);
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe ese Producto...");
+                if (this.Tabla_Compras.getRowCount() > 0) {
+                    this.Tabla_Compras.setRowSelectionInterval(0, 0);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al consultar");
+                }
+                mBD.desconectar();
             }
-            this.Tabla_Compras = new javax.swing.JTable();
-            this.Tabla_Compras.setModel(modeloTabla);
-            this.Tabla_Compras.getColumnModel().getColumn(0).setPreferredWidth(50);
-            this.Tabla_Compras.getColumnModel().getColumn(1).setPreferredWidth(100);
-            this.Tabla_Compras.getColumnModel().getColumn(2).setPreferredWidth(400);
-            this.Tabla_Compras.getColumnModel().getColumn(3).setPreferredWidth(600);
-            this.Tabla_Compras.getColumnModel().getColumn(4).setPreferredWidth(400);
-            this.Tabla_Compras.getColumnModel().getColumn(5).setPreferredWidth(500);
-            this.Tabla_Compras.getColumnModel().getColumn(6).setPreferredWidth(700);
-
-            if (this.Tabla_Compras.getRowCount() > 0) {
-                this.Tabla_Compras.setRowSelectionInterval(0, 0);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar");
-            }
-            mBD.desconectar();
         }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void Tabla_ComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_ComprasMouseClicked
@@ -704,88 +718,92 @@ public class FRM_Compras extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         //Le damos valores a los ID.
-        try {
-            Producto nProducto = new Producto();
-            //verificar si no hay problema con los iD y el folio.
-            mProducto.setId_producto(Integer.parseInt(this.TXT_Nombre.getText()));
-            mProveedor.setId_proveedor(Integer.parseInt(this.LBL_Proveedor.getText()));
+        if (this.TXT_Nombre.getText().equals("") || this.TXT_N_Cantidad.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else {
+            try {
+                Producto nProducto = new Producto();
+                //verificar si no hay problema con los iD y el folio.
+                mProducto.setId_producto(Integer.parseInt(this.TXT_Nombre.getText()));
+                mProveedor.setId_proveedor(Integer.parseInt(this.LBL_Proveedor.getText()));
 
-            mBD.conectar();
-            Producto mProductoOld = mBD.consultarProducto(TXT_Nombre.getText());
-            mBD.desconectar();
+                mBD.conectar();
+                Producto mProductoOld = mBD.consultarProducto(TXT_Nombre.getText());
+                mBD.desconectar();
 
-            Nueva_Cantidad = Integer.parseInt(TXT_N_Cantidad.getText()) + mProductoOld.getCantidadProducto();
-            nProducto.setNombre(LBL_Nombre_Producto.getText());
-            nProducto.setCodigo(TXT_Nombre.getText());
-            nProducto.setPrecio(Float.parseFloat(LBL_Precio.getText()));
-            nProducto.setCantidadProducto(Nueva_Cantidad);
-            nProducto.setId_proveedor(LBL_Proveedor.getText());
-            nProducto.setDesc_Prod(LBL_Desc.getText());
-            Nueva_Cantidad = 0;
+                Nueva_Cantidad = Integer.parseInt(TXT_N_Cantidad.getText()) + mProductoOld.getCantidadProducto();
+                nProducto.setNombre(LBL_Nombre_Producto.getText());
+                nProducto.setCodigo(TXT_Nombre.getText());
+                nProducto.setPrecio(Float.parseFloat(LBL_Precio.getText()));
+                nProducto.setCantidadProducto(Nueva_Cantidad);
+                nProducto.setId_proveedor(LBL_Proveedor.getText());
+                nProducto.setDesc_Prod(LBL_Desc.getText());
+                Nueva_Cantidad = 0;
 
-            if (mBD.conectar()) {
-                if (mBD.ModificarProductos(mProducto, nProducto)) {
-                    JOptionPane.showMessageDialog(null, "Productos agregados con éxito.");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error al añadir.");
+                if (mBD.conectar()) {
+                    if (mBD.ModificarProductos(mProducto, nProducto)) {
+                        JOptionPane.showMessageDialog(null, "Productos agregados con éxito.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al añadir.");
+                    }
+
+                    Compras mCompraConsulta = mBD.ConsultaTodaCompra(this.TXT_Nombre.getText());
+                    //Solo para verificar...
+                    //Aquí agregar todos los campos del detalle compra..
+
+                    mDCompra.setCantidad(Integer.parseInt(TXT_N_Cantidad.getText()));
+                    mDCompra.setPrecio(Float.parseFloat(LBL_Precio.getText()));
+                    mDCompra.setProducto(LBL_Nombre_Producto.getText());
+
+                    mDCompra.setId_producto(mProducto.getId_producto());
+                    mDCompra.setId_proveedor(mProveedor.getId_proveedor());
+                    mDCompra.setId_detalle(RegistroCompra);
+                    mDCompra.setId_compras(RegistroCompra);
+
+                    TotalTemporal = Float.parseFloat(LBL_Precio.getText()) * Float.parseFloat(TXT_N_Cantidad.getText());
+                    TotalCompleto = TotalTemporal + TotalCompleto;
+                    LBL_TotalP.setText(String.valueOf(TotalCompleto));
+
+                    if (mBD.AltaDetalleCompra(mDCompra)) {
+                        JOptionPane.showMessageDialog(null, "Detalle guardado.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se guardo el detalle guardado.");
+                    }
                 }
-
-                Compras mCompraConsulta = mBD.ConsultaTodaCompra(this.TXT_Nombre.getText());
-                //Solo para verificar...
-                //Aquí agregar todos los campos del detalle compra..
-
-                mDCompra.setCantidad(Integer.parseInt(TXT_N_Cantidad.getText()));
-                mDCompra.setPrecio(Float.parseFloat(LBL_Precio.getText()));
-                mDCompra.setProducto(LBL_Nombre_Producto.getText());
-
-                mDCompra.setId_producto(mProducto.getId_producto());
-                mDCompra.setId_proveedor(mProveedor.getId_proveedor());
-                mDCompra.setId_detalle(RegistroCompra);
-                mDCompra.setId_compras(RegistroCompra);
-
-                TotalTemporal = Float.parseFloat(LBL_Precio.getText()) * Float.parseFloat(TXT_N_Cantidad.getText());
-                TotalCompleto = TotalTemporal + TotalCompleto;
-                LBL_TotalP.setText(String.valueOf(TotalCompleto));
-
-                if (mBD.AltaDetalleCompra(mDCompra)) {
-                    JOptionPane.showMessageDialog(null, "Detalle guardado.");
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se guardo el detalle guardado.");
-                }
+            } catch (HeadlessException | NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Introduce un folio.");
             }
-        } catch (HeadlessException | NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Introduce un folio.");
         }
-
-        //TXT_N_Cantidad.setText("");
-        //TXT_Nombre.setText("");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        try {
-            Compras mCompraAlterada = new Compras();
-            mCompras.setId_compras(RegistroCompra);
-            //mCompras.setFolio(TXT_Nombre.getText());
-            mCompras.setFecha(FechaActual);
-            mCompras.setTotalCompras(TotalCompleto);
-            
-            
-            //mCompraAlterada.setId_compras(RegistroCompra);
-            mCompraAlterada.setFecha(FechaActual);
-            mCompraAlterada.setFolio(TXT_Nombre.getText());           
-            mCompraAlterada.setTotalCompras(Float.parseFloat(LBL_TotalP.getText()));
-            
-            if (mBD.conectar()) {
-                if (mBD.CambiosCompra(mCompras, mCompraAlterada)) {
-                    JOptionPane.showMessageDialog(null, "NUEVO PRECIO EN LA COMPRA");
-                } else {
-                    JOptionPane.showMessageDialog(null, "ERROR EN NUEVO PRECIO");
+        if (this.TXT_Nombre.getText().equals("") || this.TXT_N_Cantidad.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else {
+            try {
+                Compras mCompraAlterada = new Compras();
+                mCompras.setId_compras(RegistroCompra);
+                //mCompras.setFolio(TXT_Nombre.getText());
+                mCompras.setFecha(FechaActual);
+                mCompras.setTotalCompras(TotalCompleto);
+
+                //mCompraAlterada.setId_compras(RegistroCompra);
+                mCompraAlterada.setFecha(FechaActual);
+                mCompraAlterada.setFolio(TXT_Nombre.getText());
+                mCompraAlterada.setTotalCompras(Float.parseFloat(LBL_TotalP.getText()));
+
+                if (mBD.conectar()) {
+                    if (mBD.CambiosCompra(mCompras, mCompraAlterada)) {
+                        JOptionPane.showMessageDialog(null, "NUEVO PRECIO EN LA COMPRA");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "ERROR EN NUEVO PRECIO");
+                    }
                 }
+                mBD.desconectar();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No se guardó la compra...");
             }
-            mBD.desconectar();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se guardó la compra...");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -809,13 +827,17 @@ public class FRM_Compras extends javax.swing.JFrame {
     private void TXT_NombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_NombreKeyTyped
         // TODO add your handling code here:
         char error = evt.getKeyChar();
-        if (error < '0'|| error > '9') evt.consume(); 
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_TXT_NombreKeyTyped
 
     private void TXT_N_CantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_N_CantidadKeyTyped
         // TODO add your handling code here:
         char error = evt.getKeyChar();
-        if (error < '0'|| error > '9') evt.consume(); 
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_TXT_N_CantidadKeyTyped
 
     /**

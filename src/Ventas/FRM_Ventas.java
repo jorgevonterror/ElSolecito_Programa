@@ -43,7 +43,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
         setVentas();
     }
     private Connection conexion;
-    ResultSet rs= null;
+    ResultSet rs = null;
     Statement statement = null;
     BaseDeDatos mBD = new BaseDeDatos();
     int ContadorColumna = 1;
@@ -517,127 +517,136 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        borrar();
-        if (mBD.conectar()) {
-            Producto mProducto = mBD.ConsultaEspecificaProducto(this.TXT_Folio.getText());
-            String[] Datos;
-            if (mProducto != null) {
-                if (ContadorColumna == 1) {
-                    modeloTabla.addColumn("id_producto");
-                    modeloTabla.addColumn("Folio");
-                    modeloTabla.addColumn("Nombre");
-                    modeloTabla.addColumn("Precio");
-                    modeloTabla.addColumn("Cantidad");
-                    modeloTabla.addColumn("Descripcion");
-                    modeloTabla.addColumn("id_proveedor");
-                    ContadorColumna = 2;
-                }
-                Datos = new String[7];
-                Datos[0] = "" + mProducto.getId_producto();
-                Datos[1] = "" + mProducto.getCodigo();
-                Datos[2] = mProducto.getNombre();
-                Datos[3] = "" + mProducto.getPrecio();
-                Datos[4] = "" + mProducto.getCantidadProducto();
-                Datos[5] = mProducto.getDesc_Prod();
-                Datos[6] = "" + mProducto.getId_proveedor();
-
-                LB_Precio.setText("" + mProducto.getPrecio());
-                LB_TotalPago.setText("00.00");
-                LB_Desc.setText(mProducto.getDesc_Prod());
-                LB_Nombre.setText(mProducto.getNombre());
-                LB_Proveedor.setText(mProducto.getId_proveedor());
-
-                modeloTabla.addRow(Datos);
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe el producto.");
-            }
-            this.Tabla_Ventas = new javax.swing.JTable();
-            this.Tabla_Ventas.setModel(modeloTabla);
-
-            this.Tabla_Ventas.getColumnModel().getColumn(0).setPreferredWidth(50);
-            this.Tabla_Ventas.getColumnModel().getColumn(1).setPreferredWidth(100);
-            this.Tabla_Ventas.getColumnModel().getColumn(2).setPreferredWidth(400);
-            this.Tabla_Ventas.getColumnModel().getColumn(3).setPreferredWidth(600);
-            this.Tabla_Ventas.getColumnModel().getColumn(4).setPreferredWidth(400);
-            this.Tabla_Ventas.getColumnModel().getColumn(5).setPreferredWidth(400);
-
-            if (this.Tabla_Ventas.getRowCount() > 0) {
-                this.Tabla_Ventas.setRowSelectionInterval(0, 0);
-            }
+        if (this.TXT_Folio.getText().equals("") || this.TXT_Cantidad.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
         } else {
-            JOptionPane.showMessageDialog(null, "Error al consultar.");
+            borrar();
+            if (mBD.conectar()) {
+                Producto mProducto = mBD.ConsultaEspecificaProducto(this.TXT_Folio.getText());
+                String[] Datos;
+                if (mProducto != null) {
+                    if (ContadorColumna == 1) {
+                        modeloTabla.addColumn("id_producto");
+                        modeloTabla.addColumn("Folio");
+                        modeloTabla.addColumn("Nombre");
+                        modeloTabla.addColumn("Precio");
+                        modeloTabla.addColumn("Cantidad");
+                        modeloTabla.addColumn("Descripcion");
+                        modeloTabla.addColumn("id_proveedor");
+                        ContadorColumna = 2;
+                    }
+                    Datos = new String[7];
+                    Datos[0] = "" + mProducto.getId_producto();
+                    Datos[1] = "" + mProducto.getCodigo();
+                    Datos[2] = mProducto.getNombre();
+                    Datos[3] = "" + mProducto.getPrecio();
+                    Datos[4] = "" + mProducto.getCantidadProducto();
+                    Datos[5] = mProducto.getDesc_Prod();
+                    Datos[6] = "" + mProducto.getId_proveedor();
+
+                    LB_Precio.setText("" + mProducto.getPrecio());
+                    LB_TotalPago.setText("00.00");
+                    LB_Desc.setText(mProducto.getDesc_Prod());
+                    LB_Nombre.setText(mProducto.getNombre());
+                    LB_Proveedor.setText(mProducto.getId_proveedor());
+
+                    modeloTabla.addRow(Datos);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No existe el producto.");
+                }
+                this.Tabla_Ventas = new javax.swing.JTable();
+                this.Tabla_Ventas.setModel(modeloTabla);
+
+                this.Tabla_Ventas.getColumnModel().getColumn(0).setPreferredWidth(50);
+                this.Tabla_Ventas.getColumnModel().getColumn(1).setPreferredWidth(100);
+                this.Tabla_Ventas.getColumnModel().getColumn(2).setPreferredWidth(400);
+                this.Tabla_Ventas.getColumnModel().getColumn(3).setPreferredWidth(600);
+                this.Tabla_Ventas.getColumnModel().getColumn(4).setPreferredWidth(400);
+                this.Tabla_Ventas.getColumnModel().getColumn(5).setPreferredWidth(400);
+
+                if (this.Tabla_Ventas.getRowCount() > 0) {
+                    this.Tabla_Ventas.setRowSelectionInterval(0, 0);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar.");
+            }
+            mBD.desconectar();
         }
-        mBD.desconectar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         //Aquí para la venta...
-        Producto nProducto = new Producto();
-        mProducto.setCodigo(TXT_Folio.getText());
-
-        mBD.conectar();
-        Producto mProductoOld = mBD.ConsultaEspecificaProducto(TXT_Folio.getText());
-        mBD.desconectar();
-
-        //Restamos la cantidad.
-        CantidadNueva = mProductoOld.getCantidadProducto() - Integer.parseInt(TXT_Cantidad.getText());
-
-        nProducto.setNombre(LB_Nombre.getText());
-
-        nProducto.setCantidadProducto(CantidadNueva);
-
-        nProducto.setDesc_Prod(LB_Desc.getText());
-        nProducto.setPrecio(Float.parseFloat(LB_Precio.getText()));
-        nProducto.setId_proveedor(TXT_Folio.getText());
-        CantidadNueva = 0;
-
-        if (mBD.conectar()) {
-            if (mBD.ModificarProductos(mProducto, nProducto)) {
-                JOptionPane.showMessageDialog(null, "Productos añadidos...");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al añadir...");
-            }
-        }
-        Venta mVentaConsultada = mBD.ConsultaTodaVenta(TXT_Folio.getText());
-
-        mDetalleVenta.setCantidad(Float.parseFloat(TXT_Cantidad.getText()));
-        mDetalleVenta.setPrecio(Float.parseFloat(LB_Precio.getText()));
-        mDetalleVenta.setProducto_id_Producto(Integer.parseInt(mProducto.getCodigo()));
-        mDetalleVenta.setVenta_id_Venta(RegistroVenta);
-
-        TotalTemporal = Float.parseFloat(LB_Precio.getText()) * Float.parseFloat(TXT_Cantidad.getText());
-        TotalCompleto = TotalTemporal + TotalCompleto;
-        LB_TotalPago.setText(String.valueOf(TotalCompleto));
-
-        if (mBD.AltaDetalleVenta(mDetalleVenta)) {
-            JOptionPane.showMessageDialog(null, "Detalle venta guardado.");
+        if (this.TXT_Folio.getText().equals("") || this.TXT_Cantidad.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
         } else {
-            JOptionPane.showMessageDialog(null, "Error detalle venta.");
+            Producto nProducto = new Producto();
+            mProducto.setCodigo(TXT_Folio.getText());
+
+            mBD.conectar();
+            Producto mProductoOld = mBD.ConsultaEspecificaProducto(TXT_Folio.getText());
+            mBD.desconectar();
+
+            //Restamos la cantidad.
+            CantidadNueva = mProductoOld.getCantidadProducto() - Integer.parseInt(TXT_Cantidad.getText());
+
+            nProducto.setNombre(LB_Nombre.getText());
+
+            nProducto.setCantidadProducto(CantidadNueva);
+
+            nProducto.setDesc_Prod(LB_Desc.getText());
+            nProducto.setPrecio(Float.parseFloat(LB_Precio.getText()));
+            nProducto.setId_proveedor(TXT_Folio.getText());
+            CantidadNueva = 0;
+
+            if (mBD.conectar()) {
+                if (mBD.ModificarProductos(mProducto, nProducto)) {
+                    JOptionPane.showMessageDialog(null, "Productos añadidos...");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al añadir...");
+                }
+            }
+            Venta mVentaConsultada = mBD.ConsultaTodaVenta(TXT_Folio.getText());
+
+            mDetalleVenta.setCantidad(Float.parseFloat(TXT_Cantidad.getText()));
+            mDetalleVenta.setPrecio(Float.parseFloat(LB_Precio.getText()));
+            mDetalleVenta.setProducto_id_Producto(Integer.parseInt(mProducto.getCodigo()));
+            mDetalleVenta.setVenta_id_Venta(RegistroVenta);
+
+            TotalTemporal = Float.parseFloat(LB_Precio.getText()) * Float.parseFloat(TXT_Cantidad.getText());
+            TotalCompleto = TotalTemporal + TotalCompleto;
+            LB_TotalPago.setText(String.valueOf(TotalCompleto));
+
+            if (mBD.AltaDetalleVenta(mDetalleVenta)) {
+                JOptionPane.showMessageDialog(null, "Detalle venta guardado.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error detalle venta.");
+            }
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Venta mVentaAl = new Venta();
+        if (this.TXT_Folio.getText().equals("") || this.TXT_Cantidad.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else {
+            Venta mVentaAl = new Venta();
+            mVenta.setId_venta(RegistroVenta);
+            mVenta.setFecha_venta(FechaActual);
 
-        mVenta.setId_venta(RegistroVenta);
-        //mVenta.setFolio(TXT_Folio.getText());
-//        mVenta.setPrecioTotalVenta(TotalCompleto);
-        mVenta.setFecha_venta(FechaActual);
+            mVentaAl.setFolio(TXT_Folio.getText());
+            mVentaAl.setPrecioTotalVenta(Float.parseFloat(LB_TotalPago.getText()));
+            mVentaAl.setFecha_venta(FechaActual);
 
-        mVentaAl.setFolio(TXT_Folio.getText());
-        mVentaAl.setPrecioTotalVenta(Float.parseFloat(LB_TotalPago.getText()));
-        mVentaAl.setFecha_venta(FechaActual);
-
-        if (mBD.conectar()) {
-            if (mBD.CambiosVenta(mVenta, mVentaAl)) {
-                JOptionPane.showMessageDialog(null, "Nuevo precio en la venta...");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error en nuevo precio de venta...");
+            if (mBD.conectar()) {
+                if (mBD.CambiosVenta(mVenta, mVentaAl)) {
+                    JOptionPane.showMessageDialog(null, "Nuevo precio en la venta...");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error en nuevo precio de venta...");
+                }
             }
+            mBD.desconectar();
         }
-        mBD.desconectar();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -696,41 +705,41 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
         ResultSet rs = null;
         Statement consulta = null;
-        
-        try{
+
+        try {
             int row = Tabla_Ventas.getSelectedRow();
             String Table_click = (Tabla_Ventas.getModel().getValueAt(row, 1).toString());
-            
+
             String sql = "select * from productos where Codigo = '" + Table_click + "';";
-            
+
             consulta = conexion.prepareStatement("");
             rs = consulta.executeQuery(sql);
-            
+
             if (rs.next()) {
                 String add1 = rs.getString("Folio");
                 TXT_Folio.setText(add1);
-                
+
                 String add2 = rs.getString("Nombre");
                 LB_Nombre.setText(add2);
-                
+
                 String add3 = rs.getString("Descripcion");
                 LB_Desc.setText(add3);
-                
+
                 String add4 = rs.getString("Precio");
                 LB_Precio.setText(add4);
-                
+
                 String add5 = rs.getString("Proveedor");
                 LB_Proveedor.setText(add5);
             }
-        }catch(SQLException e){
-        
+        } catch (SQLException e) {
+
         }
 
     }//GEN-LAST:event_Tabla_VentasMouseClicked
 
     private void Tabla_VentasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_VentasMousePressed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_Tabla_VentasMousePressed
 
     /**
