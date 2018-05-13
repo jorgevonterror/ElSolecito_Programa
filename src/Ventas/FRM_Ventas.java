@@ -7,12 +7,18 @@ package Ventas;
 
 import elsolecito_programa.CLIENTES.FRM_Clientes_Alta;
 import elsolecito_programa.Producto.Producto;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -36,7 +42,9 @@ public class FRM_Ventas extends javax.swing.JFrame {
         setProductos();
         setVentas();
     }
-
+    private Connection conexion;
+    ResultSet rs= null;
+    Statement statement = null;
     BaseDeDatos mBD = new BaseDeDatos();
     int ContadorColumna = 1;
     DefaultTableModel modeloTabla = new DefaultTableModel();
@@ -51,7 +59,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
     Calendar fecha = new GregorianCalendar();
     int ContadorColumnaProveedor = 1;
     String FechaActual = "" + fecha.get(Calendar.YEAR) + "-" + fecha.get(Calendar.MONTH) + "-" + fecha.get(Calendar.DAY_OF_MONTH);
-        
+
     void borrar() {
         DefaultTableModel TablaLimpiar = (DefaultTableModel) Tabla_Ventas.getModel();
         int a = Tabla_Ventas.getRowCount() - 1;
@@ -79,7 +87,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                 for (int i = 0; i < mArrayList.size(); i++) {
                     mProducto = (Producto) mArrayList.get(i);
                     Datos = new String[7];
-                    
+
                     Datos[0] = "" + mProducto.getId_producto();
                     Datos[1] = "" + mProducto.getCodigo();
                     Datos[2] = mProducto.getNombre();
@@ -87,7 +95,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                     Datos[4] = "" + mProducto.getCantidadProducto();
                     Datos[5] = mProducto.getDesc_Prod();
                     Datos[6] = "" + mProducto.getId_proveedor();
-                    
+
                     //INICIALIZAMOS LOS LB EN NADA.
                     //Me quede aquí.
                     LB_Precio.setText("-");
@@ -110,7 +118,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
             this.Tabla_Ventas.getColumnModel().getColumn(3).setPreferredWidth(600);
             this.Tabla_Ventas.getColumnModel().getColumn(4).setPreferredWidth(400);
             this.Tabla_Ventas.getColumnModel().getColumn(5).setPreferredWidth(400);
-            
+
             if (this.Tabla_Ventas.getRowCount() > 0) {
                 this.Tabla_Ventas.setRowSelectionInterval(0, 0);
             }
@@ -122,19 +130,18 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
     void setVentas() {
         System.out.println();
-        
+
         mVenta.setFecha_venta(FechaActual);
         mVenta.setPrecioTotalVenta(TotalCompleto);
         mVenta.setFolio(TXT_Folio.getText());
-        
+
         if (mBD.conectar()) {
             if (mBD.AltaVenta(mVenta)) {
                 RegistroVenta = (mBD.ConsultaIDVenta());
             } else {
                 JOptionPane.showMessageDialog(null, "Error al guardar Venta");
             }
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(null, "Error al consultar");
         }
         mBD.desconectar();
@@ -247,6 +254,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
         jLabel1.setText("Folio:");
 
+        TXT_Folio.setToolTipText("Ingrese el folio de la tabla.");
         TXT_Folio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TXT_FolioKeyTyped(evt);
@@ -276,11 +284,28 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
         LB_TotalPago.setText("jLabel10");
 
+        Tabla_Ventas.setAutoCreateRowSorter(true);
         Tabla_Ventas.setModel(modeloTabla);
+        Tabla_Ventas.setToolTipText("Productos registrados en el sistema.");
+        Tabla_Ventas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Tabla_VentasMousePressed(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabla_VentasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Tabla_Ventas);
 
         jLabel10.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         jLabel10.setText("SELECCIÓN DE PRODUCTOS.");
+
+        TXT_Cantidad.setToolTipText("Ingrese la cantidad a comprar deseada.");
+        TXT_Cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_CantidadKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -374,6 +399,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/screen6.png"))); // NOI18N
         jButton1.setText("Mostrar datos");
+        jButton1.setToolTipText("Muestra todos los productos registrados.");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -382,6 +408,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/excel.png"))); // NOI18N
         jButton2.setText("Seleccionar producto");
+        jButton2.setToolTipText("Selecciona el producto en base al folio ingresado.");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -390,6 +417,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/guardar.png"))); // NOI18N
         jButton5.setText("Guardar venta");
+        jButton5.setToolTipText("Guardar la venta en la BD.");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -398,6 +426,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/registry24.png"))); // NOI18N
         jButton3.setText("Finalizar venta");
+        jButton3.setToolTipText("Finalizamos venta.");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -406,6 +435,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/screen6.png"))); // NOI18N
         jButton7.setText("Reporte");
+        jButton7.setToolTipText("Reporte de ventas.");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -414,6 +444,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/back57.png"))); // NOI18N
         jButton8.setText("Regresar");
+        jButton8.setToolTipText("Regresar al menú anterior.");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -529,7 +560,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
             this.Tabla_Ventas.getColumnModel().getColumn(3).setPreferredWidth(600);
             this.Tabla_Ventas.getColumnModel().getColumn(4).setPreferredWidth(400);
             this.Tabla_Ventas.getColumnModel().getColumn(5).setPreferredWidth(400);
-            
+
             if (this.Tabla_Ventas.getRowCount() > 0) {
                 this.Tabla_Ventas.setRowSelectionInterval(0, 0);
             }
@@ -589,16 +620,16 @@ public class FRM_Ventas extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         Venta mVentaAl = new Venta();
-        
+
         mVenta.setId_venta(RegistroVenta);
         //mVenta.setFolio(TXT_Folio.getText());
 //        mVenta.setPrecioTotalVenta(TotalCompleto);
         mVenta.setFecha_venta(FechaActual);
-        
+
         mVentaAl.setFolio(TXT_Folio.getText());
         mVentaAl.setPrecioTotalVenta(Float.parseFloat(LB_TotalPago.getText()));
         mVentaAl.setFecha_venta(FechaActual);
-        
+
         if (mBD.conectar()) {
             if (mBD.CambiosVenta(mVenta, mVentaAl)) {
                 JOptionPane.showMessageDialog(null, "Nuevo precio en la venta...");
@@ -645,8 +676,62 @@ public class FRM_Ventas extends javax.swing.JFrame {
     private void TXT_FolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_FolioKeyTyped
         // TODO add your handling code here:
         char error = evt.getKeyChar();
-        if (error < '0'|| error > '9') evt.consume(); 
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_TXT_FolioKeyTyped
+
+    private void TXT_CantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_CantidadKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TXT_CantidadKeyTyped
+
+    private void Tabla_VentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_VentasMouseClicked
+        // TODO add your handling code here:
+//        int filaSeleccionada = this.Tabla_Ventas.getSelectedRow();
+//        this.TXT_Folio.setText(Tabla_Ventas.getValueAt(filaSeleccionada, 1).toString());
+
+        ResultSet rs = null;
+        Statement consulta = null;
+        
+        try{
+            int row = Tabla_Ventas.getSelectedRow();
+            String Table_click = (Tabla_Ventas.getModel().getValueAt(row, 1).toString());
+            
+            String sql = "select * from productos where Codigo = '" + Table_click + "';";
+            
+            consulta = conexion.prepareStatement("");
+            rs = consulta.executeQuery(sql);
+            
+            if (rs.next()) {
+                String add1 = rs.getString("Folio");
+                TXT_Folio.setText(add1);
+                
+                String add2 = rs.getString("Nombre");
+                LB_Nombre.setText(add2);
+                
+                String add3 = rs.getString("Descripcion");
+                LB_Desc.setText(add3);
+                
+                String add4 = rs.getString("Precio");
+                LB_Precio.setText(add4);
+                
+                String add5 = rs.getString("Proveedor");
+                LB_Proveedor.setText(add5);
+            }
+        }catch(SQLException e){
+        
+        }
+
+    }//GEN-LAST:event_Tabla_VentasMouseClicked
+
+    private void Tabla_VentasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_VentasMousePressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_Tabla_VentasMousePressed
 
     /**
      * @param args the command line arguments
