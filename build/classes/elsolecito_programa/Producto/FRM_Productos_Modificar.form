@@ -217,6 +217,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="TxtNuevoCodigo">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtNuevoCodigoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
@@ -224,6 +227,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="TxtNuevoNombre">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtNuevoNombreKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -231,6 +237,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="TxtNuevoPrecio">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtNuevoPrecioKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -238,6 +247,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="TxtNuevaDesc">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtNuevaDescKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BtnModificar">
           <Properties>
@@ -289,6 +301,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="TXT_CantidadP">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TXT_CantidadPKeyTyped"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

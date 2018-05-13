@@ -5,6 +5,7 @@
  */
 package elsolecito_programa.Producto;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -115,11 +116,35 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
 
         jLabel2.setText("Folio:");
 
+        TxtNuevoCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtNuevoCodigoKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("Nombre:");
+
+        TxtNuevoNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtNuevoNombreKeyTyped(evt);
+            }
+        });
 
         jLabel5.setText("Precio:");
 
+        TxtNuevoPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtNuevoPrecioKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Desc_Producto:");
+
+        TxtNuevaDesc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtNuevaDescKeyTyped(evt);
+            }
+        });
 
         BtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (User edit).jpg"))); // NOI18N
         BtnModificar.setText("Modificar");
@@ -141,6 +166,12 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
         jScrollPane1.setViewportView(TBProductos);
 
         jLabel1.setText("Cantidad de producto:");
+
+        TXT_CantidadP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_CantidadPKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -326,30 +357,34 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
         // TODO add your handling code here:
-        Producto aProducto = new Producto();
-        Producto bProducto = new Producto();
+        if (this.TxtNuevoCodigo.getText().equals("") || this.TXT_CantidadP.getText().equals("") || this.TxtNuevaDesc.getText().equals("") || this.TxtNuevoPrecio.getText().equals("") || this.TxtNuevoNombre.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else {
+            Producto aProducto = new Producto();
+            Producto bProducto = new Producto();
 
-        aProducto.setCodigo(this.TxtNuevoCodigo.getText());
+            aProducto.setCodigo(this.TxtNuevoCodigo.getText());
 
-        bProducto.setNombre(this.TxtNuevoNombre.getText());
-        bProducto.setPrecio(Float.parseFloat(this.TxtNuevoPrecio.getText()));
-        bProducto.setDesc_Prod(this.TxtNuevaDesc.getText());
-        bProducto.setCantidadProducto(Integer.parseInt(this.TXT_CantidadP.getText()));
-        
-        if (mBD.conectar()) {
-            if (mBD.ModificarProductos(aProducto, bProducto)) {
-                //JOptionPane.showMessageDialog(null, "Producto modificado con éxito...");
-                borrar();
-                setFilas_2();
+            bProducto.setNombre(this.TxtNuevoNombre.getText());
+            bProducto.setPrecio(Float.parseFloat(this.TxtNuevoPrecio.getText()));
+            bProducto.setDesc_Prod(this.TxtNuevaDesc.getText());
+            bProducto.setCantidadProducto(Integer.parseInt(this.TXT_CantidadP.getText()));
 
-                this.TxtNuevoCodigo.setText("");
-                this.TxtNuevoNombre.setText("");
-                this.TxtNuevaDesc.setText("");
-                this.TxtNuevoPrecio.setText("");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al modificar...");
+            if (mBD.conectar()) {
+                if (mBD.ModificarProductos(aProducto, bProducto)) {
+                    //JOptionPane.showMessageDialog(null, "Producto modificado con éxito...");
+                    borrar();
+                    setFilas_2();
+
+                    this.TxtNuevoCodigo.setText("");
+                    this.TxtNuevoNombre.setText("");
+                    this.TxtNuevaDesc.setText("");
+                    this.TxtNuevoPrecio.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al modificar...");
+                }
+                mBD.desconectar();
             }
-            mBD.desconectar();
         }
     }//GEN-LAST:event_BtnModificarActionPerformed
 
@@ -358,6 +393,46 @@ public class FRM_Productos_Modificar extends javax.swing.JFrame {
         new FRM_Producto_Catalogo().show();
         this.setVisible(false);
     }//GEN-LAST:event_BtnMenuActionPerformed
+
+    private void TxtNuevoCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNuevoCodigoKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtNuevoCodigoKeyTyped
+
+    private void TxtNuevoNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNuevoNombreKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if ((error < 'A' || error > 'Z') && (error < 'a' || error > 'z') && (error != KeyEvent.VK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtNuevoNombreKeyTyped
+
+    private void TxtNuevoPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNuevoPrecioKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtNuevoPrecioKeyTyped
+
+    private void TxtNuevaDescKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNuevaDescKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if ((error < 'A' || error > 'Z') && (error < 'a' || error > 'z') && (error != KeyEvent.VK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtNuevaDescKeyTyped
+
+    private void TXT_CantidadPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_CantidadPKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TXT_CantidadPKeyTyped
 
     /**
      * @param args the command line arguments

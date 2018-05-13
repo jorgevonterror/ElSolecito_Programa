@@ -1,6 +1,8 @@
 package elsolecito_programa.PROVEEDORES;
+
 import elsolecito_programa.CLIENTES.FRM_Clientes_Alta;
 import elsolecito_programa.PROVEEDORES.BaseDeDAtos.*;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import net.sf.jasperreports.view.JasperViewer;
     2. Omar Almaraz Cordova.
     3. Creacion 17/04/18.
     4. Programacion en formulario alta de proveedores.
-*/
+ */
 /**
  *
  * @author 8.1
@@ -51,7 +53,7 @@ public class FRM_Proveedores_Alta extends javax.swing.JFrame {
     DefaultTableModel modeloTabla = new DefaultTableModel();
     BaseDeDAtos mBD = new BaseDeDAtos();
     Proveedores Prov = new Proveedores();
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -341,109 +343,112 @@ public class FRM_Proveedores_Alta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void setFilas(){
-        if(mBD.conectar()){
-            ArrayList mListaProveedores = mBD.consultarProveedores();  
-            String [] Datos;
-            
+
+    private void setFilas() {
+        if (mBD.conectar()) {
+            ArrayList mListaProveedores = mBD.consultarProveedores();
+            String[] Datos;
+
             modeloTabla.addColumn("Folio");
             modeloTabla.addColumn("Marca");
             modeloTabla.addColumn("Nombre");
- 
+
             for (Object mListaProveedor : mListaProveedores) {
                 Datos = new String[3];
-                
-                Prov = (Proveedores)mListaProveedor;
+
+                Prov = (Proveedores) mListaProveedor;
                 Datos[0] = Prov.getFolio();
                 Datos[1] = Prov.getMarca();
                 Datos[2] = Prov.getNombre();
-            
+
                 modeloTabla.addRow(Datos);
-            } 
-            
+            }
+
             this.TableConsultas = new javax.swing.JTable();
             this.TableConsultas.setModel(modeloTabla);
-            
+
             this.TableConsultas.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.TableConsultas.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.TableConsultas.getColumnModel().getColumn(2).setPreferredWidth(400);
-            
+
             if (this.TableConsultas.getRowCount() > 0) {
                 this.TableConsultas.setRowSelectionInterval(0, 0);
             }
-           
+
         } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
         mBD.desconectar();
     }
-    
-    private void setFilas_2(){
-        if(mBD.conectar()){
-            ArrayList mListaProveedores = mBD.consultarProveedores();  
-            String [] Datos;
- 
+
+    private void setFilas_2() {
+        if (mBD.conectar()) {
+            ArrayList mListaProveedores = mBD.consultarProveedores();
+            String[] Datos;
+
             for (Object mListaProveedor : mListaProveedores) {
                 Datos = new String[3];
-                
-                Prov = (Proveedores)mListaProveedor;
+
+                Prov = (Proveedores) mListaProveedor;
                 Datos[0] = Prov.getFolio();
                 Datos[1] = Prov.getMarca();
                 Datos[2] = Prov.getNombre();
-            
+
                 modeloTabla.addRow(Datos);
-            } 
-            
+            }
+
             this.TableConsultas = new javax.swing.JTable();
             this.TableConsultas.setModel(modeloTabla);
-            
+
             this.TableConsultas.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.TableConsultas.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.TableConsultas.getColumnModel().getColumn(2).setPreferredWidth(400);
-            
+
             if (this.TableConsultas.getRowCount() > 0) {
                 this.TableConsultas.setRowSelectionInterval(0, 0);
             }
-           
+
         } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
         mBD.desconectar();
     }
-    void borrar(){
+
+    void borrar() {
         DefaultTableModel LimpiadoTabla = (DefaultTableModel) TableConsultas.getModel();
         //Borramosla tabla...
-        int a = TableConsultas.getRowCount()-1;
-        
-        for(int i = a; i>=0;i--) {
-            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        int a = TableConsultas.getRowCount() - 1;
+
+        for (int i = a; i >= 0; i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount() - 1);
         }
     }
-    
+
     private void TXT_FolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_FolioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_FolioActionPerformed
 
     private void BTNGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNGuardarActionPerformed
-        Prov.setFolio(this.TXT_Folio.getText());
-        Prov.setMarca(this.TXTMarca.getText());
-        Prov.setNombre(this.TXTNombre.getText());
-        if(mBD.conectar())
-        {
-            if (mBD.GuardarProveedores(Prov)) {
-                //JOptionPane.showMessageDialog(null, "Proveedor guadado con exito");
-                borrar();
-                this.TXT_Folio.setText("");
-                this.TXTMarca.setText("");
-                this.TXTNombre.setText("");
-                setFilas_2();
+
+        if (this.TXT_Folio.getText().equals("") || this.TXTNombre.getText().equals("") || this.TXTMarca.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else {
+            Prov.setFolio(this.TXT_Folio.getText());
+            Prov.setMarca(this.TXTMarca.getText());
+            Prov.setNombre(this.TXTNombre.getText());
+            if (mBD.conectar()) {
+                if (mBD.GuardarProveedores(Prov)) {
+                    //JOptionPane.showMessageDialog(null, "Proveedor guadado con exito");
+                    borrar();
+                    this.TXT_Folio.setText("");
+                    this.TXTMarca.setText("");
+                    this.TXTNombre.setText("");
+                    setFilas_2();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al guardar");
+                }
+                mBD.desconectar();
             }
-            else  
-            {
-                JOptionPane.showMessageDialog(null, "Error al guardar");
-            }
-            mBD.desconectar();
         }
     }//GEN-LAST:event_BTNGuardarActionPerformed
 
@@ -462,22 +467,22 @@ public class FRM_Proveedores_Alta extends javax.swing.JFrame {
     }//GEN-LAST:event_TXT_NombreActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito_Programa/src/elsolecito_programa/PROVEEDORES/Reporte_Alta_Proveedores.jasper";
+        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/elsolecito_programa/PROVEEDORES/Reporte_Alta_Proveedores.jasper";
         JasperReport jr = null;
-        
+
         try {
-            jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+            //jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+            jr = (JasperReport) JRLoader.loadObject(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
             jv.setTitle(path);
-            
-            
+
         } catch (JRException ex) {
             Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -485,19 +490,23 @@ public class FRM_Proveedores_Alta extends javax.swing.JFrame {
 
     private void TXT_FolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_FolioKeyTyped
         char error = evt.getKeyChar();
-        if (error < '0'|| error > '9') evt.consume(); 
-            
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_TXT_FolioKeyTyped
 
     private void TXTMarcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTMarcaKeyTyped
-       
         char error = evt.getKeyChar();
-        if (((error < 'A'|| error > 'Z') &&(error < 'a'|| error > 'z'))&&(error < '0'|| error > '9'))evt.consume(); 
+        if ((error < 'A' || error > 'Z') && (error < 'a' || error > 'z') && (error != KeyEvent.VK_SPACE)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_TXTMarcaKeyTyped
 
     private void TXTNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXTNombreKeyTyped
         char error = evt.getKeyChar();
-        if ((error < 'A'|| error > 'Z') &&(error < 'a'|| error > 'z'))evt.consume(); 
+        if ((error < 'A' || error > 'Z') && (error < 'a' || error > 'z') && (error != KeyEvent.VK_SPACE)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_TXTNombreKeyTyped
 
     /**

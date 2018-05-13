@@ -10,13 +10,12 @@ import javax.swing.table.DefaultTableModel;
     2. Omar Almaraz Cordova.
     3. Creacion 17/04/18.
     4. Programacion de formularios en el catalogo Proveedores.
-*/
-/*
+ */
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author 8.1
@@ -44,6 +43,7 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
     BaseDeDAtos mBD = new BaseDeDAtos();
     Proveedores Prov = new Proveedores();
     DefaultTableModel modeloTabla = new DefaultTableModel();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -190,83 +190,84 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void setFilas(){
-        if(mBD.conectar()){
-            ArrayList mListaProveedores = mBD.consultarProveedores();  
-            String [] Datos;
+
+    private void setFilas() {
+        if (mBD.conectar()) {
+            ArrayList mListaProveedores = mBD.consultarProveedores();
+            String[] Datos;
             modeloTabla.addColumn("Folio");
             modeloTabla.addColumn("Marca");
             modeloTabla.addColumn("Nombre");
- 
-            for (Object mListaProveedor : mListaProveedores) {
-                Datos = new String[4];
-                
-                Prov = (Proveedores)mListaProveedor;
-                Datos[0] = Prov.getFolio();
-                Datos[1] = Prov.getMarca();
-                Datos[2] = Prov.getNombre();
-            
-                modeloTabla.addRow(Datos);
-            } 
-            
-            this.TableConsultas = new javax.swing.JTable();
-            this.TableConsultas.setModel(modeloTabla);
-            this.TableConsultas.getColumnModel().getColumn(0).setPreferredWidth(50);
-            this.TableConsultas.getColumnModel().getColumn(1).setPreferredWidth(100);
-            this.TableConsultas.getColumnModel().getColumn(2).setPreferredWidth(400);
-            
-            if (this.TableConsultas.getRowCount() > 0) {
-                this.TableConsultas.setRowSelectionInterval(0, 0);
-            }
-           
-        } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
-        mBD.desconectar();
-    }
-    
-    void borrar(){
-        DefaultTableModel LimpiadoTabla = (DefaultTableModel) TableConsultas.getModel();
-        //Borramosla tabla...
-        int a = TableConsultas.getRowCount()-1;
-        
-        for(int i = a; i>=0;i--) {
-            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
-        }
-    }
-    private void setFilas_2(){
-        if(mBD.conectar()){
-            ArrayList mListaProveedores = mBD.consultarProveedores();  
-            String [] Datos;
 
             for (Object mListaProveedor : mListaProveedores) {
                 Datos = new String[4];
-                
-                Prov = (Proveedores)mListaProveedor;
+
+                Prov = (Proveedores) mListaProveedor;
                 Datos[0] = Prov.getFolio();
                 Datos[1] = Prov.getMarca();
                 Datos[2] = Prov.getNombre();
-            
+
                 modeloTabla.addRow(Datos);
-            } 
-            
+            }
+
             this.TableConsultas = new javax.swing.JTable();
             this.TableConsultas.setModel(modeloTabla);
             this.TableConsultas.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.TableConsultas.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.TableConsultas.getColumnModel().getColumn(2).setPreferredWidth(400);
-            
+
             if (this.TableConsultas.getRowCount() > 0) {
                 this.TableConsultas.setRowSelectionInterval(0, 0);
             }
-           
+
         } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
         mBD.desconectar();
     }
-    
+
+    void borrar() {
+        DefaultTableModel LimpiadoTabla = (DefaultTableModel) TableConsultas.getModel();
+        //Borramosla tabla...
+        int a = TableConsultas.getRowCount() - 1;
+
+        for (int i = a; i >= 0; i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount() - 1);
+        }
+    }
+
+    private void setFilas_2() {
+        if (mBD.conectar()) {
+            ArrayList mListaProveedores = mBD.consultarProveedores();
+            String[] Datos;
+
+            for (Object mListaProveedor : mListaProveedores) {
+                Datos = new String[4];
+
+                Prov = (Proveedores) mListaProveedor;
+                Datos[0] = Prov.getFolio();
+                Datos[1] = Prov.getMarca();
+                Datos[2] = Prov.getNombre();
+
+                modeloTabla.addRow(Datos);
+            }
+
+            this.TableConsultas = new javax.swing.JTable();
+            this.TableConsultas.setModel(modeloTabla);
+            this.TableConsultas.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.TableConsultas.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.TableConsultas.getColumnModel().getColumn(2).setPreferredWidth(400);
+
+            if (this.TableConsultas.getRowCount() > 0) {
+                this.TableConsultas.setRowSelectionInterval(0, 0);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
+        mBD.desconectar();
+    }
+
     private void TXT_FolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_FolioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_FolioActionPerformed
@@ -276,27 +277,29 @@ public class FRM_Proveedores_Baja extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_Menu_ProveedoresActionPerformed
 
     private void BTNEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNEliminarActionPerformed
-        Prov.setFolio(this.TXT_Folio.getText());
-        if(mBD.conectar())
-        {
-            if(mBD.eliminarProveedores(Prov))
-            {
-                //JOptionPane.showMessageDialog(null, "Proveedor eliminado con exito...");
-                borrar();
-                this.TXT_Folio.setText("");
-                setFilas_2();
+        if (this.TXT_Folio.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else {
+            Prov.setFolio(this.TXT_Folio.getText());
+            if (mBD.conectar()) {
+                if (mBD.eliminarProveedores(Prov)) {
+                    //JOptionPane.showMessageDialog(null, "Proveedor eliminado con exito...");
+                    borrar();
+                    this.TXT_Folio.setText("");
+                    setFilas_2();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al eliminar...");
+                }
+                mBD.desconectar();
             }
-            else 
-            {
-                JOptionPane.showMessageDialog(null, "Error al eliminar...");
-            }
-            mBD.desconectar();
         }
     }//GEN-LAST:event_BTNEliminarActionPerformed
 
     private void TXT_FolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_FolioKeyTyped
-       char error = evt.getKeyChar();
-       if (error < '0'|| error > '9')evt.consume(); 
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_TXT_FolioKeyTyped
 
     /**

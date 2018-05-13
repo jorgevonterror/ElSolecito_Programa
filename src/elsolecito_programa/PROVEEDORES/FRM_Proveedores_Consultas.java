@@ -1,5 +1,7 @@
 package elsolecito_programa.PROVEEDORES;
+
 import elsolecito_programa.CLIENTES.ClientesDeudores;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -8,13 +10,12 @@ import javax.swing.table.DefaultTableModel;
     2. Omar Almaraz Cordova.
     3. Creacion 17/04/18.
     4. Programacion de Formularios en catalogo Proveedores
-*/
-/*
+ */
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author 8.1
@@ -32,53 +33,54 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
     DefaultTableModel modeloTabla = new DefaultTableModel();
     BaseDeDAtos mBD = new BaseDeDAtos();
     Proveedores Prov = new Proveedores();
-    
-    void borrar(){
+
+    void borrar() {
         DefaultTableModel LimpiadoTabla = (DefaultTableModel) TableConsultas.getModel();
         //Borramosla tabla...
-        int a = TableConsultas.getRowCount()-1;
-        
-        for(int i = a; i>=0;i--) {
-            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        int a = TableConsultas.getRowCount() - 1;
+
+        for (int i = a; i >= 0; i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount() - 1);
         }
     }
-    
-    private void setFilas(){
-        if(mBD.conectar()){
-            ArrayList mListaProveedores = mBD.consultarProveedores();  
-            String [] Datos;
-            
+
+    private void setFilas() {
+        if (mBD.conectar()) {
+            ArrayList mListaProveedores = mBD.consultarProveedores();
+            String[] Datos;
+
             modeloTabla.addColumn("Folio");
             modeloTabla.addColumn("Marca");
             modeloTabla.addColumn("Nombre");
- 
+
             for (Object mListaProveedor : mListaProveedores) {
                 Datos = new String[3];
-                
-                Prov = (Proveedores)mListaProveedor;
+
+                Prov = (Proveedores) mListaProveedor;
                 Datos[0] = Prov.getFolio();
                 Datos[1] = Prov.getMarca();
                 Datos[2] = Prov.getNombre();
-            
+
                 modeloTabla.addRow(Datos);
-            } 
-            
+            }
+
             this.TableConsultas = new javax.swing.JTable();
             this.TableConsultas.setModel(modeloTabla);
-            
+
             this.TableConsultas.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.TableConsultas.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.TableConsultas.getColumnModel().getColumn(2).setPreferredWidth(400);
-            
+
             if (this.TableConsultas.getRowCount() > 0) {
                 this.TableConsultas.setRowSelectionInterval(0, 0);
             }
-           
+
         } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
         mBD.desconectar();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,6 +124,7 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (Search).jpg"))); // NOI18N
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,15 +144,16 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addComponent(BTN_Menu_Proveedores)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(23, 23, 23))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,45 +229,52 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_Menu_ProveedoresActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        borrar();
-        String nombre = TXT_Nombre.getText();
-        
-        
-        if(mBD.conectar()){
-            ArrayList mListaProveedores = mBD.ConsultarEspecifica(nombre);  
-            String [] Datos;
 
-            for (Object mListaProveedor : mListaProveedores) {
-                Datos = new String[3];
-                
-                Prov = (Proveedores)mListaProveedor;
-                Datos[0] = Prov.getFolio();
-                Datos[1] = Prov.getMarca();
-                Datos[2] = Prov.getNombre();
-            
-                modeloTabla.addRow(Datos);
-            } 
-            
-            this.TableConsultas = new javax.swing.JTable();
-            this.TableConsultas.setModel(modeloTabla);
-            
-            this.TableConsultas.getColumnModel().getColumn(0).setPreferredWidth(50);
-            this.TableConsultas.getColumnModel().getColumn(1).setPreferredWidth(100);
-            this.TableConsultas.getColumnModel().getColumn(2).setPreferredWidth(400);
-            
-            if (this.TableConsultas.getRowCount() > 0) {
-                this.TableConsultas.setRowSelectionInterval(0, 0);
-            }
-           
+        if (this.TXT_Nombre.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
         } else {
+            borrar();
+            String nombre = TXT_Nombre.getText();
+
+            if (mBD.conectar()) {
+                ArrayList mListaProveedores = mBD.ConsultarEspecifica(nombre);
+                String[] Datos;
+
+                for (Object mListaProveedor : mListaProveedores) {
+                    Datos = new String[3];
+
+                    Prov = (Proveedores) mListaProveedor;
+                    Datos[0] = Prov.getFolio();
+                    Datos[1] = Prov.getMarca();
+                    Datos[2] = Prov.getNombre();
+
+                    modeloTabla.addRow(Datos);
+                }
+
+                this.TableConsultas = new javax.swing.JTable();
+                this.TableConsultas.setModel(modeloTabla);
+
+                this.TableConsultas.getColumnModel().getColumn(0).setPreferredWidth(50);
+                this.TableConsultas.getColumnModel().getColumn(1).setPreferredWidth(100);
+                this.TableConsultas.getColumnModel().getColumn(2).setPreferredWidth(400);
+
+                if (this.TableConsultas.getRowCount() > 0) {
+                    this.TableConsultas.setRowSelectionInterval(0, 0);
+                }
+
+            } else {
                 JOptionPane.showMessageDialog(null, "Error al consultar...");
             }
-        mBD.desconectar();
+            mBD.desconectar();
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void TXT_NombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_NombreKeyTyped
         char error = evt.getKeyChar();
-        if ((error < 'A'|| error > 'Z') &&(error < 'a'|| error > 'z'))evt.consume();
+        if ((error < 'A' || error > 'Z') && (error < 'a' || error > 'z') && (error != KeyEvent.VK_SPACE)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_TXT_NombreKeyTyped
 
     /**

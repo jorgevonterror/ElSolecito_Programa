@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author MARIA NOELDA MARIANO
@@ -30,6 +31,7 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
     DefaultTableModel ModeloTabla = new DefaultTableModel();
     BaseDeDatos mBD = new BaseDeDatos();
     Producto mProducto = new Producto();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,6 +99,11 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
         TxtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtCodigoActionPerformed(evt);
+            }
+        });
+        TxtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtCodigoKeyTyped(evt);
             }
         });
 
@@ -177,64 +184,74 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_BtnMenuActionPerformed
 
-    void borrar(){
+    void borrar() {
         DefaultTableModel LimpiadoTabla = (DefaultTableModel) TBProductos.getModel();
         //Borramosla tabla...
-        int a = TBProductos.getRowCount()-1;
-        
-        for(int i = a; i>=0;i--) {
-            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        int a = TBProductos.getRowCount() - 1;
+
+        for (int i = a; i >= 0; i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount() - 1);
         }
     }
     private void BtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarActionPerformed
         // TODO add your handling code here:
-        
-        String Codigo = TxtCodigo.getText();
-        borrar();
-        if(mBD.conectar()){
-            ArrayList mListaProductos = mBD.ConsultarEspecifica(Codigo);
-            String[] Datos;
-
-            for (Object mListaProducto : mListaProductos) {
-                Datos = new String[5];
-
-                mProducto = (Producto) mListaProducto;
-                Datos[0] = mProducto.getCodigo();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = "" + mProducto.getPrecio();
-                Datos[3] = "" + mProducto.getCantidadProducto();
-                Datos[4] = mProducto.getDesc_Prod();
-
-                ModeloTabla.addRow(Datos);
-            }
-
-            this.TBProductos = new javax.swing.JTable();
-            this.TBProductos.setModel(ModeloTabla);
-
-            this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
-            this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
-            this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
-            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
-            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(500);
-
-            if (this.TBProductos.getRowCount() > 0) {
-                this.TBProductos.setRowSelectionInterval(0, 0);
-            }
-
+        if (this.TxtCodigo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
         } else {
-            JOptionPane.showMessageDialog(null, "Error al consultar...");
+            String Codigo = TxtCodigo.getText();
+            borrar();
+            if (mBD.conectar()) {
+                ArrayList mListaProductos = mBD.ConsultarEspecifica(Codigo);
+                String[] Datos;
+
+                for (Object mListaProducto : mListaProductos) {
+                    Datos = new String[5];
+
+                    mProducto = (Producto) mListaProducto;
+                    Datos[0] = mProducto.getCodigo();
+                    Datos[1] = mProducto.getNombre();
+                    Datos[2] = "" + mProducto.getPrecio();
+                    Datos[3] = "" + mProducto.getCantidadProducto();
+                    Datos[4] = mProducto.getDesc_Prod();
+
+                    ModeloTabla.addRow(Datos);
+                }
+
+                this.TBProductos = new javax.swing.JTable();
+                this.TBProductos.setModel(ModeloTabla);
+
+                this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
+                this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
+                this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
+                this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
+                this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(500);
+
+                if (this.TBProductos.getRowCount() > 0) {
+                    this.TBProductos.setRowSelectionInterval(0, 0);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al consultar...");
+            }
+            mBD.desconectar();
         }
-        mBD.desconectar();
     }//GEN-LAST:event_BtnConsultarActionPerformed
 
     private void TxtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtCodigoActionPerformed
 
-    
-    private void setFilas(){
-        if(mBD.conectar()){
-           ArrayList mListaProductos = mBD.ConsultarProductos();
+    private void TxtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtCodigoKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtCodigoKeyTyped
+
+    private void setFilas() {
+        if (mBD.conectar()) {
+            ArrayList mListaProductos = mBD.ConsultarProductos();
             String[] Datos;
 
             ModeloTabla.addColumn("Codigo");
@@ -274,8 +291,7 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
         }
         mBD.desconectar();
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */

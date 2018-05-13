@@ -7,6 +7,7 @@ package elsolecito_programa.Producto;
 
 import elsolecito_programa.CLIENTES.FRM_Clientes_Alta;
 import elsolecito_programa.PROVEEDORES.FRM_Proveedores_Consultas;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -161,9 +162,33 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
 
         jLabel3.setText("Nombre:");
 
+        TxtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtCodigoKeyTyped(evt);
+            }
+        });
+
+        TxtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtNombreKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("Precio:");
 
+        TxtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtPrecioKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Desc_Producto:");
+
+        TxtDescProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtDescProductoKeyTyped(evt);
+            }
+        });
 
         BtnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (Save).jpg"))); // NOI18N
         BtnGuardar.setText("Guardar");
@@ -194,7 +219,19 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
 
         jLabel5.setText("Cantidad de producto:");
 
+        TXT_CantidadP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_CantidadPKeyTyped(evt);
+            }
+        });
+
         jLabel8.setText("No. Proveedor:");
+
+        No_Proveedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                No_ProveedorKeyTyped(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (Search).jpg"))); // NOI18N
         jButton2.setText("Mostrar proveedores");
@@ -333,9 +370,9 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
                 Datos[1] = mProducto.getNombre();
                 Datos[2] = "" + mProducto.getPrecio();
                 Datos[3] = "" + mProducto.getCantidadProducto();
-                Datos[4] = mProducto.getDesc_Prod();    
+                Datos[4] = mProducto.getDesc_Prod();
                 Datos[5] = mProducto.getId_proveedor();
-                
+
                 ModeloTabla.addRow(Datos);
             }
 
@@ -348,7 +385,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
             this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
             this.TBProductos.getColumnModel().getColumn(4).setPreferredWidth(500);
             this.TBProductos.getColumnModel().getColumn(5).setPreferredWidth(600);
-            
+
             if (this.TBProductos.getRowCount() > 0) {
                 this.TBProductos.setRowSelectionInterval(0, 0);
             }
@@ -374,7 +411,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
                 Datos[3] = "" + mProducto.getCantidadProducto();
                 Datos[4] = mProducto.getDesc_Prod();
                 Datos[5] = mProducto.getId_proveedor();
-                
+
                 ModeloTabla.addRow(Datos);
             }
 
@@ -387,7 +424,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
             this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
             this.TBProductos.getColumnModel().getColumn(4).setPreferredWidth(500);
             this.TBProductos.getColumnModel().getColumn(5).setPreferredWidth(600);
-            
+
             if (this.TBProductos.getRowCount() > 0) {
                 this.TBProductos.setRowSelectionInterval(0, 0);
             }
@@ -416,28 +453,32 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
     int prod = 1;
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
-        mProducto.setCodigo(this.TxtCodigo.getText());
-        mProducto.setNombre(this.TxtNombre.getText());
-        mProducto.setDesc_Prod(this.TxtDescProducto.getText());
-        mProducto.setPrecio(Float.parseFloat(this.TxtPrecio.getText()));
-        mProducto.setCantidadProducto(Integer.parseInt(this.TXT_CantidadP.getText()));
-        mProducto.setId_producto(Integer.parseInt(this.No_Proveedor.getText()));
-        mProducto.setId_proveedor(this.No_Proveedor.getText());
-        
-        if (mBD.conectar()) {
-            if (mBD.GuardarProducto(mProducto)) {
-                borrar();
-                setFilas_2();
-                this.TxtNombre.setText("");
-                this.TxtPrecio.setText("");
-                this.TxtCodigo.setText("");
-                this.TxtDescProducto.setText("");
-                this.TXT_CantidadP.setText("");
-                this.No_Proveedor.setText("");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al guardar...");
+        if (this.TxtNombre.getText().equals("") || this.TXT_CantidadP.getText().equals("") || this.TxtCodigo.getText().equals("") || this.TxtDescProducto.getText().equals("") || this.TxtPrecio.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else {
+            mProducto.setCodigo(this.TxtCodigo.getText());
+            mProducto.setNombre(this.TxtNombre.getText());
+            mProducto.setDesc_Prod(this.TxtDescProducto.getText());
+            mProducto.setPrecio(Float.parseFloat(this.TxtPrecio.getText()));
+            mProducto.setCantidadProducto(Integer.parseInt(this.TXT_CantidadP.getText()));
+            mProducto.setId_producto(Integer.parseInt(this.No_Proveedor.getText()));
+            mProducto.setId_proveedor(this.No_Proveedor.getText());
+
+            if (mBD.conectar()) {
+                if (mBD.GuardarProducto(mProducto)) {
+                    borrar();
+                    setFilas_2();
+                    this.TxtNombre.setText("");
+                    this.TxtPrecio.setText("");
+                    this.TxtCodigo.setText("");
+                    this.TxtDescProducto.setText("");
+                    this.TXT_CantidadP.setText("");
+                    this.No_Proveedor.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al guardar...");
+                }
+                mBD.desconectar();
             }
-            mBD.desconectar();
         }
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
@@ -448,14 +489,14 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
         JasperReport jr = null;
 
         try {
-            jr = (JasperReport)JRLoader.loadObjectFromFile(path);
+            jr = (JasperReport) JRLoader.loadObject(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
             jv.setTitle(path);
 
         } catch (JRException ex) {
-            Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FRM_Producto_Alta.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -465,6 +506,54 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
         FRM_Proveedores_Consultas pc = new FRM_Proveedores_Consultas();
         pc.show();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void TxtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtCodigoKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtCodigoKeyTyped
+
+    private void TxtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNombreKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if ((error < 'A' || error > 'Z') && (error < 'a' || error > 'z') && (error != KeyEvent.VK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtNombreKeyTyped
+
+    private void TxtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPrecioKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtPrecioKeyTyped
+
+    private void TxtDescProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtDescProductoKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if ((error < 'A' || error > 'Z') && (error < 'a' || error > 'z') && (error != KeyEvent.VK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtDescProductoKeyTyped
+
+    private void TXT_CantidadPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_CantidadPKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TXT_CantidadPKeyTyped
+
+    private void No_ProveedorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_No_ProveedorKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_No_ProveedorKeyTyped
 
     /**
      * @param args the command line arguments

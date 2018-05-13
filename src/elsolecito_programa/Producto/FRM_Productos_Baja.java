@@ -24,7 +24,7 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
         setFilas();
         initComponents();
         this.setLocationRelativeTo(null);
-    //Para seleccionar fila y columna de la tabla y los ponga en los TXT.
+        //Para seleccionar fila y columna de la tabla y los ponga en los TXT.
         TBProductos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -35,7 +35,7 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
             }
         });
     }
-    
+
     BaseDeDatos mBD = new BaseDeDatos();
     Producto mProducto = new Producto();
     DefaultTableModel ModeloTabla = new DefaultTableModel();
@@ -98,6 +98,12 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
 
         jLabel2.setText("Ingrese el folio:");
 
+        TxtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtCodigoKeyTyped(evt);
+            }
+        });
+
         TBProductos.setModel(ModeloTabla);
         jScrollPane1.setViewportView(TBProductos);
 
@@ -132,8 +138,8 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtnEliminar)
-                    .addComponent(BtnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnEliminar))
                 .addGap(17, 17, 17))
         );
         jPanel2Layout.setVerticalGroup(
@@ -172,68 +178,70 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void setFilas_2(){
-        if(mBD.conectar()){
+    private void setFilas_2() {
+        if (mBD.conectar()) {
             ArrayList mListaProductos = mBD.ConsultarProductos();
-            String [] Datos;
+            String[] Datos;
 
             for (Object mListaProducto : mListaProductos) {
                 Datos = new String[4];
-                
-                mProducto = (Producto)mListaProducto;
+
+                mProducto = (Producto) mListaProducto;
                 Datos[0] = mProducto.getCodigo();
                 Datos[1] = mProducto.getNombre();
                 Datos[2] = "" + mProducto.getPrecio();
                 Datos[3] = mProducto.getDesc_Prod();
-                
-            
+
                 ModeloTabla.addRow(Datos);
-            } 
-            
+            }
+
             this.TBProductos = new javax.swing.JTable();
             this.TBProductos.setModel(ModeloTabla);
-            
+
             this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
             this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
-            
+
             if (this.TBProductos.getRowCount() > 0) {
                 this.TBProductos.setRowSelectionInterval(0, 0);
             }
-           
+
         } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
         mBD.desconectar();
     }
-    
-    void borrar(){
+
+    void borrar() {
         DefaultTableModel LimpiadoTabla = (DefaultTableModel) TBProductos.getModel();
         //Borramosla tabla...
-        int a = TBProductos.getRowCount()-1;
-        
-        for(int i = a; i>=0;i--) {
-            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        int a = TBProductos.getRowCount() - 1;
+
+        for (int i = a; i >= 0; i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount() - 1);
         }
     }
-    
+
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
         // TODO add your handling code here:
-        mProducto.setCodigo(this.TxtCodigo.getText());
-        if(mBD.conectar()) {
-            if (mBD.EliminarProducto(mProducto)) {
-                 //JOptionPane.showMessageDialog(null, "Producto eliminado con éxito...");
-                 borrar();
-                 setFilas_2();
-                 
-                this.TxtCodigo.setText("");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al eliminar...");
+        if (this.TxtCodigo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else {
+            mProducto.setCodigo(this.TxtCodigo.getText());
+            if (mBD.conectar()) {
+                if (mBD.EliminarProducto(mProducto)) {
+                    //JOptionPane.showMessageDialog(null, "Producto eliminado con éxito...");
+                    borrar();
+                    setFilas_2();
+
+                    this.TxtCodigo.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al eliminar...");
+                }
+                mBD.desconectar();
             }
-        mBD.desconectar();
         }
-        
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenuActionPerformed
@@ -242,46 +250,54 @@ public class FRM_Productos_Baja extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_BtnMenuActionPerformed
 
-    private void setFilas(){
-        if(mBD.conectar()){
+    private void TxtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtCodigoKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtCodigoKeyTyped
+
+    private void setFilas() {
+        if (mBD.conectar()) {
             ArrayList mListaProductos = mBD.ConsultarProductos();
-            String [] Datos;
-            
+            String[] Datos;
+
             ModeloTabla.addColumn("Codigo");
             ModeloTabla.addColumn("Nombre");
             ModeloTabla.addColumn("Precio");
             ModeloTabla.addColumn("Descripcion");
- 
+
             for (Object mListaProducto : mListaProductos) {
                 Datos = new String[4];
-                
-                mProducto = (Producto)mListaProducto;
+
+                mProducto = (Producto) mListaProducto;
                 Datos[0] = mProducto.getCodigo();
                 Datos[1] = mProducto.getNombre();
                 Datos[2] = "" + mProducto.getPrecio();
                 Datos[3] = mProducto.getDesc_Prod();
-                
-            
+
                 ModeloTabla.addRow(Datos);
-            } 
-            
+            }
+
             this.TBProductos = new javax.swing.JTable();
             this.TBProductos.setModel(ModeloTabla);
-            
+
             this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
             this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
-            
+
             if (this.TBProductos.getRowCount() > 0) {
                 this.TBProductos.setRowSelectionInterval(0, 0);
             }
-           
+
         } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
         mBD.desconectar();
     }
+
     /**
      * @param args the command line arguments
      */
