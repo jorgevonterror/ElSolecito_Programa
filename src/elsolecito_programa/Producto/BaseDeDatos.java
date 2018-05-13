@@ -78,13 +78,13 @@ public class BaseDeDatos {
             while (resultado.next()) {
                 mProducto = new Producto();
                 
-                mProducto.setId_producto(resultado.getInt("id_producto"));
+                 mProducto.setId_producto(resultado.getInt("id_producto"));
                 mProducto.setCodigo(resultado.getString("Codigo"));
                 mProducto.setNombre(resultado.getString("Nombre"));
                 mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
                 mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("Cantidad")));
-                mProducto.setId_proveedor("id_proveedor");
+                mProducto.setId_proveedor(resultado.getString("id_proveedor"));
                 
                 mListaProductos.add(mProducto);
 
