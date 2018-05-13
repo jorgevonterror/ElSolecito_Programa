@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +29,15 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
         setFilas();
         initComponents();
         this.setLocationRelativeTo(null);
+        Tabla_Deudores.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (Tabla_Deudores.getSelectedRow() != -1) {
+                    int fila = Tabla_Deudores.getSelectedRow();
+                    nombre_text.setText(Tabla_Deudores.getValueAt(fila, 1).toString());
+                }
+            }
+        });
     }
 
     BaseDeDatos conectar = new BaseDeDatos();

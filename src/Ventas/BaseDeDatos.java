@@ -28,8 +28,8 @@ public class BaseDeDatos {
     public boolean conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
-            //conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "");
+            //conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -61,10 +61,13 @@ public class BaseDeDatos {
             resultado = consulta.executeQuery("select * from productos;");
             while (resultado.next()) {
                 mProducto = new Producto();
+                mProducto.setId_producto(resultado.getInt("id_producto"));
                 mProducto.setCodigo(resultado.getString("Codigo"));
                 mProducto.setNombre(resultado.getString("Nombre"));
                 mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
+                mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("Cantidad")));
+                mProducto.setId_proveedor(resultado.getString("id_proveedor"));
 
                 mListaProducto.add(mProducto);
             }
@@ -85,11 +88,13 @@ public class BaseDeDatos {
 
             while (resultado.next()) {
                 mProducto = new Producto();
+                mProducto.setId_producto(resultado.getInt("id_producto"));
                 mProducto.setCodigo(resultado.getString("Codigo"));
                 mProducto.setNombre(resultado.getString("Nombre"));
                 mProducto.setPrecio(Float.parseFloat(resultado.getString("Precio")));
                 mProducto.setDesc_Prod(resultado.getString("Desc_Producto"));
-
+                mProducto.setId_proveedor(resultado.getString("id_proveedor"));
+                mProducto.setCantidadProducto(Integer.parseInt(resultado.getString("cantidad")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,43 +137,45 @@ public class BaseDeDatos {
         }
         return mVenta;
     }
-    
+
     public boolean AltaDetalleVenta(DetalleVenta mDetalleVenta) {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("insert into detalle_venta " + 
-                        "(id_detalle_venta, Cantida, Precio, id_producto, id_venta) " +
-                        "values (null,'" + mDetalleVenta.getCantidad() + "','" 
-                                        + mDetalleVenta.getPrecio() + "','" 
-                                        + mDetalleVenta.getProducto_id_Producto() + "','"
-                                        + mDetalleVenta.getVenta_id_Venta() + "');");
+            consulta.execute("insert into detalle_venta "
+                    + "(id_detalle_venta, Cantida, Precio, id_producto, id_venta) "
+                    + "values (null,'" + mDetalleVenta.getCantidad() + "','"
+                    + mDetalleVenta.getPrecio() + "','"
+                    + mDetalleVenta.getProducto_id_Producto() + "','"
+                    + mDetalleVenta.getVenta_id_Venta() + "');");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-    } 
+    }
+
     public boolean CambiosVenta(Venta mVenta, Venta nVenta) {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("update ventas set " + 
-                        "Total = '" + nVenta.getPrecioTotalVenta() +"'," +
-                        "folio = '" + nVenta.getFolio() + "'," +" Fecha = '" + nVenta.getFecha_venta()+ "'"
-                                +" WHERE folio = '" + mVenta.getFolio() + "';");  
+            consulta.execute("update ventas set "
+                    + "Total = '" + nVenta.getPrecioTotalVenta() + "',"
+                    + "folio = '" + nVenta.getFolio() + "'," + " Fecha = '" + nVenta.getFecha_venta() + "'"
+                    + " WHERE folio = '" + mVenta.getFolio() + "';");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
-        }     
-    } 
+        }
+    }
+
     public boolean AltaVenta(Venta mVenta) {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
-            consulta.execute("INSERT INTO ventas "  +
-                        "VALUES(null, '" + mVenta.getFecha_venta() + "', '" 
+            consulta.execute("INSERT INTO ventas "
+                    + "VALUES(null, '" + mVenta.getFecha_venta() + "', '"
                     + mVenta.getPrecioTotalVenta() + "', '" + mVenta.getFolio() + "');");
             return true;
         } catch (Exception e) {
@@ -176,14 +183,14 @@ public class BaseDeDatos {
             return false;
         }
     }
-    
+
     public int ConsultaIDVenta() {
         ArrayList mLista = new ArrayList();
-        Venta mVenta=null;
+        Venta mVenta = null;
         Statement consulta;
         ResultSet resultado;
-        int RegistroUltimo=0;
-        
+        int RegistroUltimo = 0;
+
         try {
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("SELECT MAX(id_venta) FROM ventas;");
@@ -194,7 +201,7 @@ public class BaseDeDatos {
             e.printStackTrace();
         }
         return RegistroUltimo;
-      }
+    }
     public String url = "jdbc:mysql://localhost:8889/BD_ElSolecito";
     public String user = "root";
     public String pass = "root";

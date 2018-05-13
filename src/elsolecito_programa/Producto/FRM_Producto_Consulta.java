@@ -26,6 +26,15 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
         setFilas();
         initComponents();
         this.setLocationRelativeTo(null);
+        TBProductos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (TBProductos.getSelectedRow() != -1) {
+                    int fila = TBProductos.getSelectedRow();
+                    TxtCodigo.setText(TBProductos.getValueAt(fila, 1).toString());
+                }
+            }
+        });
     }
 
     DefaultTableModel ModeloTabla = new DefaultTableModel();
@@ -205,14 +214,16 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
                 String[] Datos;
 
                 for (Object mListaProducto : mListaProductos) {
-                    Datos = new String[5];
+                    Datos = new String[7];
 
                     mProducto = (Producto) mListaProducto;
-                    Datos[0] = mProducto.getCodigo();
-                    Datos[1] = mProducto.getNombre();
-                    Datos[2] = "" + mProducto.getPrecio();
-                    Datos[3] = "" + mProducto.getCantidadProducto();
-                    Datos[4] = mProducto.getDesc_Prod();
+                    Datos[0] = "" + mProducto.getId_producto();
+                    Datos[1] = mProducto.getCodigo();
+                    Datos[2] = mProducto.getNombre();
+                    Datos[3] = "" + mProducto.getPrecio();
+                    Datos[4] = "" + mProducto.getCantidadProducto();
+                    Datos[5] = mProducto.getDesc_Prod();
+                    Datos[6] = mProducto.getId_proveedor();
 
                     ModeloTabla.addRow(Datos);
                 }
@@ -221,10 +232,12 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
                 this.TBProductos.setModel(ModeloTabla);
 
                 this.TBProductos.getColumnModel().getColumn(0).setPreferredWidth(50);
-                this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
-                this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
-                this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
-                this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(500);
+            this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
+            this.TBProductos.getColumnModel().getColumn(4).setPreferredWidth(500);
+            this.TBProductos.getColumnModel().getColumn(5).setPreferredWidth(600);
+            this.TBProductos.getColumnModel().getColumn(6).setPreferredWidth(600);
 
                 if (this.TBProductos.getRowCount() > 0) {
                     this.TBProductos.setRowSelectionInterval(0, 0);
@@ -254,21 +267,25 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
             ArrayList mListaProductos = mBD.ConsultarProductos();
             String[] Datos;
 
+            ModeloTabla.addColumn("id_producto");
             ModeloTabla.addColumn("Codigo");
             ModeloTabla.addColumn("Nombre");
             ModeloTabla.addColumn("Precio");
             ModeloTabla.addColumn("Cantidad");
             ModeloTabla.addColumn("Descripcion");
+            ModeloTabla.addColumn("id_proveedor");
 
             for (Object mListaProducto : mListaProductos) {
-                Datos = new String[5];
+                Datos = new String[7];
 
                 mProducto = (Producto) mListaProducto;
-                Datos[0] = mProducto.getCodigo();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = "" + mProducto.getPrecio();
-                Datos[3] = "" + mProducto.getCantidadProducto();
-                Datos[4] = mProducto.getDesc_Prod();
+                Datos[0] = "" + mProducto.getId_producto();
+                Datos[1] = mProducto.getCodigo();
+                Datos[2] = mProducto.getNombre();
+                Datos[3] = "" + mProducto.getPrecio();
+                Datos[4] = "" + mProducto.getCantidadProducto();
+                Datos[5] = mProducto.getDesc_Prod();
+                Datos[6] = mProducto.getId_proveedor();
 
                 ModeloTabla.addRow(Datos);
             }
@@ -280,7 +297,9 @@ public class FRM_Producto_Consulta extends javax.swing.JFrame {
             this.TBProductos.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.TBProductos.getColumnModel().getColumn(2).setPreferredWidth(100);
             this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
-            this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(500);
+            this.TBProductos.getColumnModel().getColumn(4).setPreferredWidth(500);
+            this.TBProductos.getColumnModel().getColumn(5).setPreferredWidth(600);
+            this.TBProductos.getColumnModel().getColumn(6).setPreferredWidth(600);
 
             if (this.TBProductos.getRowCount() > 0) {
                 this.TBProductos.setRowSelectionInterval(0, 0);

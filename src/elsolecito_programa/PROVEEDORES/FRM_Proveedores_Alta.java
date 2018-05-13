@@ -44,8 +44,8 @@ public class FRM_Proveedores_Alta extends javax.swing.JFrame {
                 if (TableConsultas.getSelectedRow() != -1) {
                     int fila = TableConsultas.getSelectedRow();
                     TXT_Folio.setText(TableConsultas.getValueAt(fila, 0).toString());
-                    TXTNombre.setText(TableConsultas.getValueAt(fila, 1).toString());
-                    TXTMarca.setText(TableConsultas.getValueAt(fila, 2).toString());
+                    TXTNombre.setText(TableConsultas.getValueAt(fila, 2).toString());
+                    TXTMarca.setText(TableConsultas.getValueAt(fila, 1).toString());
                 }
             }
         });

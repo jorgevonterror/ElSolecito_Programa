@@ -4,6 +4,8 @@ import elsolecito_programa.CLIENTES.ClientesDeudores;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /* 1. Distribucion de inventario en el local El Solecito.
@@ -29,6 +31,15 @@ public class FRM_Proveedores_Consultas extends javax.swing.JFrame {
         setFilas();
         initComponents();
         this.setLocationRelativeTo(null);
+        TableConsultas.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (TableConsultas.getSelectedRow() != -1) {
+                    int fila = TableConsultas.getSelectedRow();
+                    TXT_Nombre.setText(TableConsultas.getValueAt(fila, 2).toString());
+                }
+            }
+        });
     }
     DefaultTableModel modeloTabla = new DefaultTableModel();
     BaseDeDAtos mBD = new BaseDeDAtos();

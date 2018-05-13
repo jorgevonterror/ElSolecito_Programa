@@ -59,10 +59,12 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent e) {
                 if (TBProductos.getSelectedRow() != -1) {
                     int fila = TBProductos.getSelectedRow();
+                    TXT_CantidadP.setText(TBProductos.getValueAt(fila, 4).toString());
+                    TxtDescProducto.setText(TBProductos.getValueAt(fila, 5).toString());
                     TxtPrecio.setText(TBProductos.getValueAt(fila, 3).toString());
-                    TxtDescProducto.setText(TBProductos.getValueAt(fila, 2).toString());
-                    TxtNombre.setText(TBProductos.getValueAt(fila, 1).toString());
-                    TxtCodigo.setText(TBProductos.getValueAt(fila, 0).toString());
+                    TxtNombre.setText(TBProductos.getValueAt(fila, 2).toString());
+                    TxtCodigo.setText(TBProductos.getValueAt(fila, 1).toString());
+                    No_Proveedor.setText(TBProductos.getValueAt(fila, 6).toString());
                 }
             }
         });
@@ -354,24 +356,25 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
         if (mBD.conectar()) {
             ArrayList mListaProductos = mBD.ConsultarProductos();
             String[] Datos;
-
+            ModeloTabla.addColumn("id_producto");
             ModeloTabla.addColumn("Codigo");
             ModeloTabla.addColumn("Nombre");
             ModeloTabla.addColumn("Precio");
             ModeloTabla.addColumn("Cantidad");
             ModeloTabla.addColumn("Descripcion");
-            ModeloTabla.addColumn("id");
+            ModeloTabla.addColumn("id_proveedor");
 
             for (Object mListaProducto : mListaProductos) {
-                Datos = new String[6];
+                Datos = new String[7];
 
                 mProducto = (Producto) mListaProducto;
-                Datos[0] = mProducto.getCodigo();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = "" + mProducto.getPrecio();
-                Datos[3] = "" + mProducto.getCantidadProducto();
-                Datos[4] = mProducto.getDesc_Prod();
-                Datos[5] = mProducto.getId_proveedor();
+                Datos[0] = "" + mProducto.getId_producto();
+                Datos[1] = mProducto.getCodigo();
+                Datos[2] = mProducto.getNombre();
+                Datos[3] = "" + mProducto.getPrecio();
+                Datos[4] = "" + mProducto.getCantidadProducto();
+                Datos[5] = mProducto.getDesc_Prod();
+                Datos[6] = mProducto.getId_proveedor();
 
                 ModeloTabla.addRow(Datos);
             }
@@ -385,6 +388,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
             this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
             this.TBProductos.getColumnModel().getColumn(4).setPreferredWidth(500);
             this.TBProductos.getColumnModel().getColumn(5).setPreferredWidth(600);
+            this.TBProductos.getColumnModel().getColumn(6).setPreferredWidth(600);
 
             if (this.TBProductos.getRowCount() > 0) {
                 this.TBProductos.setRowSelectionInterval(0, 0);
@@ -405,12 +409,13 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
                 Datos = new String[6];
 
                 mProducto = (Producto) mListaProducto;
-                Datos[0] = mProducto.getCodigo();
-                Datos[1] = mProducto.getNombre();
-                Datos[2] = "" + mProducto.getPrecio();
-                Datos[3] = "" + mProducto.getCantidadProducto();
-                Datos[4] = mProducto.getDesc_Prod();
-                Datos[5] = mProducto.getId_proveedor();
+                Datos[0] = "" + mProducto.getId_producto();
+                Datos[1] = mProducto.getCodigo();
+                Datos[2] = mProducto.getNombre();
+                Datos[3] = "" + mProducto.getPrecio();
+                Datos[4] = "" + mProducto.getCantidadProducto();
+                Datos[5] = mProducto.getDesc_Prod();
+                Datos[6] = mProducto.getId_proveedor();
 
                 ModeloTabla.addRow(Datos);
             }
@@ -424,7 +429,8 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
             this.TBProductos.getColumnModel().getColumn(3).setPreferredWidth(400);
             this.TBProductos.getColumnModel().getColumn(4).setPreferredWidth(500);
             this.TBProductos.getColumnModel().getColumn(5).setPreferredWidth(600);
-
+            this.TBProductos.getColumnModel().getColumn(6).setPreferredWidth(600);
+            
             if (this.TBProductos.getRowCount() > 0) {
                 this.TBProductos.setRowSelectionInterval(0, 0);
             }

@@ -140,6 +140,7 @@ public class FRM_Recargas extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel7 = new javax.swing.JLabel();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -160,6 +161,17 @@ public class FRM_Recargas extends javax.swing.JFrame {
         jLabel7.setBackground(new java.awt.Color(102, 255, 0));
         jLabel7.setFont(new java.awt.Font("Snap ITC", 0, 18)); // NOI18N
         jLabel7.setText("Recargas!!");
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -396,24 +408,27 @@ public class FRM_Recargas extends javax.swing.JFrame {
     }
     private void TXTrecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXTrecargarActionPerformed
         // FRM_Recargas...
+        if (this.TXTmonto.getText().equals("") || this.TXTlada.getText().equals("") || this.TXTnumerotelefono.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else {
+            TA.setMonto(Integer.parseInt(this.TXTmonto.getText()));
+            TA.setnumeroT(this.TXTlada.getText() + this.TXTnumerotelefono.getText());
+            TA.setCompañia(this.CBXcompañia.getItemAt(this.CBXcompañia.getSelectedIndex()).toString());
 
-        TA.setMonto(Integer.parseInt(this.TXTmonto.getText()));
-        TA.setnumeroT(this.TXTlada.getText() + this.TXTnumerotelefono.getText());
-        TA.setCompañia(this.CBXcompañia.getItemAt(this.CBXcompañia.getSelectedIndex()).toString());
-
-        if (mBD.conectar()) {
-            if (mBD.GuardarRecarga(TA)) {
-                JOptionPane.showMessageDialog(null, "Recarga con éxito...");
-                borrar();
-                this.TXTmonto.setText("");
-                this.TXTnumerotelefono.setText("");
-                this.CBXcompañia.setSelectedItem("");
-                this.TXTlada.setText("");
-                setFilas_2();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al guardar...");
+            if (mBD.conectar()) {
+                if (mBD.GuardarRecarga(TA)) {
+                    JOptionPane.showMessageDialog(null, "Recarga con éxito...");
+                    borrar();
+                    this.TXTmonto.setText("");
+                    this.TXTnumerotelefono.setText("");
+                    this.CBXcompañia.setSelectedItem("");
+                    this.TXTlada.setText("");
+                    setFilas_2();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al guardar...");
+                }
+                mBD.desconectar();
             }
-            mBD.desconectar();
         }
     }//GEN-LAST:event_TXTrecargarActionPerformed
 
@@ -431,7 +446,7 @@ public class FRM_Recargas extends javax.swing.JFrame {
         JasperReport jr = null;
 
         try {
-            
+
             jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
             JasperViewer jv = new JasperViewer(jp, false);
@@ -498,6 +513,7 @@ public class FRM_Recargas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
