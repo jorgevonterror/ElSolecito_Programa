@@ -28,6 +28,7 @@ public class FRM_Reportes extends javax.swing.JFrame {
         String Tipo = "";
         String path = "";
         String Mes = ""; 
+        String folio = "";
         JasperReport jr = null;
     /**
      * Creates new form FRM_Reportes
@@ -37,7 +38,7 @@ public class FRM_Reportes extends javax.swing.JFrame {
         LblTC.setVisible(false);
         CBXcompañia.setVisible(false);
         LbMes.setVisible(false);
-        TxtMes.setVisible(false);
+        TxFolio.setVisible(false);
         
     }
     
@@ -61,7 +62,9 @@ public class FRM_Reportes extends javax.swing.JFrame {
         CBXcompañia = new javax.swing.JComboBox();
         BtnGenerar = new javax.swing.JButton();
         LbMes = new javax.swing.JLabel();
-        TxtMes = new javax.swing.JTextField();
+        TxFolio = new javax.swing.JTextField();
+        LbFolio = new javax.swing.JLabel();
+        TxtMes1 = new javax.swing.JTextField();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -133,6 +136,11 @@ public class FRM_Reportes extends javax.swing.JFrame {
 
         LbMes.setText("Mes");
 
+        TxFolio.setName("TxtFolio"); // NOI18N
+
+        LbFolio.setText("Folio ");
+        LbFolio.setName("LbFolio"); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -142,22 +150,29 @@ public class FRM_Reportes extends javax.swing.JFrame {
                 .addComponent(LblTC)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CBXcompañia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                 .addComponent(LbMes)
-                .addGap(18, 18, 18)
-                .addComponent(TxtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64))
+                .addGap(178, 178, 178))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(CBXTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(CBXTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(LbFolio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TxFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(170, 170, 170)
                         .addComponent(BtnGenerar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(339, Short.MAX_VALUE)
+                    .addComponent(TxtMes1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(54, 54, 54)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,16 +180,22 @@ public class FRM_Reportes extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(CBXTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CBXTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LbFolio)
+                    .addComponent(TxFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CBXcompañia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LblTC)
-                    .addComponent(TxtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LbMes))
                 .addGap(35, 35, 35)
                 .addComponent(BtnGenerar)
                 .addContainerGap(30, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(76, 76, 76)
+                    .addComponent(TxtMes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(79, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -212,25 +233,44 @@ public class FRM_Reportes extends javax.swing.JFrame {
                 LblTC.setVisible(true);
                 CBXcompañia.setVisible(true);
                 LbMes.setVisible(false);
-                TxtMes.setVisible(false);
+                TxFolio.setVisible(false);
                 break;
                     
             case "Ventas por mes":
                 LblTC.setVisible(false);
                 CBXcompañia.setVisible(false);
                 LbMes.setVisible(true);
-                TxtMes.setVisible(true);
+                TxFolio.setVisible(true);
                 
                 
                 break;
 
             case "Ventas de dia":
                 LbMes.setVisible(false);
-                TxtMes.setVisible(false);
+                TxFolio.setVisible(false);
                 LblTC.setVisible(false);
                 CBXcompañia.setVisible(false);
                 
             break;
+            
+            case "Detalle de la ventas":
+                LbMes.setVisible(false);
+                TxFolio.setVisible(false);
+                LblTC.setVisible(false);
+                CBXcompañia.setVisible(false);
+                LbFolio.setVisible(true);
+                TxFolio.setVisible(true);
+            break;
+            
+            case "Detalle de la compra":
+                LbMes.setVisible(false);
+                TxFolio.setVisible(false);
+                LblTC.setVisible(false);
+                CBXcompañia.setVisible(false);
+                LbFolio.setVisible(true);
+                TxFolio.setVisible(true);
+            break;
+            
         }
     }//GEN-LAST:event_CBXTipoActionPerformed
 
@@ -264,7 +304,7 @@ public class FRM_Reportes extends javax.swing.JFrame {
                 break;
                     
             case "Ventas por mes": 
-            Mes = TxtMes.getText();        
+            Mes = TxFolio.getText();        
             Parametro = new HashMap();
             path = "";
             path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_VentasPorMes.jasper";
@@ -281,6 +321,45 @@ public class FRM_Reportes extends javax.swing.JFrame {
                 Logger.getLogger(FRM_Reportes.class.getName()).log(Level.SEVERE, null, ex);
             }                
             break;
+            
+            case "Detalle de la compra":
+            folio = TxFolio.getText();
+            Parametro = new HashMap();
+            path = "";
+            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_Detalle_Compra.jasper";
+            jr = null;
+            try {
+                Parametro.put("Buscar", folio);
+                jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                JasperPrint jp = JasperFillManager.fillReport(jr, Parametro, mBD.conectare());
+                JasperViewer jv = new JasperViewer(jp, false);
+                jv.setVisible(true);
+                jv.setTitle(path);
+                this.dispose();
+            } catch (JRException ex) {
+                Logger.getLogger(FRM_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+            }                
+            break;
+            case "Detalle de la venta":
+            folio = TxFolio.getText();
+            Parametro = new HashMap();
+            path = "";
+            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_Detalle_Venta.jasper";
+            jr = null;
+            try {
+                Parametro.put("Buscar", folio);
+                jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                JasperPrint jp = JasperFillManager.fillReport(jr, Parametro, mBD.conectare());
+                JasperViewer jv = new JasperViewer(jp, false);
+                jv.setVisible(true);
+                jv.setTitle(path);
+                this.dispose();
+            } catch (JRException ex) {
+                Logger.getLogger(FRM_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+            }                
+            break;
+            
+            
 
             case "Ventas de dia":
                 /*Dia = TxtDia.getText();        
@@ -346,9 +425,11 @@ public class FRM_Reportes extends javax.swing.JFrame {
     private javax.swing.JButton BtnGenerar;
     private javax.swing.JComboBox<String> CBXTipo;
     private javax.swing.JComboBox CBXcompañia;
+    private javax.swing.JLabel LbFolio;
     private javax.swing.JLabel LbMes;
     private javax.swing.JLabel LblTC;
-    private javax.swing.JTextField TxtMes;
+    private javax.swing.JTextField TxFolio;
+    private javax.swing.JTextField TxtMes1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
