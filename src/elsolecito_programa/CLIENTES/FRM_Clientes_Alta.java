@@ -6,6 +6,7 @@
 package elsolecito_programa.CLIENTES;
 
 import elsolecito_programa.CLIENTES.BaseDeDatos.*;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,6 +56,7 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
     DefaultTableModel modeloTabla = new DefaultTableModel();
     BaseDeDatos mBD = new BaseDeDatos();
     ClientesDeudores CD = new ClientesDeudores();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,6 +67,7 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -137,11 +140,28 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre:");
 
+        TXT_Folio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_FolioKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Monto:");
 
         TXT_Nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TXT_NombreActionPerformed(evt);
+            }
+        });
+        TXT_Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_NombreKeyTyped(evt);
+            }
+        });
+
+        TXT_Monto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_MontoKeyTyped(evt);
             }
         });
 
@@ -242,33 +262,31 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private Connection conexion;
-    ResultSet rs= null;
+    ResultSet rs = null;
     Statement statement = null;
-    
-    
-    
+
     //ESTE CUÑAAA
-    void borrar(){
+    void borrar() {
         DefaultTableModel LimpiadoTabla = (DefaultTableModel) Tabla_Deudores_Reg.getModel();
         //Borramosla tabla...
-        int a = Tabla_Deudores_Reg.getRowCount()-1;
-        
-        for(int i = a; i>=0;i--) {
-            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        int a = Tabla_Deudores_Reg.getRowCount() - 1;
+
+        for (int i = a; i >= 0; i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount() - 1);
         }
     }
-    
+
     //Preguntar de la actualización en tabla.
-    void consulta(){
+    void consulta() {
         ArrayList mListaClientes = new ArrayList();
         ClientesDeudores mClientes = null;
         Statement consulta;
         ResultSet resultado;
-        
+
         try {
             consulta = conexion.createStatement();
             resultado = consulta.executeQuery("select * from clientes;");
-            
+
             while (resultado.next()) {
                 mClientes = new ClientesDeudores();
                 mClientes.setNombre(resultado.getString("Nombre"));
@@ -280,77 +298,78 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
-    private void setFilas(){
-        if(mBD.conectar()){
-            ArrayList mListaClientes = mBD.consultarClientes();  
-            String [] Datos;
-            
+
+    private void setFilas() {
+        if (mBD.conectar()) {
+            ArrayList mListaClientes = mBD.consultarClientes();
+            String[] Datos;
+
             modeloTabla.addColumn("Folio");
             modeloTabla.addColumn("Nombre");
             modeloTabla.addColumn("Monto");
- 
+
             for (Object mListaCliente : mListaClientes) {
                 Datos = new String[3];
-                
-                CD = (ClientesDeudores)mListaCliente;
+
+                CD = (ClientesDeudores) mListaCliente;
                 Datos[0] = CD.getFolio();
                 Datos[1] = CD.getNombre();
                 Datos[2] = "" + CD.getMonto();
-            
+
                 modeloTabla.addRow(Datos);
                 //consulta();
-            } 
-            
+            }
+
             this.Tabla_Deudores_Reg = new javax.swing.JTable();
             this.Tabla_Deudores_Reg.setModel(modeloTabla);
-            
+
             this.Tabla_Deudores_Reg.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.Tabla_Deudores_Reg.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.Tabla_Deudores_Reg.getColumnModel().getColumn(2).setPreferredWidth(400);
-            
+
             if (this.Tabla_Deudores_Reg.getRowCount() > 0) {
                 this.Tabla_Deudores_Reg.setRowSelectionInterval(0, 0);
             }
-           
+
         } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
         mBD.desconectar();
     }
-     private void setFilas_2(){
-        if(mBD.conectar()){
-            ArrayList mListaClientes = mBD.consultarClientes();  
-            String [] Datos;
- 
+
+    private void setFilas_2() {
+        if (mBD.conectar()) {
+            ArrayList mListaClientes = mBD.consultarClientes();
+            String[] Datos;
+
             for (Object mListaCliente : mListaClientes) {
                 Datos = new String[3];
-                
-                CD = (ClientesDeudores)mListaCliente;
+
+                CD = (ClientesDeudores) mListaCliente;
                 Datos[0] = CD.getFolio();
                 Datos[1] = CD.getNombre();
                 Datos[2] = "" + CD.getMonto();
-            
+
                 modeloTabla.addRow(Datos);
-            } 
-            
+            }
+
             this.Tabla_Deudores_Reg = new javax.swing.JTable();
             this.Tabla_Deudores_Reg.setModel(modeloTabla);
-            
+
             this.Tabla_Deudores_Reg.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.Tabla_Deudores_Reg.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.Tabla_Deudores_Reg.getColumnModel().getColumn(2).setPreferredWidth(400);
-            
+
             if (this.Tabla_Deudores_Reg.getRowCount() > 0) {
                 this.Tabla_Deudores_Reg.setRowSelectionInterval(0, 0);
             }
-           
+
         } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
         mBD.desconectar();
     }
-    
+
     private void TXT_NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_NombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_NombreActionPerformed
@@ -361,23 +380,27 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Alta de clientes deudores...       
-        CD.setNombre(this.TXT_Nombre.getText());
-        CD.setMonto(Integer.parseInt(this.TXT_Monto.getText()));
-        CD.setFolio(this.TXT_Folio.getText());
-        
-        if(mBD.conectar()) {
-            if (mBD.GuardarClientes(CD)) {
-                //JOptionPane.showMessageDialog(null, "Cliente deudor guardado con éxito...");
-                borrar();
-                this.TXT_Nombre.setText("");
-                this.TXT_Monto.setText("");
-                this.TXT_Folio.setText("");
-                setFilas_2();
-            } else {
-                 JOptionPane.showMessageDialog(null, "Error al guardar...");
+        // Alta de clientes deudores...     
+        if (this.TXT_Nombre.getText().equals("") || this.TXT_Monto.getText().equals("") || this.TXT_Folio.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else {
+            CD.setNombre(this.TXT_Nombre.getText());
+            CD.setMonto(Integer.parseInt(this.TXT_Monto.getText()));
+            CD.setFolio(this.TXT_Folio.getText());
+
+            if (mBD.conectar()) {
+                if (mBD.GuardarClientes(CD)) {
+                    //JOptionPane.showMessageDialog(null, "Cliente deudor guardado con éxito...");
+                    borrar();
+                    this.TXT_Nombre.setText("");
+                    this.TXT_Monto.setText("");
+                    this.TXT_Folio.setText("");
+                    setFilas_2();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al guardar...");
+                }
+                mBD.desconectar();
             }
-        mBD.desconectar();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -385,11 +408,11 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
         // Para los reportes:
         //En la variable path se debe de colocar la ruta del archivo .jasper
         //que genera el archivo .xml
-        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito_Programa/src/elsolecito_programa/CLIENTES/Reporte_Alta_CD.jasper";
+        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/elsolecito_programa/CLIENTES/Reporte_Alta_CD.jasper";
         JasperReport jr = null;
-        
+
         try {
-            jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
@@ -399,6 +422,30 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
             Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void TXT_NombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_NombreKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if ((error < 'A' || error > 'Z') && (error < 'a' || error > 'z') && (error != KeyEvent.VK_SPACE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TXT_NombreKeyTyped
+
+    private void TXT_MontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_MontoKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TXT_MontoKeyTyped
+
+    private void TXT_FolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_FolioKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TXT_FolioKeyTyped
 
     /**
      * @param args the command line arguments
@@ -452,5 +499,6 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

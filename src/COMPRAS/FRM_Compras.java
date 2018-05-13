@@ -786,11 +786,10 @@ public class FRM_Compras extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito_Programa/src/COMPRAS/Reporte_Compra.jasper";
+        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/COMPRAS/Reporte_Compra.jasper";
         JasperReport jr = null;
 
         try {
-            
             jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
             JasperViewer jv = new JasperViewer(jp, false);

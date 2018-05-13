@@ -5,6 +5,7 @@
  */
 package elsolecito_programa.CLIENTES;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -40,84 +41,87 @@ public class FRM_Clientes_Modificar extends javax.swing.JFrame {
     DefaultTableModel modeloTabla = new DefaultTableModel();
     BaseDeDatos mBD = new BaseDeDatos();
     ClientesDeudores CD = new ClientesDeudores();
-    
-    private void setFilas(){
-        if(mBD.conectar()){
-            ArrayList mListaClientes = mBD.consultarClientes();  
-            String [] Datos;
-            
+
+    private void setFilas() {
+        if (mBD.conectar()) {
+            ArrayList mListaClientes = mBD.consultarClientes();
+            String[] Datos;
+
             modeloTabla.addColumn("Folio");
             modeloTabla.addColumn("Nombre");
             modeloTabla.addColumn("Monto");
- 
+
             for (Object mListaCliente : mListaClientes) {
                 Datos = new String[3];
-                
-                CD = (ClientesDeudores)mListaCliente;
+
+                CD = (ClientesDeudores) mListaCliente;
                 Datos[0] = CD.getFolio();
                 Datos[1] = CD.getNombre();
                 Datos[2] = "" + CD.getMonto();
-            
+
                 modeloTabla.addRow(Datos);
-            } 
-            
+            }
+
             this.Tabla_Deudores = new javax.swing.JTable();
             this.Tabla_Deudores.setModel(modeloTabla);
-            
+
             this.Tabla_Deudores.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.Tabla_Deudores.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.Tabla_Deudores.getColumnModel().getColumn(2).setPreferredWidth(400);
-            
+
             if (this.Tabla_Deudores.getRowCount() > 0) {
                 this.Tabla_Deudores.setRowSelectionInterval(0, 0);
             }
-           
+
         } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
         mBD.desconectar();
     }
-    void borrar(){
+
+    void borrar() {
         DefaultTableModel LimpiadoTabla = (DefaultTableModel) Tabla_Deudores.getModel();
         //Borramosla tabla...
-        int a = Tabla_Deudores.getRowCount()-1;
-        
-        for(int i = a; i>=0;i--) {
-            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        int a = Tabla_Deudores.getRowCount() - 1;
+
+        for (int i = a; i >= 0; i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount() - 1);
         }
     }
-    private void setFilas_2(){
-        if(mBD.conectar()){
-            ArrayList mListaClientes = mBD.consultarClientes();  
-            String [] Datos;
- 
+
+    private void setFilas_2() {
+        if (mBD.conectar()) {
+            ArrayList mListaClientes = mBD.consultarClientes();
+            String[] Datos;
+
             for (Object mListaCliente : mListaClientes) {
                 Datos = new String[3];
-                
-                CD = (ClientesDeudores)mListaCliente;
+
+                CD = (ClientesDeudores) mListaCliente;
                 Datos[0] = CD.getFolio();
                 Datos[1] = CD.getNombre();
                 Datos[2] = "" + CD.getMonto();
-            
+
                 modeloTabla.addRow(Datos);
-            } 
-            
+            }
+
             this.Tabla_Deudores = new javax.swing.JTable();
             this.Tabla_Deudores.setModel(modeloTabla);
-            
+
             this.Tabla_Deudores.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.Tabla_Deudores.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.Tabla_Deudores.getColumnModel().getColumn(2).setPreferredWidth(400);
-            
+
             if (this.Tabla_Deudores.getRowCount() > 0) {
                 this.Tabla_Deudores.setRowSelectionInterval(0, 0);
             }
-           
+
         } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
         mBD.desconectar();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -226,9 +230,27 @@ public class FRM_Clientes_Modificar extends javax.swing.JFrame {
 
         jLabel5.setText("Folio:");
 
+        TXT_Folio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_FolioKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Nombre:");
 
         jLabel3.setText("Monto:");
+
+        TXT_Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_NombreKeyTyped(evt);
+            }
+        });
+
+        TXT_Monto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_MontoKeyTyped(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (User edit).jpg"))); // NOI18N
         jButton1.setText("Modificar");
@@ -325,23 +347,27 @@ public class FRM_Clientes_Modificar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ClientesDeudores nClientesDeudores = new ClientesDeudores();
-        nClientesDeudores.setNombre(this.TXT_Nombre.getText());
-        nClientesDeudores.setMonto(Integer.parseInt(this.TXT_Monto.getText()));
-        nClientesDeudores.setFolio(this.TXT_Folio.getText());
+        if (this.TXT_Folio.getText().equals("") || this.TXT_Monto.getText().equals("") || this.TXT_Nombre.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else {
+            ClientesDeudores nClientesDeudores = new ClientesDeudores();
+            nClientesDeudores.setNombre(this.TXT_Nombre.getText());
+            nClientesDeudores.setMonto(Integer.parseInt(this.TXT_Monto.getText()));
+            nClientesDeudores.setFolio(this.TXT_Folio.getText());
 
-        if(mBD.conectar()) {
-            if(mBD.modificarClientes(CD, nClientesDeudores)){
-                //JOptionPane.showMessageDialog(null, "Cliente modificado con éxito...");
-                this.TXT_Folio.setText("");
-                this.TXT_Nombre.setText("");
-                this.TXT_Monto.setText("");
-                borrar();
-                setFilas_2();
-            } else {
-                 JOptionPane.showMessageDialog(null, "Error al modificar...");
+            if (mBD.conectar()) {
+                if (mBD.modificarClientes(CD, nClientesDeudores)) {
+                    //JOptionPane.showMessageDialog(null, "Cliente modificado con éxito...");
+                    this.TXT_Folio.setText("");
+                    this.TXT_Nombre.setText("");
+                    this.TXT_Monto.setText("");
+                    borrar();
+                    setFilas_2();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al modificar...");
+                }
+                mBD.desconectar();
             }
-            mBD.desconectar();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -349,6 +375,24 @@ public class FRM_Clientes_Modificar extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void TXT_NombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_NombreKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if ((error < 'A'|| error > 'Z') &&(error < 'a'|| error > 'z') && (error != KeyEvent.VK_SPACE))evt.consume(); 
+    }//GEN-LAST:event_TXT_NombreKeyTyped
+
+    private void TXT_MontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_MontoKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0'|| error > '9') evt.consume(); 
+    }//GEN-LAST:event_TXT_MontoKeyTyped
+
+    private void TXT_FolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_FolioKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0'|| error > '9') evt.consume(); 
+    }//GEN-LAST:event_TXT_FolioKeyTyped
 
     /**
      * @param args the command line arguments

@@ -242,6 +242,12 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
         jLabel1.setText("Folio:");
 
+        TXT_Folio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_FolioKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Nombre:");
 
         LB_Nombre.setText("jLabel3");
@@ -601,7 +607,8 @@ public class FRM_Ventas extends javax.swing.JFrame {
         JasperReport jr = null;
 
         try {
-            jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+
+            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
@@ -622,6 +629,12 @@ public class FRM_Ventas extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void TXT_FolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_FolioKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0'|| error > '9') evt.consume(); 
+    }//GEN-LAST:event_TXT_FolioKeyTyped
 
     /**
      * @param args the command line arguments

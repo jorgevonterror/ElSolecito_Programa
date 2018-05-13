@@ -6,6 +6,7 @@
 package elsolecito_programa.CLIENTES;
 
 import elsolecito_programa.Producto.Producto;
+import java.awt.event.KeyEvent;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,61 +28,63 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
+
     BaseDeDatos conectar = new BaseDeDatos();
     Connection cn;
     CallableStatement cts;
     ResultSet r;
-    
+
     DefaultTableModel modeloTabla = new DefaultTableModel();
     BaseDeDatos mBD = new BaseDeDatos();
     ClientesDeudores CD = new ClientesDeudores();
-    
-    void borrar(){
+
+    void borrar() {
         DefaultTableModel LimpiadoTabla = (DefaultTableModel) Tabla_Deudores.getModel();
         //Borramosla tabla...
-        int a = Tabla_Deudores.getRowCount()-1;
-        
-        for(int i = a; i>=0;i--) {
-            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount()-1);
+        int a = Tabla_Deudores.getRowCount() - 1;
+
+        for (int i = a; i >= 0; i--) {
+            LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount() - 1);
         }
     }
-    private void setFilas(){
-        if(mBD.conectar()){
-            ArrayList mListaClientes = mBD.consultarClientes();  
-            String [] Datos;
-            
+
+    private void setFilas() {
+        if (mBD.conectar()) {
+            ArrayList mListaClientes = mBD.consultarClientes();
+            String[] Datos;
+
             modeloTabla.addColumn("Folio");
             modeloTabla.addColumn("Nombre");
             modeloTabla.addColumn("Monto");
- 
+
             for (Object mListaCliente : mListaClientes) {
                 Datos = new String[3];
-                
-                CD = (ClientesDeudores)mListaCliente;
+
+                CD = (ClientesDeudores) mListaCliente;
                 Datos[0] = CD.getFolio();
                 Datos[1] = CD.getNombre();
                 Datos[2] = "" + CD.getMonto();
-            
+
                 modeloTabla.addRow(Datos);
-            } 
-            
+            }
+
             this.Tabla_Deudores = new javax.swing.JTable();
             this.Tabla_Deudores.setModel(modeloTabla);
-            
+
             this.Tabla_Deudores.getColumnModel().getColumn(0).setPreferredWidth(50);
             this.Tabla_Deudores.getColumnModel().getColumn(1).setPreferredWidth(100);
             this.Tabla_Deudores.getColumnModel().getColumn(2).setPreferredWidth(400);
-            
+
             if (this.Tabla_Deudores.getRowCount() > 0) {
                 this.Tabla_Deudores.setRowSelectionInterval(0, 0);
             }
-           
+
         } else {
-                JOptionPane.showMessageDialog(null, "Error al consultar...");
-            }
+            JOptionPane.showMessageDialog(null, "Error al consultar...");
+        }
         mBD.desconectar();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -156,6 +159,12 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
 
         jLabel1.setText("Ingrese el nombre:");
 
+        nombre_text.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nombre_textKeyTyped(evt);
+            }
+        });
+
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (Search).jpg"))); // NOI18N
         jButton2.setText("Buscar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -222,41 +231,48 @@ public class FRM_Clientes_Consulta extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String nombre = nombre_text.getText();
-        
-        borrar();
-        if(mBD.conectar()){
-            ArrayList mListaClientes = mBD.ConsultarEspecifica(nombre);  
-            String [] Datos;
-
- 
-            for (Object mListaCliente : mListaClientes) {
-                Datos = new String[3];
-                
-                CD = (ClientesDeudores)mListaCliente;
-                Datos[0] = CD.getFolio();
-                Datos[1] = CD.getNombre();
-                Datos[2] = "" + CD.getMonto();
-            
-                modeloTabla.addRow(Datos);
-            } 
-            
-            this.Tabla_Deudores = new javax.swing.JTable();
-            this.Tabla_Deudores.setModel(modeloTabla);
-            
-            this.Tabla_Deudores.getColumnModel().getColumn(0).setPreferredWidth(50);
-            this.Tabla_Deudores.getColumnModel().getColumn(1).setPreferredWidth(100);
-            this.Tabla_Deudores.getColumnModel().getColumn(2).setPreferredWidth(400);
-            
-            if (this.Tabla_Deudores.getRowCount() > 0) {
-                this.Tabla_Deudores.setRowSelectionInterval(0, 0);
-            }
-           
+        if (this.nombre_text.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
         } else {
+            borrar();
+            if (mBD.conectar()) {
+                ArrayList mListaClientes = mBD.ConsultarEspecifica(nombre);
+                String[] Datos;
+
+                for (Object mListaCliente : mListaClientes) {
+                    Datos = new String[3];
+
+                    CD = (ClientesDeudores) mListaCliente;
+                    Datos[0] = CD.getFolio();
+                    Datos[1] = CD.getNombre();
+                    Datos[2] = "" + CD.getMonto();
+
+                    modeloTabla.addRow(Datos);
+                }
+
+                this.Tabla_Deudores = new javax.swing.JTable();
+                this.Tabla_Deudores.setModel(modeloTabla);
+
+                this.Tabla_Deudores.getColumnModel().getColumn(0).setPreferredWidth(50);
+                this.Tabla_Deudores.getColumnModel().getColumn(1).setPreferredWidth(100);
+                this.Tabla_Deudores.getColumnModel().getColumn(2).setPreferredWidth(400);
+
+                if (this.Tabla_Deudores.getRowCount() > 0) {
+                    this.Tabla_Deudores.setRowSelectionInterval(0, 0);
+                }
+
+            } else {
                 JOptionPane.showMessageDialog(null, "Error al consultar...");
             }
-        mBD.desconectar();
-                                               
+            mBD.desconectar();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void nombre_textKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombre_textKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if ((error < 'A'|| error > 'Z') &&(error < 'a'|| error > 'z') && (error != KeyEvent.VK_SPACE))evt.consume(); 
+    }//GEN-LAST:event_nombre_textKeyTyped
 
     /**
      * @param args the command line arguments

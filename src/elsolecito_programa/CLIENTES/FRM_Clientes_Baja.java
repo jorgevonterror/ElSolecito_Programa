@@ -100,6 +100,12 @@ public class FRM_Clientes_Baja extends javax.swing.JFrame {
 
         jLabel2.setText("Ingrese el folio:");
 
+        TXT_Folio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_FolioKeyTyped(evt);
+            }
+        });
+
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16 (User delete).jpg"))); // NOI18N
         jButton1.setText("Borrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -254,19 +260,29 @@ public class FRM_Clientes_Baja extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        CD.setFolio(this.TXT_Folio.getText());
-        if(mBD.conectar()) {
-            if (mBD.eliminarClientes(CD)) {
-                 //JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito...");
-                this.TXT_Folio.setText("");
-                 borrar();
-                 setFilas_2();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al eliminar...");
+        if (this.TXT_Folio.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        }else{
+            CD.setFolio(this.TXT_Folio.getText());
+            if (mBD.conectar()) {
+                if (mBD.eliminarClientes(CD)) {
+                    //JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito...");
+                    this.TXT_Folio.setText("");
+                    borrar();
+                    setFilas_2();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al eliminar...");
+                }
+                mBD.desconectar();
             }
-        mBD.desconectar();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void TXT_FolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_FolioKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0'|| error > '9') evt.consume(); 
+    }//GEN-LAST:event_TXT_FolioKeyTyped
 
     /**
      * @param args the command line arguments
