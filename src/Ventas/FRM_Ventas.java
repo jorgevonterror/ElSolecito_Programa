@@ -624,14 +624,12 @@ public class FRM_Ventas extends javax.swing.JFrame {
             mBD.conectar();
             Producto mProductoOld = mBD.ConsultaEspecificaProducto(TXT_Folio.getText());
             mBD.desconectar();
-            
+
             if (mProductoOld.getCantidadProducto() < Integer.parseInt(TXT_Cantidad.getText())) {
                 JOptionPane.showMessageDialog(null, "No se cuenta con esa cantidad de prducto");
-            }
-            else{
-                    //Restamos la cantidad.
+            } else {
+                //Restamos la cantidad.
                 CantidadNueva = mProductoOld.getCantidadProducto() - Integer.parseInt(TXT_Cantidad.getText());
-                
 
                 nProducto.setNombre(LB_Nombre.getText());
 
@@ -662,19 +660,18 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
                 if (Float.parseFloat(TXT_Importe.getText()) < TotalCompleto) {
                     JOptionPane.showMessageDialog(null, "Importe insufucuente para completar venta");
-                }
-                else{
+                } else {
                     Cambio = Float.parseFloat(TXT_Importe.getText()) - TotalCompleto;
                     LB_Cambio.setText(String.valueOf(Cambio));
-                    
+
                     if (mBD.AltaDetalleVenta(mDetalleVenta)) {
-                    JOptionPane.showMessageDialog(null, "Detalle venta guardado.");
+                        JOptionPane.showMessageDialog(null, "Detalle venta guardado.");
                     } else {
-                    JOptionPane.showMessageDialog(null, "Error detalle venta.");
+                        JOptionPane.showMessageDialog(null, "Error detalle venta.");
                     }
                 }
             }
-            
+
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -754,9 +751,6 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
     private void Tabla_VentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_VentasMouseClicked
         // TODO add your handling code here:
-//        int filaSeleccionada = this.Tabla_Ventas.getSelectedRow();
-//        this.TXT_Folio.setText(Tabla_Ventas.getValueAt(filaSeleccionada, 1).toString());
-
         ResultSet rs = null;
         Statement consulta = null;
 
