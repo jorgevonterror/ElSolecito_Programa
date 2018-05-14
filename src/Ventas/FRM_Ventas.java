@@ -103,7 +103,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                     LB_TotalPago.setText("00.00");
                     LB_Desc.setText("-");
                     LB_Nombre.setText("-");
-                    LB_Proveedor.setText("-");
+                    //LB_Proveedor.setText("-");
 
                     modeloTabla.addRow(Datos);
                 }
@@ -177,7 +177,6 @@ public class FRM_Ventas extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         LB_Precio = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        LB_Proveedor = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         LB_TotalPago = new javax.swing.JLabel();
@@ -189,6 +188,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         TXT_Importe = new javax.swing.JTextField();
         LB_Cambio = new javax.swing.JLabel();
+        TXT_PrecioV = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -274,13 +274,11 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
         LB_Desc.setText("jLabel4");
 
-        jLabel4.setText("Precio:");
+        jLabel4.setText("Precio de Compra:");
 
         LB_Precio.setText("jLabel5");
 
-        jLabel5.setText("Proveedor:");
-
-        LB_Proveedor.setText("jLabel6");
+        jLabel5.setText("Precio de Venta:");
 
         jLabel6.setText("Cantidad:");
 
@@ -327,6 +325,13 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
         LB_Cambio.setText("jLabel10");
 
+        TXT_PrecioV.setToolTipText("Ingrese el folio de la tabla.");
+        TXT_PrecioV.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TXT_PrecioVKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -342,18 +347,6 @@ public class FRM_Ventas extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel7))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(TXT_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(LB_Proveedor))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(LB_Precio))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -374,7 +367,19 @@ public class FRM_Ventas extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TXT_Importe, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(LB_TotalPago)
-                                    .addComponent(LB_Cambio))))
+                                    .addComponent(LB_Cambio)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LB_Precio))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TXT_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TXT_PrecioV, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
@@ -412,7 +417,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(LB_Proveedor))
+                            .addComponent(TXT_PrecioV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -555,7 +560,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if (this.TXT_Folio.getText().equals("") || this.TXT_Cantidad.getText().equals("")) {
+        if (this.TXT_Folio.getText().equals("") || this.TXT_Cantidad.getText().equals("") || this.TXT_PrecioV.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
         } else {
             borrar();
@@ -586,7 +591,6 @@ public class FRM_Ventas extends javax.swing.JFrame {
                     LB_TotalPago.setText("00.00");
                     LB_Desc.setText(mProducto.getDesc_Prod());
                     LB_Nombre.setText(mProducto.getNombre());
-                    LB_Proveedor.setText(mProducto.getId_proveedor());
 
                     modeloTabla.addRow(Datos);
                 } else {
@@ -619,7 +623,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
         TotalCompleto = 0;
         
         
-        if (this.TXT_Folio.getText().equals("") || this.TXT_Cantidad.getText().equals("")) {
+        if (this.TXT_Folio.getText().equals("") || this.TXT_Cantidad.getText().equals("") || this.TXT_PrecioV.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
         } else {
             Producto nProducto = new Producto();
@@ -658,22 +662,28 @@ public class FRM_Ventas extends javax.swing.JFrame {
                 mDetalleVenta.setPrecio(Float.parseFloat(LB_Precio.getText()));
                 mDetalleVenta.setProducto_id_Producto(Integer.parseInt(mProducto.getCodigo()));
                 mDetalleVenta.setVenta_id_Venta(RegistroVenta);
-
-                TotalTemporal = Float.parseFloat(LB_Precio.getText()) * Float.parseFloat(TXT_Cantidad.getText());
-                TotalCompleto = TotalTemporal + TotalCompleto;
-                LB_TotalPago.setText(String.valueOf(TotalCompleto));
-
-                if (Float.parseFloat(TXT_Importe.getText()) < TotalCompleto) {
-                    JOptionPane.showMessageDialog(null, "Importe insufucuente para completar venta");
+                
+                if (Float.parseFloat(TXT_PrecioV.getText()) < Float.parseFloat(LB_Precio.getText())) {
+                    JOptionPane.showMessageDialog(null, "Ajusta el precio de venta pr favor");
                 }
                 else{
-                    Cambio = Float.parseFloat(TXT_Importe.getText()) - TotalCompleto;
-                    LB_Cambio.setText(String.valueOf(Cambio));
+                    TotalTemporal = Float.parseFloat(TXT_PrecioV.getText()) * Float.parseFloat(TXT_Cantidad.getText());
+                    TotalCompleto = TotalTemporal + TotalCompleto;
+                    LB_TotalPago.setText(String.valueOf(TotalCompleto));
                     
-                    if (mBD.AltaDetalleVenta(mDetalleVenta)) {
-                    JOptionPane.showMessageDialog(null, "Detalle venta guardado.");
-                    } else {
-                    JOptionPane.showMessageDialog(null, "Error detalle venta.");
+                    if (Float.parseFloat(TXT_Importe.getText()) < TotalCompleto) {
+                        JOptionPane.showMessageDialog(null, "Importe insufucuente para completar venta");
+                    }
+                    else{
+                        Cambio = Float.parseFloat(TXT_Importe.getText()) - TotalCompleto;
+                        LB_Cambio.setText(String.valueOf(Cambio));
+
+                        if (mBD.AltaDetalleVenta(mDetalleVenta)) {
+                        JOptionPane.showMessageDialog(null, "Detalle venta guardado.");
+                        } 
+                        else {
+                        JOptionPane.showMessageDialog(null, "Error detalle venta.");
+                        }
                     }
                 }
             }
@@ -785,8 +795,8 @@ public class FRM_Ventas extends javax.swing.JFrame {
                 String add4 = rs.getString("Precio");
                 LB_Precio.setText(add4);
 
-                String add5 = rs.getString("Proveedor");
-                LB_Proveedor.setText(add5);
+                //String add5 = rs.getString("Proveedor");
+                //LB_Proveedor.setText(add5);
             }
         } catch (SQLException e) {
 
@@ -802,6 +812,10 @@ public class FRM_Ventas extends javax.swing.JFrame {
     private void TXT_ImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_ImporteKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_ImporteKeyTyped
+
+    private void TXT_PrecioVKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_PrecioVKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TXT_PrecioVKeyTyped
 
     /**
      * @param args the command line arguments
@@ -843,11 +857,11 @@ public class FRM_Ventas extends javax.swing.JFrame {
     private javax.swing.JLabel LB_Desc;
     private javax.swing.JLabel LB_Nombre;
     private javax.swing.JLabel LB_Precio;
-    private javax.swing.JLabel LB_Proveedor;
     private javax.swing.JLabel LB_TotalPago;
     private javax.swing.JTextField TXT_Cantidad;
     private javax.swing.JTextField TXT_Folio;
     private javax.swing.JTextField TXT_Importe;
+    private javax.swing.JTextField TXT_PrecioV;
     private javax.swing.JTable Tabla_Ventas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
