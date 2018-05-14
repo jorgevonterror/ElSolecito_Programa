@@ -5,6 +5,7 @@
  */
 package elsolecito_programa.CLIENTES;
 
+import Reportes.FRM_Reportes;
 import elsolecito_programa.CLIENTES.BaseDeDatos.*;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -412,15 +413,15 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
         JasperReport jr = null;
 
         try {
-            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
-            JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
-            JasperViewer jv = new JasperViewer(jp, false);
-            jv.setVisible(true);
-            jv.setTitle(path);
-            this.dispose();
-        } catch (JRException ex) {
-            Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
+                JasperViewer jv = new JasperViewer(jp, false);
+                jv.setVisible(true);
+                jv.setTitle(path);
+                this.dispose();
+            } catch (JRException ex) {
+                Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
+            }                
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void TXT_NombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_NombreKeyTyped
