@@ -615,6 +615,10 @@ public class FRM_Ventas extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         //Aquí para la venta...
+        TotalTemporal = 0;
+        TotalCompleto = 0;
+        
+        
         if (this.TXT_Folio.getText().equals("") || this.TXT_Cantidad.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
         } else {
@@ -631,8 +635,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
             else{
                     //Restamos la cantidad.
                 CantidadNueva = mProductoOld.getCantidadProducto() - Integer.parseInt(TXT_Cantidad.getText());
-                
-
+               
                 nProducto.setNombre(LB_Nombre.getText());
 
                 nProducto.setCantidadProducto(CantidadNueva);
