@@ -352,7 +352,7 @@ public class FRM_Clientes_Modificar extends javax.swing.JFrame {
         } else {
             ClientesDeudores nClientesDeudores = new ClientesDeudores();
             nClientesDeudores.setNombre(this.TXT_Nombre.getText());
-            nClientesDeudores.setMonto(Integer.parseInt(this.TXT_Monto.getText()));
+            nClientesDeudores.setMonto(Float.parseFloat(this.TXT_Monto.getText()));
             nClientesDeudores.setFolio(this.TXT_Folio.getText());
 
             if (mBD.conectar()) {

@@ -651,8 +651,7 @@ public class FRM_Compras extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-
-        if (this.TXT_Nombre.getText().equals("") || this.TXT_N_Cantidad.getText().equals("")) {
+        if (this.TXT_Nombre.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
         } else {
             borrar();

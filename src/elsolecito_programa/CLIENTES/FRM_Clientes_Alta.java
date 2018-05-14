@@ -385,7 +385,7 @@ public class FRM_Clientes_Alta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
         } else {
             CD.setNombre(this.TXT_Nombre.getText());
-            CD.setMonto(Integer.parseInt(this.TXT_Monto.getText()));
+            CD.setMonto(Float.parseFloat(this.TXT_Monto.getText()));
             CD.setFolio(this.TXT_Folio.getText());
 
             if (mBD.conectar()) {
