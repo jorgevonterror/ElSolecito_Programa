@@ -713,7 +713,8 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
         try {
 
-            jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
+            //jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
+            jr = (JasperReport) JRLoader.loadObjectFromFile(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);

@@ -291,7 +291,8 @@ public class FRM_Reportes extends javax.swing.JFrame {
             jr = null;
             try {
                 Parametro.put("seleccion", Companyia);
-                jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                //jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                  jr = (JasperReport) JRLoader.loadObjectFromFile(path);
                 JasperPrint jp = JasperFillManager.fillReport(jr, Parametro, mBD.conectare());
                 JasperViewer jv = new JasperViewer(jp, false);
                 jv.setVisible(true);
@@ -311,7 +312,8 @@ public class FRM_Reportes extends javax.swing.JFrame {
             jr = null;
             try {
                 Parametro.put("seleccion", Mes);
-                jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                //jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                jr = (JasperReport) JRLoader.loadObjectFromFile(path);
                 JasperPrint jp = JasperFillManager.fillReport(jr, Parametro, mBD.conectare());
                 JasperViewer jv = new JasperViewer(jp, false);
                 jv.setVisible(true);
@@ -330,7 +332,8 @@ public class FRM_Reportes extends javax.swing.JFrame {
             jr = null;
             try {
                 Parametro.put("Buscar", folio);
-                jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                //jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                jr = (JasperReport) JRLoader.loadObjectFromFile(path);
                 JasperPrint jp = JasperFillManager.fillReport(jr, Parametro, mBD.conectare());
                 JasperViewer jv = new JasperViewer(jp, false);
                 jv.setVisible(true);
@@ -348,7 +351,8 @@ public class FRM_Reportes extends javax.swing.JFrame {
             jr = null;
             try {
                 Parametro.put("Buscar", folio);
-                jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                //jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                jr = (JasperReport) JRLoader.loadObjectFromFile(path);
                 JasperPrint jp = JasperFillManager.fillReport(jr, Parametro, mBD.conectare());
                 JasperViewer jv = new JasperViewer(jp, false);
                 jv.setVisible(true);
