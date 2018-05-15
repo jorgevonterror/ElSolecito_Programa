@@ -35,6 +35,7 @@ public class FRM_Reportes extends javax.swing.JFrame {
      */
     public FRM_Reportes() {
         initComponents();
+        this.setLocationRelativeTo(null);
         LblTC.setVisible(false);
         CBXcompañia.setVisible(false);
         LbMes.setVisible(false);
@@ -290,7 +291,7 @@ public class FRM_Reportes extends javax.swing.JFrame {
             Companyia = CBXcompañia.getItemAt(this.CBXcompañia.getSelectedIndex()).toString();
             Parametro = new HashMap();
             path = "";
-            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_Recargas.jasper";
+            path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Reportes/Reporte_Recargas.jasper";
             jr = null;
             try {
                 Parametro.put("seleccion", Companyia);
@@ -311,7 +312,7 @@ public class FRM_Reportes extends javax.swing.JFrame {
             Mes = TxFolio.getText();        
             Parametro = new HashMap();
             path = "";
-            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_VentasPorMes.jasper";
+            path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Reportes/Reporte_VentasPorMes.jasper";
             jr = null;
             try {
                 Parametro.put("seleccion", Mes);
@@ -331,7 +332,7 @@ public class FRM_Reportes extends javax.swing.JFrame {
             folio = TxFolio.getText();
             Parametro = new HashMap();
             path = "";
-            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_Detalle_Compra.jasper";
+            path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Reportes/Reporte_Detalle_Compra.jasper";
             jr = null;
             try {
                 Parametro.put("Buscar", folio);
@@ -350,7 +351,7 @@ public class FRM_Reportes extends javax.swing.JFrame {
             folio = TxFolio.getText();
             Parametro = new HashMap();
             path = "";
-            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_Detalle_Venta.jasper";
+            path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Reportes/Reporte_Detalle_Venta.jasper";
             jr = null;
             try {
                 Parametro.put("Buscar", folio);
