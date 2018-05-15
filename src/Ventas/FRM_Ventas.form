@@ -436,6 +436,7 @@
             <Property name="toolTipText" type="java.lang.String" value="Ingrese la cantidad a comprar deseada."/>
           </Properties>
           <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TXT_ImporteActionPerformed"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TXT_ImporteKeyTyped"/>
           </Events>
         </Component>

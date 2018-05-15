@@ -102,15 +102,13 @@ public class BaseDeDatos {
         return mProducto;
     }
 
-    public boolean ModificarProductos(Producto aProducto, Producto bProducto) {
+    public boolean ModificarProductos(Producto mProducto, Producto nProducto) {
         Statement consulta;
         try {
             consulta = conexion.createStatement();
             consulta.execute("update productos set "
-                    + "Desc_producto ='" + bProducto.getDesc_Prod() + "',"
-                    + "Nombre ='" + bProducto.getNombre() + "',"
-                    + "Precio =" + bProducto.getPrecio()
-                    + "where Codigo = '" + aProducto.getCodigo() + "';");
+                    + "cantidad = '" + nProducto.getCantidadProducto() + "'"  
+                    + "where Codigo = '" + mProducto.getCodigo() + "';");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

@@ -317,6 +317,11 @@ public class FRM_Ventas extends javax.swing.JFrame {
         jLabel19.setText("Cambio: $");
 
         TXT_Importe.setToolTipText("Ingrese la cantidad a comprar deseada.");
+        TXT_Importe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TXT_ImporteActionPerformed(evt);
+            }
+        });
         TXT_Importe.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TXT_ImporteKeyTyped(evt);
@@ -621,8 +626,9 @@ public class FRM_Ventas extends javax.swing.JFrame {
         //Aquí para la venta...
         TotalTemporal = 0;
         TotalCompleto = 0;
+        LB_TotalPago.setText("");
         
-        
+        //Verifica que los campos necesarios esten agregados        
         if (this.TXT_Folio.getText().equals("") || this.TXT_Cantidad.getText().equals("") || this.TXT_PrecioV.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
         } else {
@@ -632,21 +638,16 @@ public class FRM_Ventas extends javax.swing.JFrame {
             mBD.conectar();
             Producto mProductoOld = mBD.ConsultaEspecificaProducto(TXT_Folio.getText());
             mBD.desconectar();
-
-            if (mProductoOld.getCantidadProducto() < Integer.parseInt(TXT_Cantidad.getText())) {
+            //Verifica que se tenga la cantidad deseada o si ya no hay en existencia
+            
+            if ((mProductoOld.getCantidadProducto() < Integer.parseInt(TXT_Cantidad.getText())) || (mProductoOld.getCantidadProducto() == 0)) {
                 JOptionPane.showMessageDialog(null, "No se cuenta con esa cantidad de prducto");
             } else {
                 //Restamos la cantidad.
                 CantidadNueva = mProductoOld.getCantidadProducto() - Integer.parseInt(TXT_Cantidad.getText());
-<<<<<<< HEAD
-
-=======
-               
->>>>>>> 4ca92d8cbd77251d4ddab7fdb30b2a34b4fbaad7
+                
                 nProducto.setNombre(LB_Nombre.getText());
-
                 nProducto.setCantidadProducto(CantidadNueva);
-
                 nProducto.setDesc_Prod(LB_Desc.getText());
                 nProducto.setPrecio(Float.parseFloat(LB_Precio.getText()));
                 nProducto.setId_proveedor(TXT_Folio.getText());
@@ -660,17 +661,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                     }
                 }
                 Venta mVentaConsultada = mBD.ConsultaTodaVenta(TXT_Folio.getText());
-
-                mDetalleVenta.setCantidad(Float.parseFloat(TXT_Cantidad.getText()));
-                mDetalleVenta.setPrecio(Float.parseFloat(LB_Precio.getText()));
-                mDetalleVenta.setProducto_id_Producto(Integer.parseInt(mProducto.getCodigo()));
-                mDetalleVenta.setVenta_id_Venta(RegistroVenta);
-<<<<<<< HEAD
-
-                TotalTemporal = Float.parseFloat(LB_Precio.getText()) * Float.parseFloat(TXT_Cantidad.getText());
-                TotalCompleto = TotalTemporal + TotalCompleto;
-                LB_TotalPago.setText(String.valueOf(TotalCompleto));
-
+                   
                 if (Float.parseFloat(TXT_Importe.getText()) < TotalCompleto) {
                     JOptionPane.showMessageDialog(null, "Importe insufucuente para completar venta");
                 } else {
@@ -681,7 +672,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Detalle venta guardado.");
                     } else {
                         JOptionPane.showMessageDialog(null, "Error detalle venta.");
-=======
+                    }
                 
                 if (Float.parseFloat(TXT_PrecioV.getText()) < Float.parseFloat(LB_Precio.getText())) {
                     JOptionPane.showMessageDialog(null, "Ajusta el precio de venta pr favor");
@@ -704,14 +695,13 @@ public class FRM_Ventas extends javax.swing.JFrame {
                         else {
                         JOptionPane.showMessageDialog(null, "Error detalle venta.");
                         }
->>>>>>> 4ca92d8cbd77251d4ddab7fdb30b2a34b4fbaad7
                     }
                 }
             }
-
         }
     }//GEN-LAST:event_jButton5ActionPerformed
-
+    }
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         if (this.TXT_Folio.getText().equals("") || this.TXT_Cantidad.getText().equals("")) {
@@ -834,6 +824,10 @@ public class FRM_Ventas extends javax.swing.JFrame {
     private void TXT_PrecioVKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_PrecioVKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_TXT_PrecioVKeyTyped
+
+    private void TXT_ImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_ImporteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TXT_ImporteActionPerformed
 
     /**
      * @param args the command line arguments

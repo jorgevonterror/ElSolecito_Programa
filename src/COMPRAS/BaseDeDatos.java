@@ -28,8 +28,8 @@ public class BaseDeDatos {
     public boolean conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root"); //LA RUTA CAMBIA, YO LO HAGO EN MAC.
+            //conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root"); //LA RUTA CAMBIA, YO LO HAGO EN MAC.
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "");
             if (conexion != null) {
                 return true;
             } else {
