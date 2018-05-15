@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<parameter name="Buscar" class="java.lang.String"/>
+	<parameter name="Seleccion" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
      detalle_compra.`Folio` AS detalle_compra_Folio,
@@ -10,12 +10,10 @@
      detalle_compra.`PagaPorCantidad` AS detalle_compra_PagaPorCantidad,
      Cantidad * Precio AS detalle_compra_PagaPorCantidad,
      detalle_compra.`TotalAPagar` AS detalle_compra_TotalAPagar
-     
-
 FROM
      `detalle_compra` detalle_compra
 WHERE
-      Folio =$P{Buscar}]]>
+     Folio = $P{Seleccion}]]>
 	</queryString>
 	<field name="detalle_compra_Folio" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -29,13 +27,16 @@ WHERE
 	<field name="detalle_compra_Precio" class="java.lang.Float">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="detalle_compra_PagaPorCantidad" class="java.lang.Integer">
+	<field name="detalle_compra_PagaPorCantidad" class="java.lang.Float">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="detalle_compra_TotalAPagar" class="java.lang.Integer">
+	<field name="detalle_compra_TotalAPagar" class="java.lang.Float">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<variable name="detalle_compra_PagaPorCantidad_1" class="java.lang.Integer" resetType="Page" calculation="Sum">
+	<variable name="detalle_compra_PagaPorCantidad_1" class="java.lang.Float" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{detalle_compra_PagaPorCantidad}]]></variableExpression>
+	</variable>
+	<variable name="detalle_compra_PagaPorCantidad_2" class="java.lang.Float" resetType="Page" calculation="Sum">
 		<variableExpression><![CDATA[$F{detalle_compra_PagaPorCantidad}]]></variableExpression>
 	</variable>
 	<background>
@@ -68,28 +69,28 @@ WHERE
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Folio ]]></text>
+				<text><![CDATA[Folio]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="92" y="0" width="92" height="18" forecolor="#FFFFFF" backcolor="#999999"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Producto]]></text>
+				<text><![CDATA[producto]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="184" y="0" width="92" height="18" forecolor="#FFFFFF" backcolor="#999999"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Cantidad ]]></text>
+				<text><![CDATA[Cantidad]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="276" y="0" width="92" height="18" forecolor="#FFFFFF" backcolor="#999999"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Precio ]]></text>
+				<text><![CDATA[Precio]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="368" y="0" width="92" height="18" forecolor="#FFFFFF" backcolor="#999999"/>
@@ -142,12 +143,12 @@ WHERE
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{detalle_compra_PagaPorCantidad}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{detalle_compra_PagaPorCantidad}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="460" y="0" width="95" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{detalle_compra_PagaPorCantidad_1}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$V{detalle_compra_PagaPorCantidad_1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -155,9 +156,9 @@ WHERE
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch">
+		<band height="184" splitType="Stretch">
 			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
-				<reportElement key="textField" x="519" y="35" width="36" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement key="textField" x="515" y="153" width="36" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -170,7 +171,7 @@ WHERE
 				<textFieldExpression class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement key="textField" x="346" y="35" width="170" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement key="textField" x="341" y="153" width="170" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -183,7 +184,7 @@ WHERE
 				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " of "]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement key="textField" x="5" y="35" width="209" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement key="textField" x="0" y="153" width="209" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
 				<box>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -196,9 +197,9 @@ WHERE
 				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="100" height="20"/>
+				<reportElement x="22" y="44" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{Buscar}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{Seleccion}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
