@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="75f48305-abc8-4855-b2a7-67642eb7dabd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     detalle_compra.`Precio` AS detalle_compra_Precio,
+     compras.`Fecha` AS compras_Fecha,
+     compras.`folio` AS compras_folio,
+     compras.`TotalCompras` AS compras_TotalCompras,
+     detalle_compra.`producto` AS detalle_compra_producto,
+     detalle_compra.`Cantidad` AS detalle_compra_Cantidad
+FROM
+     `detalle_compra` detalle_compra,
+     `compras` compras]]>
+	</queryString>
+	<field name="detalle_compra_Precio" class="java.lang.Float"/>
+	<field name="compras_Fecha" class="java.lang.String"/>
+	<field name="compras_folio" class="java.lang.String"/>
+	<field name="compras_TotalCompras" class="java.lang.Float"/>
+	<field name="detalle_compra_producto" class="java.lang.String"/>
+	<field name="detalle_compra_Cantidad" class="java.lang.Float"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement uuid="0de7a0e3-a225-4b41-af8d-e3e4522155fa" mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699"/>
+				<staticText>
+					<reportElement uuid="7645846f-05fb-419a-9415-ca9f94013d1c" x="20" y="20" width="276" height="43" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[EL SOLECITO.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="2a36f8a6-a42b-4241-bb74-6bfc993defc2" x="395" y="43" width="180" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[DETALLE COMPRA.]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement uuid="be4bcd76-66c3-4ccc-ab93-e8c78671f62b" x="-20" y="20" width="595" height="1" forecolor="#666666"/>
+			</line>
+			<staticText>
+				<reportElement uuid="f4040ee8-a65e-44d5-a4c8-152ebf3aaf30" mode="Opaque" x="0" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[detalle_compra_Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="98bc6aa0-aab4-4d92-a059-2ccbe96a1e92" mode="Opaque" x="92" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[compras_Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="89978777-1108-4d1a-8a8c-da62756efda6" mode="Opaque" x="184" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[compras_folio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7435b4e8-028f-4cdf-991d-0acb4f9d6483" mode="Opaque" x="276" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[compras_TotalCompras]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="36372773-d468-44f7-a189-cfec00d2fc7d" mode="Opaque" x="368" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[detalle_compra_producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="34cd332a-517f-4bc7-95ae-806083232819" mode="Opaque" x="460" y="0" width="92" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[detalle_compra_Cantidad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement uuid="f6b33130-bc03-439e-81e8-2be0ff6b7825" positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="e540a437-3cf8-4b67-8467-1eaa165373e0" x="0" y="0" width="92" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detalle_compra_Precio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="5a3bc2ff-0119-4cd2-8dab-7601d6a58385" x="92" y="0" width="92" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_Fecha}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="24014acd-c0a4-4214-9679-dd3444010d1a" x="184" y="0" width="92" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_folio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="4632524e-139b-4cfd-8fed-89537cbcc722" x="276" y="0" width="92" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_TotalCompras}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="e9ff38ca-fc02-4ed6-b893-95e3d2377d49" x="368" y="0" width="92" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detalle_compra_producto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="b61bd14c-3c17-40b1-9c44-6a5666227eea" x="460" y="0" width="92" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detalle_compra_Cantidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement uuid="d3ca3f95-81ee-4a21-9397-04686fdd6bd5" mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="05546c4b-dc22-48c3-aca0-2f6889d4b61b" mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="3a0077d2-63a6-4f19-9598-1f350210dd30" x="0" y="4" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
