@@ -103,11 +103,13 @@ public class FRM_Ventas extends javax.swing.JFrame {
                     //INICIALIZAMOS LOS LB EN NADA.
                     //Me quede aquí.
                     LB_Precio.setText("-");
+
                     LB_TotalPago.setText("00.00");
                     LB_Desc.setText("-");
                     LB_Nombre.setText("-");
                     //LB_Proveedor.setText("-");
                     LB_Cambio.setText("-");
+                    LB_Ganancia.setText("-");
 
                     modeloTabla.addRow(Datos);
                 }
@@ -124,7 +126,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
             this.Tabla_Ventas.getColumnModel().getColumn(4).setPreferredWidth(400);
             this.Tabla_Ventas.getColumnModel().getColumn(5).setPreferredWidth(400);
             this.Tabla_Ventas.getColumnModel().getColumn(6).setPreferredWidth(400);
-            
+
             if (this.Tabla_Ventas.getRowCount() > 0) {
                 this.Tabla_Ventas.setRowSelectionInterval(0, 0);
             }
@@ -171,7 +173,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                     Datos[4] = "" + mProducto.getCantidadProducto();
                     Datos[5] = mProducto.getDesc_Prod();
                     Datos[6] = "" + mProducto.getId_proveedor();
-                    
+
                     modeloTabla.addRow(Datos);
                 }
             } else {
@@ -408,16 +410,11 @@ public class FRM_Ventas extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel19)
-                            .addComponent(jLabel18))
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel20)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TXT_Importe, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LB_Cambio)))
+                        .addComponent(LB_Ganancia))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -451,16 +448,21 @@ public class FRM_Ventas extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(TXT_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TXT_PrecioV, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel19)
+                                    .addComponent(jLabel18))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TXT_Importe, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LB_Cambio))))
                         .addGap(72, 72, 72)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel20)
-                        .addGap(18, 18, 18)
-                        .addComponent(LB_Ganancia)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -473,7 +475,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -503,21 +505,21 @@ public class FRM_Ventas extends javax.swing.JFrame {
                             .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LB_TotalPago))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TXT_Importe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LB_Cambio))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TXT_Importe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LB_Cambio)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LB_Ganancia))
@@ -619,14 +621,12 @@ public class FRM_Ventas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -636,7 +636,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addContainerGap())
         );
 
         pack();
@@ -644,6 +644,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        borrar();
         setProductos();
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -718,6 +719,10 @@ public class FRM_Ventas extends javax.swing.JFrame {
         //Verifica que los campos necesarios esten agregados        
         if (this.TXT_Folio.getText().equals("") || this.TXT_Cantidad.getText().equals("") || this.TXT_PrecioV.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else if (this.LB_Nombre.getText().equals("-") || this.LB_Precio.getText().equals("-")) {
+            JOptionPane.showMessageDialog(null, "Presione la opción --> Seleccionar producto.");
+        } else if (this.TXT_Importe.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Asigne un valor al importe.");
         } else {
             Producto nProducto = new Producto();
             mProducto.setCodigo(TXT_Folio.getText());
@@ -779,11 +784,10 @@ public class FRM_Ventas extends javax.swing.JFrame {
                         } else {
                             Cambio = Float.parseFloat(TXT_Importe.getText()) - TotalCompleto;
                             LB_Cambio.setText(String.valueOf(Cambio));
-                            
-                            Ganancia = TotalCompleto - ( Float.parseFloat(LB_Ganancia.getText()) * Float.parseFloat(TXT_Cantidad.getText()) );
+
+                            Ganancia = TotalCompleto - (Float.parseFloat(LB_Precio.getText()) * Float.parseFloat(TXT_Cantidad.getText()));
                             LB_Ganancia.setText(String.valueOf(Ganancia));
-                            
-                            
+
                             if (mBD.AltaDetalleVenta(mDetalleVenta)) {
                                 //JOptionPane.showMessageDialog(null, "Detalle venta guardado.");
                             } else {
@@ -793,13 +797,16 @@ public class FRM_Ventas extends javax.swing.JFrame {
                     }
                 }
             }
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
-    }
+
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         if (this.TXT_Folio.getText().equals("") || this.TXT_Cantidad.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else if (this.LB_Nombre.getText().equals("-") || this.LB_Precio.getText().equals("-")) {
+            JOptionPane.showMessageDialog(null, "Presione la opción --> Seleccionar producto.");
         } else {
             Venta mVentaAl = new Venta();
             mVenta.setId_venta(RegistroVenta);
@@ -811,7 +818,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
             if (mBD.conectar()) {
                 if (mBD.CambiosVenta(mVenta, mVentaAl)) {
-                    JOptionPane.showMessageDialog(null, "Nuevo precio en la venta...");
+                    JOptionPane.showMessageDialog(null, "Venta finalizada...");
                 } else {
                     JOptionPane.showMessageDialog(null, "Error en nuevo precio de venta...");
                 }
@@ -826,11 +833,10 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito_Programa/src/Ventas/Reporte_Ventas.jasper";
+        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Ventas/Reporte_Ventas1.jasper";
         JasperReport jr = null;
 
         try {
-
             //jr = (JasperReport) JRLoader.loadObjectFromLocation(path);
             jr = (JasperReport) JRLoader.loadObjectFromFile(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
@@ -841,7 +847,6 @@ public class FRM_Ventas extends javax.swing.JFrame {
         } catch (JRException ex) {
             Logger.getLogger(FRM_Clientes_Alta.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -872,7 +877,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
     private void Tabla_VentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_VentasMouseClicked
         // TODO add your handling code here:
- 
+
     }//GEN-LAST:event_Tabla_VentasMouseClicked
 
     private void Tabla_VentasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_VentasMousePressed
@@ -882,10 +887,16 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
     private void TXT_ImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_ImporteKeyTyped
         // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_TXT_ImporteKeyTyped
 
     private void TXT_PrecioVKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TXT_PrecioVKeyTyped
         // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0'|| error > '9') evt.consume(); 
     }//GEN-LAST:event_TXT_PrecioVKeyTyped
 
     private void TXT_ImporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_ImporteActionPerformed

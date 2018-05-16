@@ -631,6 +631,7 @@ public class FRM_Compras extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //Se programa el botón para mostrar los datos en la tabla de compras.
+
         borrar();
 
         if (mBD.conectar()) {
@@ -665,7 +666,7 @@ public class FRM_Compras extends javax.swing.JFrame {
                     LBL_Proveedor.setText("-");
                     LBL_TotalP.setText("00.00");
                     LBL_Desc.setText("-");
-
+                    TXT_Nombre.setText("");
                     modeloTabla.addRow(Datos);
                 }
             }
@@ -853,7 +854,7 @@ public class FRM_Compras extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/COMPRAS/Reporte_Compra.jasper";
+        String path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/COMPRAS/Reporte_Compra1.jasper";
         JasperReport jr = null;
 
         try {

@@ -29,8 +29,8 @@ public class BaseDeDatosVentas {
     public boolean conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            //conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
+            //conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -197,15 +197,15 @@ public class BaseDeDatosVentas {
         return RegistroUltimo;
       }
    
-    /*
+    
     public String url = "jdbc:mysql://localhost:8889/BD_ElSolecito";
     public String user = "root";
     public String pass = "root";
-   */
    
-    public String url = "jdbc:mysql://localhost/bd_elsolecito";
-    public String user = "root";
-    public String pass = "";
+   
+//    public String url = "jdbc:mysql://localhost/bd_elsolecito";
+//    public String user = "root";
+//    public String pass = "";
     public Connection conectare() {
         Connection link = null;
 
