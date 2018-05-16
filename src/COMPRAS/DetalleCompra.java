@@ -11,9 +11,36 @@ package COMPRAS;
  */
 public class DetalleCompra {
     private int id_detalle;
+    private String Folio;
+
+    public String getFolio() {
+        return Folio;
+    }
+
+    public void setFolio(String Folio) {
+        this.Folio = Folio;
+    }
+
+    public float getPagaPorCantidad() {
+        return PagaPorCantidad;
+    }
+
+    public void setPagaPorCantidad(float PagaPorCantidad) {
+        this.PagaPorCantidad = PagaPorCantidad;
+    }
+
+    public float getTotalAPagar() {
+        return TotalAPagar;
+    }
+
+    public void setTotalAPagar(float TotalAPagar) {
+        this.TotalAPagar = TotalAPagar;
+    }
     private String producto;
     private float cantidad;
     private float precio;
+    private float PagaPorCantidad;
+    private float TotalAPagar;
     private int id_producto;
     private int id_proveedor;
     private int id_compras;

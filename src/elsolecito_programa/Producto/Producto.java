@@ -17,6 +17,15 @@ public class Producto {
     private String Nombre;
     private float Precio;
     private int cantidadProducto;
+    private String Folio;
+
+    public String getFolio() {
+        return Folio;
+    }
+
+    public void setFolio(String Folio) {
+        this.Folio = Folio;
+    }
 
     public int getCantidadProducto() {
         return cantidadProducto;

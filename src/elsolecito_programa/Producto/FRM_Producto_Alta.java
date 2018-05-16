@@ -406,7 +406,7 @@ public class FRM_Producto_Alta extends javax.swing.JFrame {
             String[] Datos;
 
             for (Object mListaProducto : mListaProductos) {
-                Datos = new String[6];
+                Datos = new String[7];
 
                 mProducto = (Producto) mListaProducto;
                 Datos[0] = "" + mProducto.getId_producto();

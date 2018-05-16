@@ -1,17 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
--- https://www.phpmyadmin.net/
+-- version 4.1.14
+-- http://www.phpmyadmin.net
 --
--- Servidor: localhost:8889
--- Tiempo de generación: 02-05-2018 a las 01:41:39
--- Versión del servidor: 5.6.38-log
--- Versión de PHP: 7.2.1
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 15-05-2018 a las 07:57:10
+-- Versión del servidor: 5.6.17
+-- Versión de PHP: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
 --
--- Base de datos: `BD_ElSolecito`
+-- Base de datos: `bd_elsolecito`
 --
 
 -- --------------------------------------------------------
@@ -20,24 +26,24 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `clientes`
 --
 
-CREATE TABLE `clientes` (
-  `id_clientes` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `clientes` (
+  `id_clientes` int(11) NOT NULL AUTO_INCREMENT,
   `Nombre` varchar(50) NOT NULL,
-  `Monto` double NOT NULL,
-  `folio` varchar(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `Monto` float NOT NULL,
+  `folio` varchar(11) NOT NULL,
+  PRIMARY KEY (`id_clientes`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
 INSERT INTO `clientes` (`id_clientes`, `Nombre`, `Monto`, `folio`) VALUES
-(37, 'Luis', 80, '010'),
 (33, 'Manuel', 120, '003'),
-(26, 'Luis Ángel', 120, '002'),
+(42, 'Jorge', 90, '013'),
 (34, 'Moisés', 90, '007'),
 (38, 'Antonio', 15, '011'),
-(39, 'Omar', 15, '05');
+(40, 'Armando', 130, '012');
 
 -- --------------------------------------------------------
 
@@ -45,21 +51,50 @@ INSERT INTO `clientes` (`id_clientes`, `Nombre`, `Monto`, `folio`) VALUES
 -- Estructura de tabla para la tabla `compras`
 --
 
-CREATE TABLE `compras` (
-  `id_compras` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `compras` (
+  `id_compras` int(11) NOT NULL AUTO_INCREMENT,
   `Fecha` varchar(20) NOT NULL,
   `folio` varchar(11) NOT NULL,
-  `TotalCompras` float NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `TotalCompras` float NOT NULL,
+  PRIMARY KEY (`id_compras`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=235 ;
 
 --
 -- Volcado de datos para la tabla `compras`
 --
 
 INSERT INTO `compras` (`id_compras`, `Fecha`, `folio`, `TotalCompras`) VALUES
+(94, '2018-4-3', '015', 32),
+(93, '2018-4-3', '015', 32),
+(92, '2018-4-3', '015', 32),
+(91, '2018-4-3', '015', 32),
+(90, '2018-4-3', '002', 51),
+(89, '2018-4-3', '1', 24),
+(88, '2018-4-3', '0.0', 0),
+(87, '2018-4-3', '001', 48),
+(86, '2018-4-3', '0.0', 0),
+(85, '2018-4-3', '0.0', 0),
+(84, '2018-4-3', '0.0', 0),
+(83, '2018-4-3', '0.0', 0),
+(82, '2018-4-3', '0.0', 0),
+(81, '2018-4-3', '0.0', 0),
+(80, '2018-4-3', '0.0', 0),
+(79, '2018-4-3', '0.0', 0),
+(78, '2018-4-3', '0.0', 0),
+(77, '2018-4-3', '0.0', 0),
+(76, '2018-4-3', '0.0', 0),
+(75, '2018-4-3', '0.0', 0),
+(74, '2018-4-2', '0.0', 0),
+(73, '2018-4-2', '0.0', 0),
+(72, '2018-4-2', '0.0', 0),
+(71, '2018-4-2', '0.0', 0),
+(70, '2018-4-2', '0.0', 0),
+(69, '2018-4-2', '0.0', 0),
+(68, '2018-4-2', '0.0', 0),
+(67, '2018-4-2', '0.0', 0),
 (66, '2018-4-1', '0.0', 0),
 (65, '2018-4-1', '0.0', 0),
-(64, '2018-4-1', '001', 26),
+(64, '2018-4-1', '001', 48),
 (63, '2018-4-1', '0.0', 0),
 (62, '2018-4-1', '0.0', 0),
 (61, '2018-4-1', '0.0', 0),
@@ -68,8 +103,148 @@ INSERT INTO `compras` (`id_compras`, `Fecha`, `folio`, `TotalCompras`) VALUES
 (55, '2018-4-1', '004', 130),
 (53, '2018-4-1', '002', 187),
 (54, '2018-4-1', '003', 144),
-(52, '2018-4-1', '001', 52),
-(58, '2018-4-1', '0.0', 0);
+(52, '2018-4-1', '001', 48),
+(58, '2018-4-1', '0.0', 0),
+(95, '2018-4-3', '015', 32),
+(96, '2018-4-3', '015', 32),
+(97, '2018-4-3', '015', 32),
+(98, '2018-4-3', '015', 32),
+(99, '2018-4-3', '015', 32),
+(100, '2018-4-3', '015', 32),
+(101, '2018-4-3', '015', 32),
+(102, '2018-4-3', '015', 32),
+(103, '2018-4-3', '015', 32),
+(104, '2018-4-3', '015', 32),
+(105, '2018-4-3', '015', 32),
+(106, '2018-4-3', '015', 32),
+(107, '2018-4-3', '015', 32),
+(108, '2018-4-3', '015', 32),
+(109, '2018-4-3', '015', 32),
+(110, '2018-4-3', '015', 32),
+(111, '2018-4-3', '015', 32),
+(112, '2018-4-3', '015', 32),
+(113, '2018-4-3', '015', 32),
+(114, '2018-4-3', '015', 32),
+(115, '2018-4-3', '015', 32),
+(116, '2018-4-3', '015', 32),
+(117, '2018-4-3', '015', 32),
+(118, '2018-4-3', '015', 32),
+(119, '2018-4-3', '015', 32),
+(120, '2018-4-3', '015', 32),
+(121, '2018-4-3', '015', 32),
+(122, '2018-4-3', '015', 32),
+(123, '2018-4-3', '015', 32),
+(124, '2018-4-3', '015', 32),
+(125, '2018-4-3', '015', 32),
+(126, '2018-4-3', '015', 32),
+(127, '2018-4-3', '015', 32),
+(128, '2018-4-3', '015', 32),
+(129, '2018-4-3', '015', 32),
+(130, '2018-4-4', '015', 32),
+(131, '2018-4-4', '015', 32),
+(132, '2018-4-4', '015', 32),
+(133, '2018-4-4', '015', 32),
+(134, '2018-4-4', '015', 32),
+(135, '2018-4-4', '015', 32),
+(136, '2018-4-4', '015', 32),
+(137, '2018-4-4', '015', 32),
+(138, '2018-4-4', '015', 32),
+(139, '2018-4-4', '015', 32),
+(140, '2018-4-4', '015', 32),
+(141, '2018-4-4', '015', 32),
+(142, '2018-4-4', '015', 32),
+(143, '2018-4-4', '015', 32),
+(144, '2018-4-4', '015', 32),
+(145, '2018-4-4', '015', 32),
+(146, '2018-4-4', '015', 32),
+(147, '2018-4-4', '015', 32),
+(148, '2018-4-4', '015', 32),
+(149, '2018-4-4', '015', 32),
+(150, '2018-4-4', '015', 32),
+(151, '2018-4-4', '015', 32),
+(152, '2018-4-4', '015', 32),
+(153, '2018-4-4', '015', 32),
+(154, '2018-4-4', '015', 32),
+(155, '2018-4-4', '015', 32),
+(156, '2018-4-4', '015', 32),
+(157, '2018-4-4', '015', 32),
+(158, '2018-4-4', '015', 32),
+(159, '2018-4-4', '015', 32),
+(160, '2018-4-4', '015', 32),
+(161, '2018-4-4', '015', 32),
+(162, '2018-4-4', '015', 32),
+(163, '2018-4-4', '015', 32),
+(164, '2018-4-4', '015', 32),
+(165, '2018-4-4', '015', 32),
+(166, '2018-4-4', '015', 32),
+(167, '2018-4-4', '015', 32),
+(168, '2018-4-4', '015', 32),
+(169, '2018-4-4', '015', 32),
+(170, '2018-4-4', '015', 32),
+(171, '2018-4-4', '015', 32),
+(172, '2018-4-4', '015', 32),
+(173, '2018-4-4', '015', 32),
+(174, '2018-4-4', '015', 32),
+(175, '2018-4-5', '015', 32),
+(176, '2018-4-5', '015', 32),
+(177, '2018-4-6', '015', 32),
+(178, '2018-4-6', '015', 32),
+(179, '2018-4-6', '015', 32),
+(180, '2018-4-6', '015', 32),
+(181, '2018-4-6', '015', 32),
+(182, '2018-4-6', '015', 32),
+(183, '2018-4-6', '015', 32),
+(184, '2018-4-6', '015', 32),
+(185, '2018-4-6', '015', 32),
+(186, '2018-4-6', '015', 32),
+(187, '2018-4-6', '015', 32),
+(188, '2018-4-6', '015', 32),
+(189, '2018-4-6', '015', 32),
+(190, '2018-4-6', '015', 32),
+(191, '2018-4-6', '015', 32),
+(192, '2018-4-6', '015', 32),
+(193, '2018-4-6', '015', 32),
+(194, '2018-4-6', '015', 32),
+(195, '2018-4-6', '015', 32),
+(196, '2018-4-6', '015', 32),
+(197, '2018-4-6', '001', 48),
+(198, '2018-4-9', '', 0),
+(199, '2018-4-9', '', 0),
+(200, '2018-4-9', '', 0),
+(201, '2018-4-9', '015', 32),
+(202, '2018-4-9', '', 0),
+(203, '2018-4-9', '001', 15),
+(204, '2018-4-9', '', 0),
+(205, '2018-4-12', '', 0),
+(206, '2018-4-12', '', 0),
+(207, '2018-4-12', '', 0),
+(208, '2018-4-12', '001', 75),
+(209, '2018-4-12', '', 0),
+(210, '2018-4-12', '', 0),
+(211, '2018-4-12', '', 0),
+(212, '2018-4-12', '', 0),
+(213, '2018-4-12', '', 0),
+(214, '2018-4-12', '', 0),
+(215, '2018-4-12', '', 0),
+(216, '2018-4-12', '', 0),
+(217, '2018-4-12', '', 0),
+(218, '2018-4-12', '', 0),
+(219, '2018-4-12', '', 0),
+(220, '2018-4-12', '', 0),
+(221, '2018-4-12', '', 0),
+(222, '2018-4-13', '', 0),
+(223, '2018-4-13', '', 0),
+(224, '2018-4-13', '', 0),
+(225, '2018-4-13', '', 0),
+(226, '2018-4-13', '', 0),
+(227, '2018-4-13', '', 0),
+(228, '2018-4-13', '', 0),
+(229, '2018-4-13', '', 0),
+(230, '2018-4-13', '', 0),
+(231, '2018-4-13', '', 0),
+(232, '2018-4-13', '', 0),
+(233, '2018-4-13', '', 0),
+(234, '2018-4-13', '', 0);
 
 -- --------------------------------------------------------
 
@@ -77,24 +252,84 @@ INSERT INTO `compras` (`id_compras`, `Fecha`, `folio`, `TotalCompras`) VALUES
 -- Estructura de tabla para la tabla `detalle_compra`
 --
 
-CREATE TABLE `detalle_compra` (
-  `id_detalle` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `detalle_compra` (
+  `id_detalle` int(11) NOT NULL AUTO_INCREMENT,
+  `Folio` int(11) NOT NULL,
   `producto` varchar(50) NOT NULL,
   `Cantidad` float NOT NULL,
-  `Precio` float NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `Precio` float NOT NULL,
+  `PagaPorCantidad` float NOT NULL,
+  `TotalAPagar` float NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `id_proveedor` int(11) NOT NULL,
+  PRIMARY KEY (`id_detalle`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=115 ;
 
 --
 -- Volcado de datos para la tabla `detalle_compra`
 --
 
-INSERT INTO `detalle_compra` (`id_detalle`, `producto`, `Cantidad`, `Precio`) VALUES
-(55, 'Donitas Bimbo', 4, 13),
-(56, 'Coca - Cola', 11, 17),
-(57, 'Pepsi', 9, 16),
-(58, 'Jugo', 10, 13),
-(59, 'Naranjada', 7, 14),
-(60, 'Donitas Bimbo', 2, 13);
+INSERT INTO `detalle_compra` (`id_detalle`, `Folio`, `producto`, `Cantidad`, `Precio`, `PagaPorCantidad`, `TotalAPagar`, `id_producto`, `id_proveedor`) VALUES
+(55, 1, 'Donitas Bimbo', 4, 13, 0, 0, 0, 0),
+(56, 0, 'Coca - Cola', 11, 17, 0, 0, 0, 0),
+(57, 0, 'Pepsi', 9, 16, 0, 0, 0, 0),
+(58, 0, 'Jugo', 10, 13, 0, 0, 0, 0),
+(59, 0, 'Naranjada', 7, 14, 0, 0, 0, 0),
+(60, 0, 'Donitas Bimbo', 2, 13, 0, 0, 0, 0),
+(61, 0, 'Donitas', 3, 16, 0, 0, 0, 0),
+(62, 0, 'Prueba', 2, 12, 0, 0, 0, 0),
+(63, 0, 'Coca - Cola', 3, 17, 0, 0, 0, 0),
+(64, 0, 'Gansito', 2, 6, 0, 0, 0, 0),
+(65, 0, 'Donitas', 2, 16, 0, 0, 0, 0),
+(66, 0, 'Prueba', 2, 12, 0, 0, 0, 0),
+(67, 0, 'Donitas', 2, 16, 0, 0, 0, 0),
+(68, 0, 'Donitas', 3, 16, 0, 0, 0, 0),
+(69, 0, 'Donitas', 2, 16, 0, 0, 0, 0),
+(70, 0, 'Bocadin', 2, 5, 0, 0, 0, 0),
+(71, 0, 'Donitas', 2, 16, 0, 0, 0, 0),
+(72, 0, 'Donitas', 2, 16, 0, 0, 0, 0),
+(73, 0, 'Pepsi', 2, 16, 0, 0, 0, 0),
+(74, 0, 'Donitas', 2, 16, 0, 0, 0, 0),
+(75, 0, 'Donitas', 2, 16, 0, 0, 0, 0),
+(76, 0, 'Donitas', 2, 0, 0, 0, 16, 0),
+(77, 0, 'Donitas', 3, 16, 0, 0, 0, 0),
+(78, 0, 'Donitas', 3, 16, 0, 0, 1, 0),
+(79, 0, 'Polvoron', 4, 9, 0, 0, 15, 9),
+(80, 0, 'Papitas', 3, 14, 0, 0, 14, 2),
+(81, 0, 'Papitas', 2, 14, 0, 0, 14, 2),
+(82, 0, 'Papitas', 5, 14, 0, 0, 14, 2),
+(83, 0, 'Papitas', 5, 14, 0, 0, 14, 2),
+(84, 0, 'Papitas', 4, 14, 0, 0, 14, 2),
+(85, 0, 'Papitas', 3, 14, 0, 0, 14, 2),
+(86, 0, 'Papitas', 3, 14, 0, 0, 14, 2),
+(87, 0, 'Papitas', 4, 14, 0, 0, 14, 2),
+(88, 0, 'Papitas', 7, 14, 0, 0, 14, 2),
+(89, 0, 'Papitas', 7, 14, 0, 0, 14, 2),
+(90, 0, 'Polvoron g', 9, 20, 0, 0, 15, 7),
+(91, 0, 'Polvoron g', 3, 20, 0, 0, 7, 7),
+(92, 0, 'Polvoron g', 3, 20, 0, 0, 15, 7),
+(93, 0, 'Polvoron g', 4, 20, 0, 0, 15, 7),
+(94, 0, 'Polvoron g', 7, 20, 0, 0, 15, 7),
+(95, 0, 'Polvoron g', 5, 20, 0, 0, 15, 7),
+(96, 0, 'Polvoron g', 2, 20, 0, 0, 15, 7),
+(97, 4, 'Polvoron g', 3, 20, 0, 0, 15, 7),
+(98, 3, 'Polvoron g', 9, 20, 0, 0, 15, 7),
+(99, 2, 'Polvoron g', 3, 20, 0, 0, 15, 7),
+(100, 0, 'Polvoron g', 3, 20, 0, 0, 15, 7),
+(101, 0, 'Polvoron g', 3, 20, 0, 0, 15, 7),
+(102, 0, 'Polvoron g', 5, 20, 0, 0, 15, 7),
+(103, 0, 'Mazapan', 4, 4, 0, 0, 7, 0),
+(104, 0, 'Mazapan', 3, 4, 0, 0, 15, 7),
+(105, 0, 'Mazapan', 3, 4, 0, 0, 15, 7),
+(106, 1, 'Mazapan', 2, 4, 0, 0, 15, 7),
+(107, 0, 'Donitas', 3, 16, 0, 0, 1, 0),
+(108, 0, 'Donitas', 3, 16, 0, 0, 1, 0),
+(109, 0, 'Donitas', 2, 16, 0, 0, 15, 7),
+(110, 0, 'Donitas', 3, 16, 0, 0, 1, 0),
+(111, 0, 'Donitas', 2, 16, 0, 0, 15, 7),
+(112, 0, 'Cerveza', 1, 15, 0, 0, 1, 1),
+(113, 0, 'Cerveza', 9, 15, 0, 0, 1, 1),
+(114, 1, 'Cerveza', 5, 15, 0, 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -102,21 +337,62 @@ INSERT INTO `detalle_compra` (`id_detalle`, `producto`, `Cantidad`, `Precio`) VA
 -- Estructura de tabla para la tabla `detalle_venta`
 --
 
-CREATE TABLE `detalle_venta` (
-  `id_detalle_venta` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `detalle_venta` (
+  `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT,
+  `Folio` int(11) NOT NULL,
+  `Producto` varchar(255) NOT NULL,
   `Cantida` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `Precio` float NOT NULL,
-  `id_venta` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `PagaPorCantidad` float NOT NULL,
+  `TotalAPagar` float NOT NULL,
+  `id_venta` int(11) NOT NULL,
+  PRIMARY KEY (`id_detalle_venta`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Volcado de datos para la tabla `detalle_venta`
 --
 
-INSERT INTO `detalle_venta` (`id_detalle_venta`, `Cantida`, `id_producto`, `Precio`, `id_venta`) VALUES
-(15, 3, 2, 17, 13),
-(14, 1, 1, 13, 12);
+INSERT INTO `detalle_venta` (`id_detalle_venta`, `Folio`, `Producto`, `Cantida`, `id_producto`, `Precio`, `PagaPorCantidad`, `TotalAPagar`, `id_venta`) VALUES
+(23, 1, 'pepsi 1lt', 4, 1, 16, 0, 0, 37),
+(22, 2, 'cepillo dental', 5, 1, 16, 0, 0, 34),
+(21, 3, 'coca cola', 3, 1, 13, 0, 0, 26),
+(20, 1, 'panque', 3, 2, 17, 0, 0, 22),
+(19, 3, 'chips', 5, 1, 13, 0, 0, 21),
+(18, 2, 'takis', 5, 1, 13, 0, 0, 20),
+(17, 0, '', 4, 6, 7, 0, 0, 19),
+(16, 0, '', 5, 3, 16, 0, 0, 18),
+(15, 0, '', 3, 2, 17, 0, 0, 13),
+(14, 0, '', 1, 1, 13, 0, 0, 12),
+(24, 0, '', 2, 1, 16, 0, 0, 39),
+(25, 0, '', 3, 5, 14, 0, 0, 40),
+(26, 0, '', 3, 2, 17, 0, 0, 41),
+(27, 0, '', 7, 5, 14, 0, 0, 42),
+(28, 0, '', 3, 16, 7, 0, 0, 44),
+(29, 0, '', 1000, 1, 15, 0, 0, 46),
+(30, 0, '', 3, 1, 15, 0, 0, 60),
+(31, 0, '', 3, 4, 13, 0, 0, 122);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `existencia`
+--
+
+CREATE TABLE IF NOT EXISTS `existencia` (
+  `id_existencia` int(11) NOT NULL AUTO_INCREMENT,
+  `id_producto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  PRIMARY KEY (`id_existencia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `existencia`
+--
+
+INSERT INTO `existencia` (`id_existencia`, `id_producto`, `cantidad`) VALUES
+(3, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -124,25 +400,32 @@ INSERT INTO `detalle_venta` (`id_detalle_venta`, `Cantida`, `id_producto`, `Prec
 -- Estructura de tabla para la tabla `productos`
 --
 
-CREATE TABLE `productos` (
-  `id_producto` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `productos` (
+  `id_producto` int(11) NOT NULL AUTO_INCREMENT,
   `Desc_producto` varchar(200) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `Precio` float NOT NULL,
-  `Codigo` varchar(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `Codigo` varchar(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `id_proveedor` int(11) NOT NULL,
+  PRIMARY KEY (`id_producto`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id_producto`, `Desc_producto`, `Nombre`, `Precio`, `Codigo`) VALUES
-(1, 'Donitas', 'Donitas Bimbo', 13, '001'),
-(2, 'Bebida', 'Coca - Cola', 17, '002'),
-(4, 'Bebida', 'Pepsi', 16, '003'),
-(5, 'Sabor nara', 'Jugo', 13, '004'),
-(6, 'Bebida', 'Naranjada', 14, '005'),
-(7, 'Botana', 'Sabritas', 7, '006');
+INSERT INTO `productos` (`id_producto`, `Desc_producto`, `Nombre`, `Precio`, `Codigo`, `cantidad`, `id_proveedor`) VALUES
+(2, 'Bebida', 'Coca - Cola', 17, '002', 0, 0),
+(4, 'Bebida', 'Pepsi', 16, '003', 0, 0),
+(5, 'Sabor nara', 'Jugo', 13, '004', 0, 0),
+(6, 'Bebida', 'Naranjada', 14, '005', 0, 0),
+(7, 'Botana', 'Sabritas', 7, '006', 0, 0),
+(8, 'Dulce de masa', 'Mazapan', 4, '007', 0, 0),
+(9, 'Dulce de masa', 'Mazapan', 3, '008', 0, 0),
+(10, 'Barra de chocolate', 'Bocadin', 5, '009', 0, 0),
+(23, 'Genéricas', 'Sabritas', 7, '016', 10, 7),
+(22, 'Cerveza', 'Cerveza', 15, '015', 18, 7);
 
 -- --------------------------------------------------------
 
@@ -150,12 +433,13 @@ INSERT INTO `productos` (`id_producto`, `Desc_producto`, `Nombre`, `Precio`, `Co
 -- Estructura de tabla para la tabla `provedorees`
 --
 
-CREATE TABLE `provedorees` (
-  `id_proveedor` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `provedorees` (
+  `id_proveedor` int(11) NOT NULL AUTO_INCREMENT,
   `Marca` varchar(50) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
-  `folio` varchar(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `folio` varchar(11) NOT NULL,
+  PRIMARY KEY (`id_proveedor`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Volcado de datos para la tabla `provedorees`
@@ -168,7 +452,8 @@ INSERT INTO `provedorees` (`id_proveedor`, `Marca`, `Nombre`, `folio`) VALUES
 (11, 'Modelo', 'Fernanda E.', '004'),
 (13, 'Genérica', 'Luis Noyola', '005'),
 (14, 'La estrellita', 'Alfredo Molina', '006'),
-(15, 'Coca - Cola', 'Luis Mendes', '007');
+(15, 'Pepsi', 'Moises', '007'),
+(17, 'Corona', 'Cerveza', '001');
 
 -- --------------------------------------------------------
 
@@ -176,12 +461,13 @@ INSERT INTO `provedorees` (`id_proveedor`, `Marca`, `Nombre`, `folio`) VALUES
 -- Estructura de tabla para la tabla `recargas`
 --
 
-CREATE TABLE `recargas` (
-  `id_recarga` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `recargas` (
+  `id_recarga` int(11) NOT NULL AUTO_INCREMENT,
   `Monto` float NOT NULL,
   `NumeroTelefonico` varchar(50) NOT NULL,
-  `Compania` varchar(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `Compania` varchar(11) NOT NULL,
+  PRIMARY KEY (`id_recarga`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `recargas`
@@ -190,7 +476,9 @@ CREATE TABLE `recargas` (
 INSERT INTO `recargas` (`id_recarga`, `Monto`, `NumeroTelefonico`, `Compania`) VALUES
 (1, 100, '4981165718', 'Unefon'),
 (2, 100, '4981165718', 'Movistar'),
-(3, 90, '4989876543', 'Unefon');
+(3, 90, '4989876543', 'Unefon'),
+(4, 1000, '4981165718', 'Telcel'),
+(5, 100, '4981005816', 'Telcel');
 
 -- --------------------------------------------------------
 
@@ -198,122 +486,138 @@ INSERT INTO `recargas` (`id_recarga`, `Monto`, `NumeroTelefonico`, `Compania`) V
 -- Estructura de tabla para la tabla `ventas`
 --
 
-CREATE TABLE `ventas` (
-  `id_venta` int(11) NOT NULL,
-  `Fecha` varchar(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `ventas` (
+  `id_venta` int(11) NOT NULL AUTO_INCREMENT,
+  `Fecha` date NOT NULL,
   `Total` float NOT NULL,
-  `folio` varchar(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `folio` varchar(11) NOT NULL,
+  PRIMARY KEY (`id_venta`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=501 ;
 
 --
 -- Volcado de datos para la tabla `ventas`
 --
 
 INSERT INTO `ventas` (`id_venta`, `Fecha`, `Total`, `folio`) VALUES
-(14, '2018-4-1', 0, ''),
-(13, '2018-4-1', 51, '002'),
-(12, '2018-4-1', 13, '001');
+(18, '2018-04-02', 80, '003'),
+(14, '2018-04-02', 80, '003'),
+(15, '2018-04-02', 80, '003'),
+(16, '2018-04-02', 80, '003'),
+(17, '2018-04-02', 80, '003'),
+(13, '2018-04-02', 51, '002'),
+(12, '2018-04-06', 64, '001'),
+(19, '2018-04-02', 28, '006'),
+(20, '0000-00-00', 32, '001'),
+(21, '0000-00-00', 32, '001'),
+(22, '0000-00-00', 32, '001'),
+(23, '0000-00-00', 32, '001'),
+(24, '0000-00-00', 32, '001'),
+(25, '0000-00-00', 32, '001'),
+(26, '0000-00-00', 32, '001'),
+(27, '0000-00-00', 32, '001'),
+(28, '0000-00-00', 32, '001'),
+(29, '0000-00-00', 32, '001'),
+(30, '0000-00-00', 32, '001'),
+(31, '0000-00-00', 32, '001'),
+(32, '0000-00-00', 32, '001'),
+(33, '0000-00-00', 32, '001'),
+(34, '0000-00-00', 32, '001'),
+(35, '0000-00-00', 32, '001'),
+(36, '0000-00-00', 32, '001'),
+(37, '0000-00-00', 32, '001'),
+(38, '0000-00-00', 32, '001'),
+(39, '0000-00-00', 32, '001'),
+(40, '0000-00-00', 51, '002'),
+(41, '0000-00-00', 51, '002'),
+(42, '2018-04-06', 98, '005'),
+(43, '2018-04-09', 21, '016'),
+(44, '2018-04-09', 21, '016'),
+(45, '2018-04-09', 15000, '001'),
+(46, '2018-04-09', 15000, '001'),
+(47, '2018-04-13', 45, '001'),
+(48, '2018-04-13', 45, '001'),
+(49, '2018-04-13', 45, '001'),
+(50, '2018-04-13', 45, '001'),
+(51, '2018-04-13', 45, '001'),
+(52, '2018-04-13', 45, '001'),
+(53, '2018-04-13', 45, '001'),
+(54, '2018-04-13', 45, '001'),
+(55, '2018-04-13', 45, '001'),
+(56, '2018-04-13', 45, '001'),
+(57, '2018-04-13', 45, '001'),
+(58, '2018-04-13', 45, '001'),
+(59, '2018-04-13', 45, '001'),
+(60, '2018-04-13', 45, '001'),
+(61, '2018-04-13', 39, '004'),
+(62, '2018-04-13', 39, '004'),
+(63, '2018-04-13', 39, '004'),
+(64, '2018-04-13', 39, '004'),
+(65, '2018-04-13', 39, '004'),
+(66, '2018-04-13', 39, '004'),
+(67, '2018-04-13', 39, '004'),
+(68, '2018-04-13', 39, '004'),
+(69, '2018-04-13', 39, '004'),
+(70, '2018-04-13', 39, '004'),
+(71, '2018-04-13', 39, '004'),
+(72, '2018-04-13', 39, '004'),
+(73, '2018-04-13', 39, '004'),
+(74, '2018-04-13', 39, '004'),
+(75, '2018-04-13', 39, '004'),
+(76, '2018-04-13', 39, '004'),
+(77, '2018-04-13', 39, '004'),
+(78, '2018-04-13', 39, '004'),
+(79, '2018-04-13', 39, '004'),
+(80, '2018-04-13', 39, '004'),
+(81, '2018-04-13', 39, '004'),
+(82, '2018-04-13', 39, '004'),
+(83, '2018-04-13', 39, '004'),
+(84, '2018-04-13', 39, '004'),
+(85, '2018-04-13', 39, '004'),
+(86, '2018-04-13', 39, '004'),
+(87, '2018-04-13', 39, '004'),
+(88, '2018-04-13', 39, '004'),
+(89, '2018-04-13', 39, '004'),
+(90, '2018-04-13', 39, '004'),
+(91, '2018-04-13', 39, '004'),
+(92, '2018-04-13', 39, '004'),
+(93, '2018-04-13', 39, '004'),
+(94, '2018-04-13', 39, '004'),
+(95, '2018-04-13', 39, '004'),
+(96, '2018-04-13', 39, '004'),
+(97, '2018-04-13', 39, '004'),
+(98, '2018-04-13', 39, '004'),
+(99, '2018-04-13', 39, '004'),
+(100, '2018-04-13', 39, '004'),
+(101, '2018-04-13', 39, '004'),
+(102, '2018-04-13', 39, '004'),
+(103, '2018-04-13', 39, '004'),
+(104, '2018-04-13', 39, '004'),
+(105, '2018-04-13', 39, '004'),
+(106, '2018-04-13', 39, '004'),
+(107, '2018-04-13', 39, '004'),
+(108, '2018-04-13', 39, '004'),
+(109, '2018-04-13', 39, '004'),
+(110, '2018-04-13', 39, '004'),
+(111, '2018-04-13', 39, '004'),
+(112, '2018-04-13', 39, '004'),
+(113, '2018-04-13', 39, '004'),
+(114, '2018-04-13', 39, '004'),
+(115, '2018-04-13', 39, '004'),
+(116, '2018-04-13', 39, '004'),
+(117, '2018-04-13', 39, '004'),
+(118, '2018-04-13', 39, '004'),
+(119, '2018-04-13', 39, '004'),
+(120, '2018-04-13', 39, '004'),
+(121, '2018-04-13', 39, '004'),
+(122, '2018-04-13', 39, '004'),
+(123, '2018-04-13', 0, ''),
+(124, '2018-04-13', 0, ''),
+(125, '2018-04-13', 0, ''),
+(126, '2018-04-13', 0, ''),
+(127, '2018-04-13', 0, ''),
+(500, '0000-00-00', 397.5, '150'),
+(2, '2018-07-16', 397.5, '150');
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `clientes`
---
-ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`id_clientes`);
-
---
--- Indices de la tabla `compras`
---
-ALTER TABLE `compras`
-  ADD PRIMARY KEY (`id_compras`);
-
---
--- Indices de la tabla `detalle_compra`
---
-ALTER TABLE `detalle_compra`
-  ADD PRIMARY KEY (`id_detalle`);
-
---
--- Indices de la tabla `detalle_venta`
---
-ALTER TABLE `detalle_venta`
-  ADD PRIMARY KEY (`id_detalle_venta`);
-
---
--- Indices de la tabla `productos`
---
-ALTER TABLE `productos`
-  ADD PRIMARY KEY (`id_producto`);
-
---
--- Indices de la tabla `provedorees`
---
-ALTER TABLE `provedorees`
-  ADD PRIMARY KEY (`id_proveedor`);
-
---
--- Indices de la tabla `recargas`
---
-ALTER TABLE `recargas`
-  ADD PRIMARY KEY (`id_recarga`);
-
---
--- Indices de la tabla `ventas`
---
-ALTER TABLE `ventas`
-  ADD PRIMARY KEY (`id_venta`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `clientes`
---
-ALTER TABLE `clientes`
-  MODIFY `id_clientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
-
---
--- AUTO_INCREMENT de la tabla `compras`
---
-ALTER TABLE `compras`
-  MODIFY `id_compras` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
-
---
--- AUTO_INCREMENT de la tabla `detalle_compra`
---
-ALTER TABLE `detalle_compra`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
-
---
--- AUTO_INCREMENT de la tabla `detalle_venta`
---
-ALTER TABLE `detalle_venta`
-  MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT de la tabla `productos`
---
-ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT de la tabla `provedorees`
---
-ALTER TABLE `provedorees`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT de la tabla `recargas`
---
-ALTER TABLE `recargas`
-  MODIFY `id_recarga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `ventas`
---
-ALTER TABLE `ventas`
-  MODIFY `id_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

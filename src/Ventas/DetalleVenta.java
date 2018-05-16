@@ -13,6 +13,15 @@ public class DetalleVenta {
     public int id_detalleventa;
     public float cantidad;
     public float precio;
+    public String folio;
+
+    public String getFolio() {
+        return folio;
+    }
+
+    public void setFolio(String folio) {
+        this.folio = folio;
+    }
     public int producto_id_Producto;
     public int venta_id_Venta;
 

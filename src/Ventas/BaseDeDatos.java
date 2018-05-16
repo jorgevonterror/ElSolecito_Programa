@@ -28,8 +28,8 @@ public class BaseDeDatos {
     public boolean conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            //conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
+            //conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -141,11 +141,12 @@ public class BaseDeDatos {
         try {
             consulta = conexion.createStatement();
             consulta.execute("insert into detalle_venta "
-                    + "(id_detalle_venta, Cantida, Precio, id_producto, id_venta) "
+                    
                     + "values (null,'" + mDetalleVenta.getCantidad() + "','"
                     + mDetalleVenta.getPrecio() + "','"
                     + mDetalleVenta.getProducto_id_Producto() + "','"
-                    + mDetalleVenta.getVenta_id_Venta() + "');");
+                    + mDetalleVenta.getVenta_id_Venta() + "','"
+                    + mDetalleVenta.getFolio()+ "');");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

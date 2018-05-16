@@ -531,6 +531,47 @@ public class FRM_Compras extends javax.swing.JFrame {
 
     }
 
+    void setCompras_2() {
+        if (mBD.conectar()) {
+            ArrayList mArrayList = new ArrayList();
+            mArrayList = mBD.ConsultarProductos();
+            String[] Datos = null;
+            if (mArrayList != null) {
+
+                for (int i = 0; i < mArrayList.size(); i++) {
+                    mProducto = (Producto) mArrayList.get(i);
+                    Datos = new String[7];
+                    Datos[0] = "" + mProducto.getId_producto();
+                    Datos[1] = "" + mProducto.getCodigo();
+                    Datos[2] = mProducto.getNombre();
+                    Datos[3] = "" + mProducto.getPrecio();
+                    Datos[4] = "" + mProducto.getCantidadProducto();
+                    Datos[5] = mProducto.getDesc_Prod();
+                    Datos[6] = "" + mProducto.getId_proveedor();
+
+                    modeloTabla.addRow(Datos);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No existe ese Producto...");
+        }
+        this.Tabla_Compras = new javax.swing.JTable();
+        this.Tabla_Compras.setModel(modeloTabla);
+        this.Tabla_Compras.getColumnModel().getColumn(0).setPreferredWidth(50);
+        this.Tabla_Compras.getColumnModel().getColumn(1).setPreferredWidth(100);
+        this.Tabla_Compras.getColumnModel().getColumn(2).setPreferredWidth(400);
+        this.Tabla_Compras.getColumnModel().getColumn(3).setPreferredWidth(600);
+        this.Tabla_Compras.getColumnModel().getColumn(4).setPreferredWidth(400);
+        this.Tabla_Compras.getColumnModel().getColumn(5).setPreferredWidth(500);
+        this.Tabla_Compras.getColumnModel().getColumn(6).setPreferredWidth(600);
+
+        if (this.Tabla_Compras.getRowCount() > 0) {
+            this.Tabla_Compras.setRowSelectionInterval(0, 0);
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al consultar");
+        }
+    }
+
     void setFilas_Proveedores() {
         borrar_proveedores();
 
@@ -719,29 +760,30 @@ public class FRM_Compras extends javax.swing.JFrame {
         //Le damos valores a los ID.
         if (this.TXT_Nombre.getText().equals("") || this.TXT_N_Cantidad.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else if (this.LBL_Nombre_Producto.getText().equals("-") || this.LBL_Desc.getText().equals("-")) {
+            JOptionPane.showMessageDialog(null, "Presione la opción --> Seleccionar producto.");    
         } else {
             try {
                 Producto nProducto = new Producto();
                 //verificar si no hay problema con los iD y el folio.
-                mProducto.setId_producto(Integer.parseInt(this.TXT_Nombre.getText()));
+                mProducto.setId_producto(mProducto.getId_producto());
                 mProveedor.setId_proveedor(Integer.parseInt(this.LBL_Proveedor.getText()));
+                mProducto.setFolio(this.TXT_Nombre.getText());
+                mProducto.setCodigo(this.TXT_Nombre.getText());
 
                 mBD.conectar();
                 Producto mProductoOld = mBD.consultarProducto(TXT_Nombre.getText());
                 mBD.desconectar();
 
                 Nueva_Cantidad = Integer.parseInt(TXT_N_Cantidad.getText()) + mProductoOld.getCantidadProducto();
-                nProducto.setNombre(LBL_Nombre_Producto.getText());
-                nProducto.setCodigo(TXT_Nombre.getText());
-                nProducto.setPrecio(Float.parseFloat(LBL_Precio.getText()));
                 nProducto.setCantidadProducto(Nueva_Cantidad);
-                nProducto.setId_proveedor(LBL_Proveedor.getText());
-                nProducto.setDesc_Prod(LBL_Desc.getText());
                 Nueva_Cantidad = 0;
 
                 if (mBD.conectar()) {
                     if (mBD.ModificarProductos(mProducto, nProducto)) {
-                        JOptionPane.showMessageDialog(null, "Productos agregados con éxito.");
+                        JOptionPane.showMessageDialog(null, "Ahora finalice la compra.");
+                        borrar();
+                        setCompras_2();
                     } else {
                         JOptionPane.showMessageDialog(null, "Error al añadir.");
                     }
@@ -753,6 +795,7 @@ public class FRM_Compras extends javax.swing.JFrame {
                     mDCompra.setCantidad(Integer.parseInt(TXT_N_Cantidad.getText()));
                     mDCompra.setPrecio(Float.parseFloat(LBL_Precio.getText()));
                     mDCompra.setProducto(LBL_Nombre_Producto.getText());
+                    mDCompra.setFolio(TXT_Nombre.getText());
 
                     mDCompra.setId_producto(mProducto.getId_producto());
                     mDCompra.setId_proveedor(mProveedor.getId_proveedor());
@@ -770,7 +813,7 @@ public class FRM_Compras extends javax.swing.JFrame {
                     }
                 }
             } catch (HeadlessException | NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Introduce un folio.");
+                //JOptionPane.showMessageDialog(null, "Introduce un folio.");
             }
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -779,6 +822,8 @@ public class FRM_Compras extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (this.TXT_Nombre.getText().equals("") || this.TXT_N_Cantidad.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Rellene todos los campos, por favor.");
+        } else if (this.LBL_Nombre_Producto.getText().equals("-") || this.LBL_Desc.getText().equals("-")) {
+            JOptionPane.showMessageDialog(null, "Presione la opción --> Seleccionar producto.");    
         } else {
             try {
                 Compras mCompraAlterada = new Compras();
@@ -794,7 +839,7 @@ public class FRM_Compras extends javax.swing.JFrame {
 
                 if (mBD.conectar()) {
                     if (mBD.CambiosCompra(mCompras, mCompraAlterada)) {
-                        JOptionPane.showMessageDialog(null, "NUEVO PRECIO EN LA COMPRA");
+                        JOptionPane.showMessageDialog(null, "Precios actualizados.");
                     } else {
                         JOptionPane.showMessageDialog(null, "ERROR EN NUEVO PRECIO");
                     }
