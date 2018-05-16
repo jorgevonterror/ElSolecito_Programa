@@ -807,7 +807,7 @@ public class FRM_Compras extends javax.swing.JFrame {
                     LBL_TotalP.setText(String.valueOf(TotalCompleto));
 
                     if (mBD.AltaDetalleCompra(mDCompra)) {
-                        JOptionPane.showMessageDialog(null, "Detalle guardado.");
+                        //JOptionPane.showMessageDialog(null, "Detalle guardado.");
                     } else {
                         JOptionPane.showMessageDialog(null, "No se guardo el detalle guardado.");
                     }

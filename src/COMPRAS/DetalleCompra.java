@@ -10,6 +10,7 @@ package COMPRAS;
  * @author jorgegarcia
  */
 public class DetalleCompra {
+
     private int id_detalle;
     private String Folio;
 
@@ -100,6 +101,5 @@ public class DetalleCompra {
     public void setId_compras(int id_compras) {
         this.id_compras = id_compras;
     }
-    
-    
+
 }

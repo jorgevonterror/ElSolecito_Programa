@@ -14,7 +14,61 @@ public class DetalleVenta {
     public float cantidad;
     public float precio;
     public String folio;
+    public int id_producto;
+    public int id_venta;
+    public int id_proveedor;
+    public float PagaPorCantidad;
+    public float TotalAPagar;
+    public String Producto;
 
+    public int getId_producto() {
+        return id_producto;
+    }
+
+    public void setId_producto(int id_producto) {
+        this.id_producto = id_producto;
+    }
+
+    public int getId_venta() {
+        return id_venta;
+    }
+
+    public void setId_venta(int id_venta) {
+        this.id_venta = id_venta;
+    }
+
+    public int getId_proveedor() {
+        return id_proveedor;
+    }
+
+    public void setId_proveedor(int id_proveedor) {
+        this.id_proveedor = id_proveedor;
+    }
+
+    public float getPagaPorCantidad() {
+        return PagaPorCantidad;
+    }
+
+    public void setPagaPorCantidad(float PagaPorCantidad) {
+        this.PagaPorCantidad = PagaPorCantidad;
+    }
+
+    public float getTotalAPagar() {
+        return TotalAPagar;
+    }
+
+    public void setTotalAPagar(float TotalAPagar) {
+        this.TotalAPagar = TotalAPagar;
+    }
+
+    public String getProducto() {
+        return Producto;
+    }
+
+    public void setProducto(String Producto) {
+        this.Producto = Producto;
+    }
+    
     public String getFolio() {
         return folio;
     }

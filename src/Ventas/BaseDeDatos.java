@@ -107,7 +107,7 @@ public class BaseDeDatos {
         try {
             consulta = conexion.createStatement();
             consulta.execute("update productos set "
-                    + "cantidad = '" + nProducto.getCantidadProducto() + "'"  
+                    + "cantidad = '" + nProducto.getCantidadProducto() + "'"
                     + "where Codigo = '" + mProducto.getCodigo() + "';");
             return true;
         } catch (Exception e) {
@@ -141,12 +141,16 @@ public class BaseDeDatos {
         try {
             consulta = conexion.createStatement();
             consulta.execute("insert into detalle_venta "
-                    
-                    + "values (null,'" + mDetalleVenta.getCantidad() + "','"
+                    + "(id_detalle_venta, Folio, Producto, Cantida, id_producto, Precio, PagaPorCantidad, TotalAPagar, id_venta, id_proveedor) "
+                    + "values (null,'" + mDetalleVenta.getFolio() + "','"
+                    + mDetalleVenta.getProducto() + "','"
+                    + mDetalleVenta.getCantidad() + "','"
+                    + mDetalleVenta.getId_producto() + "','"
                     + mDetalleVenta.getPrecio() + "','"
-                    + mDetalleVenta.getProducto_id_Producto() + "','"
-                    + mDetalleVenta.getVenta_id_Venta() + "','"
-                    + mDetalleVenta.getFolio()+ "');");
+                    + mDetalleVenta.getPagaPorCantidad() + "','"
+                    + mDetalleVenta.getTotalAPagar() + "','"
+                    + mDetalleVenta.getId_venta() + "','"
+                    + mDetalleVenta.getId_proveedor() + "');");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

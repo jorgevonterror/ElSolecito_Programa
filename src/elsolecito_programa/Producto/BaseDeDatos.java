@@ -87,7 +87,6 @@ public class BaseDeDatos {
                 mProducto.setId_proveedor(resultado.getString("id_proveedor"));
                 
                 mListaProductos.add(mProducto);
-
             }
         } catch (Exception e) {
             e.printStackTrace();
