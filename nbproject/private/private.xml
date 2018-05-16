@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>src/Ventas/DetalleVenta.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>70</line>
+                <key/>
+            </bookmark>
+        </file>
         <file>
             <url>src/elsolecito_programa/Producto/FRM_Producto_Consulta.java</url>
             <bookmark id="1">
@@ -12,7 +20,9 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/MARIA%20NOELDA%20MARIANO/Documents/Git/ElSolecito_Programa/src/Ventas/FRM_Ventas.java</file>
+            <file>file:/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Ventas/FRM_Ventas.java</file>
+            <file>file:/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Ventas/Reporte_Ventas1.jrxml</file>
+            <file>file:/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/COMPRAS/Reporte_Compra.jrxml</file>
         </group>
     </open-files>
 </project-private>
