@@ -122,7 +122,8 @@ public class FRM_Ventas extends javax.swing.JFrame {
             this.Tabla_Ventas.getColumnModel().getColumn(3).setPreferredWidth(600);
             this.Tabla_Ventas.getColumnModel().getColumn(4).setPreferredWidth(400);
             this.Tabla_Ventas.getColumnModel().getColumn(5).setPreferredWidth(400);
-
+            this.Tabla_Ventas.getColumnModel().getColumn(6).setPreferredWidth(400);
+            
             if (this.Tabla_Ventas.getRowCount() > 0) {
                 this.Tabla_Ventas.setRowSelectionInterval(0, 0);
             }
@@ -672,7 +673,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                 this.Tabla_Ventas.getColumnModel().getColumn(3).setPreferredWidth(600);
                 this.Tabla_Ventas.getColumnModel().getColumn(4).setPreferredWidth(400);
                 this.Tabla_Ventas.getColumnModel().getColumn(5).setPreferredWidth(400);
-
+                this.Tabla_Ventas.getColumnModel().getColumn(6).setPreferredWidth(400);
                 if (this.Tabla_Ventas.getRowCount() > 0) {
                     this.Tabla_Ventas.setRowSelectionInterval(0, 0);
                 }
@@ -843,38 +844,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
     private void Tabla_VentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_VentasMouseClicked
         // TODO add your handling code here:
-        ResultSet rs = null;
-        Statement consulta = null;
-
-        try {
-            int row = Tabla_Ventas.getSelectedRow();
-            String Table_click = (Tabla_Ventas.getModel().getValueAt(row, 1).toString());
-
-            String sql = "select * from productos where Codigo = '" + Table_click + "';";
-
-            consulta = conexion.prepareStatement("");
-            rs = consulta.executeQuery(sql);
-
-            if (rs.next()) {
-                String add1 = rs.getString("Folio");
-                TXT_Folio.setText(add1);
-
-                String add2 = rs.getString("Nombre");
-                LB_Nombre.setText(add2);
-
-                String add3 = rs.getString("Descripcion");
-                LB_Desc.setText(add3);
-
-                String add4 = rs.getString("Precio");
-                LB_Precio.setText(add4);
-
-                //String add5 = rs.getString("Proveedor");
-                //LB_Proveedor.setText(add5);
-            }
-        } catch (SQLException e) {
-
-        }
-
+ 
     }//GEN-LAST:event_Tabla_VentasMouseClicked
 
     private void Tabla_VentasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_VentasMousePressed
