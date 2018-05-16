@@ -151,6 +151,49 @@ public class FRM_Ventas extends javax.swing.JFrame {
         mBD.desconectar();
     }
 
+    void setProductos_2() {
+        borrar();
+        if (mBD.conectar()) {
+            ArrayList mArrayList = new ArrayList();
+            mArrayList = mBD.ConsultaTodoProducto();
+            String[] Datos = null;
+            if (mArrayList != null) {
+                for (int i = 0; i < mArrayList.size(); i++) {
+                    mProducto = (Producto) mArrayList.get(i);
+                    Datos = new String[7];
+
+                    Datos[0] = "" + mProducto.getId_producto();
+                    Datos[1] = "" + mProducto.getCodigo();
+                    Datos[2] = mProducto.getNombre();
+                    Datos[3] = "" + mProducto.getPrecio();
+                    Datos[4] = "" + mProducto.getCantidadProducto();
+                    Datos[5] = mProducto.getDesc_Prod();
+                    Datos[6] = "" + mProducto.getId_proveedor();
+                    
+                    modeloTabla.addRow(Datos);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el producto...");
+            }
+            this.Tabla_Ventas = new javax.swing.JTable();
+            this.Tabla_Ventas.setModel(modeloTabla);
+
+            this.Tabla_Ventas.getColumnModel().getColumn(0).setPreferredWidth(50);
+            this.Tabla_Ventas.getColumnModel().getColumn(1).setPreferredWidth(100);
+            this.Tabla_Ventas.getColumnModel().getColumn(2).setPreferredWidth(400);
+            this.Tabla_Ventas.getColumnModel().getColumn(3).setPreferredWidth(600);
+            this.Tabla_Ventas.getColumnModel().getColumn(4).setPreferredWidth(400);
+            this.Tabla_Ventas.getColumnModel().getColumn(5).setPreferredWidth(400);
+            this.Tabla_Ventas.getColumnModel().getColumn(6).setPreferredWidth(400);
+
+            if (this.Tabla_Ventas.getRowCount() > 0) {
+                this.Tabla_Ventas.setRowSelectionInterval(0, 0);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al consultar.");
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -669,7 +712,8 @@ public class FRM_Ventas extends javax.swing.JFrame {
 
                 if (mBD.conectar()) {
                     if (mBD.ModificarProductos(mProducto, nProducto)) {
-                        //JOptionPane.showMessageDialog(null, "Productos añadidos...");
+                        //JOptionPane.showMessageDialog(null, "Ahora presione --> Finalizar venta.");
+                        setProductos_2();
                     } else {
                         JOptionPane.showMessageDialog(null, "Error al añadir...");
                     }
@@ -693,7 +737,7 @@ public class FRM_Ventas extends javax.swing.JFrame {
                     mDetalleVenta.setId_venta(RegistroVenta);
 
                     if (mBD.AltaDetalleVenta(mDetalleVenta)) {
-                        JOptionPane.showMessageDialog(null, "Ahora finalice la venta.");
+                        JOptionPane.showMessageDialog(null, "Ahora presione --> Finalizar venta.");
                     } else {
                         JOptionPane.showMessageDialog(null, "Error detalle venta.");
                     }
