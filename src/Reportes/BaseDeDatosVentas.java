@@ -197,11 +197,15 @@ public class BaseDeDatosVentas {
         return RegistroUltimo;
       }
    
+    /*
     public String url = "jdbc:mysql://localhost:8889/BD_ElSolecito";
     public String user = "root";
     public String pass = "root";
+   */
    
-   
+    public String url = "jdbc:mysql://localhost/bd_elsolecito";
+    public String user = "root";
+    public String pass = "";
     public Connection conectare() {
         Connection link = null;
 

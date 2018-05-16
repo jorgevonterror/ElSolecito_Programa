@@ -36,10 +36,17 @@ public class FRM_Reportes extends javax.swing.JFrame {
     public FRM_Reportes() {
         initComponents();
         this.setLocationRelativeTo(null);
-        LblTC.setVisible(false);
-        CBXcompañia.setVisible(false);
-        LbMes.setVisible(false);
-        TxFolio.setVisible(false);
+                LblTC.setVisible(false);
+                CBXcompañia.setVisible(false);
+                
+                LbMes.setVisible(false);
+                TxtMes.setVisible(false);
+                
+                LbDia.setVisible(false);
+                TxtDia.setVisible(false);
+                
+                LbFolio.setVisible(false);
+                TxFolio.setVisible(false);
         
     }
     
@@ -65,9 +72,10 @@ public class FRM_Reportes extends javax.swing.JFrame {
         LbMes = new javax.swing.JLabel();
         TxFolio = new javax.swing.JTextField();
         LbFolio = new javax.swing.JLabel();
-        TxtMes1 = new javax.swing.JTextField();
+        TxtMes = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        LbDia = new javax.swing.JLabel();
+        TxtDia = new javax.swing.JTextField();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -92,11 +100,11 @@ public class FRM_Reportes extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(jLabel8))
+                        .addGap(105, 105, 105)
+                        .addComponent(jLabel9))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
-                        .addComponent(jLabel9)))
+                        .addGap(78, 78, 78)
+                        .addComponent(jLabel8)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -113,7 +121,7 @@ public class FRM_Reportes extends javax.swing.JFrame {
 
         jLabel1.setText("Seleccione el tipo de reporte:");
 
-        CBXTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recargas", "Ventas por mes", " " }));
+        CBXTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Existencia", "Recargas", "Detalles de Compra", "Detalles de Venta", "Ventas por Mes", "Ventas por Dia", " ", " " }));
         CBXTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CBXTipoActionPerformed(evt);
@@ -140,14 +148,34 @@ public class FRM_Reportes extends javax.swing.JFrame {
         LbMes.setText("Mes");
 
         TxFolio.setName("TxtFolio"); // NOI18N
+        TxFolio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxFolioKeyTyped(evt);
+            }
+        });
 
         LbFolio.setText("Folio ");
         LbFolio.setName("LbFolio"); // NOI18N
 
-        jButton1.setText("Regresar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        TxtMes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtMesKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtMesKeyTyped(evt);
+            }
+        });
+
+        LbDia.setText("Dia");
+
+        TxtDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                TxtDiaActionPerformed(evt);
+            }
+        });
+        TxtDia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtDiaKeyTyped(evt);
             }
         });
 
@@ -156,58 +184,66 @@ public class FRM_Reportes extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(CBXTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(LblTC)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CBXcompañia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(LbFolio)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TxFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(LbMes))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(BtnGenerar, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(CBXTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(LblTC)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(LbDia)
+                                .addGap(25, 25, 25)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(TxtMes1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(CBXcompañia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(81, 81, 81)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LbMes)
+                            .addComponent(LbFolio))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(TxtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TxFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(209, 209, 209)
+                        .addComponent(BtnGenerar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(CBXTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                    .addComponent(CBXTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TxtMes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(LbMes))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TxtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LbMes)
+                            .addComponent(TxtDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LbDia))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TxFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LbFolio)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(CBXcompañia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(LblTC)
-                        .addComponent(LbFolio)
-                        .addComponent(TxFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(LblTC)))
                 .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnGenerar)
-                    .addComponent(jButton1))
+                .addComponent(BtnGenerar)
                 .addContainerGap())
         );
 
@@ -219,7 +255,9 @@ public class FRM_Reportes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -240,46 +278,86 @@ public class FRM_Reportes extends javax.swing.JFrame {
         Tipo = CBXTipo.getItemAt(this.CBXTipo.getSelectedIndex()).toString();
         switch(Tipo){
             case "Existencia":
+                LblTC.setVisible(false);
+                CBXcompañia.setVisible(false);
+                
+                LbMes.setVisible(false);
+                TxtMes.setVisible(false);
+                
+                LbDia.setVisible(false);
+                TxtDia.setVisible(false);
+                
+                LbFolio.setVisible(false);
+                TxFolio.setVisible(false);
                 break;
 
             case "Recargas":
                 LblTC.setVisible(true);
                 CBXcompañia.setVisible(true);
+                
                 LbMes.setVisible(false);
+                TxtMes.setVisible(false);
+                
+                LbDia.setVisible(false);
+                TxtDia.setVisible(false);
+                
+                LbFolio.setVisible(false);
                 TxFolio.setVisible(false);
                 break;
                     
-            case "Ventas por mes":
+            case "Ventas por Mes":
+                LbMes.setVisible(true);
+                TxtMes.setVisible(true);
+                
+                LbDia.setVisible(false);
+                TxtDia.setVisible(false);
+                
                 LblTC.setVisible(false);
                 CBXcompañia.setVisible(false);
-                LbMes.setVisible(true);
-                TxFolio.setVisible(true);
                 
-                
+                LbFolio.setVisible(false);
+                TxFolio.setVisible(false);
                 break;
 
-            case "Ventas de dia":
+            case "Ventas por Dia":
                 LbMes.setVisible(false);
-                TxFolio.setVisible(false);
+                TxtMes.setVisible(false);
+                
+                LbDia.setVisible(true);
+                TxtDia.setVisible(true);
+                
                 LblTC.setVisible(false);
                 CBXcompañia.setVisible(false);
+                
+                LbFolio.setVisible(false);
+                TxFolio.setVisible(false);
                 
             break;
             
-            case "Detalle de la ventas":
+            case "Detalles de Venta":
                 LbMes.setVisible(false);
-                TxFolio.setVisible(false);
+                TxtMes.setVisible(false);
+                
+                LbDia.setVisible(false);
+                TxtDia.setVisible(false);
+                
                 LblTC.setVisible(false);
                 CBXcompañia.setVisible(false);
+                
                 LbFolio.setVisible(true);
                 TxFolio.setVisible(true);
             break;
             
-            case "Detalle de la compra":
+            case "Detalles de Compra":
                 LbMes.setVisible(false);
-                TxFolio.setVisible(false);
+                TxtMes.setVisible(false);
+                
+                LbDia.setVisible(false);
+                TxtDia.setVisible(false);
+                
                 LblTC.setVisible(false);
                 CBXcompañia.setVisible(false);
+                
                 LbFolio.setVisible(true);
                 TxFolio.setVisible(true);
             break;
@@ -293,17 +371,32 @@ public class FRM_Reportes extends javax.swing.JFrame {
         
         switch(Tipo){
             case "Existencia":
-                
+                path = "";
+            //path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Reportes/Reporte_Recargas.jasper";
+               path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Existencias.jasper";
+                jr = null;
+                try {
+                    //jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                    jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+                    JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
+                    JasperViewer jv = new JasperViewer(jp, false);
+                    jv.setVisible(true);
+                    jv.setTitle(path);
+                    this.dispose();
+                } catch (JRException ex) {
+                    Logger.getLogger(FRM_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
 
             case "Recargas":
             Companyia = CBXcompañia.getItemAt(this.CBXcompañia.getSelectedIndex()).toString();
             Parametro = new HashMap();
             path = "";
-            path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Reportes/Reporte_Recargas.jasper";
+            //path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Reportes/Reporte_Recargas.jasper";
+            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_Recargas.jasper";
             jr = null;
             try {
-                Parametro.put("seleccion", Companyia);
+                Parametro.put("Buscar", Companyia);
                 //jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
                   jr = (JasperReport) JRLoader.loadObjectFromFile(path);
                 JasperPrint jp = JasperFillManager.fillReport(jr, Parametro, mBD.conectare());
@@ -317,14 +410,16 @@ public class FRM_Reportes extends javax.swing.JFrame {
                 
                 break;
                     
-            case "Ventas por mes": 
-            Mes = TxFolio.getText();        
+            case "Ventas por Mes": 
+            Mes = TxtMes.getText();        
             Parametro = new HashMap();
             path = "";
-            path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Reportes/Reporte_VentasPorMes.jasper";
+            //path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Reportes/Reporte_VentasPorMes.jasper";
+            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_Venta_Mes.jasper";
+            
             jr = null;
             try {
-                Parametro.put("seleccion", Mes);
+                Parametro.put("Seleccion", Mes);
                 //jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
                 jr = (JasperReport) JRLoader.loadObjectFromFile(path);
                 JasperPrint jp = JasperFillManager.fillReport(jr, Parametro, mBD.conectare());
@@ -337,14 +432,15 @@ public class FRM_Reportes extends javax.swing.JFrame {
             }                
             break;
             
-            case "Detalle de la compra":
+            case "Detalles de Compra":
             folio = TxFolio.getText();
             Parametro = new HashMap();
             path = "";
-            path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Reportes/Reporte_Detalle_Compra.jasper";
+            //path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Reportes/Reporte_Detalle_Compra.jasper";
+            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_Detalle_Compra.jasper";
             jr = null;
             try {
-                Parametro.put("Buscar", folio);
+                Parametro.put("Seleccion", folio);
                 //jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
                 jr = (JasperReport) JRLoader.loadObjectFromFile(path);
                 JasperPrint jp = JasperFillManager.fillReport(jr, Parametro, mBD.conectare());
@@ -356,11 +452,12 @@ public class FRM_Reportes extends javax.swing.JFrame {
                 Logger.getLogger(FRM_Reportes.class.getName()).log(Level.SEVERE, null, ex);
             }                
             break;
-            case "Detalle de la venta":
+            case "Detalles de Venta":
             folio = TxFolio.getText();
             Parametro = new HashMap();
             path = "";
-            path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Reportes/Reporte_Detalle_Venta.jasper";
+            //path = "/Users/jorgegarcia/NetBeansProjects/ElSolecito/src/Reportes/Reporte_Detalle_Venta.jasper";
+            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_Detalle_Venta.jasper";
             jr = null;
             try {
                 Parametro.put("Buscar", folio);
@@ -378,15 +475,15 @@ public class FRM_Reportes extends javax.swing.JFrame {
             
             
 
-            case "Ventas de dia":
-                /*Dia = TxtDia.getText();        
+            case "Ventas por Dia":
+            Dia = TxtDia.getText();        
             Parametro = new HashMap();
             path = "";
-            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_VentasPorMes.jasper";
+            path = "C:\\Users\\MARIA NOELDA MARIANO\\Documents\\Git\\ElSolecito_Programa\\src\\Reportes\\Reporte_Ventas_Dia.jasper";
             jr = null;
             try {
-                Parametro.put("seleccion", Dia);
-                jr = (JasperReport)JRLoader.loadObjectFromLocation(path);
+                Parametro.put("Buscar", Dia);
+                jr = (JasperReport) JRLoader.loadObjectFromFile(path);
                 JasperPrint jp = JasperFillManager.fillReport(jr, Parametro, mBD.conectare());
                 JasperViewer jv = new JasperViewer(jp, false);
                 jv.setVisible(true);
@@ -395,7 +492,6 @@ public class FRM_Reportes extends javax.swing.JFrame {
             } catch (JRException ex) {
                 Logger.getLogger(FRM_Reportes.class.getName()).log(Level.SEVERE, null, ex);
             }     
-                */
             break;
         }
     }//GEN-LAST:event_BtnGenerarActionPerformed
@@ -404,12 +500,37 @@ public class FRM_Reportes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CBXcompañiaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void TxtDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDiaActionPerformed
         // TODO add your handling code here:
-        
-        //Reprogramar.
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_TxtDiaActionPerformed
+
+    private void TxtDiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtDiaKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtDiaKeyTyped
+
+    private void TxtMesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtMesKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtMesKeyReleased
+
+    private void TxtMesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtMesKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtMesKeyTyped
+
+    private void TxFolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxFolioKeyTyped
+        // TODO add your handling code here:
+        char error = evt.getKeyChar();
+        if (error < '0' || error > '9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxFolioKeyTyped
 
     /**
      * @param args the command line arguments
@@ -449,12 +570,13 @@ public class FRM_Reportes extends javax.swing.JFrame {
     private javax.swing.JButton BtnGenerar;
     private javax.swing.JComboBox<String> CBXTipo;
     private javax.swing.JComboBox CBXcompañia;
+    private javax.swing.JLabel LbDia;
     private javax.swing.JLabel LbFolio;
     private javax.swing.JLabel LbMes;
     private javax.swing.JLabel LblTC;
     private javax.swing.JTextField TxFolio;
-    private javax.swing.JTextField TxtMes1;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField TxtDia;
+    private javax.swing.JTextField TxtMes;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
