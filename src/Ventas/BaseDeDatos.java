@@ -40,6 +40,21 @@ public class BaseDeDatos {
             return false;
         }
     }
+    public boolean conectarWindows() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            conexion = DriverManager.getConnection(
+                    "jdbc:mysql://localhost/bd_elsolecito", "root", "");
+            if (conexion != null) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public void desconectar() {
         try {
@@ -222,4 +237,26 @@ public class BaseDeDatos {
         }
         return link;
     }
+
+public ArrayList VentasFecha(String FechaInicio, String FechaFinal) {
+        Venta mVenta = null;
+        Statement consulta;
+        ResultSet resultado;
+        ArrayList mListaVentas = new ArrayList();
+        try {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select sum(total), Fecha, Total from ventas where Fecha >= "
+                    + "'" + FechaInicio + "' and fecha  <= '" + FechaFinal + "' group by Fecha;");
+            while (resultado.next()) {
+                mVenta = new Venta();
+                mVenta.setFecha_venta(resultado.getString("fecha"));
+                mVenta.setPrecioTotalVenta(resultado.getFloat("total"));
+                mListaVentas.add(mVenta);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mListaVentas;
+    }
+
 }
