@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
  * @author jorgegarcia
  */
 public class BaseDeDatosNGTest {
-    
+
     public BaseDeDatosNGTest() {
     }
 
@@ -55,7 +55,6 @@ public class BaseDeDatosNGTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        //fail("The test case is a prototype.");
 //    }
-
     /**
      * Test of desconectar method, of class BaseDeDatos.
      */
@@ -67,22 +66,28 @@ public class BaseDeDatosNGTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //        //fail("The test case is a prototype.");
 //    }
-
     /**
      * Test of GuardarCompras method, of class BaseDeDatos.
      */
 //    @Test
 //    public void testGuardarCompras() {
 //        System.out.println("GuardarCompras");
-//        Compras mCompras = null;
 //        BaseDeDatos instance = new BaseDeDatos();
 //        boolean expResult = true;
-//        boolean result = instance.GuardarCompras(mCompras);
-//        assertEquals(result, expResult);
+//        Compras mCompras = new Compras();
+//
+//        mCompras.setFecha("2018/01/25");
+//        mCompras.setFolio("090");
+//        mCompras.setId_compras(100);
+//        mCompras.setTotalCompras(900);
+//
+//        if (instance.conectar()) {
+//            boolean result = instance.GuardarCompras(mCompras);
+//            assertEquals(result, expResult);
+//        }
 //        // TODO review the generated test code and remove the default call to fail.
 //        //fail("The test case is a prototype.");
 //    }
-
 //    /**
 //     * Test of consultarCompras method, of class BaseDeDatos.
 //     */
@@ -103,13 +108,20 @@ public class BaseDeDatosNGTest {
 //    @Test
 //    public void testEliminarCompras() {
 //        System.out.println("eliminarCompras");
-//        Compras mCompras = null;
+//        Compras mCompras = new Compras();
 //        BaseDeDatos instance = new BaseDeDatos();
-//        boolean expResult = false;
-//        boolean result = instance.eliminarCompras(mCompras);
-//        assertEquals(result, expResult);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        boolean expResult = true;
+//
+//        mCompras.setFecha("2018/01/25");
+//        mCompras.setFolio("100");
+//        mCompras.setId_compras(100);
+//        mCompras.setTotalCompras(900);
+//
+//        if (instance.conectar()) {
+//            boolean result = instance.eliminarCompras(mCompras);
+//            assertEquals(result, expResult);
+//        }
+//
 //    }
 //
 //    /**
@@ -118,14 +130,25 @@ public class BaseDeDatosNGTest {
 //    @Test
 //    public void testModificarCompras() {
 //        System.out.println("modificarCompras");
-//        Compras aCompras = null;
-//        Compras nCompras = null;
+//        Compras aCompras = new Compras();
+//        Compras nCompras = new Compras();
 //        BaseDeDatos instance = new BaseDeDatos();
-//        boolean expResult = false;
-//        boolean result = instance.modificarCompras(aCompras, nCompras);
-//        assertEquals(result, expResult);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        boolean expResult = true;
+//
+//        aCompras.setFecha("2018/01/25");
+//        aCompras.setFolio("100");
+//        aCompras.setId_compras(100);
+//        aCompras.setTotalCompras(900);
+//        
+//        nCompras.setFecha("2018/01/26");
+//        nCompras.setFolio("100");
+//        nCompras.setId_compras(100);
+//        nCompras.setTotalCompras(1900);
+//        
+//        if (instance.conectar()) {
+//            boolean result = instance.modificarCompras(aCompras, nCompras);
+//            assertEquals(result, expResult);
+//        }
 //    }
 //
 //    /**
@@ -175,17 +198,37 @@ public class BaseDeDatosNGTest {
 //    /**
 //     * Test of ModificarProductos method, of class BaseDeDatos.
 //     */
-//    @Test
+    //@Test
 //    public void testModificarProductos() {
 //        System.out.println("ModificarProductos");
-//        Producto aProducto = null;
-//        Producto bProducto = null;
+//        Producto aProducto = new Producto();
+//        Producto bProducto = new Producto();
 //        BaseDeDatos instance = new BaseDeDatos();
-//        boolean expResult = false;
-//        boolean result = instance.ModificarProductos(aProducto, bProducto);
-//        assertEquals(result, expResult);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        boolean expResult = true;
+//
+//        aProducto.setCantidadProducto(10);
+//        aProducto.setCodigo("400");
+//        aProducto.setDesc_Prod("Lecherita");
+//        aProducto.setFolio("200");
+//        aProducto.setId_producto(200);
+//        aProducto.setId_proveedor("9");
+//        aProducto.setNombre("Lecherita RM");
+//        aProducto.setPrecio(20);
+//        
+//        bProducto.setCantidadProducto(100);
+//        bProducto.setCodigo("400");
+//        bProducto.setDesc_Prod("Lecherita");
+//        bProducto.setFolio("200");
+//        bProducto.setId_producto(200);
+//        bProducto.setId_proveedor("9");
+//        bProducto.setNombre("Lecherita RM");
+//        bProducto.setPrecio(20);
+//        
+//        
+//        if (instance.conectar()) {
+//            boolean result = instance.ModificarProductos(aProducto, bProducto);
+//            assertEquals(result, expResult);
+//        }
 //    }
 //
 //    /**
@@ -199,8 +242,6 @@ public class BaseDeDatosNGTest {
 //        Compras expResult = null;
 //        Compras result = instance.ConsultaTodaCompra(folio);
 //        assertEquals(result, expResult);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
 //    }
 //
 //    /**
@@ -209,13 +250,26 @@ public class BaseDeDatosNGTest {
 //    @Test
 //    public void testAltaDetalleCompra() {
 //        System.out.println("AltaDetalleCompra");
-//        DetalleCompra mDetalleCompra = null;
+//        DetalleCompra mDetalleCompra = new DetalleCompra();
 //        BaseDeDatos instance = new BaseDeDatos();
-//        boolean expResult = false;
-//        boolean result = instance.AltaDetalleCompra(mDetalleCompra);
-//        assertEquals(result, expResult);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        boolean expResult = true;
+//        
+//        mDetalleCompra.setCantidad(10);
+//        mDetalleCompra.setFolio("100");
+//        mDetalleCompra.setId_compras(1);
+//        mDetalleCompra.setId_detalle(1);
+//        mDetalleCompra.setId_producto(1);
+//        mDetalleCompra.setId_proveedor(1);
+//        mDetalleCompra.setPagaPorCantidad(100);
+//        mDetalleCompra.setPrecio(200);
+//        mDetalleCompra.setProducto("Coca-Cola Pack");
+//        mDetalleCompra.setTotalAPagar(220);
+//        
+//        
+//        if (instance.conectar()) {
+//            boolean result = instance.AltaDetalleCompra(mDetalleCompra);
+//            assertEquals(result, expResult);
+//        }
 //    }
 //
 //    /**
@@ -253,13 +307,20 @@ public class BaseDeDatosNGTest {
 //    @Test
 //    public void testAltaCompra() {
 //        System.out.println("AltaCompra");
-//        Compras mCompra = null;
+//        Compras mCompra = new Compras();
 //        BaseDeDatos instance = new BaseDeDatos();
-//        boolean expResult = false;
-//        boolean result = instance.AltaCompra(mCompra);
-//        assertEquals(result, expResult);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        boolean expResult = true;
+//        
+//        mCompra.setFecha("2018/01/25");
+//        mCompra.setFolio("100");
+//        mCompra.setId_compras(1);
+//        mCompra.setTotalCompras(200);
+//        
+//        
+//        if (instance.conectar()) {
+//            boolean result = instance.AltaCompra(mCompra);
+//            assertEquals(result, expResult);
+//        }
 //    }
 //
 //    /**
@@ -282,14 +343,25 @@ public class BaseDeDatosNGTest {
 //    @Test
 //    public void testCambiosCompra() {
 //        System.out.println("CambiosCompra");
-//        Compras mCompra = null;
-//        Compras nCompra = null;
+//        Compras mCompra = new Compras();
+//        Compras nCompra = new Compras();
 //        BaseDeDatos instance = new BaseDeDatos();
-//        boolean expResult = false;
-//        boolean result = instance.CambiosCompra(mCompra, nCompra);
-//        assertEquals(result, expResult);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        boolean expResult = true;
+//        
+//        mCompra.setFecha("2018/01/25");
+//        mCompra.setFolio("100");
+//        mCompra.setId_compras(1);
+//        mCompra.setTotalCompras(900);
+//        
+//        nCompra.setFecha("2018/01/25");
+//        nCompra.setFolio("100");
+//        nCompra.setId_compras(1);
+//        nCompra.setTotalCompras(1900);
+//        
+//        if (instance.conectar()) {
+//            boolean result = instance.CambiosCompra(mCompra, nCompra);
+//            assertEquals(result, expResult);
+//        }
 //    }
 //
 //    /**
