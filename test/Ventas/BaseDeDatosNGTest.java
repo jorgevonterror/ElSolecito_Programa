@@ -123,17 +123,19 @@ public class BaseDeDatosNGTest {
 //    /**
 //     * Test of ConsultaTodaVenta method, of class BaseDeDatos.
 //     */
-//    @Test
-//    public void testConsultaTodaVenta() {
-//        System.out.println("ConsultaTodaVenta");
-//        String folio = "";
-//        BaseDeDatos instance = new BaseDeDatos();
-//        Venta expResult = null;
-//        Venta result = instance.ConsultaTodaVenta(folio);
-//        assertEquals(result, expResult);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testConsultaTodaVenta() {
+        System.out.println("ConsultaTodaVenta");
+        String folio = "001";
+        BaseDeDatos instance = new BaseDeDatos();
+
+        if (instance.conectar()) {
+            Venta expResult = instance.ConsultaTodaVenta(folio);
+            Venta result = instance.ConsultaTodaVenta(folio);
+            expResult.equals(result);
+        }
+
+    }
 //
 //    /**
 //     * Test of AltaDetalleVenta method, of class BaseDeDatos.

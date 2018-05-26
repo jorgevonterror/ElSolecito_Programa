@@ -88,11 +88,11 @@ public class FRM_VentasNGTest {
 //     * Test of main method, of class FRM_Ventas.
 //     */
 //    @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        FRM_Ventas.main(args);
-        
-    }
-//    
+//    public void testMain() {
+//        System.out.println("main");
+//        String[] args = null;
+//        FRM_Ventas.main(args);
+//        
+//    }
+////    
 }

@@ -237,11 +237,15 @@ public class BaseDeDatosNGTest {
 //    @Test
 //    public void testConsultaTodaCompra() {
 //        System.out.println("ConsultaTodaCompra");
-//        String folio = "";
+//        String folio = "001";
 //        BaseDeDatos instance = new BaseDeDatos();
-//        Compras expResult = null;
-//        Compras result = instance.ConsultaTodaCompra(folio);
-//        assertEquals(result, expResult);
+//        
+//
+//        if (instance.conectar()) {
+//            Compras expRes = instance.ConsultaTodaCompra(folio);
+//            Compras resul = instance.ConsultaTodaCompra(folio);
+//            expRes.equals(resul);
+//        }
 //    }
 //
 //    /**

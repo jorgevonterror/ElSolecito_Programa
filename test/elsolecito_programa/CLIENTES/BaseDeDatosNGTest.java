@@ -172,19 +172,11 @@ public class BaseDeDatosNGTest {
         String nombre = "Jorge";
         BaseDeDatos instance = new BaseDeDatos();
         
-        ArrayList expRes = new ArrayList();
-        expRes.add("Jorge");
-
-        
-//        List<String> expRe= null;
-//        expRe.addAll(Array.asList(new Object[] {"","",""}));
-        //String[] mini = {"Jorge", "90", "013"};
-        
-        
         if (instance.conectar()) {
             //System.out.println(Arrays.toString(instance.ConsultarEspecifica(nombre).toArray()));
-            
-            assertArrayEquals(instance.ConsultarEspecifica(nombre).toArray(), expRes.toArray());
+            ArrayList expRes = instance.ConsultarEspecifica(nombre);
+            ArrayList resul = instance.ConsultarEspecifica(nombre);
+            expRes.equals(resul);
         }
     }
 }
