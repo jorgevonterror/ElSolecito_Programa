@@ -54,7 +54,8 @@ public class BaseDeDatos {
         try{
             consulta = conexion.createStatement();
             consulta.execute("INSERT INTO BD_ElSolecito.clientes (id_clientes, Nombre, Monto, folio)" + 
-                    "VALUES(null, '" + mClientesDeudores.getNombre() + "'," + "'" + mClientesDeudores.getMonto() + "'," +"'" +mClientesDeudores.getFolio() + "');");
+            "VALUES(null, '" + mClientesDeudores.getNombre() + "'," + "'" + mClientesDeudores.getMonto() +
+                    "'," +"'" +mClientesDeudores.getFolio() + "');");
             return true;
         }catch(Exception e){
              e.printStackTrace();
