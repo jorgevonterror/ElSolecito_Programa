@@ -3,9 +3,13 @@ package elsolecito_programa.PROVEEDORES;
 import elsolecito_programa.CLIENTES.FRM_Clientes_Alta;
 import elsolecito_programa.PROVEEDORES.BaseDeDAtos.*;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,6 +22,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
+
 
 /* 1. Distribucion de inventario en el local El Solecito.
     2. Omar Almaraz Cordova.
@@ -344,6 +349,10 @@ public class FRM_Proveedores_Alta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private Connection conexion;
+    ResultSet rs = null;
+    Statement statement = null;
+    
     private void setFilas() {
         if (mBD.conectar()) {
             ArrayList mListaProveedores = mBD.consultarProveedores();
@@ -422,6 +431,30 @@ public class FRM_Proveedores_Alta extends javax.swing.JFrame {
         for (int i = a; i >= 0; i--) {
             LimpiadoTabla.removeRow(LimpiadoTabla.getRowCount() - 1);
         }
+    }
+    void consulta()
+    {
+        ArrayList mlistaprov = new ArrayList();
+        Proveedores mproveedores = null;
+        Statement consulta;
+        ResultSet resultado;
+        
+        try
+        {
+            consulta = conexion.createStatement();
+            resultado = consulta.executeQuery("select * from proveedores;");
+            
+            while (resultado.next()) {
+                mproveedores = new Proveedores();
+                mproveedores.setFolio(resultado.getString("Folio"));
+                mproveedores.setMarca(resultado.getString("Marca"));
+                mproveedores.setFolio(resultado.getString("Nombre"));
+                mlistaprov.add(mproveedores);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       
     }
 
     private void TXT_FolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_FolioActionPerformed
