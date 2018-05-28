@@ -89,16 +89,16 @@ public class BaseDeDAtosTest {
     /**
      * Test of consultarProveedores method, of class BaseDeDAtos.
      */
-//    @Test
-//    public void testConsultarProveedores() {
-//        System.out.println("consultarProveedores");
-//        BaseDeDAtos instance = new BaseDeDAtos();
-//        ArrayList expResult = null;
-//        ArrayList result = instance.consultarProveedores();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        //fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testConsultarProveedores() {
+        System.out.println("consultarProveedores");
+        BaseDeDAtos instance = new BaseDeDAtos();
+        ArrayList expResult = null;
+        ArrayList result = instance.consultarProveedores();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
 
     /**
      * Test of eliminarProveedores method, of class BaseDeDAtos.
@@ -168,20 +168,22 @@ public class BaseDeDAtosTest {
     /**
      * Test of ConsultarEspecifica method, of class BaseDeDAtos.
      */
-    @Test
-    public void testConsultarEspecifica() {
-        System.out.println("ConsultarEspecifica");
-        String nombre = "cuña";
-        BaseDeDAtos instance = new BaseDeDAtos();
-        
-        if (instance.conectar()) {
-            ArrayList expRes = instance.ConsultarEspecifica(nombre);
-            ArrayList resul = instance.ConsultarEspecifica(nombre);
-            expRes.equals(resul);
-            
-        }
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testConsultarEspecifica() {
+//        System.out.println("ConsultarEspecifica");
+//        String nombre = "cuña";
+//        BaseDeDAtos instance = new BaseDeDAtos();
+//        
+//        if (instance.conectar()) {
+//            ArrayList expRes = instance.ConsultarEspecifica(nombre);
+//            ArrayList resul = instance.ConsultarEspecifica(nombre);
+//            expRes.equals(resul);
+//            
+//        }
+//        // TODO review the generated test code and remove the default call to fail.
+//        //fail("The test case is a prototype.");
+//    }
+
+   
     
 }

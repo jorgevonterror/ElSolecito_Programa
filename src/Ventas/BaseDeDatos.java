@@ -28,8 +28,8 @@ public class BaseDeDatos {
     public boolean conectar() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
-            //conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "");
+            //conexion = DriverManager.getConnection("jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost/bd_elsolecito", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -245,18 +245,19 @@ public ArrayList VentasFecha(String FechaInicio, String FechaFinal) {
         ArrayList mListaVentas = new ArrayList();
         try {
             consulta = conexion.createStatement();
-            resultado = consulta.executeQuery("select sum(total), Fecha, Total from ventas where Fecha >= "
-                    + "'" + FechaInicio + "' and fecha  <= '" + FechaFinal + "' group by Fecha;");
+            resultado = consulta.executeQuery("select sum(Total), Fecha, Total from venta where Fecha >= "
+                    + "'" + FechaInicio + "' and Fecha  <= '" + FechaFinal + "' group by Fecha;");
             while (resultado.next()) {
                 mVenta = new Venta();
-                mVenta.setFecha_venta(resultado.getString("fecha"));
-                mVenta.setPrecioTotalVenta(resultado.getFloat("total"));
+                mVenta.setFecha_venta(resultado.getString("Fecha"));
+                mVenta.setPrecioTotalVenta(resultado.getFloat("Total"));
                 mListaVentas.add(mVenta);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+       }
         return mListaVentas;
     }
 
 }
+

@@ -11,23 +11,23 @@ package elsolecito_programa.Recargas;
  * @author El Armandito
  */
 public class TiempoAire {
-    private String Compañia;
+    private String Compania;
     private double Monto;
     private String numeroT,Lada;
     
  public TiempoAire(){
-        Compañia = "";
+        Compania = "";
         Lada = "";
         Monto = 0;
         numeroT = "";
     }
 
-    public String getCompañia() {
-        return Compañia;
+    public String getCompania() {
+        return Compania;
     }
 
-    public void setCompañia(String Compañia) {
-        this.Compañia = Compañia;
+    public void setCompania(String Compania) {
+        this.Compania = Compania;
     }
      public String getLada() {
         return Lada;

@@ -20,7 +20,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
+//import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -75,7 +75,7 @@ public class FRM_Recargas extends javax.swing.JFrame {
                 TA = (TiempoAire) mListaRecarga;
                 Datos[0] = "" + TA.getMonto();
                 Datos[1] = TA.getnumeroT();
-                Datos[2] = "" + TA.getCompañia();
+                Datos[2] = "" + TA.getCompania();
 
                 modeloTabla.addRow(Datos);
             }
@@ -108,7 +108,7 @@ public class FRM_Recargas extends javax.swing.JFrame {
                 TA = (TiempoAire) mListaRecarga;
                 Datos[0] = "" + TA.getMonto();
                 Datos[1] = TA.getnumeroT();
-                Datos[2] = "" + TA.getCompañia();
+                Datos[2] = "" + TA.getCompania();
 
                 modeloTabla.addRow(Datos);
             }
@@ -355,42 +355,42 @@ public class FRM_Recargas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void Snumero(JTextField a) {
-        a.addKeyListener(new KeyAdapter() {
-            public void keyTyped(KeyEvent e) {
-                char c = e.getKeyChar();
-                if (!Character.isDigit(c)) {
-                    getToolkit().beep();
-                    e.consume();
-                    JOptionPane.showMessageDialog(null, "Introduce solo digitos...");
-                }
-            }
-        });
+//        a.addKeyListener(new KeyAdapter() {
+//            public void keyTyped(KeyEvent e) {
+//                char c = e.getKeyChar();
+//                if (!Character.isDigit(c)) {
+//                    getToolkit().beep();
+//                    e.consume();
+//                    JOptionPane.showMessageDialog(null, "Introduce solo digitos...");
+//                }
+//            }
+//        });
     }
 
     public void Smonto(JTextField a) {
-        a.addKeyListener(new KeyAdapter() {
-            public void keyTyped(KeyEvent e) {
-                char c = e.getKeyChar();
-                if (Character.isLetter(c)) {
-                    getToolkit().beep();
-                    JOptionPane.showMessageDialog(null, "Introduce un monto Correcto de 4 digitos...");
-                    e.consume();
-                }
-            }
-        });
+//        a.addKeyListener(new KeyAdapter() {
+//            public void keyTyped(KeyEvent e) {
+//                char c = e.getKeyChar();
+//                if (Character.isLetter(c)) {
+//                    getToolkit().beep();
+//                    JOptionPane.showMessageDialog(null, "Introduce un monto Correcto de 4 digitos...");
+//                    e.consume();
+//                }
+//            }
+//        });
     }
 
     public void SLada(JTextField a) {
-        a.addKeyListener(new KeyAdapter() {
-            public void keyTyped(KeyEvent e) {
-                char c = e.getKeyChar();
-                if (Character.isLetter(c)) {
-                    getToolkit().beep();
-                    JOptionPane.showMessageDialog(null, "Introduce una lada de solo 3 digitos...");
-                    e.consume();
-                }
-            }
-        });
+//        a.addKeyListener(new KeyAdapter() {
+//            public void keyTyped(KeyEvent e) {
+//                char c = e.getKeyChar();
+//                if (Character.isLetter(c)) {
+//                    getToolkit().beep();
+//                    JOptionPane.showMessageDialog(null, "Introduce una lada de solo 3 digitos...");
+//                    e.consume();
+//                }
+//            }
+//        });
     }
     private void TxrCerrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxrCerrar1ActionPerformed
         this.dispose();
@@ -413,7 +413,7 @@ public class FRM_Recargas extends javax.swing.JFrame {
         } else {
             TA.setMonto(Integer.parseInt(this.TXTmonto.getText()));
             TA.setnumeroT(this.TXTlada.getText() + this.TXTnumerotelefono.getText());
-            TA.setCompañia(this.CBXcompañia.getItemAt(this.CBXcompañia.getSelectedIndex()).toString());
+            TA.setCompania(this.CBXcompañia.getItemAt(this.CBXcompañia.getSelectedIndex()).toString());
 
             if (mBD.conectar()) {
                 if (mBD.GuardarRecarga(TA)) {
@@ -447,7 +447,7 @@ public class FRM_Recargas extends javax.swing.JFrame {
 
         try {
 
-            jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+           // jr = (JasperReport) JRLoader.loadObjectFromFile(path);
             JasperPrint jp = JasperFillManager.fillReport(jr, null, mBD.conectare());
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);

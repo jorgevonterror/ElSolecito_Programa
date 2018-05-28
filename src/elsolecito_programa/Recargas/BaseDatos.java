@@ -12,19 +12,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author El Armandito
  */
 public class BaseDatos {
     private Connection conexion;
+    ResultSet rs = null;
     Statement statement = null;
 
 public boolean conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:8889/BD_ElSolecito", "root", "root");
+                    "jdbc:mysql://localhost/bd_elsolecito", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -48,11 +50,11 @@ public boolean conectar(){
         Statement consulta;
         try{
             consulta = conexion.createStatement();
-            consulta.execute("insert into BD_ElSolecito.recargas "
+            consulta.execute("insert into bd_elsolecito.recargas "
                     + "(Monto, NumeroTelefonico, Compania)" + 
                     "values('" + mTiempoAire.getMonto() +
                     "'," + "'" + mTiempoAire.getnumeroT() + "'," 
-                    +"'" +mTiempoAire.getCompañia() + "');");
+                    +"'" +mTiempoAire.getCompania() + "');");
             return true;
         }catch(Exception e){
              e.printStackTrace();
@@ -74,7 +76,7 @@ public boolean conectar(){
                 mTiempo.setMonto(resultado.getDouble("Monto"));
                 mTiempo.setLada(resultado.getString("NumeroTelefonico"));
                 mTiempo.setnumeroT(resultado.getString("NumeroTelefonico"));
-                mTiempo.setCompañia(resultado.getString("Compania"));
+                mTiempo.setCompania(resultado.getString("Compania"));
                 mListaRecargas.add(mTiempo);
             }
         } catch (Exception e) {
