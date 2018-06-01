@@ -28,7 +28,7 @@ public class BaseDeDAtos {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(
-                    "jdbc:mysql://localhost/bd_elsolecito", "root", "");
+                    "jdbc:mysql://localhost/elsolecito_bd", "root", "");
             if (conexion != null) {
                 return true;
             } else {
@@ -52,7 +52,7 @@ public class BaseDeDAtos {
         Statement consulta;
         try{
             consulta = conexion.createStatement();
-            consulta.execute("INSERT INTO bd_elsolecito.provedorees (id_proveedor, Folio, Marca, Nombre)" + 
+            consulta.execute("INSERT INTO elsolecito_bd.provedorees (id_proveedor, Folio, Marca, Nombre)" + 
                     "VALUES(null, '" + mProveedores.getFolio() + "'," + "'" + mProveedores.getMarca() + "'," +"'" +mProveedores.getNombre() + "');");
             return true;
         }catch(Exception e){
@@ -111,7 +111,7 @@ public class BaseDeDAtos {
     }
     
     //PARA GENERAR LOS REPORTES:
-    public String url = "jdbc:mysql://localhost:8889/BD_ElSolecito";
+    public String url = "jdbc:mysql://localhost/elsolecito_bd";
     public String user = "root";
     public String pass = "root";
 
